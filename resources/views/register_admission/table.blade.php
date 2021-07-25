@@ -24,7 +24,12 @@
                 <td>{{ $registerAdmission->admission_id }}</td>
                 <td>{{ $registerAdmission->id }}</td>
 
-                <td>{{ $registerAdmission->admission->name }}</td>
+                <td>
+                    {{ $registerAdmission->admission->personDetails->lname}} ,
+                    {{ $registerAdmission->admission->personDetails->fname}}
+                    {{ $registerAdmission->admission->personDetails->mname ?? ''}}
+                    {{ $registerAdmission->admission->personDetails->sname ?? ''}}
+                </td>
                 
                 <td colspan="2">
                     

@@ -16,7 +16,12 @@
                     <a href = "{{ route('admission.show', [$person->id]) }}"> {{ $person->id }} </a>
                 </td>
 
-                <td> {{ $person->name }}</td>
+                <td> 
+                    {{ $person->personDetails->lname }},
+                    {{ $person->personDetails->fname }}
+                    {{ $person->personDetails->mname ?? '' }}
+                    {{ $person->personDetails->sname ?? '' }}
+                 </td>
                 
 
                 <td>

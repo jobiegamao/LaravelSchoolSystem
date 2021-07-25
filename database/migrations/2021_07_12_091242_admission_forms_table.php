@@ -48,19 +48,19 @@ class AdmissionFormsTable extends Migration
                     'school' =>'Ateneo de Davao',
                     'entrance_exam_grade' => '88',
                     'course_choice' => 'CS',
-                    'accepted_status' => '1'
+                    'accepted_status' => '0'
                 )
             );
 
-            // DB::table('admission_forms')->insert(
-            //     array(
-            //         'name' => 'Student 3',
-            //         'school' =>'Ateneo de Davao',
-            //         'entrance_exam_grade' => '68',
-            //         'course_choice' => 'IS',
-            //         'accepted_status' => '1'
-            //     )
-            // );
+            DB::table('admission_forms')->insert(
+                array(
+                    'person_details_id' => '3',
+                    'school' =>'UM',
+                    'entrance_exam_grade' => '68',
+                    'course_choice' => 'IS',
+                    'accepted_status' => '0'
+                )
+            );
 
             // DB::table('admission_forms')->insert(
             //     array(

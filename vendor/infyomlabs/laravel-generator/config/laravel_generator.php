@@ -128,7 +128,7 @@ return [
 
     'options' => [
 
-        'softDelete' => false,
+        'softDelete' => true,
 
         'save_schema_file' => true,
 

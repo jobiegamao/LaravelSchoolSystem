@@ -54,9 +54,10 @@ class AdmissionController extends AppBaseController
         // or we can use validations here
 
         Admission::create(request()->validate(
-            [ //rules here instead of creating request. 
-                //all admission details here will be replaced with person id!!
-                'name' => ['nullable','string'],
+            [ 
+                'person_details_id' => 'required|
+                    exists:App\Models\PersonDetails,id|
+                    unique:App\Models\Admission,person_details_id,',
                 'school' => ['string'],
                 'entrance_exam_grade',
                 'course_choice',

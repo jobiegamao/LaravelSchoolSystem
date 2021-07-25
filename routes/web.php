@@ -63,3 +63,6 @@ Route::resource('studentCourses', App\Http\Controllers\StudentCoursesController:
 
 
 
+
+
+Route::resource('personDetails', App\Http\Controllers\PersonDetailsController::class);
