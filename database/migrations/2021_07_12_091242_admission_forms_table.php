@@ -16,7 +16,11 @@ class AdmissionFormsTable extends Migration
         Schema::create('admission_forms', function (Blueprint $table) {
             $table->id();
             
-            $table->string('name')->nullable();
+            $table->foreignId('person_details_id')
+                ->constrained('person_details')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->string('school')->nullable();
             $table->integer('entrance_exam_grade')->nullable();
             $table->string('course_choice')->nullable();
@@ -26,10 +30,11 @@ class AdmissionFormsTable extends Migration
             $table->timestamps();
         });
 
-        // Insert some stuff !!! ERASE LATER
+        // Sample Data Insert some stuff !!! ERASE LATER 
+        // --dapat sa seeders mga sample data but for now here sa
             DB::table('admission_forms')->insert(
                 array(
-                    'name' => 'Student 1',
+                    'person_details_id' => '1',
                     'school' =>'Ateneo de Davao',
                     'entrance_exam_grade' => '88',
                     'course_choice' => 'IT',
@@ -39,7 +44,7 @@ class AdmissionFormsTable extends Migration
 
             DB::table('admission_forms')->insert(
                 array(
-                    'name' => 'Student 2',
+                    'person_details_id' => '2',
                     'school' =>'Ateneo de Davao',
                     'entrance_exam_grade' => '88',
                     'course_choice' => 'CS',
@@ -47,24 +52,24 @@ class AdmissionFormsTable extends Migration
                 )
             );
 
-            DB::table('admission_forms')->insert(
-                array(
-                    'name' => 'Student 3',
-                    'school' =>'Ateneo de Davao',
-                    'entrance_exam_grade' => '68',
-                    'course_choice' => 'IS',
-                    'accepted_status' => '1'
-                )
-            );
+            // DB::table('admission_forms')->insert(
+            //     array(
+            //         'name' => 'Student 3',
+            //         'school' =>'Ateneo de Davao',
+            //         'entrance_exam_grade' => '68',
+            //         'course_choice' => 'IS',
+            //         'accepted_status' => '1'
+            //     )
+            // );
 
-            DB::table('admission_forms')->insert(
-                array(
-                    'name' => 'Student 4',
-                    'school' =>'Ateneo de Davao',
-                    'entrance_exam_grade' => '68',
-                    'course_choice' => 'IT',
-                )
-            );
+            // DB::table('admission_forms')->insert(
+            //     array(
+            //         'name' => 'Student 4',
+            //         'school' =>'Ateneo de Davao',
+            //         'entrance_exam_grade' => '68',
+            //         'course_choice' => 'IT',
+            //     )
+            // );
     }
 
     /**

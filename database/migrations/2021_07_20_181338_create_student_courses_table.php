@@ -15,23 +15,21 @@ class CreateStudentCoursesTable extends Migration
     {
         Schema::create('student_courses', function (Blueprint $table) {
             $table->id();
-            $table->foreign('student_id')->unsigned();
-            $table->bigInteger('course_id')->unsigned();
+            $table->foreignId('student_id')
+                ->constrained('students')
+                ->onDelete('cascade');
+
+            $table->foreignId('course_id')
+                ->constrained('courses')
+                ->onDelete('cascade');
+
             $table->integer('acad_year');
             $table->string('acad_sem');
             
 
             $table->timestamps();
 
-            $table->foreign('student_id')
-                ->references('id')
-                ->on('students')
-                ->onDelete('cascade');
 
-            $table->foreign('course_id')
-                ->references('id')
-                ->on('courses')
-                ->onDelete('cascade');
 
 
         });
