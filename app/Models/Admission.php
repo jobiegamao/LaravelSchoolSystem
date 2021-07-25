@@ -13,9 +13,14 @@ class Admission extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['name', 'school', 'entrance_exam_grade','course_choice','accepted_status'];
+    protected $fillable = ['person_details_id', 'school', 'entrance_exam_grade','course_choice','accepted_status'];
 
         
+
+        public function personDetails() {
+            return $this->belongsTo(PersonDetails::class, 'person_details_id'); // model, fk, owner-key
+            
+        }
         public function registrationControlNO() {
             return $this->hasOne(RegisterAdmission::class, 'admission_id'); // model, fk, owner-key
             

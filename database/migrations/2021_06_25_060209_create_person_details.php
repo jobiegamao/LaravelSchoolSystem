@@ -50,7 +50,7 @@ class CreatePersonDetails extends Migration
                 array(
                     'fname' => 'Jenny',
                     'lname' =>'Cruz',
-                    'mname' => 'San Juan',
+                    'mname' => 'Amantiad',
                     'birthdate' => '2003-02-14'
                 )
             );

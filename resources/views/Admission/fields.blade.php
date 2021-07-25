@@ -3,10 +3,10 @@
 
 
 
-<!--  Name Field -->
+<!--  Person ID -->
 <div class="form-group row">
-        {!! Form::label('name', 'Student Name:',array('class' => 'col-sm-2 col-form-label')) !!}
-        {!! Form::text('name', null, ['class' => "col-sm-10 form-control"]) !!}
+        {!! Form::label('person_details_id', 'Person ID:',array('class' => 'col-sm-2 col-form-label')) !!}
+        {!! Form::number('person_details_id', null, ['class' => "col-sm-10 form-control"]) !!}
 </div>
 
 

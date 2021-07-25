@@ -8,7 +8,12 @@
 <!--  Name Field -->
 <div class="form-group row">
         {!! Form::label('name', 'Student Name:',array('class' => 'col-sm-2 col-form-label')) !!}
-        <div class="col-sm-10 form-control">{{ $person->name }} </div>
+        <div class="col-sm-10 form-control">
+            {{ $person->personDetails->lname }},
+            {{ $person->personDetails->fname }}
+            {{ $person->personDetails->mname ?? '' }}
+            {{ $person->personDetails->sname ?? '' }}
+        </div>
 </div>
 
 

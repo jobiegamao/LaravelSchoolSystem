@@ -549,3 +549,11 @@
 
 
 
+<li class="nav-item">
+    <a href="{{ route('personDetails.index') }}"
+       class="nav-link {{ Request::is('personDetails*') ? 'active' : '' }}">
+        <p>Person Details</p>
+    </a>
+</li>
+
+
