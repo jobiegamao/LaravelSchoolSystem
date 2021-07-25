@@ -1,0 +1,30 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+
+
+$form-floating-height:            add(3.5rem, $input-height-border);
+$form-floating-line-height:       1.25;
+$form-floating-padding-x:         $input-padding-x;
+$form-floating-padding-y:         1rem;
+$form-floating-input-padding-t:   1.625rem;
+$form-floating-input-padding-b:   .625rem;
+$form-floating-label-opacity:     .65;
+$form-floating-label-transform:   scale(.85) translateY(-.5rem) translateX(.15rem);
+$form-floating-transition:        opacity .1s ease-in-out, transform .1s ease-in-out;
