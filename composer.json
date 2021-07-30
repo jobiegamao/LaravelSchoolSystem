@@ -17,6 +17,7 @@
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.2",
         "maatwebsite/excel": "^3.0.1",
+        "staudenmeir/eloquent-has-many-deep": "^1.7",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '9f0913eacc81da086e4c3bd22197bf5cff77c452',
+        'reference' => 'c00c8c2549d2971713d325fa5e51e3aab4a7ece3',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -490,7 +490,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '9f0913eacc81da086e4c3bd22197bf5cff77c452',
+            'reference' => 'c00c8c2549d2971713d325fa5e51e3aab4a7ece3',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -919,8 +919,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0',
-                1 => '1.0.0',
+                0 => '1.0.0',
+                1 => '1.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1117,6 +1117,15 @@
             'aliases' => array(),
             'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
             'dev_requirement' => true,
+        ),
+        'staudenmeir/eloquent-has-many-deep' => array(
+            'pretty_version' => 'v1.13.1',
+            'version' => '1.13.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../staudenmeir/eloquent-has-many-deep',
+            'aliases' => array(),
+            'reference' => 'c0c9b6bd5c39d08e8adddc7eb8625962bd67a3da',
+            'dev_requirement' => false,
         ),
         'swiftmailer/swiftmailer' => array(
             'pretty_version' => 'v6.2.7',

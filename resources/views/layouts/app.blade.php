@@ -28,10 +28,15 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
   <!-- select2 select input form for data-live-search -->
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"  />
+  <!-- dataTables -->
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"> 
+  <!-- additional styles -->
+  <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+  @yield('css')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini sidebar-collapse">
 <div class="wrapper">
  
 
@@ -159,10 +164,8 @@
 
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- ChartJS -->
-<script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
-<!-- Sparkline -->
-<script src="{{ asset('plugins/sparklines/sparkline.js') }}"></script>
+
+
 <!-- JQVMap -->
 <script src="{{ asset('plugins/jqvmap/jquery.vmap.min.js') }}"></script>
 <script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
@@ -181,16 +184,15 @@
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 
 
+
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script> $.widget.bridge('uibutton', $.ui.button) </script>
 
 <!-- select2 select input form for data-live-search -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-  setTimeout(function() {
-      $('div.clearfix').fadeOut('fast');
-  }, 1000);
-</script>
+
+<!-- external Javascript  -->
+<script src="{{ asset('js/script.js') }}"></script>
 
 @stack('scripts')
 
