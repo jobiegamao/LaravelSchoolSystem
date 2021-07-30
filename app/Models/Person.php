@@ -90,5 +90,11 @@ class Person extends Model
        
         return $this->lname . ', ' . $this->fname .' '. $this->mname .' '. $this->sname;
     }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class, 'person_id');
+    }
+
     
 }

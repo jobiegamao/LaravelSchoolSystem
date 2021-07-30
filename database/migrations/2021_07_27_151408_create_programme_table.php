@@ -25,21 +25,24 @@ class CreateProgrammeTable extends Migration
 
         DB::table('Programme')->insert(
             array(
-                'id'     =>   '9991', 
-                'name'   =>   'Bachelor of Science in Computer Science',
-                'code'   =>   'BSCS',
-                'level'   =>   'undergraduate',
+                   'name'   =>   'BS in Computer Science',
+                   'level'   =>   'Undergraduate',
             )
-       );
+        );
 
-       DB::table('Programme')->insert(
-        array(
-             
-            'name'   =>   'Bachelor of Science in Information Technology',
-            'code'   =>   'BSIT',
-            'level'   =>   'undergraduate',
-        )
-   );
+        DB::table('Programme')->insert(
+            array(
+                   'name'   =>   'BS in Psychology',
+                   'level'   =>   'Undergraduate',
+            )
+        );
+
+        DB::table('Programme')->insert(
+            array(
+                   'name'   =>   'AB in Philosophy',
+                   'level'   =>   'Undergraduate',
+            )
+        );
     }
 
     /**
