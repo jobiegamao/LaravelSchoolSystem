@@ -34,6 +34,9 @@ Route::get('enrollProgramme/{id}', 'App\Http\Controllers\AdminController@goTo_en
 Route::post('enrollProgramme/store', 'App\Http\Controllers\AdminController@enrollProgrammeStore')->name('enrollProgramme.store');
 Route::delete('enrollProgramme/delete/{id}', 'App\Http\Controllers\AdminController@enrollProgrammeDelete')->name('enrollProgramme.delete');
 
+Route::get('student/courses', 'App\Http\Controllers\AdminController@goTo_courseProgramme')->name('goTo_courseProgramme');
+Route::post('student/courses', 'App\Http\Controllers\AdminController@courseProgrammeShow')->name('courseProgramme.show');
+
 // Route::resource('personContacts', App\Http\Controllers\PersonContactsController::class);
 
 

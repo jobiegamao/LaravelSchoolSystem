@@ -11,13 +11,13 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($students as $students)
+        @foreach($students  as $students )
             <tr>
                 <td>
                     {{ $students->person_id }}
                 </td>
                 <td>
-                    {{-- <a href="{{ route('students.show', [$students->id]) }}">{{ $students->id }}</a> --}}
+                    {{-- <a href="{{ route('students.show', [$students ?? ''->id]) }}">{{ $students ?? ''->id }}</a> --}}
                     {{ $students->id }}
                 </td>
                 <td>

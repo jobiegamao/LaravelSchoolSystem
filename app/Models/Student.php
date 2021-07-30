@@ -46,6 +46,7 @@ class Student extends Model
     
     /**
      * Get the user's most recent program enrollment
+     * not yet working
      */
     public function latestEnrollment()
     {

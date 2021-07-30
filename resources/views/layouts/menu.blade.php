@@ -74,6 +74,18 @@
               </li>
                 
             </ul>
+
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item ">
+                    <a href="{{ route('goTo_courseProgramme') }}" 
+                      class="nav-link {{ Request::is('student/courses') ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Student Courses</p>
+                    </a>
+              </li>
+                
+            </ul>
       </li>
 
       

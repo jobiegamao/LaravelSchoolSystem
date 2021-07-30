@@ -31,6 +31,8 @@ class CreateEnrollprogrammeTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
+
+        
     }
 
     /**
