@@ -15,11 +15,13 @@ class Student extends Model
 
 
     //add attributes
-    public $fillable = [
+    protected $fillable = [
         'person_id',
         'year',
         'section',
-        'isEnrolled'
+        'isEnrolled',
+        'isPass',
+        'isNew'
     ];
 
     

@@ -28,7 +28,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('students/enrolling-list', 'App\Http\Controllers\AdminController@goTo_enrollmentList')->name('goTo_enrollment.index');
 Route::delete('student/delete/{id}', 'App\Http\Controllers\AdminController@studentDelete')->name('student.delete');
-Route::patch('student/edit/{id}', 'App\Http\Controllers\AdminController@studentEdit')->name('student.edit');
+Route::patch('student/enroll/{id}', 'App\Http\Controllers\AdminController@studentEnroll')->name('student.enroll');
+Route::get('student/enrolling-list', 'App\Http\Controllers\AdminController@studentUnenrollAll')->name('student.unenroll');
+
 
 Route::get('enrollProgramme/{id}', 'App\Http\Controllers\AdminController@goTo_enrollProgramme')->name('goTo_enrollProgramme');
 Route::post('enrollProgramme/store', 'App\Http\Controllers\AdminController@enrollProgrammeStore')->name('enrollProgramme.store');

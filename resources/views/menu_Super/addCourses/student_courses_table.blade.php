@@ -26,13 +26,13 @@
                 </td>
                 <td>
                     
-                    @switch($course->isProfessional)
+                    {{-- @switch($course->isProfessional)
                         @case(1)
                             Major
                             @break
                         @default
                             Core/Minor
-                    @endswitch
+                    @endswitch --}}
                    
                 </td>
                 <td>

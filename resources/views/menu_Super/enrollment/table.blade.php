@@ -8,6 +8,8 @@
             <th>Programme</th>
             <th>Programme Type</th>
             <th>Action</th>
+            <th>Courses Filled?</th>
+            <th>Enrollment Status</th>
         </tr>
         </thead>
         <tbody>
@@ -70,6 +72,27 @@
                     </div>
                     {!! Form::close() !!}
                 </td> 
+
+                <td></td>
+                <td>
+                    {{-- finance should have a table data like this to tag student as enrolled --}}
+                    {!! Form::model($students, ['route' => ['student.enroll', $students->id], 'method' => 'patch']) !!}
+                  
+                    @switch($students->isEnrolled)
+                        @case(0)
+                            {!! Form::hidden('isEnrolled', 1) !!}
+                            {{Form::submit('Tag as Enrolled',['class' => 'btn btn-default'])}}
+                            @break
+                        @default
+                            {!! Form::hidden('isEnrolled', 0) !!}
+                            {{Form::submit('Enrolled',['class' => 'btn btn-success', 
+                            'onclick' => "return confirm('Are you sure you want to unenroll student?')"])}}
+                    @endswitch
+                        
+                    {!!Form::close()!!} 
+
+
+                </td>
 
             </tr>
         @endforeach

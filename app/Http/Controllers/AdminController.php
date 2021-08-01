@@ -15,6 +15,7 @@ use App\Models\EnrollProgramme;
 use Illuminate\Support\Facades\DB;
 
 
+
 // Functions to be used by Admin/Registrar View
 
 class AdminController extends Controller
@@ -23,9 +24,9 @@ class AdminController extends Controller
 
     public function goTo_enrollmentList(Request $request)
     {
-        $students = Student::where('isEnrolled','0')->get();
+        $students = Student::orderBy('updated_at','asc')->get();
 
-        return view('menu_Super/enrollment/new/index')
+        return view('menu_Super/enrollment/index')
             ->with('students', $students);
     }
 
@@ -38,9 +39,41 @@ class AdminController extends Controller
     {
         $student = Student::find($id);
 
-        return view('menu_Super/enrollment/new/show')
+        return view('menu_Super/enrollment/show')
             ->with('student', $students);
     }
+
+    /**
+     * Tag As Enrolled
+     * isEnrolled
+     * 
+     */
+    public function studentEnroll(Request $request, $id)
+    {
+        $student = Student::where('id',$id);
+       // dd($request['isEnrolled']);
+        $student->update(request(['isEnrolled']));
+
+        Flash::success('Student Enrollment Tagged Successfully.');
+
+        return back();
+    }
+
+    /**
+     * Tag all as not enrolled 
+     * isEnrolled
+     * 
+     */
+    public function studentUnenrollAll()
+    {
+        $student = Student::where('isEnrolled','1')->update(['isEnrolled' => '0']);
+ 
+        Flash::success('Students are all tagged as unenrolled for the new semester');
+
+        return back();
+    }
+
+
 
     /**
      * delete student ID
@@ -62,7 +95,7 @@ class AdminController extends Controller
     public function goTo_enrollProgramme($id)
     {
         $student = Student::find($id);
-        return view('menu_Super/enrollment/new/enrollProgramme/enrollProgramme')
+        return view('menu_Super/enrollment/enrollProgramme/enrollProgramme')
             ->with('student', $student);
     }
 
@@ -124,7 +157,7 @@ class AdminController extends Controller
         ->join('Course', 'CourseProgramme.course_id', '=', 'Course.id')
         ->join('Student', 'Student.id','=','EnrollProgramme.student_id')
         ->join('Person','Person.id','=','Student.person_id')
-        ->select('CourseProgramme.course_id', 'Course.subjname','CourseProgramme.isProfessional', 'Course.subjcode',)
+        ->select('CourseProgramme.course_id', 'Course.subjname', 'Course.subjcode',)
         ->where('Person.id','=',  $request->id)
         ->distinct()
         ->get();
