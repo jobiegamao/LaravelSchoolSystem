@@ -59,7 +59,7 @@
                 <td>
                    {{-- add class code to StudentClass table --}}
                     
-
+                    {{-- cC OME BAKC HERE COME BACK --}}
                      {!! Form::open(['route' => 'courseProgramme.show']) !!}
                         {!! Form::hidden('id', $person->id ) !!}
                         {!! Form::hidden('year', $year ) !!}
