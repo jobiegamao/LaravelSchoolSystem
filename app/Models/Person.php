@@ -91,7 +91,7 @@ class Person extends Model
         return $this->lname . ', ' . $this->fname .' '. $this->mname .' '. $this->sname;
     }
 
-    public function student()
+    public function Student()
     {
         return $this->hasOne(Student::class, 'person_id');
     }

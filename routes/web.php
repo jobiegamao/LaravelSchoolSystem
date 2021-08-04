@@ -28,14 +28,24 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('students/enrolling-list', 'App\Http\Controllers\AdminController@goTo_enrollmentList')->name('goTo_enrollment.index');
 Route::delete('student/delete/{id}', 'App\Http\Controllers\AdminController@studentDelete')->name('student.delete');
-Route::patch('student/edit/{id}', 'App\Http\Controllers\AdminController@studentEdit')->name('student.edit');
+Route::patch('student/enroll/{id}', 'App\Http\Controllers\AdminController@studentEnroll')->name('student.enroll');
+Route::get('student/enrolling-list', 'App\Http\Controllers\AdminController@studentUnenrollAll')->name('student.unenroll');
+Route::patch('student/update/{id}', 'App\Http\Controllers\AdminController@studentUpdate')->name('student.update');
+
+
+Route::get('students/promotion-list', 'App\Http\Controllers\AdminController@goTo_promotionList')->name('goTo_promotionList.index');
+Route::get('student/promotion-list', 'App\Http\Controllers\AdminController@studentUnpromoteAll')->name('student.unpromote');
+
 
 Route::get('enrollProgramme/{id}', 'App\Http\Controllers\AdminController@goTo_enrollProgramme')->name('goTo_enrollProgramme');
 Route::post('enrollProgramme/store', 'App\Http\Controllers\AdminController@enrollProgrammeStore')->name('enrollProgramme.store');
 Route::delete('enrollProgramme/delete/{id}', 'App\Http\Controllers\AdminController@enrollProgrammeDelete')->name('enrollProgramme.delete');
 
 Route::get('student/courses', 'App\Http\Controllers\AdminController@goTo_courseProgramme')->name('goTo_courseProgramme');
-Route::post('student/courses', 'App\Http\Controllers\AdminController@courseProgrammeShow')->name('courseProgramme.show');
+Route::post('student/courses/curriculum', 'App\Http\Controllers\AdminController@courseProgrammeShow')->name('courseProgramme.show');
+
+Route::post('student/courses/classes', 'App\Http\Controllers\AdminController@classOfferingShow')->name('classOffering.show');
+
 
 // Route::resource('personContacts', App\Http\Controllers\PersonContactsController::class);
 

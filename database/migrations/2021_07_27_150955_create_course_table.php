@@ -14,82 +14,124 @@ class CreateCourseTable extends Migration
     public function up()
     {
         Schema::create('Course', function (Blueprint $table) {
-            $table->id();
+            
             $table->timestamps();
 
-            $table->string('subjCode');
+            $table->string('subjCode')->primary();
             $table->string('subjName');
+            $table->smallInteger('units')->nullable()->default(3);
 
         });
+
         DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'CS 123',
                    'subjName'   =>   'Intro to Computing',
+                   'units'   =>   '3',
             )
         );
 
         DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'CS 246',
-                   'subjName'   =>   'Computer Programming 1',
+                   'subjName'   =>   'Computer Programming',
+                   'units'   =>   '3',
             )
         );
 
         DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'PH 123',
-                   'subjName'   =>   'Intro to Philo',
+                   'subjName'   =>   'Intro to Philosophy',
+                   'units'   =>   '3',
             )
         );
 
         DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'PSY 246',
-                   'subjName'   =>   'Intro to Psych',
+                   'subjName'   =>   'Intro to Psychology',
+                   'units'   =>   '3',
             )
         );
         DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'ELC 111',
                    'subjName'   =>   'Elective 1',
+                   'units'   =>   '2',
             )
         );
         DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'GE 222',
                    'subjName'   =>   'Life and Works of Rizal',
+                   'units'   =>   '3',
             )
         );
         DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'PSY 333',
                    'subjName'   =>   'Anthropology',
+                   'units'   =>   '3',
             )
         );
         DB::table('Course')->insert(
             array(
-                   'subjCode'   =>   'ET 1111',
+                   'subjCode'   =>   'ET 111',
                    'subjName'   =>   'Ethics',
+                   'units'   =>   '3',
             )
         );
         DB::table('Course')->insert(
             array(
-                   'subjCode'   =>   'CS 22222',
+                   'subjCode'   =>   'CS 2222',
                    'subjName'   =>   'Computer Programming 2',
+                   'units'   =>   '3',
             )
         );
         DB::table('Course')->insert(
             array(
-                   'subjCode'   =>   'ELC 22222',
+                   'subjCode'   =>   'ELC 222',
                    'subjName'   =>   'Elective 2',
+                   'units'   =>   '2',
             )
         );
         DB::table('Course')->insert(
             array(
-                   'subjCode'   =>   'CS 345',
+                   'subjCode'   =>   'CS 456',
                    'subjName'   =>   'Object Oriented Programming',
+                   'units'   =>   '3',
             )
         );
+        DB::table('Course')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22111',
+                   'subjName'   =>   'Chemistry for Engineers',
+                   'units'   =>   '3',
+            )
+        );
+        DB::table('Course')->insert(
+            array(
+                   'subjCode'   =>   'DIFF 22222',
+                   'subjName'   =>   'Differential Equations',
+                   'units'   =>   '3',
+            )
+        );
+        DB::table('Course')->insert(
+            array(
+                   'subjCode'   =>   'APP 11111',
+                   'subjName'   =>   'Art Appreciation',
+                   'units'   =>   '2',
+            )
+        );
+        DB::table('Course')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22444',
+                   'subjName'   =>   'Engineering Management',
+                   'units'   =>   '3',
+            )
+        );
+       
     }
 
     /**

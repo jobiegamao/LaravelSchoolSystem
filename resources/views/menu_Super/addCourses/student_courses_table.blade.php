@@ -1,43 +1,52 @@
 <div class="table-responsive">
-    <table class="table" id="studentcourses-table">
+    <table class="table" id="curriculum-table">
         <thead>
         <tr>
+            <th>Year Level</th>
+            <th>Semester</th>
             <th>Code</th>
-            <th>Subject</th>
-            <th>Prerequisite Subjects</th>
-            <th>Major or Minor</th>
+            <th>Title</th>
             
+            <th>Units</th>
             <th>Final Grade</th>
+            <th>Prerequisite</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
+        {{-- EnrolledProgramme Table --}}
         @foreach($course as $course)
             <tr>
                 <td>
-                    {{ $course->subjcode }}
+                    {{ $course->yearLevel }}
                 </td>
                 <td>
-                    {{ $course->subjname }}
+                    {{ $course->semester }}
                 </td>
                 <td>
-                   
+                    {{ $course->subjCode }}
+                </td>
+                <td>
+                    {{ $course->Course->subjName}}
+                </td>
+                <td>
+                    {{ $course->Course->units }}
+                </td>
+                <td>
                     
                 </td>
                 <td>
                     
-                    @switch($course->isProfessional)
-                        @case(1)
-                            Major
-                            @break
-                        @default
-                            Core/Minor
-                    @endswitch
-                   
-                </td>
-                <td>
-                   
-
+                    @php
+                        foreach($course->CourseProgrammePrereq as $req){
+                            $reqID = $req->prereq_course_programme_id;
+                            $ID = \App\Models\CourseProgramme::where('id',$reqID)->value('subjCode');
+                            echo($ID);
+                        }
+                        
+                    @endphp
+                    
+                    
                 </td>
                 <td>
                    
@@ -59,7 +68,7 @@
     </script>
     <script>
         $(document).ready( function () {
-            $('#studentcourses-table').DataTable();
+            $('#curriculum-table').DataTable();
            
         } );
     </script>

@@ -24,7 +24,8 @@ class EnrollProgramme extends Model
     public $fillable = [
         'description',
         'student_id',
-        'programme_id'
+        'progCode',
+        'description'
     ];
 
     /**
@@ -35,9 +36,9 @@ class EnrollProgramme extends Model
     protected $casts = [
         'id' => 'integer',
         
-        'programme_level' => 'string',
+    
         'student_id' => 'integer',
-        'programme_id' => 'integer'
+        'progCode' => 'string',
     ];
 
     /**
@@ -50,17 +51,22 @@ class EnrollProgramme extends Model
         'updated_at' => 'nullable',
         'description' => 'required',
         'student_id' => 'required|exists:App\Models\Student,id',
-        'programme_id' => 'required|exists:App\Models\Programme,id'
+        'progCode' => 'required|exists:App\Models\Programme,progCode',
     ];
 
-    public function programme()
+    public function Programme()
     {
-        return $this->belongsTo(Programme::class, 'programme_id');
+        return $this->belongsTo(Programme::class, 'progCode');
     }
 
-    public function student()
+    public function Student()
     {
         return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    public function CourseProgramme()
+    {
+        return $this->hasMany(CourseProgramme::class, 'progCode', 'progCode');
     }
 
     

@@ -14,10 +14,10 @@ class CreateProgrammeTable extends Migration
     public function up()
     {
         Schema::create('Programme', function (Blueprint $table) {
-            $table->id();
+            
             $table->timestamps();
             $table->string('name')->nullable();
-            $table->string('code')->nullable();
+            $table->string('progCode')->primary();
 
             //select if the program is for undergrad, grad, post
             $table->string('level')->nullable();
@@ -25,6 +25,7 @@ class CreateProgrammeTable extends Migration
 
         DB::table('Programme')->insert(
             array(
+		            'progCode' =>   'BSCS',
                    'name'   =>   'BS in Computer Science',
                    'level'   =>   'Undergraduate',
             )
@@ -32,17 +33,30 @@ class CreateProgrammeTable extends Migration
 
         DB::table('Programme')->insert(
             array(
+		  'progCode' =>   'BSPSYCH',
                    'name'   =>   'BS in Psychology',
+                   'level'   =>   'Undergraduate',
+            )
+        );
+
+	DB::table('Programme')->insert(
+            array(
+		  'progCode' =>   'ABPHILO',
+                   'name'   =>   'AB in Philosophy',
                    'level'   =>   'Undergraduate',
             )
         );
 
         DB::table('Programme')->insert(
             array(
-                   'name'   =>   'AB in Philosophy',
+		  'progCode' =>   'BSCHE',
+                   'name'   =>   'BS in Chemical Engineering',
                    'level'   =>   'Undergraduate',
             )
         );
+
+
+        
     }
 
     /**
