@@ -36,21 +36,93 @@ class CreatePersonTable extends Migration
 
         DB::table('Person')->insert(
             array(
-                   'id'     =>   '1001', 
-                   'lname'   =>   'Lopez',
-                   'fname'   =>   'Dayle',
-                   'mname'   =>   'Cruz',
+                   'id'   =>   '10001',
+                   'lname'   =>   'Gomez',
+		  'fname'   =>   'Jay',
+		  'mname'   =>   'M',
+		  'role'   =>   'Super Admin',
             )
-       );
-       DB::table('Person')->insert(
+        );
+
+        DB::table('Person')->insert(
+            array(
+                   'id'   =>   '10002',
+                   'lname'   =>   'Gray',
+		  'fname'   =>   'Keith',
+		  'mname'   =>   'N',
+		  'role'   =>   'Registrar',
+            )
+        );
+
+        DB::table('Person')->insert(
+            array(
+                   'id'   =>   '10003',
+                   'lname'   =>   'Jones',
+		  'fname'   =>   'Kim',
+		  'mname'   =>   'A',
+		  'role'   =>   'Teacher',
+            )
+        );
+
+        DB::table('Person')->insert(
+            array(
+                   'id'   =>   '10004',
+                   'lname'   =>   'Ibarra',
+		  'fname'   =>   'Cris',
+		  'mname'   =>   'W',
+		  'role'   =>   'Teacher',
+            )
+        );
+
+        DB::table('Person')->insert(
+            array(
+                   'id'   =>   '10005',
+                   'lname'   =>   'Perez',
+		  'fname'   =>   'Jake',
+		  'mname'   =>   'K',
+		  'role'   =>   'Teacher',
+            )
+        );
+
+        DB::table('Person')->insert(
+            array(
+                   'id'   =>   '10006',
+                   'lname'   =>   'Cruz',
+		  'fname'   =>   'Kate',
+		  'mname'   =>   'B',
+		  'role'   =>   'Student',
+            )
+        );
+
+        DB::table('Person')->insert(
+            array(
+                   'id'   =>   '10007',
+                   'lname'   =>   'Dizon',
+		  'fname'   =>   'Jim',
+		  'mname'   =>   'C',
+		  'role'   =>   'Student',
+            )
+        );
+
+        DB::table('Person')->insert(
         array(
-               
-               'lname'   =>   'Santos',
-               'fname'   =>   'Charlie',
-               'mname'   =>   'David',
-               'sname'   =>   'Jr.',
-        )
-   );
+            'id'   =>   '10008',
+            'lname'   =>   'Pratt',
+            'fname'   =>   'Cami',
+            'mname'   =>   'H',
+            'role'   =>   'Student',
+                )
+            );
+
+        DB::table('Person')->insert(
+        array(
+            'id'   =>   '10009',
+            'lname'   =>   'Smith',
+		  'fname'   =>   'Coleen',
+		  'mname'   =>   'K',
+		  'role'   =>   'Student',
+            )
+        );
 
 
     }

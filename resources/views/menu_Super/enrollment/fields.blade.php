@@ -26,9 +26,9 @@
     <div class="col-sm-10 form-control">
         <select class="select2" style="width:100%" id="description" name="description" data-style="btn-info" >
             <option></option>
-            <option value="Degree/Major">Degree/Major</option>
+            <option value="Major">Degree/Major</option>
             <option value="Minor">Minor</option>
-            <option value="Certificate">Certifucate</option>
+            <option value="Certificate">Certificate</option>
         </select>
     </div>
 

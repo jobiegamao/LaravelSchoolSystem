@@ -26,7 +26,7 @@ class Student extends Model
 
     
 
-    public function person()
+    public function Person()
     {
         return $this->belongsTo(Person::class, 'person_id');
     }
@@ -39,7 +39,7 @@ class Student extends Model
      /**
      * Get the student's enrolled IDs
      */
-    public function enrolledProgramme()
+    public function EnrolledProgramme()
     {
         return $this->hasMany(EnrollProgramme::class, 'student_id');
     }

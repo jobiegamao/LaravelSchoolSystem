@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table" id="students-table">
+    <table class="table" id="enrollment-table">
         <thead>
         <tr>
             <th>Person ID</th>
@@ -28,10 +28,10 @@
                 </td>
                 <td>
                     
-                    @forelse ($students->enrolledProgramme as $course )
+                    @forelse ($students->EnrolledProgramme as $course )
                         <div class='input-group'>    
                             <div class="group-prepend">
-                                <span class="input-group-text p-1">{{ $course->programme->name}}</span>
+                                <span class="input-group-text p-1">{{ $course->Programme->name}}</span>
                             </div>
                             
                             {!! Form::open(['route' => ['enrollProgramme.delete', $course->id], 'method' => 'delete']) !!}
@@ -48,7 +48,7 @@
                 
                 </td>
                 <td>
-                    @forelse ($students->enrolledProgramme as $course )
+                    @forelse ($students->EnrolledProgramme as $course )
                         <div class="group-prepend">
                             <span class="input-group-text p-1">{{ $course->description}}</span>
                         </div>
@@ -59,24 +59,20 @@
 
                 </td>
                  <td>
-                    {!! Form::open(['route' => ['student.delete', $students->id], 'method' => 'delete']) !!}
-                    <div class='btn-group'>
+                   
+                
                         
                         <a href="{{ route('goTo_enrollProgramme', [$students->id]) }}"
                            class='btn btn-default'>
                             Add Programme
                         </a> 
-                        {!! Form::button('<i class="far fa-trash-alt"></i>', 
-                        ['type' => 'submit', 'class' => 'btn btn-danger btn-xs',
-                         'onclick' => "return confirm('Are you sure you want to delete student ID?')"]) !!}
-                    </div>
-                    {!! Form::close() !!}
+                        
                 </td> 
 
                 <td></td>
                 <td>
                     {{-- finance should have a table data like this to tag student as enrolled --}}
-                    {!! Form::model($students, ['route' => ['student.enroll', $students->id], 'method' => 'patch']) !!}
+                    {!! Form::model($students, ['route' => ['student.update', $students->id], 'method' => 'patch']) !!}
                   
                     @switch($students->isEnrolled)
                         @case(0)
@@ -108,7 +104,7 @@
     </script>
     <script>
         $(document).ready( function () {
-            $('#students-table').DataTable();
+            $('#enrollment-table').DataTable();
            
         } );
     </script>

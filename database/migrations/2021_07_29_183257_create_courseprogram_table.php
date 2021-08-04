@@ -17,170 +17,278 @@ class CreateCourseprogramTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignID('course_id')
-                ->contstrained('Course')
+            $table->string('subjCode');
+            $table->foreign('subjCode')
+                ->references('subjCode')
+                ->on('Course')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
-            $table->foreignID('programme_id')
-                ->contstrained('Programme')
+            
+            $table->string('progCode');
+            $table->foreign('progCode')
+                ->references('progCode')
+                ->on('Programme')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->boolean('isProfessional')->nullable()->default(1);
+            $table->tinyInteger('semester')->nullable()->default(1);
+            $table->tinyInteger('yearLevel')->nullable();
+            $table->smallInteger('yearImplemented');
         });
-
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '1',
-                   'programme_id'   =>   '1',
-                  
+                   'progCode'   =>   'BSCS',
+                   'subjCode'   =>   'CS 123',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '2',
-                   'programme_id'   =>   '1',
-                 
+                   'progCode'   =>   'BSCS',
+                   'subjCode'   =>   'CS 246',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '5',
-                   'programme_id'   =>   '1',
+                   'progCode'   =>   'BSCS',
+                   'subjCode'   =>   'ELC 111',
                    'isProfessional'   =>   '0',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '6',
-                   'programme_id'   =>   '1',
+                   'progCode'   =>   'BSCS',
+                   'subjCode'   =>   'GE 222',
                    'isProfessional'   =>   '0',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '8',
-                   'programme_id'   =>   '1',
+                   'progCode'   =>   'BSCS',
+                   'subjCode'   =>   'ET 111',
                    'isProfessional'   =>   '0',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '9',
-                   'programme_id'   =>   '1',
-                  
+                   'progCode'   =>   'BSCS',
+                   'subjCode'   =>   'CS 2222',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '10',
-                   'programme_id'   =>   '1',
+                   'progCode'   =>   'BSCS',
+                   'subjCode'   =>   'ELC 222',
                    'isProfessional'   =>   '0',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '11',
-                   'programme_id'   =>   '1',
-                  
+                   'progCode'   =>   'BSCS',
+                   'subjCode'   =>   'CS 456',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '4',
-                   'programme_id'   =>   '2',
-                
+                   'progCode'   =>   'BSPSYCH',
+                   'subjCode'   =>   'PSY 246',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '5',
-                   'programme_id'   =>   '2',
+                   'progCode'   =>   'BSPSYCH',
+                   'subjCode'   =>   'ELC 111',
                    'isProfessional'   =>   '0',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '8',
-                   'programme_id'   =>   '2',
-                  
+                   'progCode'   =>   'BSPSYCH',
+                   'subjCode'   =>   'ET 111',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '6',
-                   'programme_id'   =>   '2',
+                   'progCode'   =>   'BSPSYCH',
+                   'subjCode'   =>   'GE 222',
                    'isProfessional'   =>   '0',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '7',
-                   'programme_id'   =>   '2',
-                  
+                   'progCode'   =>   'BSPSYCH',
+                   'subjCode'   =>   'PSY 333',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '10',
-                   'programme_id'   =>   '2',
+                   'progCode'   =>   'BSPSYCH',
+                   'subjCode'   =>   'ELC 222',
                    'isProfessional'   =>   '0',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '3',
-                   'programme_id'   =>   '3',
-                  
+                   'progCode'   =>   'ABPHILO',
+                   'subjCode'   =>   'PH 123',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '5',
-                   'programme_id'   =>   '3',
+                   'progCode'   =>   'ABPHILO',
+                   'subjCode'   =>   'ELC 111',
                    'isProfessional'   =>   '0',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '6',
-                   'programme_id'   =>   '3',
+                   'progCode'   =>   'ABPHILO',
+                   'subjCode'   =>   'GE 222',
                    'isProfessional'   =>   '0',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '8',
-                   'programme_id'   =>   '3',
-                  
+                   'progCode'   =>   'ABPHILO',
+                   'subjCode'   =>   'ET 111',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
 
         DB::table('CourseProgramme')->insert(
             array(
-                   'course_id'   =>   '10',
-                   'programme_id'   =>   '3',
-                  
+                   'progCode'   =>   'ABPHILO',
+                   'subjCode'   =>   'ELC 222',
+                   'isProfessional'   =>   '0',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
             )
         );
+	DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'CHE 22111',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '2',
+                   'yearImplemented'   =>   '2019',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'DIFF 22222',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '2',
+                   'yearImplemented'   =>   '2019',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'APP 11111',
+                   'isProfessional'   =>   '0',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '2',
+                   'yearImplemented'   =>   '2019',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'CHE 22444',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '2',
+                   'yearImplemented'   =>   '2019',
+            )
+        );
+
+       
     }
 
     /**

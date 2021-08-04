@@ -16,6 +16,21 @@ class CreateGradereportsTable extends Migration
         Schema::create('GradeReports', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->foreignID('studentClass_id')
+                ->nullable()
+                ->contstrained('StudentClass')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreignID('teacher_id')
+                ->nullable()
+                ->contstrained('Teacher')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->boolean('isPass')->nullable()->default(1);
+
         });
     }
 

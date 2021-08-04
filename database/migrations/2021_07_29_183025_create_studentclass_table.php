@@ -16,6 +16,26 @@ class CreateStudentclassTable extends Migration
         Schema::create('StudentClass', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->smallInteger('semester')->default(1);
+            $table->smallInteger('year')->default(2020);
+
+            $table->foreignID('student_id')
+                ->contstrained('Student')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreignID('classOffering_id')
+                ->nullable()
+                ->contstrained('ClassOffering')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreignID('classGrade_id')
+                ->nullable()
+                ->contstrained('ClassGrade')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

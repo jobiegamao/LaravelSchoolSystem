@@ -16,6 +16,10 @@ class CreateClassgradeTable extends Migration
         Schema::create('ClassGrade', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->float('prelimGrade')->nullable();
+            $table->float('midtermGrade')->nullable();
+            $table->float('prefinalsGrade')->nullable();
         });
     }
 

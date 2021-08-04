@@ -5,43 +5,36 @@ namespace App\Models;
 use Eloquent as Model;
 
 
+
 /**
- * Class Programme
+ * Class Course
  * @package App\Models
- * @version July 29, 2021, 2:13 pm UTC
+ * @version August 1, 2021, 8:33 pm UTC
  *
- * @property string $name
- * @property string $code
+ * @property string $subjCode
+ * @property string $subjName
  */
-class Programme extends Model
+class Course extends Model
 {
+    
 
 
+    public $table = 'Course';
 
-    public $table = 'Programme';
-
-    // if your key name is not 'id'
+     // if your key name is not 'id'
     // you can also set this to null if you don't have a primary key
 
-    protected $primaryKey = 'progCode';
+    protected $primaryKey = 'subjCode';
     public $incrementing = false;
     protected $keyType = 'string';
-
-
+    
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
 
-   
-
-
-
     public $fillable = [
-        'name',
-        'progCode',
-        'name',
-        'level'
-
+        'subjCode',
+        'subjName'
     ];
 
     /**
@@ -51,8 +44,8 @@ class Programme extends Model
      */
     protected $casts = [
         
-        'progCode' => 'string',
-        
+        'subjCode' => 'string',
+        'subjName' => 'string'
     ];
 
     /**
@@ -63,12 +56,13 @@ class Programme extends Model
     public static $rules = [
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'name' => 'required|string|max:191',
-        'progCode' => 'required|string|max:191'
+        'subjCode' => 'required|string|max:191',
+        'subjName' => 'required|string|max:191'
     ];
 
     public function CourseProgramme()
     {
-        return $this->hasMany(CourseProgramme::class, 'progCode');
+        return $this->hasMany(CourseProgramme::class, 'subjCode');
     }
+    
 }

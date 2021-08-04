@@ -26,11 +26,60 @@ class CreateEnrollprogrammeTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreignID('programme_id')
-                ->contstrained('Programme')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->string('progCode');
+
+            $table->foreign('progCode')
+                ->references('progCode')
+                ->on('Programme');
         });
+
+        DB::table('EnrollProgramme')->insert(
+            array(
+		  'student_id' =>   '20001',
+                   'progCode'   =>   'BSCS',
+                   'description'   =>   'Major',
+            )
+        );
+
+        DB::table('EnrollProgramme')->insert(
+            array(
+		  'student_id' =>   '20001',
+                   'progCode'   =>   'ABPHILO',
+                   'description'   =>   'Certificate',
+            )
+        );
+
+	DB::table('EnrollProgramme')->insert(
+            array(
+		  'student_id' =>   '20002',
+                   'progCode'   =>   'BSPSYCH',
+                   'description'   =>   'Major',
+            )
+        );
+
+        DB::table('EnrollProgramme')->insert(
+            array(
+		  'student_id' =>   '20002',
+                   'progCode'   =>   'BSCS',
+                   'description'   =>   'Minor',
+            )
+        );
+	
+	DB::table('EnrollProgramme')->insert(
+            array(
+		  'student_id' =>   '20003',
+                   'progCode'   =>   'ABPHILO',
+                   'description'   =>   'Major',
+            )
+        );
+
+        DB::table('EnrollProgramme')->insert(
+            array(
+		  'student_id' =>   '20004',
+                   'progCode'   =>   'BSCHE',
+                   'description'   =>   'Major',
+            )
+        );
 
         
     }
