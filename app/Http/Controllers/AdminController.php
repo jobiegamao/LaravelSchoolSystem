@@ -201,14 +201,26 @@ class AdminController extends Controller
             return redirect(route('goTo_courseProgramme'))->withInput();
         }
 
-        //Get Classes Registered for sem and year
+        //add class in pre reg list
+        if($request->addInPreReg != null){
+            $cg = new ClassGrade();
+            $cg->save();
+            StudentClass::create([
+                'student_id' => $request->student_id,
+                'classOffering_id'  => $request->classOffering_id,
+                'classGrade_id' =>$cg->id
+
+            ]);
+        }
+
+        //Get and show Classes Registered for sem and year
             $prereg = StudentClass::where('student_id', $studentID)
                         ->where('year', $request->year)
                         ->where('semester', $request->semester)
                         ->get();
 
         //Get Curriculum                                                                                 
-            $enrolledProg = Student::find($studentID)->enrolledProgramme;
+            $enrolledProg = Student::find($studentID)->EnrolledProgramme;
 
             $i=0;
             
@@ -219,11 +231,11 @@ class AdminController extends Controller
                 switch($enrolledProg->description){
                     case 'Major':
                         
-                        $a = $enrolledProg->courseProgramme->where('yearImplemented', $year);
+                        $a = $enrolledProg->CourseProgramme->where('yearImplemented', $year);
                         break;
                     
                     default: 
-                        $a = $enrolledProg->courseProgramme->where('isProfessional', '1')->where('yearImplemented', $year);
+                        $a = $enrolledProg->CourseProgramme->where('isProfessional', '1')->where('yearImplemented', $year);
                         break;
                 }
 
@@ -239,19 +251,10 @@ class AdminController extends Controller
             $course = $course->unique('subjCode');
 
         
-        //add class
-            if($request->classOffering_id != null){
-                $cg = new ClassGrade();
-                $cg->save();
-                StudentClass::create([
-                    'student_id' => $request->student_id,
-                    'classOffering_id'  => $request->classOffering_id,
-                    'classGrade_id' =>$cg->id
-
-                ]);
+        
 
             
-        }
+        
 
         // output classOfferings based on search
         if($request->subjCode != null){
