@@ -16,6 +16,7 @@ use App\Models\CourseProgramme;
 use App\Models\ClassOffering; 
 use App\Models\ClassGrade; 
 use App\Models\StudentClass; 
+use App\Models\AcadPeriod; 
 
 use Illuminate\Support\Facades\DB;
 
@@ -160,7 +161,7 @@ class AdminController extends Controller
        
 
         Flash::success('Programme Enrolled successfully.');
-        return redirect('/students/enrolling-list');;
+        return redirect('/students/enrolling-list');
     }
 
     /**
@@ -187,7 +188,7 @@ class AdminController extends Controller
     }
 
 
-    public function courseProgrammeShow(Request $request)
+    public function chanfeecourseProgrammeShow(Request $request)
     {
         $person = Person::find($request->id);
         $studentID = Student::where('person_id', $request->id)->value('id');
@@ -304,6 +305,182 @@ class AdminController extends Controller
     }
 
     
+    public function courseProgrammeShow(Request $request)
+    {
+        $person = Person::find($request->id);
+        $studentID = Student::where('person_id', $request->id)->value('id');
+
+        if (empty($person)) {
+            Flash::error('ID not found');
+
+            return redirect(route('goTo_courseProgramme'))->withInput();
+        }
+
+        //Get Curriculum                                                                                 
+        $enrolledProg = Student::find($studentID)->EnrolledProgramme
+                                                 ->where('status', '0');
+                                                 //get only curriculum of ongoing program
+
+        $i=0; // major and minor counter
+        $j=0; // cert counter
+        foreach ($enrolledProg as $enrolledProg){
+            $year = CourseProgramme::where('progCode', $enrolledProg->progCode,)->max('yearImplemented');
+            
+            
+            switch($enrolledProg->description){
+                case 'Major':
+                    
+                    $a = $enrolledProg->CourseProgramme->where('yearImplemented', $year);
+                    break;
+                
+                case 'Minor': 
+                    $a = $enrolledProg->CourseProgramme->where('isProfessional', '1')->where('yearImplemented', $year);
+                    
+                    break;
+
+                default:
+                    $b = $enrolledProg->CourseProgramme->where('isProfessional', '1')->where('yearImplemented', $year);
+                    break;
+            }
+
+            if($enrolledProg->description != 'Certificate'){
+
+                if($i > 0){
+                    $course = $course->merge($a);
+                }else{
+                    $course = $a;
+                }
+                $i++;
+            }else{
+                if($j > 0){
+                    $certOptions = $certOptions->merge($b);
+                }else{
+                    $certOptions = $b;
+                }
+                $j++;
+            }
+            
+            
+            
+        }  
+
+        if(!empty($course)){
+            $course = $course->unique('subjCode'); //list of subjects to take. Curriculum ProgrammeCourses
+        }else{
+            $course = ([]);
+        }
+        
+        if(!empty($certOptions)){                             //will not include in curriculum but will be displayed
+            $certOptions = $certOptions->unique('subjCode'); // list of subjects as options to a cert programme
+        }else{
+            $certOptions = ([]);
+        }                                                   
+         
+        
+         
+
+        return redirect()->back()
+        ->with(compact('person', 'course', 'certOptions'))
+        ->withInput();
+    
+
+    }
+
+    public function goTo_prereg(Request $request){
+        $acadYear = AcadPeriod::latest()->value('acadYear');
+        $acadSem = AcadPeriod::latest()->value('acadSem');
+        
+        if(empty($request->all())){
+            return view('menu_Super/addCourses/prereg')
+            ->with(compact('acadYear'));
+        }
+          
+        $person = Person::find($request->id);
+        $studentID = Student::where('person_id', $request->id)->value('id');
+        $student = Student::find($studentID);
+
+        if (empty($person) || empty($student)) {
+            Flash::error('ID not found');
+
+            return redirect(route('goTo_prereg'))->withInput();
+        }
+        
+    
+        
+        
+        //Get and show Classes Registered for sem and year
+            $prereg = StudentClass::where('student_id', $studentID)
+            ->where('year', $request->acadYear)
+            ->where('semester', $request->acadSem)
+            ->get();
+        
+        return view('menu_Super/addCourses/prereg')
+        ->with(compact('person', 'student','acadYear', 'acadSem', 'prereg'))
+        ;
+        
+    }
 
 
+    public function goTo_classOfferings(Request $request){
+        $student = Student::find($request->id);
+        
+        return view('menu_Super/addCourses/classOfferings')
+        ->with('student', $student);
+    }
+
+    public function classOfferingsShow(Request $request){
+        $student = Student::find($request->id);
+        $acadYear = AcadPeriod::latest()->value('acadYear');
+        $acadSem = AcadPeriod::latest()->value('acadSem');
+
+        $classes = ClassOffering::
+            where('subjCode', $request->subjCode)
+            ->where('year',$acadYear )
+            ->where('semester', $acadSem )
+            ->get();
+
+            //if subjCode is not in student Curriculum, dont show
+            // checker here -----
+        
+      
+        
+        return redirect()->back()
+        ->with(compact('student', 'classes'))
+        ->withInput();
+    }
+
+    /**
+     * Add A Class in StudentClass
+     */
+
+    public function studentClassStore(Request $request){
+        
+        //if classOffering_id has sched conflict
+        // checker here -----
+        // need to return back and not continue
+
+
+        $cg = new ClassGrade();
+        $cg->save();
+        StudentClass::create([
+            'student_id' => $request->student_id,
+            'classOffering_id'  => $request->classOffering_id,
+            'classGrade_id' =>$cg->id,
+            'semester' => $request->sem,
+            'year' => $request->year,
+
+        ]);
+
+        $student = Student::find($request->student_id);
+        $person = $student->person_id;
+
+        Flash::success('Student Added Class Successfully.');
+        return redirect()
+        ->route('goTo_prereg', [
+            'id' => $person,
+            'acadSem' => $request->sem,
+            'acadYear' => $request->year
+            ])
+        ->withInput();
+    }
 }

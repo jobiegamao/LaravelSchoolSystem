@@ -704,6 +704,7 @@ class ComposerStaticInitf19304e2e2f29d0a3a236eaae273c8d0
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Models\\AcadPeriod' => __DIR__ . '/../..' . '/app/Models/AcadPeriod.php',
         'App\\Models\\ClassGrade' => __DIR__ . '/../..' . '/app/Models/ClassGrade.php',
         'App\\Models\\ClassOffering' => __DIR__ . '/../..' . '/app/Models/ClassOffering.php',
         'App\\Models\\Course' => __DIR__ . '/../..' . '/app/Models/Course.php',

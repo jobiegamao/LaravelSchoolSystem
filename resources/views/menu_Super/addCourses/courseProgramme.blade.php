@@ -6,73 +6,64 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1>Student Pre Registration</h1>
+                <div class="col-sm-6">
+                    <h1>Curriculum</h1>
                 </div>
-                
+                <div class="col-sm-6 clearfix"> @include('flash::message')</div>
             </div>
         </div>
     </section>
-{{-- /header --}}
+    {{-- /header --}}
 
-{{-- body --}}
+    {{-- body --}}
 
     
-        <div class="clearfix"> @include('flash::message')</div>
+        
         <div class="card">
             <div class="card-body p-10">
                 {{-- Search Student ID --}}
                 {!! Form::open(['route' => 'courseProgramme.show']) !!}
-                    <div class="input-group">
-                        <input type="text" class="col-sm-4 form-control" name="id"
-                            placeholder="Search Student ID (person id)" value="{{ old('id') }}" required> 
-
-                        <input type="number" class="col-sm-4 form-control"  name="year" value="{{ old('year') }}"
-                            placeholder="Enter School Year(YYYY)" required>
-
-                        <select class="col-sm-4 form-control"" id="semester" name="semester" value="{{ old('semester') }}"
-                            style="width:100%" data-style="btn-info" placeholder="Semester" required>
-                                
-                                <option value="1">1st</option>
-                                <option value="2">2nd</option>
-                        </select>
+                    <div class="row">
                             
-                        <span class="input-group-btn">
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="id"
+                                    placeholder="Search Student ID (person id)" value="{{ old('id') }}" required> 
+                            </div>
+                            <div class="col-sm-1">
                                 <button type="submit" class="btn btn-default">
                                     <i class="fas fa-search"></i>
                                 </button>
-                        </span>
-
+                            </div>
+                                    
+                {!! Form::close() !!}
                         
+                            {{-- to access compact returns --}}
+                            @php
+                                $person = Session::get('person');
+                                $course = Session::get('course');
+                                $cert = Session::get('certOptions');
+                            @endphp
+                            @if (isset($person))
+                                <div class="col-6">
+                                    <a class="btn btn-primary float-right"
+                                    href="{{ route('goTo_prereg', ['id' => $person->id]) }}">
+                                        Register Classes
+                                    </a>
+                                </div>
+                            @endif
+                            
+
                     </div>
-                
-               {{-- close is at after classoffering search para madala ang id,sem, and year --}}
-               {!! Form::close() !!}
             </div>
         </div>
 
-             <?php $person = Session::get('person'); ?>
-             <?php $course = Session::get('course'); ?>
-             <?php $year = Session::get('curryear'); ?>
-             <?php $semester = Session::get('currsem'); ?>
+             
             
-            @if(isset($person))
-                @include('menu_Super/addCourses/studentClass')
-                @include('menu_Super/addCourses/classOfferings')
-            @endif
 
-             @if(isset($person))
-             <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-12">
-                            <h1>Student's Programme Courses</h1>
-                        </div>
-                        
-                    </div>
-                </div>
-            </section>
+             
+             
              <div class="card">
+                @if(isset($person))
                 <div class="card-body p-10"> 
                     
                         <div class="form-group row">
@@ -92,25 +83,21 @@
                                 {!! Form::text('programme', $courses->Programme->name , ['class' => "col-sm-8 form-control mb-3", 'readonly']) !!}
                                 
                             @endforeach
-                        </div>
-
-
-                        <div class="pt-3"> 
-                            @include('menu_Super/addCourses/student_courses_table') 
-                        </div>
-                        
-                        
-                        
+                        </div>    
+                        {{-- ADD UNITS COUNTER --}}
                 </div>
-               
-            @endif
-        </div>
-
+                <div class="pt-3"> 
+                    @include('menu_Super/addCourses/courseProgramme_table') 
+                </div>
+                @endif
+                
+            </div>
+        
            
 
              
-    </div>
+    
 
-
+</div>
 @endsection
 

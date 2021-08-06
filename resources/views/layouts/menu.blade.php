@@ -103,7 +103,19 @@
                     <a href="{{ route('goTo_courseProgramme') }}" 
                       class="nav-link {{ Request::is('student/courses') ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Student Courses</p>
+                      <p>Student Curriculum</p>
+                    </a>
+              </li>
+                
+            </ul>
+
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item ">
+                    <a href="{{ route('goTo_prereg') }}" 
+                      class="nav-link {{ Request::is('student/prereg') ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add/Drop</p>
                     </a>
               </li>
                 

@@ -11,11 +11,11 @@
             <th>Schedule</th>
             <th>Instructor</th>
             <th>Room</th>
-            <th>Reserve</th>
-            <th>Enrolled</th>
-            <th>Available</th>
+            <th> <small>Reserved<br>Slots</small></th>
+            <th><small>Enrolled<br>Slots</small></th>
+            <th><small>Available<br>Slots</small></th>
 
-            <th>Add Class</th>
+            <th>Add</th>
         </tr>
         </thead>
         <tbody>
@@ -52,7 +52,7 @@
                 </td>
                 <td>
                     
-
+                    {{ $classes->year }}
                 </td>
                 <td>
                    
@@ -66,19 +66,16 @@
                    {{-- add class code to StudentClass table --}}
                     
                     {{-- cC OME BAKC HERE COME BACK --}}
-                     {!! Form::open(['route' => 'courseProgramme.show']) !!}
 
-                        {!! Form::hidden('addInPreReg', 'true' ) !!}
-                        {!! Form::hidden('id', $person->id ) !!}
-                        {!! Form::hidden('year', $year ) !!}
-                        {!! Form::hidden('semester', $semester ) !!}
-                        {!! Form::hidden('student_id', $person->Student->id ) !!}
-                        {!! Form::hidden('subjCode', $classes->subjCode ) !!}
-                        {!! Form::hidden('classOffering_id', $classes->id ) !!}
-                        {!! Form::hidden('schedule',  $classes->schedule ) !!}
-                        {!! Form::hidden('units',  $classes->Course->units ) !!}
-                        {{Form::submit('Add',['class' => 'btn btn-success'] )}}
-                     {!! Form::close() !!}
+                    
+                    <a href="{{ route('studentClass.store', [
+                        'student_id' => $student->id, 
+                        'classOffering_id' => $classes->id,
+                        'sem' => $classes->semester,
+                        'year' => $classes->year,
+                        ]) }}"
+                        class='btn btn-primary'> Add Class
+                     </a> 
 
                 </td>
                 
