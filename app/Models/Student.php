@@ -44,6 +44,12 @@ class Student extends Model
         return $this->hasMany(EnrollProgramme::class, 'student_id');
     }
 
+    public function StudentClass()
+    {
+        return $this->hasMany(StudentClass::class, 'student_id');
+    }
+
+
  
     
     /**

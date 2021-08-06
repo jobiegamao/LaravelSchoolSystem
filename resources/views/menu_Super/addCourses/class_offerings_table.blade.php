@@ -2,6 +2,7 @@
     <table class="table" id="classofferings-table">
         <thead>
         <tr>
+            <th><small>Offering #</small></th>
             <th>Semester</th>
             <th>Units</th>
             
@@ -23,13 +24,14 @@
         @foreach($classes as $classes)
             <tr>
                 <td>
+                    {{ $classes->id }}
+                </td>
+                <td>
                     {{ $classes->semester }}
                 </td>
                 <td>
                     {{ $classes->Course->units }}
-
                 </td>
-                
                 <td>
                     {{ $classes->classCode }}
                 </td>
@@ -52,7 +54,7 @@
                 </td>
                 <td>
                     
-                    {{ $classes->year }}
+                    {{-- {{ $classes->id }} --}}
                 </td>
                 <td>
                    
@@ -63,20 +65,35 @@
 
                 </td>
                 <td>
-                   {{-- add class code to StudentClass table --}}
-                    
-                    {{-- cC OME BAKC HERE COME BACK --}}
+                   {{-- Button Add/Drop class code to StudentClass table --}}
+                  @php
+                      $a = $student->StudentClass
+                           ->where('classOffering_id', $classes->id)
+                  @endphp
+                   
+                    @if (!$a->isEmpty())
+                        <form action="{{ route('studentClass.delete', [
+                            'student_id' => $student->id, 
+                            'classOffering_id' => $classes->id,
+                            'sem' => $classes->semester,
+                            'year' => $classes->year,
+                            'subjCode' => $classes->subjCode
+                            ]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm" title="Delete">Drop</button>
+                        </form>
 
-                    
-                    <a href="{{ route('studentClass.store', [
-                        'student_id' => $student->id, 
-                        'classOffering_id' => $classes->id,
-                        'sem' => $classes->semester,
-                        'year' => $classes->year,
-                        ]) }}"
-                        class='btn btn-primary'> Add Class
-                     </a> 
-
+                    @else
+                        <a href="{{ route('studentClass.store', [
+                            'student_id' => $student->id, 
+                            'classOffering_id' => $classes->id,
+                            'sem' => $classes->semester,
+                            'year' => $classes->year,
+                            ]) }}"
+                            class='btn btn-primary btn-sm'> Add
+                        </a> 
+                    @endif
                 </td>
                 
 
