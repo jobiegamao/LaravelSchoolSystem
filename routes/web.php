@@ -49,7 +49,8 @@ Route::any('classOfferings', 'App\Http\Controllers\AdminController@classOffering
 
 
 Route::any('student/prereg', 'App\Http\Controllers\AdminController@goTo_prereg')->name('goTo_prereg');
-Route::get('studentClass/addClass', 'App\Http\Controllers\AdminController@studentClassStore')->name('studentClass.store');
+Route::get('studentClass/add', 'App\Http\Controllers\AdminController@studentClassStore')->name('studentClass.store');
+Route::delete('studentClass/drop', 'App\Http\Controllers\AdminController@studentClassDelete')->name('studentClass.delete');
 
 // Route::resource('personContacts', App\Http\Controllers\PersonContactsController::class);
 

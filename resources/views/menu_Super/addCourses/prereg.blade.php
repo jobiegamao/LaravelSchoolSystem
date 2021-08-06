@@ -24,17 +24,16 @@
         <div class="card">
             <div class="card-body p-10">
                 
-               
                 {{-- Search Student ID --}}
                 {!! Form::open(['route' => 'goTo_prereg']) !!}
                     <div class="input-group">
                         <input type="text" class="col-sm-4 form-control" name="id"
                             placeholder="Search Student ID (person id)" value="{{ old('id') }}" required> 
 
-                        <input type="number" class="col-sm-4 form-control"  name="acadYear" value="{{ old('acadYear') ?? $acadYear }}"
+                        <input type="number" class="col-sm-4 form-control"  name="acadYear" value="{{ old('acadYear') }}"
                             placeholder="Enter School Year(YYYY)" required>
-
-                        <select class="col-sm-4 form-control""  name="acadSem" value="{{ old('acadSem') }}"
+                        {{-- default value of acad sem not yet working --}}
+                        <select class="col-sm-4 form-control""  name="acadSem" 
                             style="width:100%" data-style="btn-info" placeholder="Semester" required>
                                 
                                 <option value="1">1st</option>
@@ -66,10 +65,10 @@
                             <input type="text" class="col-sm-4 form-control" name="id"
                                 placeholder="Search Student ID (person id)" value="{{ $person->id }}" required> 
 
-                            <input type="number" class="col-sm-4 form-control"  name="acadYear" value="{{ $acadYear }}"
+                            <input type="number" class="col-sm-4 form-control"  name="acadYear" value="{{ old('acadYear') }}"
                                 placeholder="Enter School Year(YYYY)" required>
 
-                            <select class="col-sm-4 form-control""  name="acadSem" value="{{ $acadSem }}"
+                            <select class="col-sm-4 form-control""  name="acadSem" 
                                 style="width:100%" data-style="btn-info" placeholder="Semester" required>
                                     <option disabled"></option>
                                     <option value="1">1st</option>

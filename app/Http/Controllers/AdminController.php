@@ -188,122 +188,6 @@ class AdminController extends Controller
     }
 
 
-    public function chanfeecourseProgrammeShow(Request $request)
-    {
-        $person = Person::find($request->id);
-        $studentID = Student::where('person_id', $request->id)->value('id');
-        $curryear = $request->year;
-        $currsem = $request->semester;
-
-            //echo($person);
-        if (empty($person)) {
-            Flash::error('ID not found');
-
-            return redirect(route('goTo_courseProgramme'))->withInput();
-        }
-
-        //add class in pre reg list
-        if($request->addInPreReg != null){
-            $cg = new ClassGrade();
-            $cg->save();
-            StudentClass::create([
-                'student_id' => $request->student_id,
-                'classOffering_id'  => $request->classOffering_id,
-                'classGrade_id' =>$cg->id
-
-            ]);
-        }
-
-        //Get and show Classes Registered for sem and year
-            $prereg = StudentClass::where('student_id', $studentID)
-                        ->where('year', $request->year)
-                        ->where('semester', $request->semester)
-                        ->get();
-
-        //Get Curriculum                                                                                 
-            $enrolledProg = Student::find($studentID)->EnrolledProgramme;
-
-            $i=0;
-            
-            foreach ($enrolledProg as $enrolledProg){
-                $year = CourseProgramme::where('progCode', $enrolledProg->progCode,)->max('yearImplemented');
-                
-                
-                switch($enrolledProg->description){
-                    case 'Major':
-                        
-                        $a = $enrolledProg->CourseProgramme->where('yearImplemented', $year);
-                        break;
-                    
-                    default: 
-                        $a = $enrolledProg->CourseProgramme->where('isProfessional', '1')->where('yearImplemented', $year);
-                        break;
-                }
-
-                if($i > 0){
-                    $course = $course->merge($a);
-                }else{
-                    $course = $a;
-                }
-                $i++;
-                
-            }  
-            
-            $course = $course->unique('subjCode');
-
-        
-        
-
-            
-        
-
-        // output classOfferings based on search
-        if($request->subjCode != null){
-
-            $classes = ClassOffering::
-            where('subjCode', $request->subjCode)
-            ->where('year',$request->year )
-            ->where('semester', $request->semester )
-            ->get();
-
-            return redirect()->back()->with(compact('person', 'course', 'prereg','classes', 'currsem', 'curryear'))->withInput();
-        }
-
-        //insert in studentClass on add button in classOffering
-        // if($request->classOffering_id != null){
-
-        //     $rules = [
-        //         'classOffering_id' => [ Rule::unique('StudentClass,classOffering_id')->where(function ($query) {
-        //             return $query->where('student_id', '!=', $request->student_id);
-        //         })]
-        //     ];
-        
-        //     $validator = Validator::make($request->classOffering_id, $rules);
-        //     // special validation for your complex unique rule
-        //     $validator->after(function ($validator) {
-        //         // create a query to see if this record already exists.
-        //         $exists = DB::table('StudentClass')
-        //                 -> where('student_id', '=', $request->student_id)
-        //                 ->join('ClassOffering','ClassOffering.id', '=', 'StudentClass.classOffering_id')
-        //                 ->where('ClassOffering.schedule','=', $request->schedule)
-        //                 ->exists();
-
-        //         if ($validator->fails() || $exists) {
-        //             $validator->errors()->add('schedule', 'conflict in schedule');
-        //             return redirect()->back()->with(compact('person', 'course'))->withInput();
-        //         }
-
-        //     }
-        // }
-
-        
-            
-       
-
-
-        return redirect()->back()->with(compact('person', 'course', 'prereg','currsem', 'curryear'))->withInput();
-    }
-
     
     public function courseProgrammeShow(Request $request)
     {
@@ -390,6 +274,7 @@ class AdminController extends Controller
         $acadYear = AcadPeriod::latest()->value('acadYear');
         $acadSem = AcadPeriod::latest()->value('acadSem');
         
+        //if opened without values. like opening it thru the menu
         if(empty($request->all())){
             return view('menu_Super/addCourses/prereg')
             ->with(compact('acadYear'));
@@ -405,18 +290,19 @@ class AdminController extends Controller
             return redirect(route('goTo_prereg'))->withInput();
         }
         
-    
-        
         
         //Get and show Classes Registered for sem and year
             $prereg = StudentClass::where('student_id', $studentID)
             ->where('year', $request->acadYear)
             ->where('semester', $request->acadSem)
             ->get();
+
+        if($request->has('fromStudClassDelete')){
+                Flash::success('Class has been dropped');
+        }
         
         return view('menu_Super/addCourses/prereg')
-        ->with(compact('person', 'student','acadYear', 'acadSem', 'prereg'))
-        ;
+        ->with(compact('person', 'student','acadYear', 'acadSem', 'prereg'));
         
     }
 
@@ -424,14 +310,24 @@ class AdminController extends Controller
     public function goTo_classOfferings(Request $request){
         $student = Student::find($request->id);
         
-        return view('menu_Super/addCourses/classOfferings')
-        ->with('student', $student);
+        return view('menu_Super/addCourses/classOfferings', [
+        'student' =>  $student]);
     }
 
+     /**
+     * Show Offerings Based on Search
+     * 
+     */
     public function classOfferingsShow(Request $request){
         $student = Student::find($request->id);
         $acadYear = AcadPeriod::latest()->value('acadYear');
         $acadSem = AcadPeriod::latest()->value('acadSem');
+
+                    //!!!!! if subjCode is not in student Curriculum, dont show
+                    // checker here -----
+                
+                    //get all subjcode from CourseProgramme by student !!!
+        
 
         $classes = ClassOffering::
             where('subjCode', $request->subjCode)
@@ -439,11 +335,17 @@ class AdminController extends Controller
             ->where('semester', $acadSem )
             ->get();
 
-            //if subjCode is not in student Curriculum, dont show
-            // checker here -----
-        
-      
-        
+        //error message from studentClassStore 
+        // when added class is error
+        if($request->has('error')){
+            Flash::error('Error in adding class, drop class first');
+        }
+
+        //success message from studentClassDelete 
+        if($request->has('fromStudClassDelete')){
+            Flash::success('Class dropped succesfully');
+        }
+
         return redirect()->back()
         ->with(compact('student', 'classes'))
         ->withInput();
@@ -451,14 +353,43 @@ class AdminController extends Controller
 
     /**
      * Add A Class in StudentClass
+     * Add class to student
      */
 
     public function studentClassStore(Request $request){
         
-        //if classOffering_id has sched conflict
-        // checker here -----
-        // need to return back and not continue
-
+        $s = StudentClass::with('ClassOffering')
+                    ->with('Student')->where('student_id',$request->student_id)
+                    ->where('year', $request->year)
+                    ->where('semester', $request->sem)
+                    ->get();
+        
+        //classOffering: the added class
+        $added = ClassOffering::where('id',$request->classOffering_id);
+            $a_subj = $added->value('subjCode');
+            $a_class = $added->value('classCode');
+            $a_sched = $added->value('schedule');
+            
+        foreach($s as $s){
+            echo($s->ClassOffering);
+            if  (
+                $s->ClassOffering->subjCode == $a_subj ||
+                $s->ClassOffering->classCode == $a_class ||
+                $s->ClassOffering->schedule == $a_sched
+                )
+            {
+                //dd('error');
+                
+                $error = true;
+                return redirect()->route('classOfferings.show', [
+                    'id' => $request->student_id,
+                    'subjCode' => $a_subj,
+                    'error' => $error
+                ])->withInput();
+            }
+        }
+        
+        
 
         $cg = new ClassGrade();
         $cg->save();
@@ -482,5 +413,34 @@ class AdminController extends Controller
             'acadYear' => $request->year
             ])
         ->withInput();
+    }
+
+    public function studentClassDelete(Request $request){
+        StudentClass::where('student_id', $request->student_id )
+        ->where('classOffering_id',$request->classOffering_id )
+        ->delete();
+
+
+        // Drop button is found in prereg view and classOfferingShow
+        //it will return back to which place they pressed
+        // the drop button
+
+        //will go to prereg view after
+        if($request->has('backToPreregView')){
+            return redirect()->route('goTo_prereg', [
+                'id' => $request->id,
+                'acadYear' =>$request->year,
+                'acadSem' =>$request->sem,
+                'fromStudClassDelete' => true
+            ])->withInput();
+        }
+
+        //will go back classOfferingShow 
+        return redirect()->route('classOfferings.show', [
+            'id' => $request->student_id,
+            'subjCode' => $request->subjCode,
+            'fromStudClassDelete' => true
+        ])->withInput();
+
     }
 }

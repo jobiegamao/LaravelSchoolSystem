@@ -10,7 +10,7 @@
                     <th>Schedule</th>
                     <th>Teacher</th>
                     <th>Units</th>
-                    <th>Action</th>
+                    <th>Drop</th>
                 </tr>
             </thead>
         <tbody>
@@ -44,6 +44,18 @@
                 </td>
                 <td>
                    
+                    <form action="{{ route('studentClass.delete', [
+                        'id' => $student->person_id,
+                        'student_id' => $student->id, 
+                        'classOffering_id' => $prereg->ClassOffering->id,
+                        'sem' => $prereg->semester,
+                        'year' => $prereg->year,
+                        'backToPreregView' => true
+                        ]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-sm" title="Delete">Drop</button>
+                    </form>
 
                 </td>
                  

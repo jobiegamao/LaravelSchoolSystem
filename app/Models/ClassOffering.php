@@ -49,9 +49,9 @@ class ClassOffering extends Model
         'updated_at' => 'nullable',
         'subjCode' => 'required|string|max:191',
         'classCode' => 'required|string|max:191',
-        'schedule' => 'required|string|max:191',
+        'schedule' => 'nullable',
         'teacher_id' => 'nullable',
-        'room' => 'required|string|max:191',
+        'room' => 'nullable',
        
         
     ];
@@ -61,6 +61,11 @@ class ClassOffering extends Model
      **/
     public function Course()
     {
-        return $this->belongsTo(\App\Models\Course::class, 'subjCode');
+        return $this->belongsTo(Course::class, 'subjCode');
+    }
+
+    public function CourseProgramme()
+    {
+        return $this->belongsToMany(CourseProgramme::class, 'subjCode');
     }
 }
