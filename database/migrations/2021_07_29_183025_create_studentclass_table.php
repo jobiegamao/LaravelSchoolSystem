@@ -17,8 +17,8 @@ class CreateStudentclassTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->smallInteger('semester')->default(1);
-            $table->smallInteger('year')->default(2020);
+            $table->smallInteger('semester');
+            $table->smallInteger('year');
 
             $table->foreignID('student_id')
                 ->contstrained('Student')

@@ -20,6 +20,7 @@ class CreateEnrollprogrammeTable extends Migration
             //select if major/degree or minor or certificate
             $table->string('description');
             
+            $table->smallInteger('status')->default(0);
 
             $table->foreignID('student_id')
                 ->contstrained('Student')
@@ -35,7 +36,7 @@ class CreateEnrollprogrammeTable extends Migration
 
         DB::table('EnrollProgramme')->insert(
             array(
-		  'student_id' =>   '20001',
+		            'student_id' =>   '20001',
                    'progCode'   =>   'BSCS',
                    'description'   =>   'Major',
             )
@@ -46,6 +47,8 @@ class CreateEnrollprogrammeTable extends Migration
 		  'student_id' =>   '20001',
                    'progCode'   =>   'ABPHILO',
                    'description'   =>   'Certificate',
+                   
+
             )
         );
 

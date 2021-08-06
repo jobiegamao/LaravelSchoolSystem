@@ -6,10 +6,10 @@
 <div class="form-group row">
     {!! Form::label('programme_id', 'Programme:',array('class' => 'col-sm-2 col-form-label')) !!}
     <div class="col-sm-10 form-control">
-        <select class="select2" style="width:100%" id="programme_id" name="programme_id" data-live-search="true" data-style="btn-info" >
+        <select class="select2" style="width:100%" id="progCode" name="progCode" data-live-search="true" data-style="btn-info" >
                 <option></option>
                 @foreach($programme as $programme)
-                    <option name="programme_id" data-tokens="{{ $programme->name }}" value="{{ $programme->id }}">{{ $programme->name }}</option>
+                    <option name="programme_id" data-tokens="{{ $programme->name }}" value="{{ $programme->progCode }}">{{ $programme->name }}</option>
                 @endforeach
         </select>
     </div>
@@ -40,7 +40,7 @@
 <!-- For Select Input program/Course Id Field -->
 <script>
     $(document).ready(function() {
-        $('#programme_id').select2({
+        $('#progCode').select2({
             width: 'resolve',
             theme: "bootstrap",
             

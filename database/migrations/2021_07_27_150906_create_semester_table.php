@@ -13,10 +13,22 @@ class CreateSemesterTable extends Migration
      */
     public function up()
     {
-        Schema::create('Semester', function (Blueprint $table) {
+        Schema::create('AcadPeriod', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->smallInteger('acadSem');
+            $table->smallInteger('acadYear');
         });
+
+        DB::table('AcadPeriod')->insert(
+            array(
+                   'acadSem'   =>   '1',
+                   'acadYear'   =>   '2021',
+                   "created_at" =>  date('Y-m-d H:i:s'),
+                  "updated_at" => date('Y-m-d H:i:s'),
+            )
+        );
     }
 
     /**
@@ -26,6 +38,8 @@ class CreateSemesterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Semester');
+        
+        
+        Schema::dropIfExists('AcadPeriod');
     }
 }

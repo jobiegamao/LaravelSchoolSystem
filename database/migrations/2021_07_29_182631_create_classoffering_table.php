@@ -35,7 +35,7 @@ class CreateClassofferingTable extends Migration
             
             $table->string('room');
             $table->smallInteger('semester');
-            $table->smallInteger('year')->default(2020);
+            $table->smallInteger('year')->default(2021);
         });
 
         DB::table('ClassOffering')->insert(
@@ -45,7 +45,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 7:40-9:10 AM',
                    'room'   =>   'F120',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -56,7 +56,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 9:20-10:50 AM',
                    'room'   =>   'F121',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -67,7 +67,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 9:20-10:50 AM',
                    'room'   =>   'F122',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -78,7 +78,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 11:10-12:40 AM',
                    'room'   =>   'F123',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -89,7 +89,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 7:40-9:10 AM',
                    'room'   =>   'F124',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -100,7 +100,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 9:20-10:50 AM',
                    'room'   =>   'F125',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -111,7 +111,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 9:20-10:50 AM',
                    'room'   =>   'F126',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                
             )
         );
 
@@ -122,7 +122,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 7:40-9:10 AM',
                    'room'   =>   'F127',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -133,7 +133,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 1:30-2:30 PM',
                    'room'   =>   'F128',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -144,7 +144,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 5:00-6:00 PM',
                    'room'   =>   'F129',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+             
             )
         );
 
@@ -155,7 +155,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 9:40-11:10 AM',
                    'room'   =>   'F130',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -166,7 +166,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 5:40-7:10 PM',
                    'room'   =>   'F131',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                 
             )
         );
 
@@ -177,7 +177,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 1:30-3:00 PM',
                    'room'   =>   'F132',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -188,7 +188,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 5:40-7:10 PM',
                    'room'   =>   'F133',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+                 
             )
         );
 
@@ -199,7 +199,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 7:40-9:10 AM',
                    'room'   =>   'F134',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -210,7 +210,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 7:40-9:10 AM',
                    'room'   =>   'F135',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+               
             )
         );
 
@@ -221,7 +221,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 7:40-9:10 AM',
                    'room'   =>   'F136',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                 
             )
         );
 
@@ -232,7 +232,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 9:20-10:50 AM',
                    'room'   =>   'F137',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                  
             )
         );
 
@@ -243,7 +243,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 1:30-3:00 PM',
                    'room'   =>   'F138',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -254,7 +254,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 1:30-3:00 PM',
                    'room'   =>   'F139',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -265,7 +265,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 7:40-9:10 AM',
                    'room'   =>   'F140',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -276,7 +276,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 9:20-10:50 AM',
                    'room'   =>   'F141',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+                  
             )
         );
 
@@ -287,7 +287,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 1:30-2:30 PM',
                    'room'   =>   'F142',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -298,7 +298,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 9:20-10:50 AM',
                    'room'   =>   'F143',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -309,7 +309,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 7:40-9:10 AM',
                    'room'   =>   'F144',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+                  
             )
         );
 
@@ -320,7 +320,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 9:20-10:50 AM',
                    'room'   =>   'F145',
                    'semester'   =>   '2',
-                   'year'   =>   '2020',
+                  
             )
         );
 
@@ -331,7 +331,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 9:20-10:50 AM',
                    'room'   =>   'F146',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -342,7 +342,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 7:40-9:10 AM',
                    'room'   =>   'F147',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+               
             )
         );
 
@@ -353,7 +353,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 7:40-9:10 AM',
                    'room'   =>   'F148',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -364,7 +364,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 1:30-3:00 PM',
                    'room'   =>   'F149',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                  
             )
         );
 
@@ -375,7 +375,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'MW 1:00-2:00 PM',
                    'room'   =>   'F150',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -386,7 +386,7 @@ class CreateClassofferingTable extends Migration
                    'schedule'   =>   'TTh 5:40-6:40 PM',
                    'room'   =>   'F151',
                    'semester'   =>   '1',
-                   'year'   =>   '2020',
+                   
             )
         );
 
@@ -397,7 +397,7 @@ class CreateClassofferingTable extends Migration
                     'schedule'   =>   'TTh 7:40-9:10 AM',
                     'room'   =>   'F152',
                     'semester'   =>   '1',
-                    'year'   =>   '2020',
+                    
                 )
             );
         DB::table('ClassOffering')->insert(
@@ -407,7 +407,7 @@ class CreateClassofferingTable extends Migration
                     'schedule'   =>   'MW 5:40-7:10 PM',
                     'room'   =>   'F153',
                     'semester'   =>   '1',
-                    'year'   =>   '2020',
+                    
                 )
             );
 

@@ -37,16 +37,7 @@ class ClassOffering extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'id' => 'integer',
-        'subjCode' => 'string',
-        'classCode' => 'string',
-        'schedule' => 'string',
-        'teacher_id' => 'integer',
-        'room' => 'string',
-        'semester' => 'integer',
-        'year' => 'date'
-    ];
+  
 
     /**
      * Validation rules
@@ -61,8 +52,8 @@ class ClassOffering extends Model
         'schedule' => 'required|string|max:191',
         'teacher_id' => 'nullable',
         'room' => 'required|string|max:191',
-        'semester' => 'required',
-        'year' => 'required'
+       
+        
     ];
 
     /**
