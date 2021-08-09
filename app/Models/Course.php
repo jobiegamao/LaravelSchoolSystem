@@ -34,19 +34,11 @@ class Course extends Model
 
     public $fillable = [
         'subjCode',
-        'subjName'
+        'subjName',
+        'units'
     ];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        
-        'subjCode' => 'string',
-        'subjName' => 'string'
-    ];
+    
 
     /**
      * Validation rules

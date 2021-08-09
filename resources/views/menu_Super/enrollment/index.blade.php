@@ -26,8 +26,9 @@
         <div class="card-footer">
             <a href="{{ route('student.unenroll') }}" class="btn btn-danger float-right"
             onclick ="return confirm('Are you sure you want to unenroll ALL students?')"
-            >    
-                Tag All as Unenrolled</a>
+            >Tag All as Unenrolled</a>
+
+            
         </div>
 
     </div>

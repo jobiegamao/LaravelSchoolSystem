@@ -32,8 +32,9 @@ class CreateStudentTable extends Migration
             //pass for next enrollment
             $table->boolean('isPass')->default(0);
 
-            //every enrollment 30 units again or ispecify
-            $table->tinyInteger('units')->default(30);
+            
+            $table->tinyInteger('units')->nullable()->default(0);
+            $table->tinyInteger('unitsTook')->nullable();
             //$table->string('role')->default('Student');
         });
 

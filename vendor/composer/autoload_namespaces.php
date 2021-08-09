@@ -9,4 +9,5 @@ return array(
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'Laracasts\\Flash' => array($vendorDir . '/laracasts/flash/src'),
     'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
+    'Felixkiss\\UniqueWithValidator\\' => array($vendorDir . '/felixkiss/uniquewith-validator/src'),
 );

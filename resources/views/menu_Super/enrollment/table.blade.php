@@ -7,19 +7,24 @@
             <th>Name</th>
             <th>Programme</th>
             <th>Programme Type</th>
-            <th>Action</th>
-            <th>Courses Filled?</th>
+            <th><small>Action</small></th>
+            <th><small>Units</small></th>
+            <th><small>PreReg Filled?</small></th>
             <th>Enrollment Status</th>
         </tr>
         </thead>
         <tbody>
+            
         @foreach($students  as $students )
+            
+
             <tr>
                 <td>
-                    {{ $students->person_id }}
+                    <a href="{{ route('goTo_prereg', ['id' => $students->person_id]) }}">{{ $students->person_id }}</a>
+                    {{-- {{ $students->person_id }} --}}
                 </td>
                 <td>
-                    {{-- <a href="{{ route('students.show', [$students ?? ''->id]) }}">{{ $students ?? ''->id }}</a> --}}
+                    
                     {{ $students->id }}
                 </td>
                 <td>
@@ -47,11 +52,15 @@
                     @endforelse
                 
                 </td>
+
+               
+
                 <td>
                     @forelse ($students->EnrolledProgramme as $course )
                         <div class="group-prepend">
                             <span class="input-group-text p-1">{{ $course->description}}</span>
                         </div>
+                        
                     @empty
                         No Course yet
                     @endforelse
@@ -60,16 +69,20 @@
                 </td>
                  <td>
                    
-                
-                        
                         <a href="{{ route('goTo_enrollProgramme', [$students->id]) }}"
-                           class='btn btn-default'>
+                           class='btn btn-default btn-xs'>
                             Add Programme
                         </a> 
                         
                 </td> 
+                <td>
+                    {{-- units --}}
+                    {{ $students->units }}
+                </td>
 
-                <td></td>
+                <td>
+                    {{-- pre reg link --}}
+                </td>
                 <td>
                     {{-- finance should have a table data like this to tag student as enrolled --}}
                     {!! Form::model($students, ['route' => ['student.update', $students->id], 'method' => 'patch']) !!}

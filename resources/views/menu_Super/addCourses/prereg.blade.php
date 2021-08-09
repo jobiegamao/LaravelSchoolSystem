@@ -88,7 +88,7 @@
                 </div>
             </div>
     
-
+           
                 
             <div class="card">
                 <div class="card-body"> 
@@ -114,13 +114,38 @@
                             
                         </div>
 
-                        <div class="row float-right mb-3">
-                            <a href="{{ route('goTo_classOfferings', ['id' => $student->id]) }}"
-                                class='btn btn-primary'>
-                                 Add Class
-                             </a> 
+                        <div class="form-group row">
+                            {{-- {!! Form::label('units', 'Units:',array('class' => 'col-sm-2 col-form-label')) !!} --}}
+                            {{-- {!! Form::text('units',$student->units , ['class' => "col-sm-10 form-control", 'readonly']) !!} --}}
+                            <div class="col-sm-2 col-form-label">
+                                Total units
+                            </div>
+                            <div class="col-sm-2 col-form-label">
+                                
+                                
+                                
+                                
+                                 {{ $student->unitsTook }}/ {{ $student->units }} 
+                            </div>
+
                         </div>
 
+
+                        {{-- ADD TO PRE REG --}}
+                       
+                        <div class="d-flex align-items-end flex-column" style="height:50px;">   
+                            <a href="{{ route('goTo_classOfferings', ['id' => $student->id]) }}"
+                            class='btn btn-success'>
+                            Add Class
+                            </a> 
+                        </div>
+                        <div class="d-flex align-items-end flex-column" style="height:20px;">
+                            <small>Note: You can only add class for current academic period</small>
+                        </div>     
+                            
+                            
+                        
+                        
                         <div class="pt-3"> 
                             @include('menu_Super/addCourses/studentClass_table')
                         </div>

@@ -34,7 +34,9 @@ class AdminController extends Controller
      */
     public function goTo_enrollmentList(Request $request)
     {
+        $this->studentUpdateUnits();
         $students = Student::where('isPass', '1')->orderBy('updated_at','asc')->get();
+        
         return view('menu_Super/enrollment/index')
             ->with('students', $students);
     }
@@ -65,14 +67,13 @@ class AdminController extends Controller
             ->with('student', $students);
     }
     /**
-     * Tag As Enrolled
-     * isEnrolled
+     * Update student enrollment details
+     * 
      * 
      */
     public function studentUpdate(Request $request, $id)
     {
         $student = Student::where('id',$id);
-       
         $student->update(request()->except(['_token','_method']),$id);
         Flash::success('Student Updated Successfully.');
 
@@ -93,6 +94,57 @@ class AdminController extends Controller
         return back();
     }
 
+    /**
+     * Update all units in enrollment list 
+     * units will  be based on course description for every minor + 12 , cert +4
+     * major will be based on curriculum
+     */
+    public function studentUpdateUnits()
+    {
+       
+
+       //-- current academic period --// 
+       $acadSem = AcadPeriod::latest()->value('acadSem');
+
+       // get all students who is passed and has curriculum. 
+       $student= Student::with('CourseProgramme')->where('isPass', '1')->get();
+       foreach($student as $s){
+           $unitsCounter = 0;
+            foreach($s->EnrolledProgramme as $ep){
+                //echo($ep);
+                if($ep->status == 0){
+                    switch($ep->description){
+                        case 'Certificate':
+                            $unitsCounter+= 4;
+                            break;
+                        case 'Minor':
+                            $unitsCounter+= 12;
+                            break;
+                        default:
+                            foreach($s->CourseProgramme as $cp){
+                                if($cp->yearLevel == $s->year && $cp->semester == $acadSem){
+                                    $unitsCounter+= $cp->Course->units;
+                                    
+                                }
+                                
+                            }
+                        
+                    }
+                    //echo();
+                }
+                
+                
+            }
+
+            
+            $s->units = $unitsCounter;
+            $s->save();
+            
+       }
+
+       return;
+        
+    }
     /**
      * Tag all as not enrolled 
      * isEnrolled
@@ -187,7 +239,9 @@ class AdminController extends Controller
         return view('menu_Super/addCourses/courseProgramme');
     }
 
-
+    /**
+     * show curriculum
+     */
     
     public function courseProgrammeShow(Request $request)
     {
@@ -290,12 +344,17 @@ class AdminController extends Controller
             return redirect(route('goTo_prereg'))->withInput();
         }
         
+
         
         //Get and show Classes Registered for sem and year
             $prereg = StudentClass::where('student_id', $studentID)
-            ->where('year', $request->acadYear)
-            ->where('semester', $request->acadSem)
+            ->where('year', $request->acadYear ?? $acadYear)
+            ->where('semester', $request->acadSem ?? $acadSem)
             ->get();
+
+
+
+
 
         if($request->has('fromStudClassDelete')){
                 Flash::success('Class has been dropped');
@@ -335,13 +394,14 @@ class AdminController extends Controller
             ->where('semester', $acadSem )
             ->get();
 
-        //error message from studentClassStore 
-        // when added class is error
+        //error message is from studentClassStore. that method returns to this
+        //route, and brings request->error when
+        //  added class is error
         if($request->has('error')){
             Flash::error('Error in adding class, drop class first');
         }
 
-        //success message from studentClassDelete 
+        //success message from  route studentClassDelete 
         if($request->has('fromStudClassDelete')){
             Flash::success('Class dropped succesfully');
         }
@@ -370,8 +430,12 @@ class AdminController extends Controller
             $a_class = $added->value('classCode');
             $a_sched = $added->value('schedule');
             
+             $c = $added->with('Course')->get();
+             $a_units = $c[0]->Course->units;
+            
+
         foreach($s as $s){
-            echo($s->ClassOffering);
+            //echo($s->ClassOffering);
             if  (
                 $s->ClassOffering->subjCode == $a_subj ||
                 $s->ClassOffering->classCode == $a_class ||
@@ -387,6 +451,8 @@ class AdminController extends Controller
                     'error' => $error
                 ])->withInput();
             }
+
+            
         }
         
         
@@ -401,24 +467,40 @@ class AdminController extends Controller
             'year' => $request->year,
 
         ]);
+        
 
         $student = Student::find($request->student_id);
-        $person = $student->person_id;
+        //update the units took
+        $student->unitsTook += $a_units;
+        $student->save();
+
+        //get person id
+        $personID = $student->person_id;
+
 
         Flash::success('Student Added Class Successfully.');
         return redirect()
         ->route('goTo_prereg', [
-            'id' => $person,
+            'id' => $personID,
             'acadSem' => $request->sem,
             'acadYear' => $request->year
             ])
         ->withInput();
     }
 
+
     public function studentClassDelete(Request $request){
-        StudentClass::where('student_id', $request->student_id )
+         StudentClass::where('student_id', $request->student_id )
         ->where('classOffering_id',$request->classOffering_id )
         ->delete();
+
+        //update unitsTook
+        $c = ClassOffering::where('id',$request->classOffering_id)
+        ->with('Course')->get();
+        $units = $c[0]->Course->units;
+        $s = Student::find($request->student_id);
+        $s->unitsTook -= $units;
+        $s->save();
 
 
         // Drop button is found in prereg view and classOfferingShow
@@ -435,7 +517,7 @@ class AdminController extends Controller
             ])->withInput();
         }
 
-        //will go back classOfferingShow 
+        //will go back classOfferingShow (class offerring list)
         return redirect()->route('classOfferings.show', [
             'id' => $request->student_id,
             'subjCode' => $request->subjCode,

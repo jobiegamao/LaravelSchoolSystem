@@ -40,7 +40,9 @@
                 </td>
                 <td>
                     {{ $prereg->ClassOffering->Course->units }}
+                  
 
+                    
                 </td>
                 <td>
                    

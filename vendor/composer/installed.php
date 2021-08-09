@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c00c8c2549d2971713d325fa5e51e3aab4a7ece3',
+        'reference' => '548bb964575bd751f8e1824cd17395095a583aa5',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -183,6 +183,15 @@
             'aliases' => array(),
             'reference' => '89c6201c74db25fa759ff16e78a4d8f32547770e',
             'dev_requirement' => true,
+        ),
+        'felixkiss/uniquewith-validator' => array(
+            'pretty_version' => '3.4.2',
+            'version' => '3.4.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../felixkiss/uniquewith-validator',
+            'aliases' => array(),
+            'reference' => '4fe108b0cdb3e3f343dc06a1b95b94b1e13b6556',
+            'dev_requirement' => false,
         ),
         'fideloper/proxy' => array(
             'pretty_version' => '4.4.1',
@@ -490,7 +499,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c00c8c2549d2971713d325fa5e51e3aab4a7ece3',
+            'reference' => '548bb964575bd751f8e1824cd17395095a583aa5',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(

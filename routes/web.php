@@ -31,7 +31,7 @@ Route::delete('student/delete/{id}', 'App\Http\Controllers\AdminController@stude
 Route::patch('student/enroll/{id}', 'App\Http\Controllers\AdminController@studentEnroll')->name('student.enroll');
 Route::get('student/enrolling-list', 'App\Http\Controllers\AdminController@studentUnenrollAll')->name('student.unenroll');
 Route::patch('student/update/{id}', 'App\Http\Controllers\AdminController@studentUpdate')->name('student.update');
-
+Route::get('student/update/units', 'App\Http\Controllers\AdminController@studentUpdateUnits')->name('student.updateUnits');
 
 Route::get('students/promotion-list', 'App\Http\Controllers\AdminController@goTo_promotionList')->name('goTo_promotionList.index');
 Route::get('student/promotion-list', 'App\Http\Controllers\AdminController@studentUnpromoteAll')->name('student.unpromote');
@@ -52,38 +52,5 @@ Route::any('student/prereg', 'App\Http\Controllers\AdminController@goTo_prereg')
 Route::get('studentClass/add', 'App\Http\Controllers\AdminController@studentClassStore')->name('studentClass.store');
 Route::delete('studentClass/drop', 'App\Http\Controllers\AdminController@studentClassDelete')->name('studentClass.delete');
 
-// Route::resource('personContacts', App\Http\Controllers\PersonContactsController::class);
 
-
-// Route::get('enroll/{id}', 'App\Http\Controllers\StudentsController@enrollID')->name('students.enrollID');
-
-// Route::resource('classes', App\Http\Controllers\ClassesController::class);
-
-// Route::resource('roles', App\Http\Controllers\RolesController::class);
-
-// Route::resource('classrooms', App\Http\Controllers\ClassroomsController::class);
-
-// Route::resource('courses', App\Http\Controllers\CoursesController::class);
-// Route::get('courses/list','App\Http\Controllers\CoursesController@list')->name('courses.list');
-
-// Route::resource('studentCourses', App\Http\Controllers\StudentCoursesController::class);
-
-
-
-
-// Route::resource('admission', App\Http\Controllers\AdmissionController::class);
-// Route::get('/acceptedList', 'App\Http\Controllers\AdmissionController@acceptedList')->name('admission.acceptedList'); //custom function
-// Route::get('create/{id}', 'App\Http\Controllers\AdmissionController@createStudent')->name('admission.createStudent');
-// //Route::get('admission', 'App\Http\Controllers\AdmissionController@getNextID')->name('admission.getNextID'); //custom function
-
-
-
-// Route::resource('register', App\Http\Controllers\RegisterAdmissionController::class);
-
-// Route::get('finance/register-admission/list', 'App\Http\Controllers\FinanceController@registeredAdmissionList')->name('finance.admissionList');
-// Route::get('finance/register-admission/pay-log/{id}', 'App\Http\Controllers\FinanceController@enrollPayLog')->name('finance.enrollPayLog');
-
-
-
-
-// Route::resource('personDetails', App\Http\Controllers\PersonDetailsController::class);
+Route::resource('acadPeriods', App\Http\Controllers\AcadPeriodController::class);
