@@ -28,18 +28,7 @@ class EnrollProgramme extends Model
         'description'
     ];
 
-    /**
-     * The attributes that should be casted to native types.
-     * ok lanf wala to
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        
     
-        'student_id' => 'integer',
-        'progCode' => 'string',
-    ];
 
     /**
      * Validation rules

@@ -183,3 +183,11 @@
 </li>
  --}}
 
+<li class="nav-item">
+    <a href="{{ route('acadPeriods.index') }}"
+       class="nav-link {{ Request::is('acadPeriods*') ? 'active' : '' }}">
+        <p>Acad Periods</p>
+    </a>
+</li>
+
+

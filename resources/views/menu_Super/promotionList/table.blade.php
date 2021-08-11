@@ -16,6 +16,7 @@
         </tr>
         </thead>
         <tbody>
+            
         @foreach($students  as $students )
             <tr>
                 <td>

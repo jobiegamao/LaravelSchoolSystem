@@ -21,7 +21,9 @@ class Student extends Model
         'section',
         'isEnrolled',
         'isPass',
-        'isNew'
+        'isNew',
+        'unitsTook',
+        'units'
     ];
 
     
@@ -48,7 +50,17 @@ class Student extends Model
     {
         return $this->hasMany(StudentClass::class, 'student_id');
     }
-
+    public function CourseProgramme()
+    {
+        return $this->hasManyThrough(
+            CourseProgramme::class, 
+            EnrollProgramme::class,  
+            'student_id',
+            'progCode',
+            'id',
+            'progCode'
+        );
+    }
 
  
     

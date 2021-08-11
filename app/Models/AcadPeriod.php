@@ -9,7 +9,7 @@ use Eloquent as Model;
 
 class AcadPeriod extends Model
 {
- 
+    
 
 
     public $table = 'AcadPeriod';
@@ -18,7 +18,7 @@ class AcadPeriod extends Model
     const UPDATED_AT = 'updated_at';
 
 
-  
+    
 
 
 
@@ -27,16 +27,7 @@ class AcadPeriod extends Model
         'acadYear'
     ];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'acadSem' => 'integer',
-        'acadYear' => 'integer'
-    ];
+    
 
     /**
      * Validation rules
@@ -46,7 +37,7 @@ class AcadPeriod extends Model
     public static $rules = [
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'acadSem' => 'required',
+        'acadSem' => 'required|unique_with:AcadPeriod,acadYear',
         'acadYear' => 'required'
     ];
 

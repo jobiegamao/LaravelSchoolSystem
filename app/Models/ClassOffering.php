@@ -32,12 +32,7 @@ class ClassOffering extends Model
         'year'
     ];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-  
+   
 
     /**
      * Validation rules
@@ -56,9 +51,6 @@ class ClassOffering extends Model
         
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
     public function Course()
     {
         return $this->belongsTo(Course::class, 'subjCode');
