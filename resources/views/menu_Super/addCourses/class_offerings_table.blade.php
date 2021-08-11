@@ -13,7 +13,6 @@
             <th>Instructor</th>
             <th>Room</th>
             <th> <small>Reserved<br>Slots</small></th>
-            <th><small>Enrolled<br>Slots</small></th>
             <th><small>Available<br>Slots</small></th>
 
             <th>Add</th>
@@ -57,10 +56,7 @@
                     {{-- {{ $classes->id }} --}}
                 </td>
                 <td>
-                   
-
-                </td>
-                <td>
+                
                    
 
                 </td>

@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Flash;
-use Response;
-use Validator, Input, Redirect;
-use Illuminate\Validation\Rule;
+use Flash, Response, Validator, Input, Redirect, Rule;
 
 // add models that will be used in this controller
 use App\Models\Person; 
 use App\Models\Student; 
 use App\Models\EnrollProgramme; 
 use App\Models\CourseProgramme; 
+use App\Models\CourseProgrammePreReq; 
 use App\Models\ClassOffering; 
 use App\Models\ClassGrade; 
 use App\Models\StudentClass; 
@@ -248,7 +246,7 @@ class AdminController extends Controller
         $person = Person::find($request->id);
         $studentID = Student::where('person_id', $request->id)->value('id');
 
-        if (empty($person)) {
+        if (empty($person) || empty($studentID)) {
             Flash::error('ID not found');
 
             return redirect(route('goTo_courseProgramme'))->withInput();
@@ -384,6 +382,7 @@ class AdminController extends Controller
 
                     //!!!!! if subjCode is not in student Curriculum, dont show
                     // checker here -----
+                    // pero basin pwede parong maka search?
                 
                     //get all subjcode from CourseProgramme by student !!!
         
@@ -412,19 +411,82 @@ class AdminController extends Controller
     }
 
     /**
+     * Checker if pre req subj is passed
+     * ----not yet doneee
+     */
+
+     public function preReqTaken($stud_id, $subj){
+       
+       //all classes student has already taken
+        $s = StudentClass::
+        where('student_id',$stud_id)
+        ->with('ClassGrade', 'ClassOffering')
+        ->get();
+
+        $e = EnrollProgramme::
+            where('student_id', $stud_id)
+            ->where('status', '0')
+            ->whereHas('CourseProgramme.CourseProgrammePrereq', function ($query) use($subj){
+                $query->where('CourseProgramme.subjCode', '=', $subj);
+            })
+            ->get();
+
+       if($e->isEmpty()){
+           //class has no pre reqs
+            return true;
+       }
+       if(!($e->isEmpty()) && $s->isEmpty()){
+            //subj has pre req AND student has no record of any classes
+            return false; //false means student cannot add the classoffering
+        }
+
+//////////not yet donnee ///////
+
+       //get the prog code where the added subj is related
+        $e = EnrollProgramme::where('student_id', $stud_id)
+            ->where('status', '0')
+            ->whereHas('CourseProgramme', function ($query) use($subj){
+                $query->where('subjCode', '=', $subj);
+            })->first('progCode');
+
+       $cp = CourseProgramme::
+            where('progCode', $e->progCode)
+            ->where('subjCode', $subj)
+            ->latest('yearImplemented')
+            ->with('CourseProgrammePrereq')
+            ->first();
+            
+       
+       //loop prereq subjs
+       foreach ($cp->CourseProgrammePrereq as $pre) {
+           $prereqSubjCode = $pre->PrereqProg->subjCode;
+           foreach($s as $takenClass){
+                dd($takenClass->ClassOffering);
+           }
+
+            dd($s);
+
+       }
+  
+        return "";
+     }
+
+
+    /**
      * Add A Class in StudentClass
      * Add class to student
      */
 
     public function studentClassStore(Request $request){
         
+        // get all specific student's classses for this acad time
         $s = StudentClass::with('ClassOffering')
                     ->with('Student')->where('student_id',$request->student_id)
                     ->where('year', $request->year)
                     ->where('semester', $request->sem)
                     ->get();
         
-        //classOffering: the added class
+        //classOffering: the recently added class
         $added = ClassOffering::where('id',$request->classOffering_id);
             $a_subj = $added->value('subjCode');
             $a_class = $added->value('classCode');
@@ -432,14 +494,27 @@ class AdminController extends Controller
             
              $c = $added->with('Course')->get();
              $a_units = $c[0]->Course->units;
-            
 
+             //check if may pre req yun na added class, if so na take na ba ng student ? can be added : error
+             $checker = $this->preReqTaken($request->student_id, $a_subj);
+
+                if(!$checker){
+                    $error = "Prerequisite subjects should be passed first";
+                    return redirect()->route('classOfferings.show', [
+                        'id' => $request->student_id,
+                        'subjCode' => $a_subj,
+                        'error' => $error
+                    ])->withInput();
+                }
+               
+        
         foreach($s as $s){
             //echo($s->ClassOffering);
             if  (
                 $s->ClassOffering->subjCode == $a_subj ||
                 $s->ClassOffering->classCode == $a_class ||
                 $s->ClassOffering->schedule == $a_sched
+
                 )
             {
                 //dd('error');
@@ -490,10 +565,13 @@ class AdminController extends Controller
 
 
     public function studentClassDelete(Request $request){
-         StudentClass::where('student_id', $request->student_id )
-        ->where('classOffering_id',$request->classOffering_id )
-        ->delete();
-
+        
+        $cg_id = StudentClass::where('student_id', $request->student_id )
+        ->where('classOffering_id',$request->classOffering_id )->value('classGrade_id');
+        $sc = StudentClass::where('student_id', $request->student_id )
+        ->where('classOffering_id',$request->classOffering_id )->delete();
+        ClassGrade::find($cg_id)->delete();
+        
         //update unitsTook
         $c = ClassOffering::where('id',$request->classOffering_id)
         ->with('Course')->get();

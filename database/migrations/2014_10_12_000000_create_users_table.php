@@ -24,15 +24,18 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->string('dp')->default('default.jpeg');
         });
 
-        // Insert some stuff !!! super admin account
+
+        // super admin account
 
         DB::table('users')->insert(
         array(
             'name' => 'Super Admin',
             'email' => 'admin@yahoo.com',
-            
+            'role' => 'Admin',
             'password' => Hash::make('12345678'),
             'created_at' => now()
 

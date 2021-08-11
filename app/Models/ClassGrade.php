@@ -22,7 +22,8 @@ class ClassGrade extends Model
     public $fillable = [
         'prelimGrade',
         'midtermGrade',
-        'prefinalsGrade'
+        'prefinalsGrade',
+        'isPass'
     ];
 
     /**

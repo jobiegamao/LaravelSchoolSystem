@@ -67,11 +67,17 @@ class CourseProgramme extends Model
 
     public function Course()
     {
-        return $this->belongsTo(Course::class, 'subjCode');
+        return $this->belongsTo(Course::class, 'subjCode', 'subjCode'); // fk, parent pk
     }
 
     public function CourseProgrammePrereq()
     {
         return $this->hasMany(CourseProgrammePrereq::class, 'course_programme_id');
     }
+
+    public function EnrollProgramme()
+    {
+        return $this->belongsTo(EnrollProgramme::class, 'progCode', 'progCode');
+    }
+   
 }

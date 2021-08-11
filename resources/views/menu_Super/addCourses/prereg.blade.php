@@ -115,19 +115,12 @@
                         </div>
 
                         <div class="form-group row">
-                            {{-- {!! Form::label('units', 'Units:',array('class' => 'col-sm-2 col-form-label')) !!} --}}
-                            {{-- {!! Form::text('units',$student->units , ['class' => "col-sm-10 form-control", 'readonly']) !!} --}}
                             <div class="col-sm-2 col-form-label">
                                 Total units
                             </div>
                             <div class="col-sm-2 col-form-label">
-                                
-                                
-                                
-                                
-                                 {{ $student->unitsTook }}/ {{ $student->units }} 
+                                 {{ $student->unitsTook }}/{{ $student->units }} 
                             </div>
-
                         </div>
 
 
@@ -143,9 +136,6 @@
                             <small>Note: You can only add class for current academic period</small>
                         </div>     
                             
-                            
-                        
-                        
                         <div class="pt-3"> 
                             @include('menu_Super/addCourses/studentClass_table')
                         </div>

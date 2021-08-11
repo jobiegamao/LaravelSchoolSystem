@@ -31,6 +31,8 @@ class CreateGradereportsTable extends Migration
 
             $table->boolean('isPass')->nullable()->default(1);
 
+            
+
         });
     }
 
