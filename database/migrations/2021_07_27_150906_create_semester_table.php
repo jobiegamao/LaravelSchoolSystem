@@ -24,11 +24,34 @@ class CreateSemesterTable extends Migration
         DB::table('AcadPeriod')->insert(
             array(
                    'acadSem'   =>   '1',
+                   'acadYear'   =>   '2020',
+                   
+            )
+        );
+        DB::table('AcadPeriod')->insert(
+            array(
+                   'acadSem'   =>   '2',
+                   'acadYear'   =>   '2020',
+              
+            )
+        );
+
+        DB::table('AcadPeriod')->insert(
+            array(
+                   'acadSem'   =>   '3',
+                   'acadYear'   =>   '2020',
+              
+            )
+        );
+        DB::table('AcadPeriod')->insert(
+            array(
+                   'acadSem'   =>   '1',
                    'acadYear'   =>   '2021',
                    "created_at" =>  date('Y-m-d H:i:s'),
                   "updated_at" => date('Y-m-d H:i:s'),
             )
         );
+
     }
 
     /**

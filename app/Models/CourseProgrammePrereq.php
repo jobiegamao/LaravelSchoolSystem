@@ -61,4 +61,9 @@ class CourseProgrammePrereq extends Model
     {
         return $this->belongsTo(CourseProgramme::class, 'course_programme_id');
     }
+
+    public function PrereqProg() //prereq subject details
+    {
+        return $this->belongsTo(CourseProgramme::class, 'prereq_course_programme_id');
+    }
 }

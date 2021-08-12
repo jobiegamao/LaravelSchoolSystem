@@ -17,14 +17,14 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/table', function () {
-    return view('menu_Super/enrollment/index');
-});
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('profile', 'App\Http\Controllers\UserController@profile');
+Route::post('profile', 'App\Http\Controllers\UserController@update_dp');
 
 Route::get('students/enrolling-list', 'App\Http\Controllers\AdminController@goTo_enrollmentList')->name('goTo_enrollment.index');
 Route::delete('student/delete/{id}', 'App\Http\Controllers\AdminController@studentDelete')->name('student.delete');

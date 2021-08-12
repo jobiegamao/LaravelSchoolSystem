@@ -20,6 +20,8 @@ class CreateClassgradeTable extends Migration
             $table->float('prelimGrade')->nullable();
             $table->float('midtermGrade')->nullable();
             $table->float('prefinalsGrade')->nullable();
+
+            $table->boolean('isPass')->default(0);
         });
     }
 

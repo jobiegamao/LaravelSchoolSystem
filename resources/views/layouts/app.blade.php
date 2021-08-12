@@ -50,28 +50,6 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
-      <!-- /Navbar Search -->
 
       <!-- Navbar Fullsscreen -->
       <li class="nav-item">
@@ -83,24 +61,23 @@
       <!-- Navbar Drop down menu -->
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-            <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
+            <img src="{{ asset('dist/img/SEUlogo.jpeg') }}"
                  class="user-image img-circle elevation-2" alt="User Image">
   
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <!-- User image -->
             <li class="user-header bg-primary">
-                <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
+                <img src="{{ asset('dist/img/SEUlogo.jpeg') }}"
                      class="img-circle elevation-2"
                      alt="User Image">
                 <p>
                     {{ Auth::user()->name }}
-                    {{-- <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small> --}}
                 </p>
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                <a href="{{ url('/profile') }}" class="btn btn-default btn-flat"><i class="fa fa-btn fa-user m-1"></i>Profile</a>
                 <a href="#" class="btn btn-default btn-flat float-right"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Sign out

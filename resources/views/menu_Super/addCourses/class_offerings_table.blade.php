@@ -13,7 +13,6 @@
             <th>Instructor</th>
             <th>Room</th>
             <th> <small>Reserved<br>Slots</small></th>
-            <th><small>Enrolled<br>Slots</small></th>
             <th><small>Available<br>Slots</small></th>
 
             <th>Add</th>
@@ -54,14 +53,11 @@
                 </td>
                 <td>
                     
-                    {{-- {{ $classes->id }} --}}
+                    {{ $classes->StudentCount() }}
                 </td>
                 <td>
-                   
-
-                </td>
-                <td>
-                   
+                
+                    {{ 40 - $classes->StudentCount() }}
 
                 </td>
                 <td>

@@ -36,6 +36,8 @@ class CreateStudentclassTable extends Migration
                 ->contstrained('ClassGrade')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+            
         });
     }
 

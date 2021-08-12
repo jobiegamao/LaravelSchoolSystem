@@ -26,7 +26,8 @@ class StudentClass extends Model
         'year',
         'student_id',
         'classOffering_id',
-        'classGrade_id'
+        'classGrade_id',
+        
     ];
 
     /**
@@ -72,6 +73,6 @@ class StudentClass extends Model
 
     public function ClassGrade()
     {
-        return $this->hasOne(ClassGrade::class, 'classGrade_id');
+        return $this->belongsTo(ClassGrade::class, 'classGrade_id');
     }
 }

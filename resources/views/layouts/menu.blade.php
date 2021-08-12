@@ -13,47 +13,6 @@
       </li>
 
      
-      {{-- <li class="nav-item has-treeview menu-open">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-copy"></i>
-          <p>
-            Admission
-            <i class="fas fa-angle-left right"></i>
-          </p>
-        </a>
-            <ul class="nav nav-treeview">
-
-                <li class="nav-item ">
-                    <a href="{{ route('admission.index') }}" class="nav-link {{ Request::is('admission') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pending Requests</p>
-                    </a>
-                </li>
-
-                <li class="nav-item ">
-                    <a href="{{ route('admission.acceptedList') }}" class="nav-link {{ Request::is('acceptedList') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Accepted Admissions</p>
-                    </a>
-                </li>
-
-                <li class="nav-item ">
-                  <a href="{{ route('register.index') }}" class="nav-link {{ Request::is('register') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ongoing Registrations</p>
-                  </a>
-              </li>
-                
-
-                <li class="nav-item">
-                    <a href="{{ route('students.index') }}" class="nav-link {{ Request::is('students') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Registered Students</p>
-                    </a>
-                </li>
- 
-            </ul>
-      </li> --}}
 
       <li class="nav-item has-treeview menu-open">
         <a href="#" class="nav-link">
@@ -69,7 +28,7 @@
                   <a href="{{ route('goTo_promotionList.index') }}" 
                     class="nav-link {{ Request::is('students/promotion-list') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Promotion List</p>
+                    <p>Student List</p>
                   </a>
             </li>
               
@@ -124,13 +83,25 @@
 
       
 
+      <li class="nav-item">
+        <a href="{{ route('acadPeriods.index') }}"
+           class="nav-link {{ Request::is('acadPeriods*') ? 'active' : '' }}">
+           
+            
 
+          <i class="nav-icon fas fa-copy"></i>
+          <p>
+            Academic Time
+           
+          </p>
+        </a>
+      </li>
       
 
       <li class="nav-header">ACCOUNT</li>
                        
       <li class="nav-item" >
-        <a href="/register_admin" class="nav-link">
+        <a href="#" class="nav-link">
             <i class="nav-icon fas fa-sign-out-alt"></i>
             <p>Register</p>
         </a>
@@ -175,19 +146,9 @@
 
 
 
-<li class="nav-item">
-    <a href="{{ route('personDetails.index') }}"
-       class="nav-link {{ Request::is('personDetails*') ? 'active' : '' }}">
-        <p>Person Details</p>
-    </a>
-</li>
+
  --}}
 
-<li class="nav-item">
-    <a href="{{ route('acadPeriods.index') }}"
-       class="nav-link {{ Request::is('acadPeriods*') ? 'active' : '' }}">
-        <p>Acad Periods</p>
-    </a>
-</li>
+
 
 
