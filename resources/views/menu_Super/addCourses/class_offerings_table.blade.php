@@ -53,11 +53,11 @@
                 </td>
                 <td>
                     
-                    {{-- {{ $classes->id }} --}}
+                    {{ $classes->StudentCount() }}
                 </td>
                 <td>
                 
-                   
+                    {{ 40 - $classes->StudentCount() }}
 
                 </td>
                 <td>

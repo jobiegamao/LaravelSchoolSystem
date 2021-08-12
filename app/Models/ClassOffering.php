@@ -51,6 +51,17 @@ class ClassOffering extends Model
         
     ];
 
+    public function StudentClass()
+    {
+        return $this->hasMany(StudentClass::class, 'classOffering_id');
+    }
+
+    public function StudentCount()
+    {
+        return $this->StudentClass()->count();
+    }
+
+
     public function Course()
     {
         return $this->belongsTo(Course::class, 'subjCode');
@@ -60,4 +71,6 @@ class ClassOffering extends Model
     {
         return $this->belongsToMany(CourseProgramme::class, 'subjCode');
     }
+
+
 }

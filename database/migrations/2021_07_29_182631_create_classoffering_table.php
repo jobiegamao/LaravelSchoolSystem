@@ -38,6 +38,12 @@ class CreateClassofferingTable extends Migration
             $table->smallInteger('year')->default(2021);
         });
 
+        //2020 classes plsstt
+        // 1st and 2nd sem for student 10009 Course BS in CHem Eng and passing class grades 
+
+
+
+        // 2021 1st sem classes
         DB::table('ClassOffering')->insert(
             array(
                    'subjCode'   =>   'CS 123',
