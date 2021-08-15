@@ -56,7 +56,7 @@
           </a>
             <ul class="nav nav-treeview">
 
-              <li class="nav-item ">
+              <li class="nav-item">
                     <a href="{{ route('goTo_enrollment.index') }}" 
                       class="nav-link {{ Request::is('students/enrolling-list') ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
