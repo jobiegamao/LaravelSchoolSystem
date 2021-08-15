@@ -85,7 +85,7 @@ class CreateCourseTable extends Migration
         DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'CS 2222',
-                   'subjName'   =>   'Computer Programming 2',
+                   'subjName'   =>   'Computer Programming',
                    'units'   =>   '3',
             )
         );
@@ -128,6 +128,27 @@ class CreateCourseTable extends Migration
             array(
                    'subjCode'   =>   'CHE 22444',
                    'subjName'   =>   'Engineering Management',
+                   'units'   =>   '3',
+            )
+        );
+        DB::table('Course')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22333',
+                   'subjName'   =>   'Engineering Data Analysis',
+                   'units'   =>   '3',
+            )
+        );
+        DB::table('Course')->insert(
+            array(
+                   'subjCode'   =>   'TRIG 11111',
+                   'subjName'   =>   'College Trigonometry',
+                   'units'   =>   '3',
+            )
+        );
+        DB::table('Course')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22222',
+                   'subjName'   =>   'Engineering Economics',
                    'units'   =>   '3',
             )
         );

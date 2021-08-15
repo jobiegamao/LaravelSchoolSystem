@@ -14,7 +14,7 @@
 
      
 
-      <li class="nav-item has-treeview menu-open">
+      {{-- <li class="nav-item has-treeview menu-open">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-copy"></i>
           <p>
@@ -34,6 +34,16 @@
               
           </ul>
 
+      </li> --}}
+
+      <li class="nav-item">
+        <a href="{{ route('goTo_promotionList.index') }}"
+           class="nav-link {{ Request::is('students/promotion-list') ? 'active' : '' }}">
+          <i class="nav-icon fas fa-copy"></i>
+          <p>
+            Students List
+          </p>
+        </a>
       </li>
 
       <li class="nav-item has-treeview menu-open">
@@ -80,19 +90,34 @@
                 
             </ul>
       </li>
+      <li class="nav-item">
+        <a href={{ route('classOfferings.show') }}
+           class="nav-link {{ Request::is('classes*') ? 'active' : '' }}">
+          <i class="nav-icon fas fa-copy"></i>
+          <p>
+            Class Offerings
+          </p>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a href={{ route('teachers') }}
+           class="nav-link {{ Request::is('teacher*') ? 'active' : '' }}">
+          <i class="nav-icon fas fa-copy"></i>
+          <p>
+            Teachers
+          </p>
+        </a>
+      </li>
 
       
 
       <li class="nav-item">
         <a href="{{ route('acadPeriods.index') }}"
            class="nav-link {{ Request::is('acadPeriods*') ? 'active' : '' }}">
-           
-            
-
           <i class="nav-icon fas fa-copy"></i>
           <p>
             Academic Time
-           
           </p>
         </a>
       </li>
@@ -125,29 +150,6 @@
   </nav>
 
 
-{{--
-<li class="nav-item">
-    <a href="{{ route('courses.index') }}"
-       class="nav-link {{ Request::is('courses*') ? 'active' : '' }}">
-        <p>Courses</p>
-    </a>
-</li>
-
-
-
-
-<li class="nav-item">
-    <a href="{{ route('studentCourses.index') }}"
-       class="nav-link {{ Request::is('studentCourses*') ? 'active' : '' }}">
-        <p>Student  Courses</p>
-    </a>
-</li>
-
-
-
-
-
- --}}
 
 
 

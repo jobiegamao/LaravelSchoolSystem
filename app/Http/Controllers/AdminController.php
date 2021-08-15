@@ -32,7 +32,7 @@ class AdminController extends Controller
      */
     public function goTo_enrollmentList(Request $request)
     {
-        $this->studentUpdateUnits();
+        
         $students = Student::where('isPass', '1')->orderBy('updated_at','asc')->get();
         
         return view('menu_Super/enrollment/index')
@@ -71,8 +71,14 @@ class AdminController extends Controller
      */
     public function studentUpdate(Request $request, $id)
     {
+        
         $student = Student::where('id',$id);
+        //dd($request->all());
+        
         $student->update(request()->except(['_token','_method']),$id);
+        if($request->has('isPass')){
+            $this->studentUpdateUnits();
+        }
         Flash::success('Student Updated Successfully.');
 
         return back();
@@ -94,7 +100,7 @@ class AdminController extends Controller
 
     /**
      * Update all units in enrollment list 
-     * units will  be based on course description for every minor + 12 , cert +4
+     * units will  be based on course description for every minor + 6 , cert +3
      * major will be based on curriculum
      */
     public function studentUpdateUnits()
@@ -105,7 +111,8 @@ class AdminController extends Controller
        $acadSem = AcadPeriod::latest()->value('acadSem');
 
        // get all students who is passed and has curriculum. 
-       $student= Student::with('CourseProgramme')->where('isPass', '1')->get();
+
+       $student= Student::with('CourseProgramme')->get();
        foreach($student as $s){
            $unitsCounter = 0;
             foreach($s->EnrolledProgramme as $ep){
@@ -113,28 +120,32 @@ class AdminController extends Controller
                 if($ep->status == 0){
                     switch($ep->description){
                         case 'Certificate':
-                            $unitsCounter+= 4;
+                            $unitsCounter+= 3;
                             break;
                         case 'Minor':
-                            $unitsCounter+= 12;
+                            $unitsCounter+= 6;
                             break;
                         default:
-                            foreach($s->CourseProgramme as $cp){
-                                if($cp->yearLevel == $s->year && $cp->semester == $acadSem){
-                                    $unitsCounter+= $cp->Course->units;
+                            //this formula  if naka base sa curric
+                            // foreach($s->CourseProgramme as $cp){
+                            //     if($cp->yearLevel == $s->year && $cp->semester == $acadSem){
+                            //         $unitsCounter+= $cp->Course->units;
                                     
-                                }
-                                
-                            }
+                            //     }
+                            // }
+
+                            // this if ay given lang per sem
+                            $unitsCounter+= 15;
+                            break;
                         
                     }
-                    //echo();
-                }
-                
-                
+                } 
             }
 
-            
+            if($s->isPass == '0'){
+                $unitsCounter = 0;
+            }
+
             $s->units = $unitsCounter;
             $s->save();
             
@@ -164,7 +175,7 @@ class AdminController extends Controller
      */
     public function studentUnpromoteAll()
     {
-        $student = Student::where('isPass','1')->update(['isPass' => '0']);
+        $student = Student::where('isPass','1')->update(['isPass' => '0', 'units' => '0', 'unitsTook' => '0']);
  
         Flash::success('Students are all tagged as unpromoted for the new semester');
 
@@ -190,6 +201,28 @@ class AdminController extends Controller
         return back();
     }
 
+
+    public function enrollProgrammeUpdate(Request $request, $id){
+        
+        /// !!VALIDATE REQUEST->STATUS REQUIRED, 0-3 ONLY
+        if($request->has('status')){
+            $validatedData = $request->validate([
+                'status' => ['required', 'integer', 'between:0,3'],
+            ]);
+        }
+        $prog = EnrollProgramme::where('id',$id);
+        //dd($request->all());
+        
+        $prog->update(request()->except(['_token','_method']),$id);
+       
+        Flash::success('Student Updated Successfully.');
+
+        return back()->withErrors(['Something went wrong']);
+    }
+
+
+
+
     public function goTo_enrollProgramme($id)
     {
         $student = Student::find($id);
@@ -208,6 +241,7 @@ class AdminController extends Controller
     {
         $validatedData = $request->validate(EnrollProgramme::$rules);
         EnrollProgramme::create($validatedData);
+        $this->studentUpdateUnits();
        
 
         Flash::success('Programme Enrolled successfully.');
@@ -221,6 +255,7 @@ class AdminController extends Controller
     public function enrollProgrammeDelete($id){
         $q = EnrollProgramme::find($id);
         $q->delete($id);
+        $this->studentUpdateUnits();
 
         Flash::success('Student unenrolled to programme successfully.');
 
@@ -252,13 +287,29 @@ class AdminController extends Controller
             return redirect(route('goTo_courseProgramme'))->withInput();
         }
 
-        //Get Curriculum                                                                                 
+        $course = $this->currCourse($studentID);
+        $certOptions = $this->currCertOptions($studentID);
+    
+        
+                
+
+        return view('menu_Super/addCourses/courseProgramme', [
+            'person' => $person,
+            'course' => $course,
+            'certOptions' => $certOptions
+            ])
+        ;
+    
+
+    }
+
+    public function currCourse($studentID){
+        //Get Curriculum  for Major or/and Minor                                                                               
         $enrolledProg = Student::find($studentID)->EnrolledProgramme
                                                  ->where('status', '0');
                                                  //get only curriculum of ongoing program
 
         $i=0; // major and minor counter
-        $j=0; // cert counter
         foreach ($enrolledProg as $enrolledProg){
             $year = CourseProgramme::where('progCode', $enrolledProg->progCode,)->max('yearImplemented');
             
@@ -275,26 +326,20 @@ class AdminController extends Controller
                     break;
 
                 default:
-                    $b = $enrolledProg->CourseProgramme->where('isProfessional', '1')->where('yearImplemented', $year);
+                    
                     break;
             }
 
+            
             if($enrolledProg->description != 'Certificate'){
-
                 if($i > 0){
                     $course = $course->merge($a);
                 }else{
                     $course = $a;
                 }
                 $i++;
-            }else{
-                if($j > 0){
-                    $certOptions = $certOptions->merge($b);
-                }else{
-                    $certOptions = $b;
-                }
-                $j++;
             }
+            
             
             
             
@@ -303,29 +348,58 @@ class AdminController extends Controller
         if(!empty($course)){
             $course = $course->unique('subjCode'); //list of subjects to take. Curriculum ProgrammeCourses
         }else{
-            $course = ([]);
+            $course = collect();
         }
+        
+        //dd($course);
+        return $course;
+    }
+
+    public function currCertOptions($studentID){
+        //Get Curriculum                                                                                 
+        $enrolledProg = Student::find($studentID)->EnrolledProgramme
+                                                 ->where('status', '0');
+                                                 //get only curriculum of ongoing program
+
+        
+        $j=0; // cert counter
+        
+        foreach ($enrolledProg as $enrolledProg){
+            $year = CourseProgramme::where('progCode', $enrolledProg->progCode,)->max('yearImplemented');
+            
+            
+            if ($enrolledProg->description == 'Certificate' ){
+        
+                $b = $enrolledProg->CourseProgramme->where('isProfessional', '1')->where('yearImplemented', $year);
+                if($j > 0){
+                    $certOptions = $certOptions->merge($b);
+                }else{
+                    $certOptions = $b;
+                }
+                $j++;
+            }
+ 
+        }  
+
         
         if(!empty($certOptions)){                             //will not include in curriculum but will be displayed
             $certOptions = $certOptions->unique('subjCode'); // list of subjects as options to a cert programme
         }else{
-            $certOptions = ([]);
-        }                                                   
-         
+            $certOptions = collect();
+        }
+
         
-         
-
-        return redirect()->back()
-        ->with(compact('person', 'course', 'certOptions'))
-        ->withInput();
-    
-
+        return $certOptions;
     }
+
 
     public function goTo_prereg(Request $request){
         $acadYear = AcadPeriod::latest()->value('acadYear');
         $acadSem = AcadPeriod::latest()->value('acadSem');
-        
+        $reqYear = $request->acadYear;
+        $reqSem =$request->acadSem;
+
+
         //if opened without values. like opening it thru the menu
         if(empty($request->all())){
             return view('menu_Super/addCourses/prereg')
@@ -345,59 +419,72 @@ class AdminController extends Controller
 
         
         //Get and show Classes Registered for sem and year
-            $prereg = StudentClass::where('student_id', $studentID)
-            ->where('year', $request->acadYear ?? $acadYear)
-            ->where('semester', $request->acadSem ?? $acadSem)
-            ->get();
-
-
+            $prereg = ClassOffering::with(['StudentClass' =>
+                function ($query) use($studentID){
+                $query->where('student_id', '=',$studentID);
+                }])
+                ->whereHas('StudentClass', function ($query) use($studentID){
+                    $query->where('student_id', '=',$studentID);
+                    })
+                ->where('year', $reqYear ?? $acadYear)
+                ->where('semester', $reqSem ?? $acadSem)       
+                ->get();
+// echo($prereg);
+ //dd($prereg);
 
 
 
         if($request->has('fromStudClassDelete')){
                 Flash::success('Class has been dropped');
         }
-        
-        return view('menu_Super/addCourses/prereg')
-        ->with(compact('person', 'student','acadYear', 'acadSem', 'prereg'));
+        //dd($student);
+        return view('menu_Super/addCourses/prereg', [
+            'person' => $person,
+            'student' => $student,
+            'prereg' => $prereg
+
+        ]);
         
     }
 
 
     public function goTo_classOfferings(Request $request){
         $student = Student::find($request->id);
-        
-        return view('menu_Super/addCourses/classOfferings', [
-        'student' =>  $student]);
-    }
-
-     /**
-     * Show Offerings Based on Search
-     * 
-     */
-    public function classOfferingsShow(Request $request){
-        $student = Student::find($request->id);
+        $studentID = $request->id;
         $acadYear = AcadPeriod::latest()->value('acadYear');
         $acadSem = AcadPeriod::latest()->value('acadSem');
-
-                    //!!!!! if subjCode is not in student Curriculum, dont show
-                    // checker here -----
-                    // pero basin pwede parong maka search?
-                
-                    //get all subjcode from CourseProgramme by student !!!
         
+        //curriculum of student (CourseProgramme)
+        $course = $this->currCourse($studentID);
+        $certOptions = $this->currCertOptions($studentID);
 
         $classes = ClassOffering::
-            where('subjCode', $request->subjCode)
-            ->where('year',$acadYear )
-            ->where('semester', $acadSem )
-            ->get();
+        where('year',$acadYear )
+        ->where('semester', $acadSem )
+        ->get();
+
 
         //error message is from studentClassStore. that method returns to this
         //route, and brings request->error when
         //  added class is error
         if($request->has('error')){
-            Flash::error('Error in adding class, drop class first');
+            switch ($request->error) {
+                case 'Prereq':
+                    Flash::error('Class code has a prerequisite class');
+                    break;
+                case 'Units Overload':
+                    Flash::error('Units Overload');
+                    break;
+                case 'Conflict':
+                    Flash::error('Conflict in adding class, drop class first');
+                    break;
+                case 'Class Taken':
+                        Flash::error('Class has already been passed');
+                        break;
+                default:
+                    
+                    break;
+            }  
         }
 
         //success message from  route studentClassDelete 
@@ -405,14 +492,19 @@ class AdminController extends Controller
             Flash::success('Class dropped succesfully');
         }
 
-        return redirect()->back()
-        ->with(compact('student', 'classes'))
-        ->withInput();
+        return view('menu_Super/addCourses/classOfferings', [
+            'student' =>  $student,
+            'classes' => $classes,
+            'course' => $course,
+            'certOptions' => $certOptions
+        ]);
     }
+
+     
 
     /**
      * Checker if pre req subj is passed
-     * ----not yet doneee
+     * 
      */
 
      public function preReqTaken($stud_id, $subj){
@@ -421,7 +513,12 @@ class AdminController extends Controller
         $s = StudentClass::
         where('student_id',$stud_id)
         ->with('ClassGrade', 'ClassOffering')
+        ->whereHas('ClassGrade', function ($query){
+            $query->where('isPass', 1);
+        })
         ->get();
+
+    
 
         $e = EnrollProgramme::
             where('student_id', $stud_id)
@@ -430,6 +527,7 @@ class AdminController extends Controller
                 $query->where('CourseProgramme.subjCode', '=', $subj);
             })
             ->get();
+            
 
        if($e->isEmpty()){
            //class has no pre reqs
@@ -439,38 +537,81 @@ class AdminController extends Controller
             //subj has pre req AND student has no record of any classes
             return false; //false means student cannot add the classoffering
         }
+        
 
-//////////not yet donnee ///////
 
-       //get the prog code where the added subj is related
+       //get the courseProg ID where the added subj is related
         $e = EnrollProgramme::where('student_id', $stud_id)
             ->where('status', '0')
-            ->whereHas('CourseProgramme', function ($query) use($subj){
+            ->with('CourseProgramme', function ($query) use($subj){
                 $query->where('subjCode', '=', $subj);
-            })->first('progCode');
-
-       $cp = CourseProgramme::
-            where('progCode', $e->progCode)
-            ->where('subjCode', $subj)
-            ->latest('yearImplemented')
-            ->with('CourseProgrammePrereq')
-            ->first();
+            })->get();
+        
+        
+       $prereq = CourseProgrammePreReq::
+        where('course_programme_id',$e[0]->CourseProgramme[0]->id)
+        ->with('CourseProgramme')->get();
+           
             
-       
+        $preReqs= [];
        //loop prereq subjs
-       foreach ($cp->CourseProgrammePrereq as $pre) {
-           $prereqSubjCode = $pre->PrereqProg->subjCode;
+       foreach ($prereq as $prereq) {
+        $preReqs[] = $prereq->PrereqProg->subjCode;
            foreach($s as $takenClass){
-                dd($takenClass->ClassOffering);
+                //echo($takenClass->ClassOffering->subjCode);
+                if(in_array($takenClass->ClassOffering->subjCode,$preReqs)){
+                    return true;
+                }
            }
 
-            dd($s);
-
+           return false;
        }
-  
-        return "";
+ 
      }
 
+     public function classTaken($stud_id, $subj){
+        
+        //class with subjcode and is Pass
+        $s = StudentClass::
+        where('student_id',$stud_id)
+        ->whereHas('ClassOffering', function ($query) use($subj){
+            $query->where('subjCode', $subj);
+        })
+        ->whereHas('ClassGrade', function ($query){
+            $query->where('isPass', 1);
+        })
+        ->get();
+        
+        if($s->isEmpty()){
+            //subjCode is not yet taken or passed
+            return false;
+        };
+
+        return true;
+     }
+
+     public function conflictSched($sched1, $sched2){
+        // $a = explode('', $sched1);
+        // $b = explode(' ', $sched2);
+
+            //time1 result is array 
+            // ex. 7:40-9:10 time1[0] = [7,40,9,10]
+            // time1[0][0] = 7
+
+        preg_match_all('!\d+!', $sched1, $time1); 
+        preg_match_all('!\d+!', $sched2, $time2);
+        if($sched1[0] == $sched2[0]){ // tth mw 
+            if(
+                $time1[0][0] == $time2[0][0] &&
+                $time1[0][1] == $time2[0][1]
+                ){ 
+                return true;
+            }
+        }
+
+        
+        return false;
+     }
 
     /**
      * Add A Class in StudentClass
@@ -479,12 +620,23 @@ class AdminController extends Controller
 
     public function studentClassStore(Request $request){
         
+        
+        $studentID = $request->student_id;
+        $student = Student::find($studentID);
+        
+        
+
         // get all specific student's classses for this acad time
-        $s = StudentClass::with('ClassOffering')
-                    ->with('Student')->where('student_id',$request->student_id)
-                    ->where('year', $request->year)
-                    ->where('semester', $request->sem)
-                    ->get();
+        $s = ClassOffering::with(['StudentClass' =>
+                function ($query) use($studentID){
+                $query->where('student_id', '=',$studentID);
+                }])
+                ->whereHas('StudentClass', function ($query) use($studentID){
+                    $query->where('student_id', '=',$studentID);
+                    })
+                ->where('year', $request->year)
+                ->where('semester', $request->sem)       
+                ->get();
         
         //classOffering: the recently added class
         $added = ClassOffering::where('id',$request->classOffering_id);
@@ -495,56 +647,70 @@ class AdminController extends Controller
              $c = $added->with('Course')->get();
              $a_units = $c[0]->Course->units;
 
-             //check if may pre req yun na added class, if so na take na ba ng student ? can be added : error
-             $checker = $this->preReqTaken($request->student_id, $a_subj);
 
-                if(!$checker){
-                    $error = "Prerequisite subjects should be passed first";
-                    return redirect()->route('classOfferings.show', [
-                        'id' => $request->student_id,
-                        'subjCode' => $a_subj,
-                        'error' => $error
-                    ])->withInput();
-                }
-               
-        
-        foreach($s as $s){
-            //echo($s->ClassOffering);
-            if  (
-                $s->ClassOffering->subjCode == $a_subj ||
-                $s->ClassOffering->classCode == $a_class ||
-                $s->ClassOffering->schedule == $a_sched
-
-                )
-            {
-                //dd('error');
-                
-                $error = true;
-                return redirect()->route('classOfferings.show', [
-                    'id' => $request->student_id,
-                    'subjCode' => $a_subj,
+            //if units full
+            if((($student->unitsTook) + $a_units ) > $student->units ){
+                $error = 'Units Overload';
+                return redirect()->route('goTo_classOfferings', [
+                    'id' => $studentID,
                     'error' => $error
                 ])->withInput();
             }
 
+            //checker if added class is already passed by student
+            $checkerClass = $this->classTaken($request->student_id, $a_subj);
+            if($checkerClass){
+                $error = "Class Taken";
+                return redirect()->route('goTo_classOfferings', [
+                    'id' => $studentID,
+                    'error' => $error
+                ])->withInput();
+            }
+
+             //check if may pre req yun na added class, if so na take na ba ng student ? can be added : error
+            $checkerPrereq = $this->preReqTaken($request->student_id, $a_subj);
             
+            if(!$checkerPrereq){
+                $error = "Prereq";
+                return redirect()->route('goTo_classOfferings', [
+                    'id' => $studentID,
+                    'error' => $error
+                ])->withInput();
+            }
+               
+        //check if with conflict
+
+        
+        foreach($s as $s){
+            
+            if ($s->subjCode == $a_subj ||
+                $s->classCode == $a_class ||
+                $s->schedule == $a_sched ||
+                $this->conflictSched($s->schedule, $a_sched)
+                )
+            {
+            
+                $error = 'Conflict';
+                return redirect()->route('goTo_classOfferings', [
+                    'id' => $request->student_id,
+                    'error' => $error
+                ])->withInput();
+            }
+ 
         }
         
-        
-
+    
         $cg = new ClassGrade();
         $cg->save();
         StudentClass::create([
             'student_id' => $request->student_id,
             'classOffering_id'  => $request->classOffering_id,
             'classGrade_id' =>$cg->id,
-            'semester' => $request->sem,
-            'year' => $request->year,
 
         ]);
         
 
-        $student = Student::find($request->student_id);
+        
         //update the units took
         $student->unitsTook += $a_units;
         $student->save();
@@ -567,18 +733,23 @@ class AdminController extends Controller
     public function studentClassDelete(Request $request){
         
         $cg_id = StudentClass::where('student_id', $request->student_id )
-        ->where('classOffering_id',$request->classOffering_id )->value('classGrade_id');
+                ->where('classOffering_id',$request->classOffering_id )
+                ->value('classGrade_id');
         $sc = StudentClass::where('student_id', $request->student_id )
-        ->where('classOffering_id',$request->classOffering_id )->delete();
+                ->where('classOffering_id',$request->classOffering_id )->delete();
         ClassGrade::find($cg_id)->delete();
         
         //update unitsTook
         $c = ClassOffering::where('id',$request->classOffering_id)
-        ->with('Course')->get();
+            ->with('Course')->get();
         $units = $c[0]->Course->units;
         $s = Student::find($request->student_id);
-        $s->unitsTook -= $units;
-        $s->save();
+        if($s->unitsTook != 0){
+            $s->unitsTook -= $units;
+            $s->save();
+        }
+        
+        
 
 
         // Drop button is found in prereg view and classOfferingShow
@@ -596,11 +767,22 @@ class AdminController extends Controller
         }
 
         //will go back classOfferingShow (class offerring list)
-        return redirect()->route('classOfferings.show', [
+        return redirect()->route('goTo_classOfferings', [
             'id' => $request->student_id,
-            'subjCode' => $request->subjCode,
             'fromStudClassDelete' => true
         ])->withInput();
 
+    }
+
+
+    //Show all class offerings based on year and sem
+    public function classOfferingsShow(Request $request){
+        $c = ClassOffering::where('year', $request->year)
+        ->where('semester', $request->sem)->get();
+
+        session()->flashInput($request->input());
+        return view('menu_Super.classes.classOfferings',[
+            'classes' => $c
+        ]);
     }
 }

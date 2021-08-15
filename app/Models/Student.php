@@ -50,6 +50,12 @@ class Student extends Model
     {
         return $this->hasMany(StudentClass::class, 'student_id');
     }
+
+    public function class()
+    {
+        return $this->hasMany(StudentClass::class, 'student_id')->where();
+    }
+
     public function CourseProgramme()
     {
         return $this->hasManyThrough(

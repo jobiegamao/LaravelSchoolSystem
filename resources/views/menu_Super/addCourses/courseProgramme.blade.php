@@ -37,12 +37,7 @@
                                     
                 {!! Form::close() !!}
                         
-                            {{-- to access compact returns --}}
-                            @php
-                                $person = Session::get('person');
-                                $course = Session::get('course');
-                                $cert = Session::get('certOptions');
-                            @endphp
+                            
                             @if (isset($person))
                                 <div class="col-6">
                                     <a class="btn btn-primary float-right"
@@ -56,9 +51,6 @@
                     </div>
             </div>
         </div>
-
-             
-            
 
              
              
@@ -84,7 +76,7 @@
                                 
                             @endforeach
                         </div>    
-                        {{-- ADD UNITS COUNTER --}}
+                        
                 </div>
                 <div class="pt-3"> 
                     @include('menu_Super/addCourses/courseProgramme_table') 

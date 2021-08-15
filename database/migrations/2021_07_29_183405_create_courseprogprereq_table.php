@@ -28,16 +28,13 @@ class CreateCourseprogprereqTable extends Migration
                 ->onDelete('cascade');
         });
 
+        
+    
+
         DB::table('CourseProgrammePreReq')->insert(
             array(
                    'course_programme_id'   =>   '6',
                    'prereq_course_programme_id'   =>   '2',
-            )
-        );
-        DB::table('CourseProgrammePreReq')->insert(
-            array(
-                   'course_programme_id'   =>   '7',
-                   'prereq_course_programme_id'   =>   '3',
             )
         );
 
@@ -54,6 +51,28 @@ class CreateCourseprogprereqTable extends Migration
                    'prereq_course_programme_id'   =>   '16',
             )
         );
+
+        DB::table('CourseProgrammePreReq')->insert(
+            array(
+                   'course_programme_id'   =>   '23',
+                   'prereq_course_programme_id'   =>   '20',
+            )
+        );
+
+        DB::table('CourseProgrammePreReq')->insert(
+            array(
+                   'course_programme_id'   =>   '25',
+                   'prereq_course_programme_id'   =>   '22',
+            )
+        );
+
+        DB::table('CourseProgrammePreReq')->insert(
+            array(
+                   'course_programme_id'   =>   '27',
+                   'prereq_course_programme_id'   =>   '23',
+            )
+        );
+
     }
 
     /**

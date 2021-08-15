@@ -9,7 +9,7 @@
             <th>Programme Type</th>
             <th><small>Action</small></th>
             <th><small>Units</small></th>
-            <th><small>PreReg Filled?</small></th>
+            <th><small>Course Registration</small></th>
             <th>Enrollment Status</th>
         </tr>
         </thead>
@@ -20,12 +20,13 @@
 
             <tr>
                 <td>
-                    <a href="{{ route('goTo_prereg', ['id' => $students->person_id]) }}">{{ $students->person_id }}</a>
-                    {{-- {{ $students->person_id }} --}}
+                    {{ $students->person_id }}
                 </td>
                 <td>
-                    
-                    {{ $students->id }}
+                    {!! Form::open(['method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
+                        {!! Form::hidden('id', $students->person_id ) !!}   
+                        {{Form::submit($students->id ,['class' => 'btn btn-link p-0 '])}}
+                    {!! Form::close() !!}
                 </td>
                 <td>
                     {{ $students->full_name() }}
@@ -82,6 +83,7 @@
 
                 <td>
                     {{-- pre reg link --}}
+                    <a href="{{ route('goTo_prereg', ['id' => $students->person_id]) }}"> {{ $students->id }} </a>
                 </td>
                 <td>
                     {{-- finance should have a table data like this to tag student as enrolled --}}

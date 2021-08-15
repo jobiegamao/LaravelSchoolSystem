@@ -247,6 +247,49 @@ class CreateCourseprogramTable extends Migration
 	DB::table('CourseProgramme')->insert(
             array(
                    'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'CHE 22222',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'GE 222',
+                   'isProfessional'   =>   '0',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'TRIG 11111',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'CHE 22333',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'yearImplemented'   =>   '2019',
+            )
+        );
+	DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
                    'subjCode'   =>   'CHE 22111',
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
@@ -287,6 +330,7 @@ class CreateCourseprogramTable extends Migration
                    'yearImplemented'   =>   '2019',
             )
         );
+
 
        
     }

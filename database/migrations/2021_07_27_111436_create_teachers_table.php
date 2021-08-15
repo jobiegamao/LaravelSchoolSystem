@@ -15,8 +15,34 @@ class CreateTeachersTable extends Migration
     {
         Schema::create('Teachers', function (Blueprint $table) {
             $table->id();
+            $table->foreignID('person_id')
+                ->contstrained('Person')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
+
+        
+
+        DB::table('Teachers')->insert(
+            array(
+                'id'   =>   '30001',
+                'person_id'   =>   '10003',
+            )
+        );
+        DB::table('Teachers')->insert(
+            array( 
+                'person_id'   =>   '10004',
+            )
+        );
+        DB::table('Teachers')->insert(
+            array( 
+                'person_id'   =>   '10005',
+            )
+        );
+
+
     }
 
     /**

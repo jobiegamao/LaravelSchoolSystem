@@ -2,7 +2,7 @@
 
       
 
-@if ($course != null)
+@if ($course->isNotEmpty())
 <div class="card-body">
     <div class="table-responsive">
         <table class="table" id="curriculum-table">
@@ -21,7 +21,7 @@
             </tr>
             </thead>
             <tbody>
-            {{-- EnrolledProgramme Table --}}
+            {{-- CourseProgramme Table --}}
             @foreach($course as $course)
                 <tr>
                     <td> 
@@ -44,6 +44,23 @@
                         {{ $course->Course->units }}
                     </td>
                     <td>
+                        
+                        @php
+                            $subjCode = $course->subjCode;
+                            $s = \App\Models\StudentClass::where('student_id', $person->Student->id)
+                            ->whereHas('ClassOffering', function ($query) use($subjCode){
+                                    $query->latest()->where('subjCode', '=',$subjCode);
+                                })
+                            ->with('ClassGrade')
+                            ->has('ClassGrade')
+                            ->first();
+                            
+                            if(!empty($s)){
+                                echo($s->ClassGrade->finalGradeTEXT());
+                            }
+                           
+                        @endphp
+
                         
                     </td>
                     <td>
@@ -76,7 +93,7 @@
 @endif
 
 
-@if ($cert != null)
+@if ($certOptions->isNotEmpty())
 <div class="card-body">
     <div class="d-flex justify-content-center">
         <span>Available Classes For Certification</span>
@@ -88,15 +105,15 @@
                 
                 <th>Code</th>
                 <th>Title</th>
-                
                 <th>Units</th>
+                <th>Final Grade</th>
                 <th>Prerequisite</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
             {{-- EnrolledProgramme Table --}}
-            @foreach($cert as $course)
+            @foreach($certOptions as $course)
                 <tr>
                 
                     <td>
@@ -109,7 +126,24 @@
                         {{ $course->Course->units }}
                     </td>
                     <td>
-                        
+                        @php
+                            $subjCode = $course->subjCode;
+                            $s = \App\Models\StudentClass::where('student_id', $person->Student->id)
+                            ->whereHas('ClassOffering', function ($query) use($subjCode){
+                                    $query->latest()->where('subjCode', '=',$subjCode);
+                                })
+                            ->with('ClassGrade')
+                            ->has('ClassGrade')
+                            ->first();
+                            
+                            if(!empty($s)){
+                                echo($s->ClassGrade->finalGradeTEXT());
+                            }
+                           
+                        @endphp
+                    </td>
+                    <td>
+                        {{--  --}}
                     </td>
                     <td>
                         

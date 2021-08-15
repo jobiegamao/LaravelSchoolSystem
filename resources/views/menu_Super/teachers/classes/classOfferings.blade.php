@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Class Offerings</h1>
+                    <h1>{{ $classes[0]->Teacher->full_name() }}'s Classes</h1>
                 </div>
                 <div class="col-sm-6">
                     <div class="clearfix"> @include('flash::message')</div>
@@ -19,27 +19,28 @@
 
     {{-- body --}}
 
+    
+
     <div class="card">
         
         <div class="card-body p-10">
             <div class="table-responsive">
-                <table class="table" id="classofferings-table">
+                <table class="table" id="teacherClasses-table">
                     <thead>
                     <tr>
                         <th><small>Offering #</small></th>
-                        <th>Semester</th>
-                        <th>Units</th>
+                        <th>Year and Semester</th>
+                        
                         
                         <th>Class Code</th>
                         <th>Subject Code</th>
                         <th>Subject Title</th>
                         <th>Schedule</th>
-                        <th>Instructor</th>
                         <th>Room</th>
                         <th><small>Reserved<br>Slots</small></th>
                         <th><small>Available<br>Slots</small></th>
             
-                        <th>Add</th>
+                        <th>Students</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,11 +51,9 @@
                                 {{ $classes->id }}
                             </td>
                             <td>
-                                {{ $classes->semester }}
+                                 {{ $classes->year }} sem: {{ $classes->semester }}
                             </td>
-                            <td>
-                                {{ $classes->Course->units }}
-                            </td>
+        
                             <td>
                                 {{ $classes->classCode }}
                             </td>
@@ -67,10 +66,7 @@
                             <td>
                                 {{ $classes->schedule }}
                             </td>
-                            <td>
-                                {{-- {{ $classes->teacher_id }} --}}
-                        
-                            </td>
+                            
                             <td>
                                 {{ $classes->room }}
             
@@ -85,41 +81,11 @@
             
                             </td>
                             <td>
-                               {{-- Button Add/Drop class code to StudentClass table --}}
-                              @php
-                                  $a = $student->StudentClass
-                                       ->where('classOffering_id', $classes->id)
-                                       
-                              @endphp
-                                
-                                   @if ($course->contains('subjCode',$classes->subjCode) || $certOptions->contains('subjCode',$classes->subjCode) )
-                                        @if (!$a->isEmpty())
-                                            <form action="{{ route('studentClass.delete', [
-                                                'student_id' => $student->id, 
-                                                'classOffering_id' => $classes->id,
-                                                'sem' => $classes->semester,
-                                                'year' => $classes->year,
-                                                'subjCode' => $classes->subjCode
-                                                ]) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger btn-sm" title="Delete">Drop</button>
-                                            </form>
-            
-                                        @else
-                                            <a href="{{ route('studentClass.store', [
-                                                'student_id' => $student->id, 
-                                                'classOffering_id' => $classes->id,
-                                                'sem' => $classes->semester,
-                                                'year' => $classes->year,
-                                                ]) }}"
-                                                class='btn btn-primary btn-sm'> Add
-                                            </a> 
-                                        @endif
-                                   @endif
-                                   
                                
-                                
+                                <a href="{{ route('teacher.students', ['id' => $classes->id ]) }}"
+                                    class='btn btn-default btn-xs'>
+                                    <i class="far fa-edit"></i>
+                                </a>
                             </td>
                             
             
@@ -146,7 +112,7 @@
                 </script>
                 <script>
                     $(document).ready( function () {
-                        $('#classofferings-table').DataTable();
+                        $('#teacherClasses-table').DataTable();
                        
                     } );
                 </script>

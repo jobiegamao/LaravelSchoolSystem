@@ -116,9 +116,10 @@
 
                         <div class="form-group row">
                             <div class="col-sm-2 col-form-label">
-                                Total units
+                                <labeL>Total Units For Sem:</label>
                             </div>
                             <div class="col-sm-2 col-form-label">
+                    
                                  {{ $student->unitsTook }}/{{ $student->units }} 
                             </div>
                         </div>

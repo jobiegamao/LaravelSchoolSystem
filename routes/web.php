@@ -39,13 +39,15 @@ Route::get('student/promotion-list', 'App\Http\Controllers\AdminController@stude
 
 Route::get('enrollProgramme/{id}', 'App\Http\Controllers\AdminController@goTo_enrollProgramme')->name('goTo_enrollProgramme');
 Route::post('enrollProgramme/store', 'App\Http\Controllers\AdminController@enrollProgrammeStore')->name('enrollProgramme.store');
+Route::patch('enrollProgramme/update-status/{id}', 'App\Http\Controllers\AdminController@enrollProgrammeUpdate')->name('enrollProgramme.update');
 Route::delete('enrollProgramme/delete/{id}', 'App\Http\Controllers\AdminController@enrollProgrammeDelete')->name('enrollProgramme.delete');
 
 Route::get('student/courses', 'App\Http\Controllers\AdminController@goTo_courseProgramme')->name('goTo_courseProgramme');
 Route::post('student/courses/curriculum', 'App\Http\Controllers\AdminController@courseProgrammeShow')->name('courseProgramme.show');
 
 Route::any('classOffering', 'App\Http\Controllers\AdminController@goTo_classOfferings')->name('goTo_classOfferings');
-Route::any('classOfferings', 'App\Http\Controllers\AdminController@classOfferingsShow')->name('classOfferings.show');
+
+
 
 
 Route::any('student/prereg', 'App\Http\Controllers\AdminController@goTo_prereg')->name('goTo_prereg');
@@ -54,3 +56,10 @@ Route::delete('studentClass/drop', 'App\Http\Controllers\AdminController@student
 
 
 Route::resource('acadPeriods', App\Http\Controllers\AcadPeriodController::class);
+
+Route::get('teacher', 'App\Http\Controllers\TeacherController@index')->name('teachers');
+Route::post('teacher/{id}/classes', 'App\Http\Controllers\TeacherController@classes')->name('teacher.classes');
+Route::get('class/{id}/students', 'App\Http\Controllers\TeacherController@classStudents')->name('teacher.students');
+Route::patch('class/student/grade/{id}', 'App\Http\Controllers\TeacherController@classGradeUpdate')->name('classGrade.update');
+
+Route::any('classes', 'App\Http\Controllers\AdminController@classOfferingsShow')->name('classOfferings.show');
