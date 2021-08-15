@@ -2,6 +2,7 @@
     <table class="table" id="prereg-table">
             <thead>
                 <tr>
+                    <th>CO-ID</th>
                     <th>Year</th>
                     <th>Semester</th>
                     <th>Class Code</th>
@@ -14,9 +15,12 @@
                 </tr>
             </thead>
         <tbody>
-        {{-- StudentClass Table --}}
+        {{-- ClassOffering Table --}}
         @foreach($prereg as $prereg)
             <tr>
+                <td>
+                    {{ $prereg->id }}
+                </td>
                 <td>
                     {{ $prereg->year }}
                 </td>
@@ -24,22 +28,22 @@
                     {{ $prereg->semester }}
                 </td>
                 <td>
-                    {{ $prereg->ClassOffering->classCode }}
+                    {{ $prereg->classCode }}
                 </td>
                 <td>
-                    {{ $prereg->ClassOffering->subjCode }}
+                    {{ $prereg->subjCode }}
                 </td>
                 <td>
-                    {{ $prereg->ClassOffering->Course->subjName }}
+                    {{ $prereg->Course->subjName }}
                 </td>
                 <td>
-                    {{ $prereg->ClassOffering->schedule }}
+                    {{ $prereg->schedule }}
                 </td>
                 <td>
-                    {{-- {{ $prereg->ClassOffering->Teacher->Person->full_name() }} --}}
+                    {{ $prereg->Teacher->full_name() }}
                 </td>
                 <td>
-                    {{ $prereg->ClassOffering->Course->units }}
+                    {{ $prereg->Course->units }}
                   
 
                     
@@ -49,7 +53,7 @@
                     <form action="{{ route('studentClass.delete', [
                         'id' => $student->person_id,
                         'student_id' => $student->id, 
-                        'classOffering_id' => $prereg->ClassOffering->id,
+                        'classOffering_id' => $prereg->id,
                         'sem' => $prereg->semester,
                         'year' => $prereg->year,
                         'backToPreregView' => true

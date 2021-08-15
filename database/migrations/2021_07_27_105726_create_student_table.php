@@ -50,7 +50,7 @@ class CreateStudentTable extends Migration
             array(
                    'id'   =>   '20002',
                    'person_id'   =>   '10007',
-		            'year'   =>   '1',
+		           'year'   =>   '1',
             )
         );
 
@@ -58,7 +58,7 @@ class CreateStudentTable extends Migration
             array(
                    'id'   =>   '20003',
                    'person_id'   =>   '10008',
-		  'year'   =>   '1',
+		           'year'   =>   '1',
             )
         );
 

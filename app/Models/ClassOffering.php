@@ -72,5 +72,10 @@ class ClassOffering extends Model
         return $this->belongsToMany(CourseProgramme::class, 'subjCode');
     }
 
+    public function Teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'teacher_id');
+    }
+
 
 }

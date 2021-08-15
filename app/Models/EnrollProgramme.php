@@ -25,7 +25,8 @@ class EnrollProgramme extends Model
         'description',
         'student_id',
         'progCode',
-        'description'
+        'description',
+        'status'
     ];
 
     
@@ -42,6 +43,34 @@ class EnrollProgramme extends Model
         'student_id' => 'required|exists:App\Models\Student,id',
         'progCode' => 'required|exists:App\Models\Programme,progCode',
     ];
+    public static $status_rules = [
+        
+        // 'status' => 'required|inBetween',
+    ];
+
+    public function statusText()
+    {
+        
+        $text;
+        
+        switch ($this->status) {
+            case '0':
+                $text = "Ongoing";
+                break;
+
+            case '1':
+                $text = "Completed";
+                break;
+            
+            default:
+                $text = "Hold";
+                break;
+        }
+
+        return $text;
+            
+       
+    }
 
     public function Programme()
     {

@@ -17,9 +17,6 @@ class CreateStudentclassTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->smallInteger('semester');
-            $table->smallInteger('year');
-
             $table->foreignID('student_id')
                 ->contstrained('Student')
                 ->onUpdate('cascade')
@@ -39,6 +36,39 @@ class CreateStudentclassTable extends Migration
 
             
         });
+
+
+        DB::table('StudentClass')->insert(
+            array(
+                   'student_id'   =>   '20004',
+                   'classOffering_id'   =>   '35',
+                   'classGrade_id'   =>   '1',
+            )
+         );
+
+	DB::table('StudentClass')->insert(
+            array(
+                   'student_id'   =>   '20004',
+                   'classOffering_id'   =>   '41',
+                   'classGrade_id'   =>   '2',
+            )
+         );
+
+	DB::table('StudentClass')->insert(
+            array(
+                   'student_id'   =>   '20004',
+                   'classOffering_id'   =>   '37',
+                   'classGrade_id'   =>   '3',
+            )
+         );
+
+	DB::table('StudentClass')->insert(
+            array(
+                   'student_id'   =>   '20004',
+                   'classOffering_id'   =>   '39',
+                   'classGrade_id'   =>   '4',
+            )
+         );
     }
 
     /**

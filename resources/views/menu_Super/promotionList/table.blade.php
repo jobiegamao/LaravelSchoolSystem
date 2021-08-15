@@ -7,7 +7,14 @@
             <th>Name</th>
             <th>Year</th>
             <th>Programme</th>
-            <th>Programme Type</th>
+            <th>Programme Type<br>
+                <small>
+                Editable<br>
+                0 = Ongoing,
+                1 = Completed, 
+                2 = Hold
+            </small>
+            </th>
             
             <th>Course Grades</th>
             <th>Evaluation Pass <br><small>Pass for Next Enrollment</small></th>
@@ -39,7 +46,7 @@
                     {!!Form::close()!!} 
                 </td>
                 <td>
-                    
+                    {{-- Programme --}}
                     @forelse ($students->EnrolledProgramme as $course )  
                         {{ $course->progCode}}<br>
                     @empty
@@ -48,9 +55,16 @@
                 
                 </td>
                 <td>
+                    {{-- Programme Desc --}}
                     @forelse ($students->EnrolledProgramme as $course )
-                       
-                            {{ $course->description}} <br>
+                       {!! Form::model($course, ['route' => ['enrollProgramme.update', $course->id], 'method' => 'patch']) !!}
+                            <small> 
+                            {{ $course->description}} 
+                            
+                            {!! Form::number('status', $course->status , ['class' => 'border-0 w-1', 'size' => 1]) !!}     
+                            <a href="{{ route('enrollProgramme.update', [$course->id]) }}"></a>
+                            {!!Form::close()!!} 
+                            </small>
                     @empty
                         New Enrollment
                     @endforelse
@@ -59,13 +73,12 @@
                 </td>
                 
                 <td>
-                    {{-- class grade link --}}
-                    @forelse ($students->EnrolledProgramme as $course )
-                       
-                        
-                    @empty
-                        No Grades Yet
-                    @endforelse
+                    {{-- class grade  --}}
+                    
+                    {!! Form::open(['method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
+                        {!! Form::hidden('id', $students->person_id ) !!}   
+                        {{Form::submit('Grades',['class' => 'btn btn-default'])}}
+                    {!! Form::close() !!}
                 </td>
 
 

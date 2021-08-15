@@ -37,16 +37,7 @@ class CourseProgramme extends Model
         'isProfessional'
     ];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-       
-        'isProfessional' => 'boolean'
-    ];
+   
 
     /**
      * Validation rules

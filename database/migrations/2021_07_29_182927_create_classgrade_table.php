@@ -23,6 +23,42 @@ class CreateClassgradeTable extends Migration
 
             $table->boolean('isPass')->default(0);
         });
+
+        DB::table('ClassGrade')->insert(
+            array(
+                   'prelimGrade'   =>   '86',
+                   'midtermGrade'   =>   '90',
+                   'prefinalsGrade'   =>   '88',
+		  'isPass'   =>  '1',
+            )
+         );
+
+	DB::table('ClassGrade')->insert(
+            array(
+                   'prelimGrade'   =>   '89',
+                   'midtermGrade'   =>   '92',
+                   'prefinalsGrade'   =>   '85',
+		  'isPass'   =>  '1',
+            )
+         );
+
+	DB::table('ClassGrade')->insert(
+            array(
+                   'prelimGrade'   =>   '70',
+                   'midtermGrade'   =>   '70',
+                   'prefinalsGrade'   =>   '71',
+		  'isPass'   => '0',
+            )
+         );
+
+	DB::table('ClassGrade')->insert(
+            array(
+                   'prelimGrade'   =>   '88',
+                   'midtermGrade'   =>   '89',
+                   'prefinalsGrade'   =>   '90',
+		  'isPass'   =>  '1',
+            )
+         );
     }
 
     /**
