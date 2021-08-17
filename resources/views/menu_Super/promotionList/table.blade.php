@@ -7,18 +7,13 @@
             <th>Name</th>
             <th>Year</th>
             <th>Programme</th>
-            <th>Programme Type<br>
-                <small>
-                Editable<br>
-                0 = Ongoing,
-                1 = Completed, 
-                2 = Hold
-            </small>
+            <th>
             </th>
             
-            <th>Course Grades</th>
+            <th>Courses</th>
+            <th>Grades<br><small>Prev Sem</small></th>
             <th>Evaluation Pass <br><small>Pass for Next Enrollment</small></th>
-            <th>Year Promotion<br><small>Promote College Level</small></th>
+            {{-- <th>Year Promotion<br><small>Promote College Level</small></th> --}}
             <th>Action</th>
         </tr>
         </thead>
@@ -47,8 +42,8 @@
                 </td>
                 <td>
                     {{-- Programme --}}
-                    @forelse ($students->EnrolledProgramme as $course )  
-                        {{ $course->progCode}}<br>
+                    @forelse ($students->EnrolledProgramme as $ep )  
+                        {{ $ep->progCode}}<br>
                     @empty
                         New Enrollment
                     @endforelse
@@ -56,15 +51,10 @@
                 </td>
                 <td>
                     {{-- Programme Desc --}}
-                    @forelse ($students->EnrolledProgramme as $course )
-                       {!! Form::model($course, ['route' => ['enrollProgramme.update', $course->id], 'method' => 'patch']) !!}
+                    @forelse ($students->EnrolledProgramme as $ep )
                             <small> 
-                            {{ $course->description}} 
-                            
-                            {!! Form::number('status', $course->status , ['class' => 'border-0 w-1', 'size' => 1]) !!}     
-                            <a href="{{ route('enrollProgramme.update', [$course->id]) }}"></a>
-                            {!!Form::close()!!} 
-                            </small>
+                            {{ $ep->description}} -- {{ $ep->statusText()}}
+                            </small><br>
                     @empty
                         New Enrollment
                     @endforelse
@@ -77,8 +67,12 @@
                     
                     {!! Form::open(['method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
                         {!! Form::hidden('id', $students->person_id ) !!}   
-                        {{Form::submit('Grades',['class' => 'btn btn-default'])}}
+                        {{Form::submit('Curriculum',['class' => 'btn btn-link'])}}
                     {!! Form::close() !!}
+                </td>
+
+                <td>
+                    {{-- class grade of student per sem  --}}
                 </td>
 
 
@@ -89,12 +83,12 @@
                     @switch($students->isPass)
                         @case(0)
                             {!! Form::hidden('isPass', 1) !!}
-                            {{Form::submit('Promote',['class' => 'btn btn-default'])}}
+                            {{Form::submit('Approve',['class' => 'btn btn-default'])}}
                             @break
                         @default
                             {!! Form::hidden('isPass', 0) !!}
-                            Passed
-                            {{Form::button('<i class="fa fa-trash"></i>',['class' => 'btn btn-xs remove-circle-outline','type' => 'submit', 
+                            
+                            {{Form::button('Approved <i class="fa fa-times"></i>',['class' => 'btn remove-circle-outline','type' => 'submit', 
                             'onclick' => "return confirm('Are you sure you want to unpromote student?')"])}}
                             
                     @endswitch
@@ -103,17 +97,25 @@
                     
                 </td>
 
-                <td>
+                {{-- <td>
                     {!! Form::model($students, ['route' => ['student.update', $students->id], 'method' => 'patch']) !!}
                         {!! Form::hidden('year', $students->year + 1 ) !!}
                     {{Form::submit('Promote',['class' => 'btn btn-default'])}}
                     {!!Form::close()!!} 
-                </td>
+                </td> --}}
                 <td>
-                    {{-- Delete Student ID --}}
+
+                    {{-- Edit programme type status && Delete Student ID --}}
                     {!! Form::open(['route' => ['student.delete', $students->id], 'method' => 'delete']) !!}
+                    
+                    <a href={{ route('enrollProgramme.edit', $students->id ) }}
+                        class='btn btn-default btn-xs'>
+                        <i class="far fa-edit"></i>
+                    </a>
+                    
+                    
                     {!! Form::button('<i class="far fa-trash-alt"></i>', 
-                        ['type' => 'submit', 'class' => 'btn btn-danger btn-xs float-right',
+                        ['type' => 'submit', 'class' => 'btn btn-danger btn-xs',
                          'onclick' => "return confirm('Are you sure you want to delete student ID?')"]) !!}
                     {!! Form::close() !!}
                 </td>

@@ -201,23 +201,27 @@ class AdminController extends Controller
         return back();
     }
 
+    public function enrollProgrammeEdit($id){
+        $student = Student::find($id);
+        return view('menu_Super.enrollment.enrollProgramme.edit', [
+            'student' => $student
+        ]);
+    }
 
-    public function enrollProgrammeUpdate(Request $request, $id){
-        
-        /// !!VALIDATE REQUEST->STATUS REQUIRED, 0-3 ONLY
-        if($request->has('status')){
-            $validatedData = $request->validate([
-                'status' => ['required', 'integer', 'between:0,3'],
-            ]);
+   /**
+     * Update program status
+     * 
+     * 
+     */
+    public function enrollProgrammeUpdate(Request $request){
+        $status_arr = request()->except(['_token','_method','id']);
+        foreach($status_arr as $id => $status){
+            EnrollProgramme::where('id',$id)
+            ->update(['status' => $status] );
         }
-        $prog = EnrollProgramme::where('id',$id);
-        //dd($request->all());
         
-        $prog->update(request()->except(['_token','_method']),$id);
-       
-        Flash::success('Student Updated Successfully.');
-
-        return back()->withErrors(['Something went wrong']);
+        Flash::success('Programme Updated Successfully.');
+        return redirect()->route('goTo_promotionList.index');
     }
 
 
@@ -399,11 +403,10 @@ class AdminController extends Controller
         $reqYear = $request->acadYear;
         $reqSem =$request->acadSem;
 
-
+        session()->flashInput($request->input());
         //if opened without values. like opening it thru the menu
         if(empty($request->all())){
-            return view('menu_Super/addCourses/prereg')
-            ->with(compact('acadYear'));
+            return view('menu_Super/addCourses/prereg');
         }
           
         $person = Person::find($request->id);
@@ -777,10 +780,7 @@ class AdminController extends Controller
 
     //Show all class offerings based on year and sem
     public function classOfferingsShow(Request $request){
-        $c = ClassOffering::where('year', $request->year)
-        ->where('semester', $request->sem)->get();
-
-        session()->flashInput($request->input());
+        $c = ClassOffering::all();
         return view('menu_Super.classes.classOfferings',[
             'classes' => $c
         ]);

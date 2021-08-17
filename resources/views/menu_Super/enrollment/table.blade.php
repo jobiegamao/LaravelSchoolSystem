@@ -2,15 +2,17 @@
     <table class="table" id="enrollment-table">
         <thead>
         <tr>
-            <th>Person ID</th>
-            <th>ID</th>
+            <th>PID</th>
+            <th>SID</th>
             <th>Name</th>
             <th>Programme</th>
             <th>Programme Type</th>
-            <th><small>Action</small></th>
+            
             <th><small>Units</small></th>
-            <th><small>Course Registration</small></th>
-            <th>Enrollment Status</th>
+            <th><small>Curriculum</small></th>
+            <th><small>Courses</small></th>
+            <th><small>Enrollment Status</small></th>
+            <th><small>Action</small></th>
         </tr>
         </thead>
         <tbody>
@@ -23,10 +25,7 @@
                     {{ $students->person_id }}
                 </td>
                 <td>
-                    {!! Form::open(['method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
-                        {!! Form::hidden('id', $students->person_id ) !!}   
-                        {{Form::submit($students->id ,['class' => 'btn btn-link p-0 '])}}
-                    {!! Form::close() !!}
+                    {{ $students->id }}
                 </td>
                 <td>
                     {{ $students->full_name() }}
@@ -68,22 +67,20 @@
                 
 
                 </td>
-                 <td>
-                   
-                        <a href="{{ route('goTo_enrollProgramme', [$students->id]) }}"
-                           class='btn btn-default btn-xs'>
-                            Add Programme
-                        </a> 
-                        
-                </td> 
+                 
                 <td>
                     {{-- units --}}
                     {{ $students->units }}
                 </td>
-
+                <td>
+                    {!! Form::open(['method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
+                        {!! Form::hidden('id', $students->person_id ) !!}   
+                        {{Form::submit('Curriculum' ,['class' => 'btn btn-link p-0 '])}}
+                    {!! Form::close() !!}
+                </td>
                 <td>
                     {{-- pre reg link --}}
-                    <a href="{{ route('goTo_prereg', ['id' => $students->person_id]) }}"> {{ $students->id }} </a>
+                    <a href="{{ route('goTo_prereg', ['id' => $students->person_id]) }}"> Prereg </a>
                 </td>
                 <td>
                     {{-- finance should have a table data like this to tag student as enrolled --}}
@@ -92,11 +89,11 @@
                     @switch($students->isEnrolled)
                         @case(0)
                             {!! Form::hidden('isEnrolled', 1) !!}
-                            {{Form::submit('Tag as Enrolled',['class' => 'btn btn-default'])}}
+                            {{Form::submit('Tag as Enrolled',['class' => 'btn btn-default btn-xs'])}}
                             @break
                         @default
                             {!! Form::hidden('isEnrolled', 0) !!}
-                            {{Form::submit('Enrolled',['class' => 'btn btn-success', 
+                            {{Form::submit('Enrolled',['class' => 'btn btn-success btn-xs', 
                             'onclick' => "return confirm('Are you sure you want to unenroll student?')"])}}
                     @endswitch
                         
@@ -104,6 +101,14 @@
 
 
                 </td>
+                <td>
+                   
+                    <a href="{{ route('goTo_enrollProgramme', [$students->id]) }}"
+                       class='btn btn-default btn-xs'>
+                        Add Programme
+                    </a> 
+                    
+            </td> 
 
             </tr>
         @endforeach
