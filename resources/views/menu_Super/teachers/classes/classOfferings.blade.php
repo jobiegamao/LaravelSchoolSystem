@@ -84,7 +84,7 @@
                                
                                 <a href="{{ route('teacher.students', ['id' => $classes->id ]) }}"
                                     class='btn btn-default btn-xs'>
-                                    <i class="far fa-edit"></i>
+                                    <i class="fas fa-graduation-cap"></i>
                                 </a>
                             </td>
                             

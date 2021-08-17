@@ -20,7 +20,7 @@
     {{-- body --}}
 
     <div class="card">
-        <div class="card-body p-10">
+        {{-- <div class="card-body p-10">
             {!! Form::open(['route' => 'classOfferings.show']) !!}
             <div class="input-group">
                 <input type="number" class="col-sm-4 form-control"  name="year" value="{{ old('year') }}"
@@ -43,35 +43,54 @@
             </div>
 
             {!! Form::close() !!}
-        </div>
+        </div> --}}
         
             <div class="card-body p-10">
                 <div class="table-responsive">
                     <table class="table" id="classofferings-table">
                         <thead>
-                        <tr>
-                            <th><small>Offering #</small></th>
-                            <th>Semester</th>
-                            <th>Units</th>
+                            <tr>
+                                <th><small>Offering #</small></th>
+                                <th>Year</th>
+                                <th>Semester</th>
+                                <th>Units</th>
+                                <th>Class Code</th>
+                                <th>Subject Code</th>
+                                <th>Subject Title</th>
+                                <th>Schedule</th>
+                                <th>Instructor</th>
+                                <th>Room</th>
+                                <th><small>Reserved<br>Slots</small></th>
+                                <th><small>Available<br>Slots</small></th>
+                    
                             
-                            <th>Class Code</th>
-                            <th>Subject Code</th>
-                            <th>Subject Title</th>
-                            <th>Schedule</th>
-                            <th>Instructor</th>
-                            <th>Room</th>
-                            <th><small>Reserved<br>Slots</small></th>
-                            <th><small>Available<br>Slots</small></th>
-                
-                        
-                        </tr>
+                            </tr>
                         </thead>
+                        <tfoot style="display: table-header-group ">
+                            <tr>
+                                <th><small>Offering #</small></th>
+                                <th>Year</th>
+                                <th>Semester</th>
+                                <th>Units</th>
+                                <th>Class Code</th>
+                                <th>Subject Code</th>
+                                <th>Subject Title</th>
+                                <th>Schedule</th>
+                                <th>Instructor</th>
+                                <th>Room</th>
+                                <th><small>Reserved<br>Slots</small></th>
+                                <th><small>Available<br>Slots</small></th>
+                            </tr>
+                        </tfoot>
                         <tbody>
                         {{-- foreach classoffering  --}}
                         @foreach($classes as $classes)
                             <tr>
                                 <td>
                                     {{ $classes->id }}
+                                </td>
+                                <td>
+                                    {{ $classes->year }}
                                 </td>
                                 <td>
                                     {{ $classes->semester }}
@@ -104,9 +123,7 @@
                                     {{ $classes->StudentCount() }}
                                 </td>
                                 <td>
-                                
                                     {{ 40 - $classes->StudentCount() }}
-                
                                 </td>
                                 
                             </tr>
@@ -129,9 +146,33 @@
                 </script>
                 <script>
                     $(document).ready( function () {
-                        $('#classofferings-table').DataTable();
-                       
+                        // Setup - add a text input to each footer cell
+                        $('#classofferings-table tfoot th').each( function () {
+                            var title = $(this).text();
+                            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                        } );
+                    
+                        // DataTable
+                        var table = $('#classofferings-table').DataTable({
+
+                            initComplete: function () {
+                                // Apply the search
+                                this.api().columns().every( function () {
+                                    var that = this;
+                    
+                                    $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                                        if ( that.search() !== this.value ) {
+                                            that
+                                                .search( this.value )
+                                                .draw();
+                                        }
+                                    } );
+                                } );
+                            }
+                        });
+                    
                     } );
+                        
                 </script>
 @endpush
 

@@ -12,30 +12,6 @@
         </a>
       </li>
 
-     
-
-      {{-- <li class="nav-item has-treeview menu-open">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-copy"></i>
-          <p>
-            Student
-            <i class="fas fa-angle-left right"></i>
-          </p>
-        </a>
-          <ul class="nav nav-treeview">
-
-            <li class="nav-item ">
-                  <a href="{{ route('goTo_promotionList.index') }}" 
-                    class="nav-link {{ Request::is('students/promotion-list') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Student List</p>
-                  </a>
-            </li>
-              
-          </ul>
-
-      </li> --}}
-
       <li class="nav-item">
         <a href="{{ route('goTo_promotionList.index') }}"
            class="nav-link {{ Request::is('students/promotion-list') ? 'active' : '' }}">
@@ -46,24 +22,23 @@
         </a>
       </li>
 
-      <li class="nav-item has-treeview menu-open">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
-            <p>
-              Enrollment
-              <i class="fas fa-angle-left right"></i>
-            </p>
+      <li class="nav-item has-treeview">
+          <a class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Enrollment
+                <i class="fas fa-angle-left right"></i>
+              </p>
           </a>
-            <ul class="nav nav-treeview">
 
-              <li class="nav-item ">
+            <ul class="nav nav-treeview ">
+              <li class="nav-item">
                     <a href="{{ route('goTo_enrollment.index') }}" 
                       class="nav-link {{ Request::is('students/enrolling-list') ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Enrollment List</p>
                     </a>
-              </li>
-                
+              </li>   
             </ul>
 
             <ul class="nav nav-treeview">
@@ -80,7 +55,7 @@
 
             <ul class="nav nav-treeview">
 
-              <li class="nav-item ">
+              <li class="nav-item">
                     <a href="{{ route('goTo_prereg') }}" 
                       class="nav-link {{ Request::is('student/prereg') ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
@@ -91,7 +66,7 @@
             </ul>
       </li>
       <li class="nav-item">
-        <a href={{ route('classOfferings.show') }}
+        <a href={{ url('/classes') }}
            class="nav-link {{ Request::is('classes*') ? 'active' : '' }}">
           <i class="nav-icon fas fa-copy"></i>
           <p>
@@ -101,7 +76,7 @@
       </li>
       
       <li class="nav-item">
-        <a href={{ route('teachers') }}
+        <a href={{ url('/teacher') }}
            class="nav-link {{ Request::is('teacher*') ? 'active' : '' }}">
           <i class="nav-icon fas fa-copy"></i>
           <p>
