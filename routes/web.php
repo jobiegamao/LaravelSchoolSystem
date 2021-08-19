@@ -64,3 +64,6 @@ Route::get('class/{id}/students', 'App\Http\Controllers\TeacherController@classS
 Route::patch('class/grade/{id}', 'App\Http\Controllers\TeacherController@classGradeUpdate')->name('classGrade.update');
 
 Route::any('classes', 'App\Http\Controllers\AdminController@classOfferingsShow')->name('classOfferings.show');
+
+
+Route::post('student/{id}/grades', 'App\Http\Controllers\StudentController@grades')->name('grades.show');;

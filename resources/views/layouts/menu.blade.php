@@ -13,11 +13,21 @@
       </li>
 
       <li class="nav-item">
+        <a href={{ url('/teacher') }}
+           class="nav-link {{ Request::is('teacher*') ? 'active' : '' }}">
+          <i class="nav-icon fas fa-copy"></i>
+          <p>
+            Teachers
+          </p>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a href="{{ route('goTo_promotionList.index') }}"
            class="nav-link {{ Request::is('students/promotion-list') ? 'active' : '' }}">
           <i class="nav-icon fas fa-copy"></i>
           <p>
-            Students List
+            Students
           </p>
         </a>
       </li>
@@ -30,8 +40,7 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
           </a>
-
-            <ul class="nav nav-treeview ">
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                     <a href="{{ route('goTo_enrollment.index') }}" 
                       class="nav-link {{ Request::is('students/enrolling-list') ? 'active' : '' }}">
@@ -40,9 +49,7 @@
                     </a>
               </li>   
             </ul>
-
-            <ul class="nav nav-treeview">
-
+            {{-- <ul class="nav nav-treeview">
               <li class="nav-item ">
                     <a href="{{ route('goTo_courseProgramme') }}" 
                       class="nav-link {{ Request::is('student/courses') ? 'active' : '' }}">
@@ -50,21 +57,18 @@
                       <p>Student Curriculum</p>
                     </a>
               </li>
-                
             </ul>
-
             <ul class="nav nav-treeview">
-
               <li class="nav-item">
                     <a href="{{ route('goTo_prereg') }}" 
                       class="nav-link {{ Request::is('student/prereg') ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Add/Drop</p>
+                      <p>Registration</p>
                     </a>
               </li>
-                
-            </ul>
+            </ul> --}}
       </li>
+
       <li class="nav-item">
         <a href={{ url('/classes') }}
            class="nav-link {{ Request::is('classes*') ? 'active' : '' }}">
@@ -74,18 +78,7 @@
           </p>
         </a>
       </li>
-      
-      <li class="nav-item">
-        <a href={{ url('/teacher') }}
-           class="nav-link {{ Request::is('teacher*') ? 'active' : '' }}">
-          <i class="nav-icon fas fa-copy"></i>
-          <p>
-            Teachers
-          </p>
-        </a>
-      </li>
 
-      
 
       <li class="nav-item">
         <a href="{{ route('acadPeriods.index') }}"
@@ -96,6 +89,50 @@
           </p>
         </a>
       </li>
+
+    {{-- FOR STUDENT MENU --}}
+    <li class="nav-header">STUDENT</li>
+      <li class="nav-item has-treeview">
+        <a class="nav-link">
+            <i class="nav-icon fas fa-copy"></i>
+            <p>
+              Student's Menu
+              <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+                  <a href="#"
+                    class="nav-link {{ Request::is('students/enrolling-list') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>My Grades</p>
+                  </a>
+            </li>   
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ">
+                  <a href="#" 
+                    class="nav-link {{ Request::is('student/courses') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>My Prereg</p>
+                  </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+                  <a href="#"
+                    class="nav-link {{ Request::is('student/prereg') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>My Balance</p>
+                  </a>
+            </li>
+          </ul>
+    </li>
+    {{-- /FOR STUDENT MENU --}}
+
+      
+      
+      
       
 
       <li class="nav-header">ACCOUNT</li>

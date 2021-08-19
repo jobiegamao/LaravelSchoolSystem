@@ -27,7 +27,7 @@
                             
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" name="id"
-                                    placeholder="Search Student ID (person id)" value="{{ old('id') }}" required> 
+                                    placeholder="Search ID" value="{{ $person->id  ?? old('id') }}" required> 
                             </div>
                             <div class="col-sm-1">
                                 <button type="submit" class="btn btn-default">

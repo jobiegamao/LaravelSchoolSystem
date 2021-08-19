@@ -2,6 +2,7 @@
     <table class="table" id="acadPeriods-table">
         <thead>
         <tr>
+            <th>#</th>
             <th>Acadsem</th>
             <th>Acadyear</th>
             <th colspan="3">Action</th>
@@ -10,6 +11,7 @@
         <tbody>
         @foreach($acadPeriods as $acadPeriod)
             <tr>
+                <td>{{ $acadPeriod->id}}</td>
                 <td>{{ $acadPeriod->acadSem }}</td>
                 <td>{{ $acadPeriod->acadYear }}</td>
                 <td width="120">

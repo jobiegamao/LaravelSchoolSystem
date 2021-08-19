@@ -13,6 +13,12 @@
                     <div class="clearfix"> @include('flash::message')</div>
                 </div>
             </div>
+            <div class="row">
+                <a href="javascript:history.back()"
+                    class='btn btn-link'>
+                    &larr; return
+                </a>
+            </div>
         </div>
     </section>
     {{-- /header --}}
