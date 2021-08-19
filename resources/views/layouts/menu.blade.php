@@ -69,6 +69,7 @@
             </ul> --}}
       </li>
 
+      
       <li class="nav-item">
         <a href={{ url('/classes') }}
            class="nav-link {{ Request::is('classes*') ? 'active' : '' }}">
