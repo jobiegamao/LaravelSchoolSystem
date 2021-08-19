@@ -53,7 +53,7 @@ class ClassGrade extends Model
 
    
 
-    public function finalGradeTEXT()
+    public function finalGradeText()
     {
         $grade = round( (($this->prelimGrade + $this->midtermGrade + $this->prefinalsGrade)/3) , 2);
         if($grade < 75){

@@ -71,6 +71,8 @@ class StudentClass extends Model
         return $this->belongsTo(ClassOffering::class, 'classOffering_id');
     }
 
+    
+
     public function ClassGrade()
     {
         return $this->belongsTo(ClassGrade::class, 'classGrade_id');

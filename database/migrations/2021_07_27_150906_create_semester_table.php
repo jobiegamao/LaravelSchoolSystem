@@ -21,6 +21,15 @@ class CreateSemesterTable extends Migration
             $table->smallInteger('acadYear');
         });
 
+
+        DB::table('AcadPeriod')->insert(
+            array(
+                   'acadSem'   =>   '0',
+                   'acadYear'   =>   '2020',
+              
+            )
+        );
+
         DB::table('AcadPeriod')->insert(
             array(
                    'acadSem'   =>   '1',
@@ -38,11 +47,12 @@ class CreateSemesterTable extends Migration
 
         DB::table('AcadPeriod')->insert(
             array(
-                   'acadSem'   =>   '3',
-                   'acadYear'   =>   '2020',
+                   'acadSem'   =>   '0',
+                   'acadYear'   =>   '2021',
               
             )
         );
+       
         DB::table('AcadPeriod')->insert(
             array(
                    'acadSem'   =>   '1',
