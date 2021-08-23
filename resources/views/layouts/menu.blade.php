@@ -14,7 +14,7 @@
       <li class="nav-item">
         <a href="javascript:void(0)" 
           class="nav-link {{ Request::is('teacher*') ? 'active' : '' }}" onclick="$('#teachListForm').submit()">
-          <i class="far fa-circle nav-icon"></i>
+          <i class="fas fa-chalkboard-teacher nav-icon"></i>
           <p>Teachers</p>
         </a>
       </li>
@@ -22,7 +22,7 @@
       <li class="nav-item">
         <a href="{{ route('goTo_promotionList.index') }}" 
           class="nav-link {{ Request::is('students/promotion-list') ? 'active' : '' }}" >
-          <i class="far fa-circle nav-icon"></i>
+          <i class="fas fa-user nav-icon"></i>
           <p>Students</p>
         </a>
       </li>
@@ -30,7 +30,7 @@
       <li class="nav-item">
             <a href="{{ route('goTo_enrollment.index') }}" 
               class="nav-link {{ Request::is('students/enrolling-list') ? 'active' : '' }}" >
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-clipboard nav-icon"></i>
               <p>Enrollment List</p>
             </a>
       </li>   
@@ -38,7 +38,7 @@
       <li class="nav-item">
         <a href={{ url('/classes') }}
           class="nav-link {{ Request::is('classes*') ? 'active' : '' }}">
-          <i class="far fa-circle nav-icon"></i>
+          <i class="fas fa-clipboard-list nav-icon"></i>
           <p>Class Offerings</p>
         </a>
       </li>
@@ -46,7 +46,7 @@
       <li class="nav-item">
         <a href="{{ route('acadPeriods.index') }}"
           class="nav-link {{ Request::is('acadPeriods*') ? 'active' : '' }}">
-          <i class="far fa-circle nav-icon"></i>
+          <i class="fas fa-calendar-alt nav-icon"></i>
           <p>Academic Time</p>
         </a>
       </li>
@@ -54,18 +54,18 @@
 
     @if (Auth::user()->role == 'Student')
       {{-- FOR STUDENT MENU --}}
-      <li class="nav-header">STUDENT</li>
+      <li class="nav-header"><b>STUDENT</b></li>
 
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link {{ Request::is('student/*/grades') ? 'active' : '' }}" onclick="$('#gradesForm').submit()">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="nav-icon fas fa-address-card"></i>
             <p>My Grades</p>
           </a>
         </li>
 
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link {{ Request::is('student/courses/curriculum') ? 'active' : '' }}" onclick="$('#curricForm').submit()">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="nav-icon fas fa-newspaper"></i>
             <p>My Curriculum</p>
           </a>
         </li>
@@ -73,7 +73,7 @@
         @if(Auth::user()->Person->Student->isEnrolled == 0)
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link {{ Request::is('student/prereg') ? 'active' : '' }}" onclick="$('#preregForm').submit()">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="nav-icon fas fa-book-reader"></i>
             <p>My Prereg</p>
           </a>
         </li>
@@ -81,7 +81,7 @@
         
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link {{ Request::is('student/*/balance') ? 'active' : '' }}" onclick="$('#balForm').submit()">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="nav-icon fas fa-wallet"></i>
             <p>My Balance</p>
           </a>
         </li>
@@ -93,7 +93,7 @@
       <li class="nav-item">
         <a href="javascript:void(0)"
           class="nav-link {{ Request::is('/teacher/*/classes') ? 'active' : '' }}" onclick="$('#tClassesForm').submit()">
-          <i class="far fa-circle nav-icon"></i>
+          <i class="fas fa-clipboard-list nav-icon"></i>
           <p>Classes</p>
         </a>
       </li>
@@ -103,19 +103,19 @@
       <li class="nav-item">
         <a href="{{ route('registrar.index') }}"
           class="nav-link {{ Request::is('registrar/index') ? 'active' : '' }}">
-          <i class="far fa-circle nav-icon"></i>
-          <p>SO Accounts</p>
+          <i class="fas fa-users nav-icon"></i>
+          <p>SOAs</p>
         </a>
       </li>
 
     @endIf
 
     
-      <li class="nav-header">ACCOUNT</li>
+      <li class="nav-header"><b>ACCOUNT</b></li>
                        
       <li class="nav-item" >
         <a href="{{ url('/profile') }}" class="nav-link {{ Request::is('profile') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-sign-out-alt"></i>
+            <i class="nav-icon fas fa-user-circle"></i>
             <p>Profile</p>
         </a>
       </li>
@@ -172,5 +172,3 @@
 
 
   @endIf
-
-
