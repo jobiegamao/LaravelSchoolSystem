@@ -20,36 +20,38 @@
     
         
         <div class="card">
+
+            @if (Auth::user()->role == 'Super Admin')
             <div class="card-body p-10">
+
+                
                 {{-- Search Student ID --}}
-                {!! Form::open(['route' => 'courseProgramme.show']) !!}
+                        {!! Form::open(['route' => 'courseProgramme.show']) !!}
                     <div class="row">
-                            
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" name="id"
-                                    placeholder="Search ID" value="{{ $person->id  ?? old('id') }}" required> 
-                            </div>
-                            <div class="col-sm-1">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                                    
-                {!! Form::close() !!}
-                        
-                            
-                            @if (isset($person))
-                                <div class="col-6">
-                                    <a class="btn btn-primary float-right"
-                                    href="{{ route('goTo_prereg', ['id' => $person->id]) }}">
-                                        Register Classes
-                                    </a>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="id"
+                                        placeholder="Search ID" value="{{ $person->id  ?? old('id') }}" required> 
                                 </div>
+                                <div class="col-sm-1">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>  
+                            {!! Form::close() !!}
+                        
+                            @if (isset($person))
+                                {!! Form::open(['method' => 'POST', 'route' => ['goTo_prereg' , 'id' => $person->id  ] ]) !!}
+                                    {!! Form::hidden('id', $person->id ) !!}   
+                                    {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
+                                    {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!}
+                                    {{Form::submit('Register Classes' ,['class' => 'btn btn-primary float-right'])}}
+                                {!! Form::close() !!}
                             @endif
                             
 
                     </div>
             </div>
+            @endif
         </div>
 
              

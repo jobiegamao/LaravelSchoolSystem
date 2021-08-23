@@ -6,142 +6,117 @@
       <li class="nav-item">
         <a href="/home" class="nav-link">
           <i class="nav-icon fas fa-house-user"></i>
-          <p>
-            Home
-          </p>
+          <p>Home</p>
+        </a>
+      </li>
+      
+    @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Super Admin')
+      <li class="nav-item">
+        <a href="javascript:void(0)" 
+          class="nav-link {{ Request::is('teacher*') ? 'active' : '' }}" onclick="$('#teachListForm').submit()">
+          <i class="far fa-circle nav-icon"></i>
+          <p>Teachers</p>
         </a>
       </li>
 
       <li class="nav-item">
-        <a href={{ url('/teacher') }}
-           class="nav-link {{ Request::is('teacher*') ? 'active' : '' }}">
-          <i class="nav-icon fas fa-copy"></i>
-          <p>
-            Teachers
-          </p>
+        <a href="{{ route('goTo_promotionList.index') }}" 
+          class="nav-link {{ Request::is('students/promotion-list') ? 'active' : '' }}" >
+          <i class="far fa-circle nav-icon"></i>
+          <p>Students</p>
         </a>
       </li>
 
       <li class="nav-item">
-        <a href="{{ route('goTo_promotionList.index') }}"
-           class="nav-link {{ Request::is('students/promotion-list') ? 'active' : '' }}">
-          <i class="nav-icon fas fa-copy"></i>
-          <p>
-            Students
-          </p>
-        </a>
-      </li>
-
-      <li class="nav-item has-treeview">
-          <a class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Enrollment
-                <i class="fas fa-angle-left right"></i>
-              </p>
-          </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                    <a href="{{ route('goTo_enrollment.index') }}" 
-                      class="nav-link {{ Request::is('students/enrolling-list') ? 'active' : '' }}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Enrollment List</p>
-                    </a>
-              </li>   
-            </ul>
-            {{-- <ul class="nav nav-treeview">
-              <li class="nav-item ">
-                    <a href="{{ route('goTo_courseProgramme') }}" 
-                      class="nav-link {{ Request::is('student/courses') ? 'active' : '' }}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Student Curriculum</p>
-                    </a>
-              </li>
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                    <a href="{{ route('goTo_prereg') }}" 
-                      class="nav-link {{ Request::is('student/prereg') ? 'active' : '' }}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Registration</p>
-                    </a>
-              </li>
-            </ul> --}}
-      </li>
-
+            <a href="{{ route('goTo_enrollment.index') }}" 
+              class="nav-link {{ Request::is('students/enrolling-list') ? 'active' : '' }}" >
+              <i class="far fa-circle nav-icon"></i>
+              <p>Enrollment List</p>
+            </a>
+      </li>   
       
       <li class="nav-item">
         <a href={{ url('/classes') }}
-           class="nav-link {{ Request::is('classes*') ? 'active' : '' }}">
-          <i class="nav-icon fas fa-copy"></i>
-          <p>
-            Class Offerings
-          </p>
+          class="nav-link {{ Request::is('classes*') ? 'active' : '' }}">
+          <i class="far fa-circle nav-icon"></i>
+          <p>Class Offerings</p>
         </a>
       </li>
-
 
       <li class="nav-item">
         <a href="{{ route('acadPeriods.index') }}"
-           class="nav-link {{ Request::is('acadPeriods*') ? 'active' : '' }}">
-          <i class="nav-icon fas fa-copy"></i>
-          <p>
-            Academic Time
-          </p>
+          class="nav-link {{ Request::is('acadPeriods*') ? 'active' : '' }}">
+          <i class="far fa-circle nav-icon"></i>
+          <p>Academic Time</p>
+        </a>
+      </li>
+    @endif
+
+    @if (Auth::user()->role == 'Student')
+      {{-- FOR STUDENT MENU --}}
+      <li class="nav-header">STUDENT</li>
+
+        <li class="nav-item">
+          <a href="javascript:void(0)" class="nav-link {{ Request::is('student/*/grades') ? 'active' : '' }}" onclick="$('#gradesForm').submit()">
+            <i class="nav-icon fas fa-copy"></i>
+            <p>My Grades</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="javascript:void(0)" class="nav-link {{ Request::is('student/courses/curriculum') ? 'active' : '' }}" onclick="$('#curricForm').submit()">
+            <i class="nav-icon fas fa-copy"></i>
+            <p>My Curriculum</p>
+          </a>
+        </li>
+
+        @if(Auth::user()->Person->Student->isEnrolled == 0)
+        <li class="nav-item">
+          <a href="javascript:void(0)" class="nav-link {{ Request::is('student/prereg') ? 'active' : '' }}" onclick="$('#preregForm').submit()">
+            <i class="nav-icon fas fa-copy"></i>
+            <p>My Prereg</p>
+          </a>
+        </li>
+        @endif
+        
+        <li class="nav-item">
+          <a href="javascript:void(0)" class="nav-link {{ Request::is('student/*/balance') ? 'active' : '' }}" onclick="$('#balForm').submit()">
+            <i class="nav-icon fas fa-copy"></i>
+            <p>My Balance</p>
+          </a>
+        </li>
+      {{-- /FOR STUDENT MENU --}}
+  
+    @endif
+
+    @if (Auth::user()->role == 'Teacher')
+      <li class="nav-item">
+        <a href="javascript:void(0)"
+          class="nav-link {{ Request::is('/teacher/*/classes') ? 'active' : '' }}" onclick="$('#tClassesForm').submit()">
+          <i class="far fa-circle nav-icon"></i>
+          <p>Classes</p>
+        </a>
+      </li>
+    @endIf
+
+    @if (Auth::user()->role == 'Registrar')
+      <li class="nav-item">
+        <a href="{{ route('registrar.index') }}"
+          class="nav-link {{ Request::is('registrar/index') ? 'active' : '' }}">
+          <i class="far fa-circle nav-icon"></i>
+          <p>SO Accounts</p>
         </a>
       </li>
 
-    {{-- FOR STUDENT MENU --}}
-    <li class="nav-header">STUDENT</li>
-      <li class="nav-item has-treeview">
-        <a class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
-            <p>
-              Student's Menu
-              <i class="fas fa-angle-left right"></i>
-            </p>
-        </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-                  <a href="#"
-                    class="nav-link {{ Request::is('students/enrolling-list') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>My Grades</p>
-                  </a>
-            </li>   
-          </ul>
-          <ul class="nav nav-treeview">
-            <li class="nav-item ">
-                  <a href="#" 
-                    class="nav-link {{ Request::is('student/courses') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>My Prereg</p>
-                  </a>
-            </li>
-          </ul>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-                  <a href="#"
-                    class="nav-link {{ Request::is('student/prereg') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>My Balance</p>
-                  </a>
-            </li>
-          </ul>
-    </li>
-    {{-- /FOR STUDENT MENU --}}
+    @endIf
 
-      
-      
-      
-      
-
+    
       <li class="nav-header">ACCOUNT</li>
                        
       <li class="nav-item" >
-        <a href="#" class="nav-link">
+        <a href="{{ url('/profile') }}" class="nav-link {{ Request::is('profile') ? 'active' : '' }}">
             <i class="nav-icon fas fa-sign-out-alt"></i>
-            <p>Register</p>
+            <p>Profile</p>
         </a>
       </li>
 
@@ -160,10 +135,42 @@
       
 
     </ul>
+    
   </nav>
 
+  @if (Auth::user()->role == 'Student')
+    {!! Form::open(['id' => 'gradesForm','method' => 'POST', 'route' => ['grades.show', 'id' => Auth::user()->Person->Student->id] ]) !!}
+    {!! Form::close() !!}
+
+    {!! Form::open(['id' => 'curricForm','method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
+    {!! Form::hidden('id', Auth::user()->person_id ) !!}
+    {!! Form::close() !!}
+
+    {!! Form::open(['id' => 'preregForm','method' => 'POST', 'route' => ['goTo_prereg' , 'id' => $person->id  ] ]) !!}
+    {!! Form::hidden('id', Auth::user()->person_id ) !!}
+    {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
+    {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!}
+    {!! Form::close() !!}
+
+    {!! Form::open(['id' => 'balForm','method' => 'POST', 'route' => ['balance', 'id' => Auth::user()->person_id] ]) !!}
+    {!! Form::hidden('id', Auth::user()->person_id ) !!}
+    {!! Form::close() !!}
+    
+  @endif
+
+  @if (Auth::user()->role == 'Teacher')
+    {!! Form::open(['id' => 'tClassesForm', 'method' => 'POST', 'route' => ['teacher.classes',  'id' => Auth::user()->Person->Teacher->id] ]) !!}
+    {!! Form::close() !!}
 
 
+  @endif
 
+
+  @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Super Admin')
+    {!! Form::open(['id' => 'teachListForm','method' => 'POST', 'route' => 'teacher.list' ]) !!}
+    {!! Form::close() !!}
+
+
+  @endIf
 
 

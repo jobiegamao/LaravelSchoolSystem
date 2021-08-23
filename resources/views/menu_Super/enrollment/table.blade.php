@@ -6,8 +6,7 @@
             <th>SID</th>
             <th>Name</th>
             <th>Programme</th>
-            <th>Programme Type</th>
-            
+            <th></th>
             <th><small>Units</small></th>
             <th><small>Curriculum</small></th>
             <th><small>Courses</small></th>
@@ -19,7 +18,6 @@
             
         @foreach($students  as $students )
             
-
             <tr>
                 <td>
                     {{ $students->person_id }}
@@ -40,6 +38,7 @@
                             </div>
                             
                             {!! Form::open(['route' => ['enrollProgramme.delete', $course->id], 'method' => 'delete']) !!}
+                                {!! Form::hidden('student_id', $students->id ) !!}  
                                 {!! Form::button('<i class="fa fa-times"></i>', 
                                 ['type' => 'submit', 'class' => 'btn bg-transparent',
                                 'onclick' => "return confirm('Are you sure you want to uneroll program?')"]) 
@@ -70,17 +69,23 @@
                  
                 <td>
                     {{-- units --}}
-                    {{ $students->units }}
+                    {{ $students->StudentUpdate[0]->units }}
                 </td>
                 <td>
+                    {{-- curriculum --}}
                     {!! Form::open(['method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
                         {!! Form::hidden('id', $students->person_id ) !!}   
                         {{Form::submit('Curriculum' ,['class' => 'btn btn-link p-0 '])}}
                     {!! Form::close() !!}
                 </td>
                 <td>
-                    {{-- pre reg link --}}
-                    <a href="{{ route('goTo_prereg', ['id' => $students->person_id]) }}"> Prereg </a>
+                    {{-- pre reg --}}
+                    {!! Form::open(['method' => 'POST', 'route' => ['goTo_prereg' , 'id' => $students->person_id ] ]) !!}
+                        {!! Form::hidden('id', $students->person_id ) !!} 
+                        {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
+                        {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!} 
+                        {{Form::submit('Prereg' ,['class' => 'btn btn-link p-0 '])}}
+                    {!! Form::close() !!}
                 </td>
                 <td>
                     {{-- finance should have a table data like this to tag student as enrolled --}}

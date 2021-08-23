@@ -12,38 +12,49 @@ use App\Models\ClassOffering;
 use App\Models\ClassGrade; 
 use App\Models\StudentClass; 
 use App\Models\AcadPeriod; 
+use App\Models\Fees; 
+use App\Models\Payments; 
+use App\Models\StudentUpdate; 
 
 class StudentController extends Controller
 {
     public function grades(Request $request, $id){
-        
-        $student = Student::find($id);
-
+       
             //pressed prev or next button
         if($request->has('changePeriod')){
             
-           
-            $year = $request->year;
-            $sem = $request->sem;
+            $acadPeriod = AcadPeriod::find($request->acadPeriod_id);
             
+            $student = Student::whereId($id)
+                ->with(['StudentUpdate' => function ($query) use($acadPeriod){
+                        $query->where('acadPeriod_id',$acadPeriod->id);
+                    }])
+                ->first();
+                
             $classes = StudentClass::where('student_id',$id )
                 ->with('ClassGrade', 'ClassOffering')
-                ->whereHas('ClassOffering', function ($query) use($year, $sem){
-                    $query->where('year', $year)->where('semester', $sem);
+                ->whereHas('ClassOffering', function ($query) use($acadPeriod){
+                    $query->where('year', $acadPeriod->acadYear)
+                          ->where('semester', $acadPeriod->acadSem);
                 })
                 ->get();
+
+            // if(!empty($classes)){
+            //     //calculate qpi
+            //     $this->calculateQPI($classes);
+            // }
+               
 
             
             return view('menu_Student.grades.grades', [
                 'student' => $student,
                 'classes' => $classes,
-                'year' => $year,
-                'sem' => $sem,
+                'acadPeriod' => $acadPeriod,
             ]);
 
         }
         
-            //pressed prev grades at student list view
+            //pressed grades at student list view
         $latestClass = ClassOffering::
                     with(['StudentClass' =>
                         function ($query) use($id){
@@ -63,6 +74,18 @@ class StudentController extends Controller
         $year = $latestClass->year;
         $sem = $latestClass->semester;
 
+        $acadPeriod= AcadPeriod::where('acadYear', $year)
+                    ->where('acadSem', $sem)
+                    ->first();
+        
+
+        $student = Student::whereId($id)
+                ->with(['StudentUpdate' => function ($query) use($acadPeriod){
+                        $query->where('acadPeriod_id',$acadPeriod->id);
+                    }])
+                ->first();
+                
+
         // GET LAST SEM AND YEAR CLASS AND GRADES
         $classes = StudentClass::where('student_id',$id )
                 ->with('ClassGrade', 'ClassOffering')
@@ -71,14 +94,43 @@ class StudentController extends Controller
                 })
                 ->get();
 
-            session()->flashInput($request->input());
-            return view('menu_Student.grades.grades', [
-                'student' => $student,
-                'classes' => $classes,
-                'year' => $year,
-                'sem' => $sem,
-            ]);
+        session()->flashInput($request->input());
+        return view('menu_Student.grades.grades', [
+            'student' => $student,
+            'classes' => $classes,
+            'acadPeriod' => $acadPeriod,
+        ]);
         
         
     }
+
+    public function balance(Request $request, $id){
+        $student = Student::where('person_id', $id)
+                    ->with('StudentUpdateLatest')
+                    ->first();
+        $latest = true;
+        
+        if($request->has('acadPeriod_id')){
+            $latest = false;
+            $student = Student::where('person_id', $id)
+                    ->with(['StudentUpdate' => function ($query) use($request){
+                        $query->where('acadPeriod_id',$request->acadPeriod_id);
+                        }])
+                    ->first();
+        }
+        
+        $fees = Fees::latest()->first();
+   
+        return view('menu_Student.balance.view', [
+            'fees' => $fees,
+            'student' => $student,
+            'latest' => $latest
+            ]
+        );
+    }
+
+    public function calculateQPI($classes){
+        //
+    }
+
 }

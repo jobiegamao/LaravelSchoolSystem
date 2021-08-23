@@ -81,11 +81,20 @@
             
                             </td>
                             <td>
-                               
-                                <a href="{{ route('teacher.students', ['id' => $classes->id ]) }}"
-                                    class='btn btn-default btn-xs'>
-                                    <i class="fas fa-graduation-cap"></i>
-                                </a>
+                                {{-- FOR POST METHOD --}} 
+                                {{-- {!! Form::open(['id' => 'Tclasses','method' => 'POST', 'route' => ['teacher.students', 'id' => $classes->id  ] ]) !!}
+                                {!! Form::hidden('id', $classes->id) !!}
+                                {!! Form::button('<i class="fas fa-graduation-cap"></i>', 
+                                ['type' => 'submit', 'class' => 'btn bg-transparent', ]) !!}
+                                {!! Form::close() !!} --}}
+
+                                {{-- FOR GET METHOD prob here kay ma access ang url ng anyone --}}
+
+                               {!! Form::open(['method' => 'GET', 'route' => 'teacher.students' ]) !!}
+                                {!! Form::hidden('id', $classes->id) !!}
+                                {!! Form::button('<i class="fas fa-graduation-cap"></i>', 
+                                ['type' => 'submit', 'class' => 'btn bg-transparent', ]) !!}
+                                {!! Form::close() !!}
                             </td>
                             
             

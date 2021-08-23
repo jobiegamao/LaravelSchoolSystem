@@ -51,16 +51,16 @@
                 <td>
                    
                     <form action="{{ route('studentClass.delete', [
-                        'id' => $student->person_id,
-                        'student_id' => $student->id, 
-                        'classOffering_id' => $prereg->id,
-                        'sem' => $prereg->semester,
-                        'year' => $prereg->year,
-                        'backToPreregView' => true
-                        ]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger btn-sm" title="Delete">Drop</button>
+                                'id' => $student->person_id,
+                                'student_id' => $student->id, 
+                                'classOffering_id' => $prereg->id,
+                                'sem' => $prereg->semester,
+                                'year' => $prereg->year,
+                                'backToPreregView' => true
+                                ]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm" title="Delete">Drop</button>
                     </form>
 
                 </td>

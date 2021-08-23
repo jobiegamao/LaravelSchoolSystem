@@ -96,5 +96,15 @@ class Person extends Model
         return $this->hasOne(Student::class, 'person_id');
     }
 
+    public function Teacher()
+    {
+        return $this->hasOne(Teacher::class, 'person_id');
+    }
+
+    public function Payments()
+    {
+        return $this->hasMany(Payments::class, 'person_id');
+    }
+
     
 }

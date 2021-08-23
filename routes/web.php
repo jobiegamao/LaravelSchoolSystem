@@ -38,32 +38,38 @@ Route::get('student/promotion-list', 'App\Http\Controllers\AdminController@stude
 
 
 Route::get('enrollProgramme/{id}', 'App\Http\Controllers\AdminController@goTo_enrollProgramme')->name('goTo_enrollProgramme');
-Route::get('enrollProgramme/edit/{id}', 'App\Http\Controllers\AdminController@enrollProgrammeEdit')->name('enrollProgramme.edit');
+Route::post('enrollProgramme/edit/{id}', 'App\Http\Controllers\AdminController@enrollProgrammeEdit')->name('enrollProgramme.edit');
 Route::post('enrollProgramme/store', 'App\Http\Controllers\AdminController@enrollProgrammeStore')->name('enrollProgramme.store');
 Route::patch('enrollProgramme/update-status', 'App\Http\Controllers\AdminController@enrollProgrammeUpdate')->name('enrollProgramme.update');
 Route::delete('enrollProgramme/delete/{id}', 'App\Http\Controllers\AdminController@enrollProgrammeDelete')->name('enrollProgramme.delete');
 
-Route::get('student/courses', 'App\Http\Controllers\AdminController@goTo_courseProgramme')->name('goTo_courseProgramme');
+Route::post('student/courses', 'App\Http\Controllers\AdminController@goTo_courseProgramme')->name('goTo_courseProgramme');
 Route::post('student/courses/curriculum', 'App\Http\Controllers\AdminController@courseProgrammeShow')->name('courseProgramme.show');
-
-Route::any('classOffering', 'App\Http\Controllers\AdminController@goTo_classOfferings')->name('goTo_classOfferings');
-
-
-
-
-Route::any('student/prereg', 'App\Http\Controllers\AdminController@goTo_prereg')->name('goTo_prereg');
-Route::get('studentClass/add', 'App\Http\Controllers\AdminController@studentClassStore')->name('studentClass.store');
-Route::delete('studentClass/drop', 'App\Http\Controllers\AdminController@studentClassDelete')->name('studentClass.delete');
 
 
 Route::resource('acadPeriods', App\Http\Controllers\AcadPeriodController::class);
 
-Route::get('teacher', 'App\Http\Controllers\TeacherController@index');
+Route::post('teacher', 'App\Http\Controllers\TeacherController@index')->name('teacher.list');
 Route::post('teacher/{id}/classes', 'App\Http\Controllers\TeacherController@classes')->name('teacher.classes');
-Route::get('class/{id}/students', 'App\Http\Controllers\TeacherController@classStudents')->name('teacher.students');
+Route::get('class/students', 'App\Http\Controllers\TeacherController@classStudents')->name('teacher.students');
 Route::patch('class/grade/{id}', 'App\Http\Controllers\TeacherController@classGradeUpdate')->name('classGrade.update');
 
 Route::any('classes', 'App\Http\Controllers\AdminController@classOfferingsShow')->name('classOfferings.show');
 
 
-Route::post('student/{id}/grades', 'App\Http\Controllers\StudentController@grades')->name('grades.show');;
+Route::post('student/{id}/grades', 'App\Http\Controllers\StudentController@grades')->name('grades.show');
+Route::post('student/{id}/balance', 'App\Http\Controllers\StudentController@balance')->name('balance.show');
+
+Route::any('classOffering', 'App\Http\Controllers\AdminController@goTo_classOfferings')->name('goTo_classOfferings');
+Route::any('student/prereg/{id}', 'App\Http\Controllers\AdminController@goTo_prereg')->name('goTo_prereg');
+Route::any('studentClass/add', 'App\Http\Controllers\AdminController@studentClassStore')->name('studentClass.store');
+Route::delete('studentClass/drop', 'App\Http\Controllers\AdminController@studentClassDelete')->name('studentClass.delete');
+
+Route::get('registrar/index', 'App\Http\Controllers\RegistrarController@index')->name('registrar.index');
+Route::get('registrar/add-payment/{id}', 'App\Http\Controllers\RegistrarController@goTo_payment')->name('goTo_payment');
+Route::post('registrar/add-payment/{id}', 'App\Http\Controllers\RegistrarController@paymentStore')->name('payment.store');
+Route::get('registrar/{id}/payments-history', 'App\Http\Controllers\RegistrarController@paymentShow')->name('payment.show');
+Route::post('registrar/{id}/balance', 'App\Http\Controllers\RegistrarController@balanceShow')->name('balance.show');
+Route::post('registrar/{id}/balance', 'App\Http\Controllers\RegistrarController@balance')->name('balance');
+Route::get('registrar/update-dues', 'App\Http\Controllers\RegistrarController@updateDues')->name('update.dues');
+

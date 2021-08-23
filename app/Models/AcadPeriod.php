@@ -18,10 +18,6 @@ class AcadPeriod extends Model
     const UPDATED_AT = 'updated_at';
 
 
-    
-
-
-
     public $fillable = [
         'acadSem',
         'acadYear'
@@ -40,6 +36,35 @@ class AcadPeriod extends Model
         'acadSem' => 'required|unique_with:AcadPeriod,acadYear',
         'acadYear' => 'required'
     ];
+
+
+    public function acadSemText(){
+        
+        switch($this->acadSem){
+            
+            case '0':
+                $text = "Summer";
+                break;
+
+            case '1':
+                $text = "1st Semester";
+                break;
+            
+            default:
+                $text = "2nd Semester";
+                break;
+        }
+
+        return $text;
+        
+    }
+
+    public function Payments()
+    {
+        return $this->hasMany(Payments::class, 'acadPeriod_id');
+    }
+
+
 
     
 }

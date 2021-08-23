@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Flash, Response, Validator, Input, Redirect, Rule;
+use Illuminate\Support\Facades\DB;
 
 // add models that will be used in this controller
 use App\Models\Person; 
@@ -14,9 +15,11 @@ use App\Models\CourseProgrammePreReq;
 use App\Models\ClassOffering; 
 use App\Models\ClassGrade; 
 use App\Models\StudentClass; 
-use App\Models\AcadPeriod; 
+use App\Models\AcadPeriod;
+use App\Models\Fees; 
+use App\Models\StudentUpdate; 
 
-use Illuminate\Support\Facades\DB;
+
 
 
 
@@ -30,13 +33,23 @@ class AdminController extends Controller
      * 
      * 
      */
-    public function goTo_enrollmentList(Request $request)
+    public function goTo_enrollmentList()
     {
         
-        $students = Student::where('isPass', '1')->orderBy('updated_at','asc')->get();
-        
-        return view('menu_Super/enrollment/index')
-            ->with('students', $students);
+        $acadPeriod = AcadPeriod::latest()->first();
+        $students = Student::where('isPass', '1')
+                    ->whereHas('StudentUpdate', function ($query) use($acadPeriod){
+                    $query->where('acadPeriod_id',$acadPeriod->id);
+                    })
+                    ->with(['StudentUpdate' => function ($query) use($acadPeriod){
+                            $query->where('acadPeriod_id',$acadPeriod->id);
+                            }])
+                    ->orderBy('updated_at','asc')->get();
+        //dd($students);
+        return view('menu_Super/enrollment/index',[
+            'students' => $students
+        ]);
+            
     }
 
     /**
@@ -57,7 +70,7 @@ class AdminController extends Controller
      * 
      * 
      */
-    public function studentShow($id) //not yet routed/done
+    public function studentShow($id) //not yet routed/ not done
     {
         $student = Student::find($id);
 
@@ -72,12 +85,43 @@ class AdminController extends Controller
     public function studentUpdate(Request $request, $id)
     {
         
-        $student = Student::where('id',$id);
+        $student = Student::find($id);
         //dd($request->all());
-        
-        $student->update(request()->except(['_token','_method']),$id);
+
+        if($request->has('isEnrolled')){
+            $student->update(['isEnrolled' => $request->isEnrolled]);
+        }
         if($request->has('isPass')){
-            $this->studentUpdateUnits();
+            Student::whereId($id)->update(['isPass' => $request->isPass], $id);
+            if($request->isPass == 1){
+                $su = StudentUpdate::create([
+                            'student_id' => $id,
+                            'acadPeriod_id' => AcadPeriod::latest()->value('id'),
+                            'fees_id' => Fees::latest()->value('id')
+                        ]);  
+                $this->studentUpdateUnits($su);
+            }else{
+                StudentUpdate::where('student_id',$id)
+                ->latest()->delete();
+
+                // in case if student is mistakenly approved then already added classes
+                $ap = AcadPeriod::latest()->first();
+                $sc = StudentClass::where('student_id',$id)
+                     ->whereHas('ClassOffering',  function ($query) use($ap){
+                        $query->where('year', $ap->acadYear)->where('semester', $ap->acadSem);
+                        })
+                     ->with('ClassGrade')
+                     ->get();
+                    
+                if(!empty($sc)){
+                    foreach($sc as $sc){
+                        $sc->ClassGrade->delete();
+                        $sc->delete($id);
+                    }
+                }
+            
+            }
+            
         }
         Flash::success('Student Updated Successfully.');
 
@@ -103,56 +147,39 @@ class AdminController extends Controller
      * units will  be based on course description for every minor + 6 , cert +3
      * major will be based on curriculum
      */
-    public function studentUpdateUnits()
+    public function studentUpdateUnits($su)
     {
        
-
-       //-- current academic period --// 
-       $acadSem = AcadPeriod::latest()->value('acadSem');
-
-       // get all students who is passed and has curriculum. 
-
-       $student= Student::with('CourseProgramme')->get();
-       foreach($student as $s){
-           $unitsCounter = 0;
-            foreach($s->EnrolledProgramme as $ep){
-                //echo($ep);
-                if($ep->status == 0){
-                    switch($ep->description){
-                        case 'Certificate':
-                            $unitsCounter+= 3;
-                            break;
-                        case 'Minor':
-                            $unitsCounter+= 6;
-                            break;
-                        default:
-                            //this formula  if naka base sa curric
-                            // foreach($s->CourseProgramme as $cp){
-                            //     if($cp->yearLevel == $s->year && $cp->semester == $acadSem){
-                            //         $unitsCounter+= $cp->Course->units;
-                                    
-                            //     }
-                            // }
-
-                            // this if ay given lang per sem
-                            $unitsCounter+= 15;
-                            break;
-                        
-                    }
-                } 
-            }
-
-            if($s->isPass == '0'){
-                $unitsCounter = 0;
-            }
-
-            $s->units = $unitsCounter;
-            $s->save();
+       $acad_id = $su->acadPeriod_id;
+       $s = StudentUpdate::whereId($su->id)
+                ->with('Student', 'Student.EnrolledProgramme')
+                ->with(['AcadPeriod' => function ($query) use($acad_id){
+                        $query->where('id',$acad_id);
+                }])
+                ->first();
             
-       }
+        $unitsCounter = 0;
+        foreach($s->Student->EnrolledProgramme as $ep){
+            if($ep->status == 0){
+                switch($ep->description){
+                    case 'Certificate':
+                        $unitsCounter+= 3;
+                        break;
+                    case 'Minor':
+                        $unitsCounter+= 6;
+                        break;
+                    default:
+                        $unitsCounter+= 15;
+                        break;
+                    
+                }
+            } 
+        }
 
-       return;
+        $s->units = $unitsCounter;
+        $s->save();
         
+        return;
     }
     /**
      * Tag all as not enrolled 
@@ -175,14 +202,37 @@ class AdminController extends Controller
      */
     public function studentUnpromoteAll()
     {
-        $student = Student::where('isPass','1')->update(['isPass' => '0', 'units' => '0', 'unitsTook' => '0']);
+        $student = Student::where('isPass','1')->update(['isPass' => '0']);
+        
+        $ap = AcadPeriod::latest()->first();
+
+        //in case some student is mistakenly approved for current sem and need to reset
+        // clear all StudentUpdate for current sem
+        $su = StudentUpdate::where('acadPeriod_id',$ap->id)->get();
+        if(!empty($su)){
+            foreach($su as $su){
+                $su->delete($su->id);
+            }
+        }
+        // in case if student is mistakenly approved then already added classes
+        $sc = StudentClass::
+             whereHas('ClassOffering',  function ($query) use($ap){
+                $query->where('year', $ap->acadYear)->where('semester', $ap->acadSem);
+                })
+             ->with('ClassGrade')
+             ->get();
+
+        if(!empty($sc)){
+            foreach($sc as $sc){
+                $sc->ClassGrade->delete();
+                $sc->delete($sc->id);
+            }
+        }
  
         Flash::success('Students are all tagged as unpromoted for the new semester');
 
         return back();
     }
-
-
 
     /**
      * delete student ID
@@ -224,9 +274,6 @@ class AdminController extends Controller
         return redirect()->route('goTo_promotionList.index');
     }
 
-
-
-
     public function goTo_enrollProgramme($id)
     {
         $student = Student::find($id);
@@ -242,12 +289,14 @@ class AdminController extends Controller
      * $validatedData = $request->validate(MODELNAME::$rules);
      */
     public function enrollProgrammeStore(Request $request)
-    {
+    {       
         $validatedData = $request->validate(EnrollProgramme::$rules);
         EnrollProgramme::create($validatedData);
-        $this->studentUpdateUnits();
-       
 
+        $su = StudentUpdate::where('student_id', $request->student_id)
+        ->latest()->first();
+        $this->studentUpdateUnits($su);
+       
         Flash::success('Programme Enrolled successfully.');
         return redirect('/students/enrolling-list');
     }
@@ -256,10 +305,14 @@ class AdminController extends Controller
      * Delete table from enrollProgramme
      */
 
-    public function enrollProgrammeDelete($id){
-        $q = EnrollProgramme::find($id);
-        $q->delete($id);
-        $this->studentUpdateUnits();
+    public function enrollProgrammeDelete(Request $request,$id){
+        $e = EnrollProgramme::find($id);
+        $e->delete($id);
+        
+        $su = StudentUpdate::where('student_id', $request->student_id)
+        ->latest()->first();
+
+        $this->studentUpdateUnits($su);
 
         Flash::success('Student unenrolled to programme successfully.');
 
@@ -294,17 +347,11 @@ class AdminController extends Controller
         $course = $this->currCourse($studentID);
         $certOptions = $this->currCertOptions($studentID);
     
-        
-                
-
         return view('menu_Super/addCourses/courseProgramme', [
             'person' => $person,
             'course' => $course,
             'certOptions' => $certOptions
-            ])
-        ;
-    
-
+            ]);
     }
 
     public function currCourse($studentID){
@@ -320,21 +367,17 @@ class AdminController extends Controller
             
             switch($enrolledProg->description){
                 case 'Major':
-                    
                     $a = $enrolledProg->CourseProgramme->where('yearImplemented', $year);
                     break;
                 
                 case 'Minor': 
                     $a = $enrolledProg->CourseProgramme->where('isProfessional', '1')->where('yearImplemented', $year);
-                    
                     break;
 
                 default:
-                    
                     break;
             }
 
-            
             if($enrolledProg->description != 'Certificate'){
                 if($i > 0){
                     $course = $course->merge($a);
@@ -344,9 +387,6 @@ class AdminController extends Controller
                 $i++;
             }
             
-            
-            
-            
         }  
 
         if(!empty($course)){
@@ -355,7 +395,6 @@ class AdminController extends Controller
             $course = collect();
         }
         
-        //dd($course);
         return $course;
     }
 
@@ -365,7 +404,6 @@ class AdminController extends Controller
                                                  ->where('status', '0');
                                                  //get only curriculum of ongoing program
 
-        
         $j=0; // cert counter
         
         foreach ($enrolledProg as $enrolledProg){
@@ -385,57 +423,63 @@ class AdminController extends Controller
  
         }  
 
-        
         if(!empty($certOptions)){                             //will not include in curriculum but will be displayed
             $certOptions = $certOptions->unique('subjCode'); // list of subjects as options to a cert programme
         }else{
             $certOptions = collect();
         }
 
-        
         return $certOptions;
     }
 
 
     public function goTo_prereg(Request $request){
-        $acadYear = AcadPeriod::latest()->value('acadYear');
-        $acadSem = AcadPeriod::latest()->value('acadSem');
-        $reqYear = $request->acadYear;
-        $reqSem =$request->acadSem;
+        
+        $acadPeriod = AcadPeriod::
+                        where('acadYear',$request->acadYear )
+                        ->where('acadSem', $request->acadSem)
+                        ->first();
+
 
         session()->flashInput($request->input());
         //if opened without values. like opening it thru the menu
         if(empty($request->all())){
             return view('menu_Super/addCourses/prereg');
         }
+        if(empty($acadPeriod)){
+            Flash::error('No Record for Year ' . $request->acadYear . ' Semester ' . $request->acadSem);
+            return back();
+        }
           
         $person = Person::find($request->id);
         $studentID = Student::where('person_id', $request->id)->value('id');
-        $student = Student::find($studentID);
-
+        $student = Student::whereId($studentID)
+                     ->whereHas('StudentUpdate', function ($query) use($acadPeriod){
+                        $query->where('acadPeriod_id',$acadPeriod->id);
+                        })
+                    ->with(['StudentUpdate' => function ($query) use($acadPeriod){
+                            $query->where('acadPeriod_id',$acadPeriod->id);
+                         }])
+                    ->first();
+    
         if (empty($person) || empty($student)) {
-            Flash::error('ID not found');
-
+            Flash::error('Prereg not found');
             return redirect(route('goTo_prereg'))->withInput();
         }
         
-
-        
         //Get and show Classes Registered for sem and year
-            $prereg = ClassOffering::with(['StudentClass' =>
-                function ($query) use($studentID){
+        $prereg = ClassOffering::with(['StudentClass' =>
+            function ($query) use($studentID){
                 $query->where('student_id', '=',$studentID);
-                }])
-                ->whereHas('StudentClass', function ($query) use($studentID){
-                    $query->where('student_id', '=',$studentID);
-                    })
-                ->where('year', $reqYear ?? $acadYear)
-                ->where('semester', $reqSem ?? $acadSem)       
-                ->get();
+            }])
+            ->whereHas('StudentClass', function ($query) use($studentID){
+                $query->where('student_id', '=',$studentID);
+                })
+            ->where('year', $request->acadYear ?? $acadPeriod->acadYear)
+            ->where('semester', $request->acadSem ?? $acadPeriod->acadSem)       
+            ->get();
 // echo($prereg);
  //dd($prereg);
-
-
 
         if($request->has('fromStudClassDelete')){
                 Flash::success('Class has been dropped');
@@ -462,9 +506,9 @@ class AdminController extends Controller
         $certOptions = $this->currCertOptions($studentID);
 
         $classes = ClassOffering::
-        where('year',$acadYear )
-        ->where('semester', $acadSem )
-        ->get();
+            where('year',$acadYear )
+            ->where('semester', $acadSem )
+            ->get();
 
 
         //error message is from studentClassStore. that method returns to this
@@ -485,7 +529,6 @@ class AdminController extends Controller
                         Flash::error('Class has already been passed');
                         break;
                 default:
-                    
                     break;
             }  
         }
@@ -620,28 +663,31 @@ class AdminController extends Controller
      * Add A Class in StudentClass
      * Add class to student
      */
-
     public function studentClassStore(Request $request){
         
-        
+        $acad_id = AcadPeriod::latest()->value('id');
         $studentID = $request->student_id;
-        $student = Student::find($studentID);
-        
+        $student = Student::whereId($studentID)
+                    ->with(['StudentUpdate' => function ($query) use($acad_id){
+                        $query->where('acadPeriod_id',$acad_id);
+                     }])
+                    ->first();
+
+        //dd($student->StudentUpdate[0]);
         
 
         // get all specific student's classses for this acad time
-        $s = ClassOffering::with(['StudentClass' =>
-                function ($query) use($studentID){
-                $query->where('student_id', '=',$studentID);
+        $s = ClassOffering::with(['StudentClass' => function ($query) use($studentID){
+                    $query->where('student_id', '=',$studentID);
                 }])
                 ->whereHas('StudentClass', function ($query) use($studentID){
                     $query->where('student_id', '=',$studentID);
-                    })
+                })
                 ->where('year', $request->year)
                 ->where('semester', $request->sem)       
                 ->get();
         
-        //classOffering: the recently added class
+        //classOffering of the recently added class
         $added = ClassOffering::where('id',$request->classOffering_id);
             $a_subj = $added->value('subjCode');
             $a_class = $added->value('classCode');
@@ -652,12 +698,12 @@ class AdminController extends Controller
 
 
             //if units full
-            if((($student->unitsTook) + $a_units ) > $student->units ){
+            if((($student->StudentUpdate[0]->unitsTook) + $a_units ) > $student->StudentUpdate[0]->units ){
                 $error = 'Units Overload';
                 return redirect()->route('goTo_classOfferings', [
                     'id' => $studentID,
                     'error' => $error
-                ])->withInput();
+                ]);
             }
 
             //checker if added class is already passed by student
@@ -667,7 +713,7 @@ class AdminController extends Controller
                 return redirect()->route('goTo_classOfferings', [
                     'id' => $studentID,
                     'error' => $error
-                ])->withInput();
+                ]);
             }
 
              //check if may pre req yun na added class, if so na take na ba ng student ? can be added : error
@@ -678,7 +724,7 @@ class AdminController extends Controller
                 return redirect()->route('goTo_classOfferings', [
                     'id' => $studentID,
                     'error' => $error
-                ])->withInput();
+                ]);
             }
                
         //check if with conflict
@@ -697,7 +743,7 @@ class AdminController extends Controller
                 return redirect()->route('goTo_classOfferings', [
                     'id' => $request->student_id,
                     'error' => $error
-                ])->withInput();
+                ]);
             }
  
         }
@@ -715,8 +761,8 @@ class AdminController extends Controller
 
         
         //update the units took
-        $student->unitsTook += $a_units;
-        $student->save();
+        $student->StudentUpdate[0]->unitsTook += $a_units;
+        $student->StudentUpdate[0]->save();
 
         //get person id
         $personID = $student->person_id;
@@ -727,14 +773,20 @@ class AdminController extends Controller
         ->route('goTo_prereg', [
             'id' => $personID,
             'acadSem' => $request->sem,
-            'acadYear' => $request->year
+            'acadYear' => $request->year,
+            'acadPeriod_id' => $student->StudentUpdate[0]->acadPeriod_id
             ])
         ->withInput();
     }
 
 
     public function studentClassDelete(Request $request){
-        
+        // === with New Addition StudentUpdate
+        $acadPeriod = AcadPeriod::where('acadYear', $request->year)
+                    ->where('acadSem', $request->sem)
+                    ->first();
+
+
         $cg_id = StudentClass::where('student_id', $request->student_id )
                 ->where('classOffering_id',$request->classOffering_id )
                 ->value('classGrade_id');
@@ -746,7 +798,9 @@ class AdminController extends Controller
         $c = ClassOffering::where('id',$request->classOffering_id)
             ->with('Course')->get();
         $units = $c[0]->Course->units;
-        $s = Student::find($request->student_id);
+        $s = StudentUpdate::where('student_id',$request->student_id)
+             ->where('acadPeriod_id', $acadPeriod->id)->first();
+             
         if($s->unitsTook != 0){
             $s->unitsTook -= $units;
             $s->save();

@@ -87,10 +87,6 @@ class EnrollProgramme extends Model
         return $this->hasMany(CourseProgramme::class, 'progCode', 'progCode');
     }
 
-    // public function CourseProgrammePrereq()
-    // {
-    //     return $this->hasManyThrough(CourseProgrammePrereq::class, CourseProgramme::class, 'progCode','course_programme_id', 'id', 'id' );
-    // }
 
     
 }

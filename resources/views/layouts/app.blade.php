@@ -121,14 +121,6 @@
 
 </div>
 
-<script type="text/javascript">
-  console.log('executing js here..')
-    $(document).ready(function() {
-        
-        $('.select_id').selectpicker();
-    });
-</script> 
-
 
 <!-- ./wrapper -->
 
