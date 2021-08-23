@@ -5,9 +5,5 @@
     <img class="animation__shake" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
 </div>
 @section('content')
-        NEW BRANCH - TEST PUSH 12345
-
-        jobie push
+        NEW BRANCH - TEST PUSH Symon 123
 @endsection
-
-
