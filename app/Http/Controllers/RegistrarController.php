@@ -45,10 +45,15 @@ class RegistrarController extends Controller
                     ->with('StudentUpdateLatest', 'Person.Payments')
                     ->first();
         $latest = true;
-        $acadPeriod = AcadPeriod::find($student->StudentUpdateLatest->acadPeriod_id);
+        
         $fees = Fees::latest()->first();
 
-       // dd($student->Person->Payments);
+        if( $student->StudentUpdateLatest == null ){
+            Flash::error('No Recorded Balance');       
+            return redirect()->back();
+        }
+        $acadPeriod = AcadPeriod::find($student->StudentUpdateLatest->acadPeriod_id);
+        
         if($request->has('acadPeriod_id')){
             $latest = false;
             $student = Student::where('person_id', $id)
@@ -76,11 +81,8 @@ class RegistrarController extends Controller
     
         }
 
-        if( $student->StudentUpdateLatest == null ){
-            Flash::error('No Recorded Balance');       
-            return redirect()->back();
-        }
         
+
         $totalPay = 0.00;
         foreach($student->Person->Payments as $pay){
             if($latest && $pay->acadPeriod == $student->StudentUpdateLatest->acadPeriod){

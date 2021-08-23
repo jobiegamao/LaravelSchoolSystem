@@ -98,7 +98,7 @@
                                 </td>
                                 <td>
                                     {{-- pre reg --}}
-                                    {!! Form::open(['method' => 'POST', 'route' => ['goTo_prereg' , 'id' => $person->id  ] ]) !!}
+                                    {!! Form::open(['method' => 'POST', 'route' => ['goTo_prereg' , 'id' => $students->person_id ] ]) !!}
                                         {!! Form::hidden('id', $students->person_id ) !!}
                                         {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
                                         {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!}    
