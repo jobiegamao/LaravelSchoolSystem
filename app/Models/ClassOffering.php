@@ -64,7 +64,7 @@ class ClassOffering extends Model
 
     public function Course()
     {
-        return $this->belongsTo(Course::class, 'subjCode');
+        return $this->belongsTo(Course::class, 'subjCode', 'subjCode');
     }
 
     public function CourseProgramme()

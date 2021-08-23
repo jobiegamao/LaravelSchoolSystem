@@ -111,7 +111,7 @@
                                     {{ $classes->schedule }}
                                 </td>
                                 <td>
-                                    {{ $classes->teacher_id }}
+                                    {{ $classes->Teacher->full_name() }}
                             
                                 </td>
                                 <td>

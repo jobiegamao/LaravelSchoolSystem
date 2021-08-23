@@ -11,7 +11,7 @@
             </th>
             
             <th>Courses</th>
-            <th>Grades<br><small>Prev Sem</small></th>
+            <th>Grades</th>
             <th>Evaluation Pass <br><small>Pass for Next Enrollment</small></th>
             {{-- <th>Year Promotion<br><small>Promote College Level</small></th> --}}
             <th>Action</th>
@@ -33,11 +33,8 @@
                 </td>
                 <td>
                     {!! Form::model($students, ['route' => ['student.update', $students->id], 'method' => 'patch']) !!}
-                   
                         {!! Form::text('year',$students->year, ['class' => 'border-0 w-2', 'size' => 10]) !!}
-                    
-                    
-                    <a href="{{ route('student.update', [$students->id]) }}"></a>
+                        <a href="{{ route('student.update', [$students->id]) }}"></a>
                     {!!Form::close()!!} 
                 </td>
                 <td>
@@ -64,7 +61,6 @@
                 
                 <td>
                     {{-- curric  --}}
-                    
                     {!! Form::open(['method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
                         {!! Form::hidden('id', $students->person_id ) !!}   
                         {{Form::submit('Curriculum',['class' => 'btn btn-link'])}}
@@ -74,7 +70,6 @@
                 <td>
                     {{-- class grade of student per sem  --}}
                     {!! Form::open(['method' => 'POST', 'route' => ['grades.show', 'id' => $students->id] ]) !!}
-                    {{-- {!! Form::hidden('id', $students->id ) !!} --}}
                     {{Form::submit('Grades',['class' => 'btn btn-link'])}}
                     {!! Form::close() !!}
 
@@ -92,7 +87,6 @@
                             @break
                         @default
                             {!! Form::hidden('isPass', 0) !!}
-                            
                             {{Form::button('Approved <i class="fa fa-times"></i>',['class' => 'btn remove-circle-outline','type' => 'submit', 
                             'onclick' => "return confirm('Are you sure you want to unpromote student?')"])}}
                             

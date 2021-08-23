@@ -13,12 +13,33 @@
                     <div class="clearfix"> @include('flash::message')</div>
                 </div>
             </div>
+
+            {{-- not working because it retains the id whyyy --}}
+            @if (Auth::user()->role == 'Super Admin')
             <div class="row">
-                <a href="{{ route('goTo_enrollment.index') }}"
+                <a href="{{ url('students/enrolling-list') }}"
                     class='btn btn-link'>
                     &larr; Student List
+                    @php
+                        //anion diayz
+                        session()->forget('_old_input');
+                    @endphp
                 </a>
             </div>
+            @endif
+            @if (Auth::user()->role == 'Registrar')
+            <div class="row">
+                <a href="{{ url('registrar/index') }}"
+                    class='btn btn-link'>
+                    &larr; Student List
+                    @php
+                        //anion diayz
+                        session()->forget('_old_input');
+                    @endphp
+                </a>
+            </div>
+            @endif
+            
         </div>
     </section>
 {{-- /header --}}
@@ -30,58 +51,62 @@
     $currentYear = \App\Models\AcadPeriod::latest()->value('acadYear');
     $currentSem = \App\Models\AcadPeriod::latest()->value('acadSem');
 @endphp
+            @if(Auth::user()->role != 'Student')
             <div class="card">
                 <div class="card-body p-10">
                     {{-- Search Student ID --}}
                     
-                    {!! Form::open(['route' => 'goTo_prereg']) !!}
+                    {!! Form::open(['route' => ['goTo_prereg' , 'id' => $person->id ?? old('id') ]]) !!}
                         <div class="input-group">
                             <input type="text" class="col-sm-4 form-control" name="id"
                                 placeholder="Search ID" value="{{ $person->id  ?? old('id') }}" required> 
 
-                            <input type="number" class="col-sm-4 form-control"  name="year" value="{{ old('year') ?? $currentYear }}"
+                            <input type="number" class="col-sm-4 form-control"  name="acadYear" value="{{ old('acadYear') ?? $currentYear }}"
                                 placeholder="Enter School Year(YYYY)" required>
 
-                            <select class="col-sm-4 form-control""  name="sem" 
+                            <select class="col-sm-4 form-control""  name="acadSem" 
                                 style="width:100%" data-style="btn-info" placeholder="Semester" required>
     
-                                    <option {{ ( old('sem') ?? $currentSem) == '1' ? 'selected' : '' }} value="1">1st</option>
-                                    <option {{ ( old('sem') ?? $currentSem ) == '2' ? 'selected' : '' }} value="2">2nd</option> 
-                                    <option {{ ( old('sem') ?? $currentSem ) == '0' ? 'selected' : '' }} value="0">Summer</option> 
+                                    <option {{ ( old('acadSem') ?? $currentSem) == '1' ? 'selected' : '' }} value="1">1st</option>
+                                    <option {{ ( old('acadSem') ?? $currentSem ) == '2' ? 'selected' : '' }} value="2">2nd</option> 
+                                    <option {{ ( old('acadSem') ?? $currentSem ) == '0' ? 'selected' : '' }} value="0">Summer</option> 
                             </select>
                                 
                             <span class="input-group-btn">
                                     <button type="submit" class="btn btn-default">
                                         <i class="fas fa-search"></i>
                                     </button>
-                            </span>
-
-                            
+                            </span>   
                         </div>
                 {!! Form::close() !!}
                 </div>
             </div>
-    
+            @endIf()
            
         @if(isset($student))    
             <div class="card">
                 <div class="card-body"> 
                     
                         <div class="form-group row">
-                            {!! Form::label('person_id', 'Person ID:',array('class' => 'col-sm-2 col-form-label')) !!}
-                            <div class="col-sm-10 form-control" readonly>{{ $person->id }} </div>
+                            <label class="col-sm-2 col-form-label">ID: </label>
+                            <div class="col-sm-10 form-control" readonly>{{ $student->person->id }} </div>
+                        </div>
+            
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Student ID: </label>
+                            <div class="col-sm-10 form-control" readonly>{{ $student->id }} </div>
                         </div>
                     
                         <div class="form-group row">
-                            {!! Form::label('name', 'Name:',array('class' => 'col-sm-2 col-form-label')) !!}
-                            {!! Form::text('name', $person->full_name(), ['class' => "col-sm-10 form-control", 'readonly']) !!}
+                            <label class="col-sm-2 col-form-label">Name: </label>
+                            <div class="col-sm-10 form-control" readonly>{{ $student->full_name()}} </div>
                         </div>
                         <div class="form-group row">
-                            @forelse ($student->EnrolledProgramme as $courses )
-                            
-                                {!! Form::label('programme', 'Programme:',array('class' => 'col-sm-2 col-form-label')) !!}
-                                {!! Form::text('programme', $courses->description , ['class' => "col-sm-2 form-control mb-3", 'readonly']) !!}
-                                {!! Form::text('programme', $courses->Programme->name , ['class' => "col-sm-8 form-control mb-3", 'readonly']) !!}
+                            @forelse ($student->EnrolledProgramme as $ep )
+                                <label class="col-sm-2 col-form-label">Programme: </label>
+                                <div class="col-sm-2 form-control mb-3" readonly>{{ $ep->description }} </div>
+                                <div class="col-sm-4 form-control mb-3" readonly>{{ $ep->Programme->name}} </div>
+                                <div class="col-sm-4 form-control mb-3" readonly>{{ $ep->statusText()}} </div>
                             @empty
                                 <h1>no enrolled programme</h1>
                             @endforelse
@@ -94,7 +119,7 @@
                             </div>
                             <div class="col-sm-2 col-form-label">
                     
-                                 {{ $student->unitsTook }}/{{ $student->units }} 
+                                 {{ $student->StudentUpdate[0]->unitsTook }}/{{ $student->StudentUpdate[0]->units }} 
                             </div>
                         </div>
 

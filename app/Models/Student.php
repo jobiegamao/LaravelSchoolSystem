@@ -35,7 +35,7 @@ class Student extends Model
 
     public function full_name()
     {
-        return $this->person->full_name();
+        return $this->Person->full_name();
     }
 
      /**
@@ -51,10 +51,6 @@ class Student extends Model
         return $this->hasMany(StudentClass::class, 'student_id');
     }
 
-    public function class()
-    {
-        return $this->hasMany(StudentClass::class, 'student_id')->where();
-    }
 
     public function CourseProgramme()
     {
@@ -66,6 +62,17 @@ class Student extends Model
             'id',
             'progCode'
         );
+    }
+
+    public function StudentUpdate()
+    {
+        return $this->hasMany(StudentUpdate::class, 'student_id');
+    }
+   
+
+    public function StudentUpdateLatest()
+    {
+        return $this->hasOne(StudentUpdate::class, 'student_id')->latestOfMany('id');
     }
 
  

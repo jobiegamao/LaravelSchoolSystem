@@ -6,9 +6,10 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-12 text-center">
                     <h1>{{ $student->full_name() }} Grades</h1>
-                    <span> {{ $year }} Semester:{{ $sem }} </span>
+                    <hr>
+                    <span> S.Y. {{ $acadPeriod->acadYear }} {{ $acadPeriod->acadSemText() }}</span>
                 </div>
             </div>
         </div>
@@ -44,21 +45,18 @@
                     {{-- BUTTONS--}}
                     
                         @php
-                            $gradesAcadPeriod = App\Models\AcadPeriod::where('acadYear', $year)
-                                        ->where('acadSem', $sem)->first();
                             $currPeriod = App\Models\AcadPeriod::latest()->first();
-                            $nextPeriod = App\Models\AcadPeriod::find( ($gradesAcadPeriod->id) +1);
-                            $prevPeriod = App\Models\AcadPeriod::find( ($gradesAcadPeriod->id) -1);
+                            $nextPeriod = App\Models\AcadPeriod::find( ($acadPeriod->id) +1);
+                            $prevPeriod = App\Models\AcadPeriod::find( ($acadPeriod->id) -1);
                         @endphp
                        
                         <div class="d-flex flex-row-reverse">
                             <!-- show next button if this is not the latest acadPeriod -->
-                            @if(!($year == $currPeriod->acadYear && $sem == $currPeriod->acadSem))
+                            @if(!($acadPeriod->acadYear == $currPeriod->acadYear && $acadPeriod->acadSem== $currPeriod->acadSem))
                                 <div class="p-2"> 
                                 {!! Form::open(['method' => 'POST', 'route' => ['grades.show', 'id' => $student->id] ]) !!}
                                     {!! Form::hidden('changePeriod', true) !!}
-                                    {!! Form::hidden('year', $nextPeriod->acadYear) !!}
-                                    {!! Form::hidden('sem', $nextPeriod->acadSem) !!}
+                                    {!! Form::hidden('acadPeriod_id', $nextPeriod->id) !!}
                                     {{Form::submit('Next &rarr;',['class' => 'btn btn-link'])}}
                                 {!! Form::close() !!}
                                 </div>
@@ -67,8 +65,7 @@
                             <div class="p-2">
                                 {!! Form::open(['method' => 'POST', 'route' => ['grades.show', 'id' => $student->id] ]) !!}
                                     {!! Form::hidden('changePeriod', true) !!}
-                                    {!! Form::hidden('year', $prevPeriod->acadYear) !!}
-                                    {!! Form::hidden('sem', $prevPeriod->acadSem) !!}
+                                    {!! Form::hidden('acadPeriod_id', $prevPeriod->id) !!}
                                     {{Form::submit('&larr; Prev',['class' => 'btn btn-link'])}}
                                 {!! Form::close() !!}
                             </div>
@@ -82,7 +79,6 @@
                             <table class="table" id="mygrades-table">
                                     <thead>
                                         <tr>
-                                            
                                             <th>Class Code</th>
                                             <th>Subject Code</th>
                                             <th>Title</th>
@@ -90,11 +86,16 @@
                                             <th>Midterm</th>
                                             <th>Pre-final</th>
                                             <th>Final</th>
+                                            <th>QPI</th>
                                             <th>Units</th>
-
                                         </tr>
                                     </thead>
                                 <tbody>
+                                
+                                @php
+                                    $grades = array();
+                                @endphp
+
                                 {{-- ClassOffering Table --}}
                                 @foreach($classes as $class)
                                     <tr>
@@ -117,21 +118,76 @@
                                         </td>
                                         <td>
                                             {{ $class->ClassGrade->prefinalsGrade }}
-                                    
                                         </td>
                                         <td>
                                             {{ $class->ClassGrade->finalGrade() }}
-                                    
+                                            
+                                        </td>
+                                        <td>
+
+                                            @php
+                                                $n = $class->ClassGrade->finalGrade();
+                                                switch($n){
+                                                    case ($n >= 92):
+                                                        $e = 4.0;
+                                                        break;
+                                                    case ($n >= 87):
+                                                        $e = 3.5;
+                                                        break;
+                                                    case ($n >= 80):
+                                                        $e = 3.0;
+                                                        break;
+                                                    case ($n >= 75):
+                                                        $e = 2.5;
+                                                        break;
+                                                    case ($n >= 68):
+                                                        $e = 2.0;
+                                                        break;
+                                                    case ($n >= 60):
+                                                        $e = 1.0;
+                                                        break;
+                                                    default:
+                                                        $e = 0.0;
+                                                        break;  
+                                                }
+                                                echo($e);
+                                                $e = $e * $class->ClassOffering->Course->units;
+                                                array_push($grades, $e);
+                                                
+                                            @endphp
+
                                         </td>
                                         <td>
                                             {{ $class->ClassOffering->Course->units}}
-                                    
                                         </td>
                                          
                         
                                     </tr>
                                 @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: right;">
+                                            <strong>Quality Point Index (Q.P.I) = </strong>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            @php
+                                                $sum = array_sum($grades);
+                                                if(!empty($student->StudentUpdate[0])){
+                                                    $totalUnits = $student->StudentUpdate[0]->unitsTook;
+                                                    echo($sum / $totalUnits);
+                                                }
+                                            @endphp
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                         

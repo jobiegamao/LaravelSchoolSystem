@@ -21,7 +21,7 @@ class CreateClassofferingTable extends Migration
             $table->foreign('subjCode')
                 ->references('subjCode')
                 ->on('Course')
-                ->onDelete('cascade');
+                ->onUpdate('cascade');
 
             $table->string('classCode');
             $table->string('schedule');
@@ -30,7 +30,7 @@ class CreateClassofferingTable extends Migration
             $table->foreignID('teacher_id')
                 ->nullable()
                 ->contstrained('Teacher')
-                ->onDelete('cascade');
+                ->onUpdate('cascade');
             
             $table->string('room');
             $table->smallInteger('semester');

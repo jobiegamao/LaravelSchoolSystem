@@ -33,9 +33,8 @@ class CreateStudentTable extends Migration
             $table->boolean('isPass')->default(0);
 
             
-            $table->tinyInteger('units')->nullable()->default(0);
-            $table->tinyInteger('unitsTook')->nullable();
-            //$table->string('role')->default('Student');
+        
+            
         });
 
         DB::table('Student')->insert(

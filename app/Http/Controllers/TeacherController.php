@@ -28,19 +28,19 @@ class TeacherController extends Controller
                     ->orderBy('year','desc')
                     ->get();
    
-        return view('menu_Super.teachers.classes.classOfferings', [
+        return view('menu_Teacher.teachers.classes.classOfferings', [
             'classes' => $classes
         ]);
     }
 
-    public function classStudents($id){
-        $class = ClassOffering::find($id);
-        $s = StudentClass::where('classOffering_id', $id)
+    public function classStudents(Request $request){
+        $class = ClassOffering::find($request->id);
+        $s = StudentClass::where('classOffering_id', $request->id)
                     ->with('ClassGrade', 'ClassOffering')
                     ->get();
         
 
-        return view('menu_Super.teachers.students.studentClass', [
+        return view('menu_Teacher.teachers.students.studentClass', [
             's' => $s,
             'class' => $class
         ]);
@@ -51,6 +51,6 @@ class TeacherController extends Controller
         $c = ClassGrade::where('id',$id);
         $c->update(request()->except(['_token','_method']),$id);
         Flash::success('Student Grade Updated Successfully.');
-        return back();
+        return redirect()->back();
     }
 }

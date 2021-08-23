@@ -14,10 +14,13 @@
                 </div>
             </div>
             <div class="row">
-                <a href="javascript:history.back()"
-                    class='btn btn-link'>
-                    &larr; return
+                {!! Form::open(['id' => 'preregForm','method' => 'POST', 'route' => ['goTo_prereg' , 'id' => $student->person_id  ] ]) !!}
+                {!! Form::hidden('id', $student->person_id ) !!}
+                <a href="javascript:void(0)" class="nav-link {{ Request::is('student/prereg') ? 'active' : '' }}" onclick="$('#preregForm').submit()">
+                    
+                    <p> &larr; Prereg</p>
                 </a>
+                {!! Form::close() !!}
             </div>
         </div>
     </section>
@@ -74,7 +77,7 @@
                                 {{ $classes->schedule }}
                             </td>
                             <td>
-                                {{-- {{ $classes->teacher_id }} --}}
+                                {{ $classes->Teacher->full_name() }}
                         
                             </td>
                             <td>
@@ -113,14 +116,14 @@
                                             </form>
             
                                         @else
-                                            <a href="{{ route('studentClass.store', [
-                                                'student_id' => $student->id, 
-                                                'classOffering_id' => $classes->id,
-                                                'sem' => $classes->semester,
-                                                'year' => $classes->year,
-                                                ]) }}"
-                                                class='btn btn-primary btn-sm'> Add
-                                            </a> 
+                 
+                                            {!! Form::open([ 'route' => 'studentClass.store', 'method' => 'POST' ]) !!}
+                                                {!! Form::hidden('student_id', $student->id ) !!}
+                                                {!! Form::hidden('classOffering_id', $classes->id) !!}
+                                                {!! Form::hidden('sem', $classes->semester ) !!}
+                                                {!! Form::hidden('year', $classes->year) !!}
+                                                {{Form::submit('Add',['class' => 'btn btn-primary btn-sm'])}}
+                                            {!! Form::close() !!}
                                         @endif
                                    @endif
                                    
