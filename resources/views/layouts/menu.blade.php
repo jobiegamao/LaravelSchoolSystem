@@ -70,7 +70,7 @@
           </a>
         </li>
 
-        @if(Auth::user()->Person->Student->isEnrolled == 0)
+        @if(Auth::user()->Person->Student->isEnrolled == 0 && Auth::user()->Person->Student->isPass == 1 )
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link {{ Request::is('student/prereg') ? 'active' : '' }}" onclick="$('#preregForm').submit()">
             <i class="nav-icon fas fa-copy"></i>
