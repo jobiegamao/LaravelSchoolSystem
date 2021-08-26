@@ -12,7 +12,7 @@
 
     <div class="video-overlay header-text">
         <div class="caption">
-            <h6>Southeast University</h6>
+            <h4>Southeast University</h4>
             <h2><em>Your</em> Classroom</h2>
             <div class="main-button">
                 <div class="scroll-to-section"><a href="#section2">Discover more</a></div>
@@ -21,6 +21,54 @@
     </div>
 </section>
 
+<section class="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-12">
+          <div class="features-post">
+            <div class="features-content">
+              <div class="content-show">
+                <h4><i class="fas fa-clipboard"></i>All Courses</h4>
+              </div>
+              <div class="content-hide">
+                <p>Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet. Donec maximus elementum ex. Cras convallis ex rhoncus, laoreet libero eu, vehicula libero.</p>
+                <p class="hidden-sm">Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet.</p>
+                <div class="scroll-to-section"><a href="#section2">More Info.</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-12">
+          <div class="features-post second-features">
+            <div class="features-content">
+              <div class="content-show">
+                <h4><i class="fas fa-school"></i>About SEU</h4>
+              </div>
+              <div class="content-hide">
+                <p>Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet. Donec maximus elementum ex. Cras convallis ex rhoncus, laoreet libero eu, vehicula libero.</p>
+                <p class="hidden-sm">Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet.</p>
+                <div class="scroll-to-section"><a href="#section3">Details</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-12">
+          <div class="features-post third-features">
+            <div class="features-content">
+              <div class="content-show">
+                <h4><i class="fas fa-book"></i>Contact Us</h4>
+              </div>
+              <div class="content-hide">
+                <p>Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet. Donec maximus elementum ex. Cras convallis ex rhoncus, laoreet libero eu, vehicula libero.</p>
+                <p class="hidden-sm">Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet.</p>
+                <div class="scroll-to-section"><a href="#section4">Read More</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 <!-- Scripts -->
 <!-- Bootstrap core JavaScript -->

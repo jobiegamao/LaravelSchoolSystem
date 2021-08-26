@@ -324,9 +324,10 @@ a.menu-link { display: none; }
   transform: translate(-50%,-50%);
 }
 
-.main-banner .caption h6 {
+.main-banner .caption h4 {
   margin-top: 0px;
-  font-size: 18px;
+  font-size: 25px;
+  margin-left: 25px;
   text-transform: uppercase;
   font-weight: 600;
   color: #fff;

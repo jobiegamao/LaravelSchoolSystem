@@ -87,7 +87,7 @@
                             @break
                         @default
                             {!! Form::hidden('isPass', 0) !!}
-                            {{Form::button('Approved <i class="fa fa-times"></i>',['class' => 'btn remove-circle-outline','type' => 'submit', 
+                            {{Form::button('Approved <i class="fas fa-times"></i>',['class' => 'btn remove-circle-outline','type' => 'submit', 
                             'onclick' => "return confirm('Are you sure you want to unpromote student?')"])}}
                             
                     @endswitch
