@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Dashboard</title>
 
 
@@ -29,9 +29,18 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"  />
   <!-- dataTables -->
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"> 
+  <!-- Bootstrap core CSS -->
+  <link href="{{ asset('plugins/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  
   
   <!-- additional styles -->
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+
+  <link rel="stylesheet" href="{{ asset('plugins/temp/fontawesome.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/temp/lightbox.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/temp/owl.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/temp/templatemo-grad-school.css') }}"> 
   @yield('css')
 </head>
 
@@ -40,7 +49,7 @@
  
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light ">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light " style="color:white;position:fixed;width:95%">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -49,7 +58,7 @@
     </ul>
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto" >
 
       <!-- Navbar Fullsscreen -->
       <li class="nav-item">
@@ -77,14 +86,16 @@
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
-                <a href="{{ url('/profile') }}" class="btn btn-default btn-flat"><i class="fa fa-btn fa-user m-1"></i>Profile</a>
+                <a href="{{ url('/profile') }}" class="btn btn-default btn-flat">
+                <i class="fas fa-btn fa-user m-1"></i>Profile</a>
                 <a href="#" class="btn btn-default btn-flat float-right"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Sign out
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
+              
             </li>
         </ul>
       </li>
@@ -109,7 +120,7 @@
 
 
   <!-- footer -->
-  <footer class="main-footer">
+  <footer class="main-footer" style="position: fixed">
     <strong> footer </strong>
     <div class="float-right d-none d-sm-inline-block">
       <b>footer</b> footer

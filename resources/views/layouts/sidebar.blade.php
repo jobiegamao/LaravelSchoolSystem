@@ -1,8 +1,8 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #124559;">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #124559;position:fixed" >
     <!-- Brand Logo -->
     <a href="" class="brand-link logo-switch">
-      <img src="{{ asset('dist/img/SEUlogo.jpeg') }}" alt="Logo" class="brand-image-xl rounded elevation-5 " style="opacity: .8">
-      <span class="brand-text font-weight-light">Southeast University</span>
+      <img src="{{ asset('dist/img/SEUlogo.jpeg') }}" alt="Logo" class="brand-image-xl rounded elevation-4" style="opacity: .8;">
+      <span class="brand-text">SEU</span>
     </a>
 
     <!-- Sidebar -->

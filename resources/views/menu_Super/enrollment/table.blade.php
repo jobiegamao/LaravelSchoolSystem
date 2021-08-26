@@ -39,7 +39,7 @@
                             
                             {!! Form::open(['route' => ['enrollProgramme.delete', $course->id], 'method' => 'delete']) !!}
                                 {!! Form::hidden('student_id', $students->id ) !!}  
-                                {!! Form::button('<i class="fa fa-times"></i>', 
+                                {!! Form::button('<i class="fas fa-times"></i>', 
                                 ['type' => 'submit', 'class' => 'btn bg-transparent',
                                 'onclick' => "return confirm('Are you sure you want to uneroll program?')"]) 
                                 !!}
