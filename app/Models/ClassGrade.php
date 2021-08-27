@@ -71,5 +71,39 @@ class ClassGrade extends Model
        
     }
 
+    public function finalGradeQPI()
+    {
+        $n = $this->finalGrade();
+        
+        if($n == 0){
+            return 0;
+        }
+        switch($n){                            
+            case ($n >= 92):
+                $e = 4.0;
+                break;
+            case ($n >= 87):
+                $e = 3.5;
+                break;
+            case ($n >= 80):
+                $e = 3.0;
+                break;
+            case ($n >= 75):
+                $e = 2.5;
+                break;
+            case ($n >= 68):
+                $e = 2.0;
+                break;
+            case ($n >= 60):
+                $e = 1.0;
+                break;
+            default:
+                $e = 0.0;
+                break;  
+        }
+        return $e;
+       
+    }
+
     
 }

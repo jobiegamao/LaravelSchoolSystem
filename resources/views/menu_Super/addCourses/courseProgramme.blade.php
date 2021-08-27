@@ -40,7 +40,7 @@
                             {!! Form::close() !!}
                         
                             @if (isset($person))
-                                {!! Form::open(['method' => 'POST', 'route' => ['goTo_prereg' , 'id' => $person->id  ] ]) !!}
+                                {!! Form::open(['method' => 'POST', 'route' => 'goTo_prereg'  ]) !!}
                                     {!! Form::hidden('id', $person->id ) !!}   
                                     {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
                                     {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!}

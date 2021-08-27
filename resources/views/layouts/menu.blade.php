@@ -151,7 +151,7 @@
     {!! Form::hidden('id', Auth::user()->person_id ) !!}
     {!! Form::close() !!}
 
-    {!! Form::open(['id' => 'preregForm','method' => 'POST', 'route' => ['goTo_prereg' , 'id' => Auth::user()->person_id ] ]) !!}
+    {!! Form::open(['id' => 'preregForm','method' => 'POST', 'route' => 'goTo_prereg' ]) !!}
     {!! Form::hidden('id', Auth::user()->person_id ) !!}
     {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
     {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!}

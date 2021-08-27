@@ -14,32 +14,6 @@
                 </div>
             </div>
 
-            {{-- not working because it retains the id whyyy --}}
-            @if (Auth::user()->role == 'Super Admin')
-            <div class="row">
-                <a href="{{ url('students/enrolling-list') }}"
-                    class='btn btn-link'>
-                    &larr; Student List
-                    @php
-                        //anion diayz
-                        session()->forget('_old_input');
-                    @endphp
-                </a>
-            </div>
-            @endif
-            @if (Auth::user()->role == 'Registrar')
-            <div class="row">
-                <a href="{{ url('registrar/index') }}"
-                    class='btn btn-link'>
-                    &larr; Student List
-                    @php
-                        //anion diayz
-                        session()->forget('_old_input');
-                    @endphp
-                </a>
-            </div>
-            @endif
-            
         </div>
     </section>
 {{-- /header --}}
@@ -55,8 +29,8 @@
             <div class="card">
                 <div class="card-body p-10">
                     {{-- Search Student ID --}}
-                    
-                    {!! Form::open(['route' => ['goTo_prereg' , 'id' => $person->id ?? old('id') ]]) !!}
+                   
+                    {!! Form::open(['route' => 'goTo_prereg']) !!}
                         <div class="input-group">
                             <input type="text" class="col-sm-4 form-control" name="id"
                                 placeholder="Search ID" value="{{ $person->id  ?? old('id') }}" required> 

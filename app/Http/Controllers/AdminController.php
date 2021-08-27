@@ -441,13 +441,12 @@ class AdminController extends Controller
 
 
         session()->flashInput($request->input());
-        //if opened without values. like opening it thru the menu
-        if(empty($request->all())){
-            return view('menu_Super/addCourses/prereg');
-        }
+       
         if(empty($acadPeriod)){
+            //dd($request->input());
             Flash::error('No Record for Year ' . $request->acadYear . ' Semester ' . $request->acadSem);
             return back();
+
         }
           
         $person = Person::find($request->id);

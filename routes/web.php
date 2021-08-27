@@ -61,7 +61,7 @@ Route::post('student/{id}/grades', 'App\Http\Controllers\StudentController@grade
 Route::post('student/{id}/balance', 'App\Http\Controllers\StudentController@balance')->name('balance.show');
 
 Route::any('classOffering', 'App\Http\Controllers\AdminController@goTo_classOfferings')->name('goTo_classOfferings');
-Route::any('student/prereg/{id}', 'App\Http\Controllers\AdminController@goTo_prereg')->name('goTo_prereg');
+Route::any('student/prereg', 'App\Http\Controllers\AdminController@goTo_prereg')->name('goTo_prereg');
 Route::any('studentClass/add', 'App\Http\Controllers\AdminController@studentClassStore')->name('studentClass.store');
 Route::delete('studentClass/drop', 'App\Http\Controllers\AdminController@studentClassDelete')->name('studentClass.delete');
 
