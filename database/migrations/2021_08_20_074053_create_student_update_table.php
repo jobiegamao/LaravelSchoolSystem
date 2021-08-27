@@ -49,7 +49,7 @@ class CreateStudentUpdateTable extends Migration
         DB::table('StudentUpdate')->insert(
             array(
                    'student_id'   =>   '20004',
-                   'acadPeriod_id'   =>   '2',
+                   'acadPeriod_id'   =>   '7',
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '6',
@@ -63,7 +63,7 @@ class CreateStudentUpdateTable extends Migration
         DB::table('StudentUpdate')->insert(
             array(
                    'student_id'   =>   '20004',
-                   'acadPeriod_id'   =>   '3',
+                   'acadPeriod_id'   =>   '8',
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '6',
@@ -72,6 +72,10 @@ class CreateStudentUpdateTable extends Migration
                    
             )
         );
+        //new data
+       
+
+
     }
 
     /**
