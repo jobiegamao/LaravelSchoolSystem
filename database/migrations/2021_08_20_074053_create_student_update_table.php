@@ -43,7 +43,7 @@ class CreateStudentUpdateTable extends Migration
             $table->decimal('currDue', 10, 2)->nullable()->default(0.00);
             $table->decimal('adjustments', 10, 2)->nullable()->default(0.00);
 
-            $table->boolean('isGrad')->default(0);
+            
         });
 
         DB::table('StudentUpdate')->insert(

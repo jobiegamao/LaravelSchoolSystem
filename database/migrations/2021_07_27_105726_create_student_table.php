@@ -32,9 +32,8 @@ class CreateStudentTable extends Migration
             //pass for next enrollment
             $table->boolean('isPass')->default(0);
 
-            
-        
-            
+            $table->boolean('isGrad')->default(0);
+
         });
 
         DB::table('Student')->insert(
@@ -65,8 +64,18 @@ class CreateStudentTable extends Migration
             array(
                    'id'   =>   '20004',
                    'person_id'   =>   '10009',
-		  'year'   =>   '2',
-		  'isNew'   =>   '0',
+                    'year'   =>   '2',
+                    'isNew'   =>   '0',
+            )
+        );
+
+        DB::table('Student')->insert(
+            array(
+                   'id'   =>   '20005',
+                   'person_id'   =>   '10010',
+                    'year'   =>   '4',
+                    'isNew'   =>   '0',
+                    'isGrad'   =>   '1',
             )
         );
     }
