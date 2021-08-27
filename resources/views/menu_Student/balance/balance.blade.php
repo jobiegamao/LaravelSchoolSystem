@@ -8,10 +8,9 @@
         <div class="card-body">
             
             <table>
-                <td valign='top' width="900">
+                <td valign='top' width="400">
                     <h4>Statement of Account Summary</h4>
                     <span>S.Y. {{ $acadPeriod->acadYear }} {{ $acadPeriod->acadSemText() }}</span>
-                    <hr>
                     <table>
                         <tbody>
                             
@@ -41,7 +40,7 @@
                     </table>
                 </td>
 
-                <td valign="top" width="*">
+                <td valign="top" width="900">
                     <h4>Breakdown of Fees</h4>
                     
                     
