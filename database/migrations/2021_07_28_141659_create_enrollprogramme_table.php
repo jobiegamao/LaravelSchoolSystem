@@ -84,6 +84,14 @@ class CreateEnrollprogrammeTable extends Migration
             )
         );
 
+        DB::table('EnrollProgramme')->insert(
+            array(
+		           'student_id' =>   '20005',
+                   'progCode'   =>   'BSCHE',
+                   'description'   =>   'Major',
+            )
+        );
+
         
     }
 
