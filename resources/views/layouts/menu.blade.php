@@ -81,14 +81,15 @@
         </li>
         @endif
 
-       
+        @if(!(Auth::user()->Person->Student->StudentUpdate->isEmpty()) )
         <li class="nav-item">
-          <a href="javascript:void(0)" class="nav-link {{ Request::is('student/*/balance') ? 'active' : '' }}" onclick="$('#balForm').submit()">
-            <i class="nav-icon fas fa-wallet"></i>
+          <a href="{{ route('balance', Auth::user()->person_id)}}"
+            class="nav-link {{ Request::is('student/*/balance') ? 'active' : '' }}">
+            <i class="fas fa-calendar-alt nav-icon"></i>
             <p>My Balance</p>
           </a>
         </li>
-        
+        @endif
       {{-- /FOR STUDENT MENU --}}
   
     @endif
@@ -154,10 +155,6 @@
     {!! Form::hidden('id', Auth::user()->person_id ) !!}
     {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
     {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!}
-    {!! Form::close() !!}
-
-    {!! Form::open(['id' => 'balForm','method' => 'POST', 'route' => ['balance', 'id' => Auth::user()->person_id] ]) !!}
-    {!! Form::hidden('id', Auth::user()->person_id ) !!}
     {!! Form::close() !!}
     
   @endif

@@ -106,11 +106,11 @@
                                     {!! Form::close() !!}
                                 </td>
                                 <td>
-                                    {!! Form::open(['method' => 'POST', 'route' => ['balance', 'id' => $students->person_id ] ]) !!}
-                                        {{-- {!! Form::hidden('acadPeriod_id', \App\Models\AcadPeriod::latest()->value('id') ) !!} --}}
-                                        {{ Form::submit('Balance' ,['class' => 'btn btn-link p-0 ']) }}
-                                    {!! Form::close() !!}
-
+                                    
+                                    <a href="{{ route('balance', [$students->person_id]) }}"
+                                        class='btn btn-link p-0'>
+                                        balance
+                                    </a> 
                                     
                                 </td>
                                 <td>

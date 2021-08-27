@@ -69,7 +69,7 @@ Route::get('registrar/index', 'App\Http\Controllers\RegistrarController@index')-
 Route::get('registrar/add-payment/{id}', 'App\Http\Controllers\RegistrarController@goTo_payment')->name('goTo_payment');
 Route::post('registrar/add-payment/{id}', 'App\Http\Controllers\RegistrarController@paymentStore')->name('payment.store');
 Route::get('registrar/{id}/payments-history', 'App\Http\Controllers\RegistrarController@paymentShow')->name('payment.show');
-Route::post('registrar/{id}/balance', 'App\Http\Controllers\RegistrarController@balanceShow')->name('balance.show');
-Route::post('registrar/{id}/balance', 'App\Http\Controllers\RegistrarController@balance')->name('balance');
+// Route::post('registrar/{id}/balance', 'App\Http\Controllers\RegistrarController@balanceShow')->name('balance.show');
+Route::get('registrar/{id}/balance', 'App\Http\Controllers\RegistrarController@balance')->name('balance');
 Route::get('registrar/update-dues', 'App\Http\Controllers\RegistrarController@updateDues')->name('update.dues');
 
