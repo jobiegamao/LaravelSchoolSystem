@@ -31,7 +31,9 @@ class Fees extends Model
         'misc_ITfee',
         'misc_inst',
         'misc_medfee',
-        'misc_studIns'
+        'misc_studIns',
+        'gradfee',
+        'retreatfee',
     ];
 
     
@@ -59,6 +61,8 @@ class Fees extends Model
     public function totalMisc(){
         $total = $this->misc_dcb + $this->misc_devfee + $this->misc_energyfee + $this->misc_facimp + $this->misc_guidfee
         + $this->misc_ITfee + $this->misc_inst + $this->misc_medfee + $this->misc_studIns + $this->regFee;
+
+        
 
         return round($total,2);
     }

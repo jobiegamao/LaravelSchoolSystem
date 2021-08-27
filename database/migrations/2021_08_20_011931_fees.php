@@ -46,7 +46,6 @@ class Fees extends Migration
                    'misc_studIns'   =>   '1000.00',
                    'gradfee'    =>   '1000.00',
                    'retreatfee'   =>   '1000.00',
-                   'thesisfee'   =>   '1000.00',
             )
         );
 
