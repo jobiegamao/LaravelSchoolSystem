@@ -21,7 +21,8 @@ class StudentUpdate extends Model
         'acadPeriod_id',
         'fees_id',
         'units',
-        'unitsTook'
+        'unitsTook',
+        'isGrad'
     ];
 
 

@@ -9,7 +9,7 @@ use App\Models\Teacher;
 use App\Models\ClassOffering; 
 use App\Models\StudentClass; 
 use App\Models\ClassGrade; 
-
+use App\Models\AcadPeriod; 
 
 class TeacherController extends Controller
 {
@@ -22,10 +22,12 @@ class TeacherController extends Controller
     }
 
     public function classes($id){
+        $acadPeriod = AcadPeriod::latest()->first();
+        
         $classes = ClassOffering::where('teacher_id', $id)
                     ->with('Teacher')
-                    ->orderBy('semester','asc')
-                    ->orderBy('year','desc')
+                    ->where('year', $acadPeriod->acadYear)
+                    ->where('semester', $acadPeriod->acadSem)
                     ->get();
    
         return view('menu_Teacher.teachers.classes.classOfferings', [

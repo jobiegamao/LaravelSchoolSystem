@@ -13,15 +13,7 @@
                     <div class="clearfix"> @include('flash::message')</div>
                 </div>
             </div>
-            <div class="row">
-                {!! Form::open(['id' => 'preregForm','method' => 'POST', 'route' => ['goTo_prereg' , 'id' => $student->person_id  ] ]) !!}
-                {!! Form::hidden('id', $student->person_id ) !!}
-                <a href="javascript:void(0)" class="nav-link {{ Request::is('student/prereg') ? 'active' : '' }}" onclick="$('#preregForm').submit()">
-                    
-                    <p> &larr; Prereg</p>
-                </a>
-                {!! Form::close() !!}
-            </div>
+           
         </div>
     </section>
     {{-- /header --}}
@@ -85,13 +77,10 @@
             
                             </td>
                             <td>
-                                
                                 {{ $classes->StudentCount() }}
                             </td>
                             <td>
-                            
                                 {{ 40 - $classes->StudentCount() }}
-            
                             </td>
                             <td>
                                {{-- Button Add/Drop class code to StudentClass table --}}
@@ -116,7 +105,7 @@
                                             </form>
             
                                         @else
-                 
+                                            @if( $classes->StudentCount() <= 40)
                                             {!! Form::open([ 'route' => 'studentClass.store', 'method' => 'POST' ]) !!}
                                                 {!! Form::hidden('student_id', $student->id ) !!}
                                                 {!! Form::hidden('classOffering_id', $classes->id) !!}
@@ -124,6 +113,7 @@
                                                 {!! Form::hidden('year', $classes->year) !!}
                                                 {{Form::submit('Add',['class' => 'btn btn-primary btn-sm'])}}
                                             {!! Form::close() !!}
+                                            @endif
                                         @endif
                                    @endif
                                    
