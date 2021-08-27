@@ -181,7 +181,10 @@
                                                 $sum = array_sum($grades);
                                                 if(!empty($student->StudentUpdate[0])){
                                                     $totalUnits = $student->StudentUpdate[0]->unitsTook;
-                                                    echo($sum / $totalUnits);
+                                                    if($totalUnits != 0){
+                                                        echo($sum / $totalUnits);
+                                                    }
+                                                    
                                                 }
                                             @endphp
                                         </td>
