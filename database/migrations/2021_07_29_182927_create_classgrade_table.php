@@ -59,6 +59,70 @@ class CreateClassgradeTable extends Migration
 		  'isPass'   =>  '1',
             )
          );
+
+         DB::table('ClassGrade')->insert(
+            array(
+                   'prelimGrade'   =>   '83',
+                   'midtermGrade'   =>   '84',
+                   'prefinalsGrade'   =>   '89',
+		  'isPass'   =>  '1',
+            )
+         );
+
+	DB::table('ClassGrade')->insert(
+            array(
+                   'prelimGrade'   =>   '84',
+                   'midtermGrade'   =>   '85',
+                   'prefinalsGrade'   =>   '92',
+		  'isPass'   =>  '1',
+            )
+         );
+
+	DB::table('ClassGrade')->insert(
+            array(
+                   'prelimGrade'   =>   '85',
+                   'midtermGrade'   =>   '87',
+                   'prefinalsGrade'   =>   '93',
+		  'isPass'   =>  '1',
+            )
+         );
+
+	DB::table('ClassGrade')->insert(
+            array(
+                   'prelimGrade'   =>   '86',
+                   'midtermGrade'   =>   '85',
+                   'prefinalsGrade'   =>   '93',
+		  'isPass'   =>  '1',
+            )
+         );
+
+	DB::table('ClassGrade')->insert(
+            array(
+                   'prelimGrade'   =>   '87',
+                   'midtermGrade'   =>   '89',
+                   'prefinalsGrade'   =>   '91',
+		  'isPass'   =>  '1',
+            )
+         );
+	
+	DB::table('ClassGrade')->insert(
+            array(
+                   'prelimGrade'   =>   '88',
+                   'midtermGrade'   =>   '90',
+                   'prefinalsGrade'   =>   '89',
+		  'isPass'   =>  '1',
+            )
+         );
+
+	DB::table('ClassGrade')->insert(
+            array(
+                   'prelimGrade'   =>   '89',
+                   'midtermGrade'   =>   '92',
+                   'prefinalsGrade'   =>   '90',
+		  'isPass'   =>  '1',
+            )
+         );
+
     }
 
     /**

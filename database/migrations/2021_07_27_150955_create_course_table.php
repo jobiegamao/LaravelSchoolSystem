@@ -34,7 +34,7 @@ class CreateCourseTable extends Migration
         DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'CS 246',
-                   'subjName'   =>   'Computer Programming',
+                   'subjName'   =>   'Computer Programming 1',
                    'units'   =>   '5',
             )
         );
@@ -85,7 +85,7 @@ class CreateCourseTable extends Migration
         DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'CS 2222',
-                   'subjName'   =>   'Computer Programming',
+                   'subjName'   =>   'Computer Programming 2',
                    'units'   =>   '5',
             )
         );
@@ -128,7 +128,7 @@ class CreateCourseTable extends Migration
             array(
                    'subjCode'   =>   'CHE 22444',
                    'subjName'   =>   'Engineering Management',
-                   'units'   =>   '3',
+                   'units'   =>   '5',
             )
         );
         DB::table('Course')->insert(
@@ -153,6 +153,35 @@ class CreateCourseTable extends Migration
             )
         );
        
+        DB::table('Course')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22223',
+                   'subjName'   =>   'Fundamentals of Engineering',
+                   'units'   =>   '3',
+            )
+        );
+	    DB::table('Course')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22224',
+                   'subjName'   =>   'Chemical Process Industries',
+                   'units'   =>   '5',
+            )
+        );
+	    DB::table('Course')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22225',
+                   'subjName'   =>   'Particle Technology',
+                   'units'   =>   '3',
+            )
+        );
+	    DB::table('Course')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22226',
+                   'subjName'   =>   'Biochemical Engineering',
+                   'units'   =>   '5',
+            )
+        );
+
     }
 
     /**

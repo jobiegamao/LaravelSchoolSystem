@@ -91,7 +91,6 @@ class CreateEnrollprogrammeTable extends Migration
                    'description'   =>   'Major',
             )
         );
-
         
     }
 

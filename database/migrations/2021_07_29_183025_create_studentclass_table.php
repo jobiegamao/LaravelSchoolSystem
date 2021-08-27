@@ -69,6 +69,63 @@ class CreateStudentclassTable extends Migration
                    'classGrade_id'   =>   '4',
             )
          );
+
+    DB::table('StudentClass')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'classOffering_id'   =>   '43',
+                   'classGrade_id'   =>   '5',
+            )
+         );
+
+	DB::table('StudentClass')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'classOffering_id'   =>   '44',
+                   'classGrade_id'   =>   '6',
+            )
+         );
+	
+	DB::table('StudentClass')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'classOffering_id'   =>   '45',
+                   'classGrade_id'   =>   '7',
+            )
+         );
+
+	DB::table('StudentClass')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'classOffering_id'   =>   '46',
+                   'classGrade_id'   =>   '8',
+            )
+         );
+	
+	DB::table('StudentClass')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'classOffering_id'   =>   '47',
+                   'classGrade_id'   =>   '9',
+            )
+         );
+
+	DB::table('StudentClass')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'classOffering_id'   =>   '48',
+                   'classGrade_id'   =>   '10',
+            )
+         );
+
+	DB::table('StudentClass')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'classOffering_id'   =>   '49',
+                   'classGrade_id'   =>   '11',
+            )
+         );
+
     }
 
     /**
