@@ -119,7 +119,7 @@ class CreateClassgradeTable extends Migration
                    'prelimGrade'   =>   '89',
                    'midtermGrade'   =>   '92',
                    'prefinalsGrade'   =>   '90',
-		  'isPass'   =>  '1',
+		             'isPass'   =>  '1',
             )
          );
 

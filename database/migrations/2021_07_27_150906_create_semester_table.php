@@ -21,7 +21,41 @@ class CreateSemesterTable extends Migration
             $table->smallInteger('acadYear');
         });
 
-
+        DB::table('AcadPeriod')->insert(
+            array(
+                   'acadSem'   =>   '1',
+                   'acadYear'   =>   '2018',
+              
+            )
+        );
+        DB::table('AcadPeriod')->insert(
+            array(
+                   'acadSem'   =>   '2',
+                   'acadYear'   =>   '2018',
+              
+            )
+        );
+        DB::table('AcadPeriod')->insert(
+            array(
+                   'acadSem'   =>   '0',
+                   'acadYear'   =>   '2019',
+              
+            )
+        );
+        DB::table('AcadPeriod')->insert(
+            array(
+                   'acadSem'   =>   '1',
+                   'acadYear'   =>   '2019',
+              
+            )
+        );
+        DB::table('AcadPeriod')->insert(
+            array(
+                   'acadSem'   =>   '2',
+                   'acadYear'   =>   '2019',
+              
+            )
+        );
         DB::table('AcadPeriod')->insert(
             array(
                    'acadSem'   =>   '0',
