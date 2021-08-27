@@ -114,15 +114,6 @@ class CreateClassgradeTable extends Migration
             )
          );
 
-	DB::table('ClassGrade')->insert(
-            array(
-                   'prelimGrade'   =>   '89',
-                   'midtermGrade'   =>   '92',
-                   'prefinalsGrade'   =>   '90',
-		             'isPass'   =>  '1',
-            )
-         );
-
     }
 
     /**
