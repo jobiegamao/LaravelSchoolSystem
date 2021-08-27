@@ -43,7 +43,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -54,7 +54,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -65,7 +65,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -76,7 +76,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -87,7 +87,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -98,7 +98,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -109,7 +109,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -120,7 +120,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -131,7 +131,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -142,7 +142,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -153,7 +153,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -164,7 +164,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -175,7 +175,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -186,7 +186,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -197,7 +197,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -208,7 +208,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -219,7 +219,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -230,7 +230,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -241,7 +241,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 	DB::table('CourseProgramme')->insert(
@@ -251,7 +251,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -262,7 +262,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -273,7 +273,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -284,7 +284,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 	DB::table('CourseProgramme')->insert(
@@ -294,7 +294,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '2',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -305,7 +305,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '2',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -316,7 +316,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '2',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
@@ -327,11 +327,53 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '2',
-                   'yearImplemented'   =>   '2019',
+                   'yearImplemented'   =>   '2018',
             )
         );
 
+        DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'CHE 22223',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '2',
+                   'yearImplemented'   =>   '2018',
+            )
+        );
 
+	    DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'CHE 22224',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '3',
+                   'yearImplemented'   =>   '2018',
+            )
+        );
+
+	    DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'CHE 22225',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '3',
+                   'yearImplemented'   =>   '2018',
+            )
+        );
+
+	    DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCHE',
+                   'subjCode'   =>   'CHE 22226',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '1',
+                   'yearLevel'   =>   '4',
+                   'yearImplemented'   =>   '2018',
+            )
+        );
        
     }
 

@@ -124,6 +124,15 @@ class CreatePersonTable extends Migration
             )
         );
 
+        DB::table('Person')->insert(
+            array(
+                   'id'   =>   '10010',
+                   'lname'   =>   'Ano',
+		  'fname'   =>   'Andre',
+		  'mname'   =>   'A',
+		  'role'   =>   'Student',
+            )
+        );
 
     }
 

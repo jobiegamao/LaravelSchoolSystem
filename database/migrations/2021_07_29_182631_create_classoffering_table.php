@@ -539,6 +539,92 @@ class CreateClassofferingTable extends Migration
               )
           );
 
+          DB::table('ClassOffering')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22222',
+                   'classCode'   =>   '4-343',
+                   'schedule'   =>   'TTh 5:40-7:10 PM',
+		  'teacher_id'  =>   '30003',
+                   'room'   =>   'F162',
+                   'semester'   =>   '1',
+                   'year'   =>   '2018',
+            )
+        );
+
+	   DB::table('ClassOffering')->insert(
+            array(
+                   'subjCode'   =>   'TRIG 11111',
+                   'classCode'   =>   '4-344',
+                   'schedule'   =>   'MW 1:30-3:00 PM',
+		  'teacher_id'  =>   '30001',
+                   'room'   =>   'F163',
+                   'semester'   =>   '2',
+                   'year'   =>   '2018',
+            )
+        );
+
+	   DB::table('ClassOffering')->insert(
+            array(
+                   'subjCode'   =>   'DIFF 22222',
+                   'classCode'   =>   '4-345',
+                   'schedule'   =>   'TTh 9:20-10:50 AM',
+		  'teacher_id'  =>   '30001',
+                   'room'   =>   'F164',
+                   'semester'   =>   '1',
+                   'year'   =>   '2019',
+            )
+        );
+
+	   DB::table('ClassOffering')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22223',
+                   'classCode'   =>   '4-346',
+                   'schedule'   =>   'MW 9:20-10:50 AM',
+		  'teacher_id'  =>   '30003',
+                   'room'   =>   'F165',
+                   'semester'   =>   '2',
+                   'year'   =>   '2019',
+            )
+        );
+
+	   DB::table('ClassOffering')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22224',
+                   'classCode'   =>   '4-347',
+                   'schedule'   =>   'TTh 1:30-3:00 PM',
+		  'teacher_id'  =>   '30003',
+                   'room'   =>   'F166',
+                   'semester'   =>   '1',
+                   'year'   =>   '2020',
+            )
+        );
+
+	   DB::table('ClassOffering')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22225',
+                   'classCode'   =>   '4-348',
+                   'schedule'   =>   'MW 9:20-10:20 AM',
+		  'teacher_id'  =>   '30003',
+                   'room'   =>   'F167',
+                   'semester'   =>   '2',
+                   'year'   =>   '2020',
+            )
+        );
+
+	   DB::table('ClassOffering')->insert(
+            array(
+                   'subjCode'   =>   'CHE 22226',
+                   'classCode'   =>   '4-349',
+                   'schedule'   =>   'TTh 11:10-12:10 AM',
+		  'teacher_id'  =>   '30003',
+                   'room'   =>   'F168',
+                   'semester'   =>   '1',
+                   'year'   =>   '2021',
+            )
+        );
+
+
+
     }
 
     /**

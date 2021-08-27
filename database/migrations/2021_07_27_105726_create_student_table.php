@@ -69,6 +69,18 @@ class CreateStudentTable extends Migration
 		  'isNew'   =>   '0',
             )
         );
+
+        DB::table('Student')->insert(
+            array(
+                   'id'   =>   '20005',
+                   'person_id'   =>   '10010',
+		  'year'   =>   '4',
+		  'isNew'   =>   '0',
+		  'isGrad'   => '1',
+            )
+        );
+
+
     }
 
     /**
