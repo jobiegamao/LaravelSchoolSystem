@@ -86,11 +86,10 @@ class AdminController extends Controller
     {
         
         $student = Student::find($id);
+        $ap = AcadPeriod::latest()->first();
         //dd($request->all());
 
-        if($request->has('isEnrolled')){
-            $student->update(['isEnrolled' => $request->isEnrolled]);
-        }
+        
         if($request->has('isPass')){
             Student::whereId($id)->update(['isPass' => $request->isPass], $id);
             if($request->isPass == 1){
@@ -105,7 +104,7 @@ class AdminController extends Controller
                 ->latest()->delete();
 
                 // in case if student is mistakenly approved then already added classes
-                $ap = AcadPeriod::latest()->first();
+                
                 $sc = StudentClass::where('student_id',$id)
                      ->whereHas('ClassOffering',  function ($query) use($ap){
                         $query->where('year', $ap->acadYear)->where('semester', $ap->acadSem);

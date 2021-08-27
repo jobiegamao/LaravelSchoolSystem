@@ -118,13 +118,7 @@ class CreateStudentclassTable extends Migration
             )
          );
 
-	DB::table('StudentClass')->insert(
-            array(
-                   'student_id'   =>   '20005',
-                   'classOffering_id'   =>   '49',
-                   'classGrade_id'   =>   '11',
-            )
-         );
+	
 
     }
 

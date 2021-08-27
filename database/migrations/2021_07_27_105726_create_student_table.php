@@ -75,7 +75,7 @@ class CreateStudentTable extends Migration
                    'person_id'   =>   '10010',
                     'year'   =>   '4',
                     'isNew'   =>   '0',
-                    'isGrad'   =>   '1',
+                    'isPass'   =>   '1',
             )
         );
 

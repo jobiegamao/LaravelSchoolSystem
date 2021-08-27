@@ -94,7 +94,7 @@ class StudentController extends Controller
                 })
                 ->get();
 
-        session()->flashInput($request->input());
+       // session()->flashInput($request->input());
         return view('menu_Student.grades.grades', [
             'student' => $student,
             'classes' => $classes,
@@ -105,28 +105,7 @@ class StudentController extends Controller
     }
 
     public function balance(Request $request, $id){
-        $student = Student::where('person_id', $id)
-                    ->with('StudentUpdateLatest')
-                    ->first();
-        $latest = true;
-        
-        if($request->has('acadPeriod_id')){
-            $latest = false;
-            $student = Student::where('person_id', $id)
-                    ->with(['StudentUpdate' => function ($query) use($request){
-                        $query->where('acadPeriod_id',$request->acadPeriod_id);
-                        }])
-                    ->first();
-        }
-        
-        $fees = Fees::latest()->first();
-   
-        return view('menu_Student.balance.view', [
-            'fees' => $fees,
-            'student' => $student,
-            'latest' => $latest
-            ]
-        );
+       //
     }
 
     public function calculateQPI($classes){

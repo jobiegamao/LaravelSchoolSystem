@@ -30,7 +30,7 @@ class Fees extends Migration
             $table->decimal('misc_studIns', 10, 2)->nullable();
             $table->decimal('gradfee', 10, 2)->nullable();
             $table->decimal('retreatfee', 10, 2)->nullable();
-            $table->decimal('labfee', 10, 2)->nullable();
+            
         });
 
         DB::table('Fees')->insert(
@@ -49,7 +49,7 @@ class Fees extends Migration
                    'misc_studIns'   =>   '1000.00',
                    'gradfee'    =>   '1000.00',
                    'retreatfee'   =>   '1000.00',
-                   'labfee'   =>   '1000.00',  
+                    
             )
         );
 
