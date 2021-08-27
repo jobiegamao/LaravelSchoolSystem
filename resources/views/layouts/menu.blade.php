@@ -56,12 +56,14 @@
       {{-- FOR STUDENT MENU --}}
       <li class="nav-header"><b>STUDENT</b></li>
 
+        @if(Auth::user()->Person->Student->isEnrolled == 1 || Auth::user()->Person->Student->isNew != 1 )
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link {{ Request::is('student/*/grades') ? 'active' : '' }}" onclick="$('#gradesForm').submit()">
             <i class="nav-icon fas fa-address-card"></i>
             <p>My Grades</p>
           </a>
         </li>
+        @endif
 
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link {{ Request::is('student/courses/curriculum') ? 'active' : '' }}" onclick="$('#curricForm').submit()">
@@ -78,13 +80,15 @@
           </a>
         </li>
         @endif
-        
+
+       
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link {{ Request::is('student/*/balance') ? 'active' : '' }}" onclick="$('#balForm').submit()">
             <i class="nav-icon fas fa-wallet"></i>
             <p>My Balance</p>
           </a>
         </li>
+        
       {{-- /FOR STUDENT MENU --}}
   
     @endif

@@ -28,6 +28,9 @@ class Fees extends Migration
             $table->decimal('misc_inst', 10, 2)->nullable();
             $table->decimal('misc_medfee', 10, 2)->nullable();
             $table->decimal('misc_studIns', 10, 2)->nullable();
+            $table->decimal('gradfee', 10, 2)->nullable();
+            $table->decimal('retreatfee', 10, 2)->nullable();
+            $table->decimal('labfee', 10, 2)->nullable();
         });
 
         DB::table('Fees')->insert(
