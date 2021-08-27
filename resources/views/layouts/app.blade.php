@@ -40,7 +40,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/temp/fontawesome.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/temp/lightbox.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/temp/owl.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/temp/templatemo-grad-school.css') }}"> 
+  <link rel="stylesheet" href="{{ asset('plugins/temp/templatemo-grad-school.css') }}">  
   @yield('css')
 </head>
 
@@ -49,7 +49,7 @@
  
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light " style="color:white;position:fixed;width:95%">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light ">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
