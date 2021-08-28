@@ -580,7 +580,7 @@ class CreateClassofferingTable extends Migration
                    'subjCode'   =>   'CHE 22223',
                    'classCode'   =>   '4-346',
                    'schedule'   =>   'MW 9:20-10:50 AM',
-		  'teacher_id'  =>   '30003',
+		     'teacher_id'  =>   '30003',
                    'room'   =>   'F165',
                    'semester'   =>   '2',
                    'year'   =>   '2019',

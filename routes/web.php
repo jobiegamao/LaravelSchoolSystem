@@ -72,4 +72,5 @@ Route::get('registrar/{id}/payments-history', 'App\Http\Controllers\RegistrarCon
 // Route::post('registrar/{id}/balance', 'App\Http\Controllers\RegistrarController@balanceShow')->name('balance.show');
 Route::get('registrar/{id}/balance', 'App\Http\Controllers\RegistrarController@balance')->name('balance');
 Route::get('registrar/update-dues', 'App\Http\Controllers\RegistrarController@updateDues')->name('update.dues');
+Route::patch('registrar/tag/{id}', 'App\Http\Controllers\RegistrarController@updateEnrollTag')->name('update.enrollTag');
 

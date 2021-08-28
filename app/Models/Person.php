@@ -35,26 +35,6 @@ class Person extends Model
         'role'
     ];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'lname' => 'string',
-        'fname' => 'string',
-        'mname' => 'string',
-        'birthdate' => 'date',
-        'sex' => 'string',
-        'email' => 'string',
-        'contactNo' => 'integer',
-        'emergencyContactName' => 'string',
-        'emergencyContactNo' => 'integer',
-        'address' => 'string',
-        'passsword' => 'string',
-        'role' => 'string'
-    ];
 
     /**
      * Validation rules
@@ -104,6 +84,11 @@ class Person extends Model
     public function Payments()
     {
         return $this->hasMany(Payments::class, 'person_id');
+    }
+
+    public function PaymentLatest()
+    {
+        return $this->hasOne(Payments::class, 'person_id')->latestOfMany('id');
     }
 
     

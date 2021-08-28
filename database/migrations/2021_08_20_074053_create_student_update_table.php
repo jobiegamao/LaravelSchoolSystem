@@ -43,6 +43,8 @@ class CreateStudentUpdateTable extends Migration
             $table->decimal('currDue', 10, 2)->nullable()->default(0.00);
             $table->decimal('adjustments', 10, 2)->nullable()->default(0.00);
 
+            //is graduating? || is this the last sem of student
+            $table->boolean('isGrad')->default(0);
             
         });
 
@@ -55,8 +57,6 @@ class CreateStudentUpdateTable extends Migration
                    'unitsTook'   =>   '6',
                    'final'   =>   '88.36',
                    'currDue'   =>   '16000.00',
-                   
-                   
             )
         );
 
@@ -69,10 +69,75 @@ class CreateStudentUpdateTable extends Migration
                    'unitsTook'   =>   '6',
                    'final'   =>   '79.67',
                    'currDue'   =>   '16000.00',
+            )
+        );
+
+        //new data
+        DB::table('StudentUpdate')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'acadPeriod_id'   =>   '1',
+                   'fees_id'   =>   '1',
+                   'units'   =>   '15',
+                   'unitsTook'   =>   '3',
+            )
+        );
+        DB::table('StudentUpdate')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'acadPeriod_id'   =>   '2',
+                   'fees_id'   =>   '1',
+                   'units'   =>   '15',
+                   'unitsTook'   =>   '3',
+            )
+        );
+        DB::table('StudentUpdate')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'acadPeriod_id'   =>   '4',
+                   'fees_id'   =>   '1',
+                   'units'   =>   '15',
+                   'unitsTook'   =>   '3',
+            )
+        );
+        DB::table('StudentUpdate')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'acadPeriod_id'   =>   '5',
+                   'fees_id'   =>   '1',
+                   'units'   =>   '15',
+                   'unitsTook'   =>   '3',
+            )
+        );
+        DB::table('StudentUpdate')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'acadPeriod_id'   =>   '7',
+                   'fees_id'   =>   '1',
+                   'units'   =>   '15',
+                   'unitsTook'   =>   '3',
+            )
+        );
+        DB::table('StudentUpdate')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'acadPeriod_id'   =>   '8',
+                   'fees_id'   =>   '1',
+                   'units'   =>   '15',
+                   'unitsTook'   =>   '3',
+            )
+        );
+
+        DB::table('StudentUpdate')->insert(
+            array(
+                   'student_id'   =>   '20005',
+                   'acadPeriod_id'   =>   '10',
+                   'fees_id'   =>   '1',
+                   'units'   =>   '15',
+                   'isGrad' => '1'
                    
             )
         );
-        //new data
        
 
 

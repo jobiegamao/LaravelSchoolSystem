@@ -56,5 +56,10 @@ class Course extends Model
     {
         return $this->hasMany(CourseProgramme::class, 'subjCode', 'subjCode');
     }
+
+    public function ClassOffering()
+    {
+        return $this->hasMany(ClassOffering::class, 'subjCode', 'subjCode');
+    }
     
 }

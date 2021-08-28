@@ -114,6 +114,8 @@ class CreateClassgradeTable extends Migration
             )
          );
 
+	
+
     }
 
     /**

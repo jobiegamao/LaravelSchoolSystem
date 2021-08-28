@@ -10,6 +10,7 @@
             <th><small>Units</small></th>
             <th><small>Curriculum</small></th>
             <th><small>Courses</small></th>
+            <th><small>Balance</small></th>
             <th><small>Enrollment Status</small></th>
             <th><small>Action</small></th>
         </tr>
@@ -88,8 +89,14 @@
                     {!! Form::close() !!}
                 </td>
                 <td>
+                    <a href="{{ route('balance', [$students->person_id]) }}"
+                        class='btn btn-link p-0'>
+                        Balance
+                    </a> 
+                </td>
+                <td>
                     {{-- finance should have a table data like this to tag student as enrolled --}}
-                    {!! Form::model($students, ['route' => ['student.update', $students->id], 'method' => 'patch']) !!}
+                    {!! Form::model($students, ['route' => ['update.enrollTag', $students->id], 'method' => 'patch']) !!}
                   
                     @switch($students->isEnrolled)
                         @case(0)

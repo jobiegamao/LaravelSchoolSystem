@@ -20,6 +20,7 @@ class CreateCourseTable extends Migration
             $table->string('subjCode')->primary();
             $table->string('subjName');
             $table->smallInteger('units')->nullable()->default(3);
+            $table->decimal('labFee', 10, 2)->nullable()->default(0);
 
         });
 
@@ -27,7 +28,8 @@ class CreateCourseTable extends Migration
             array(
                    'subjCode'   =>   'CS 123',
                    'subjName'   =>   'Intro to Computing',
-                   'units'   =>   '5',
+                   'units'   =>   '3',
+                   'labFee' => '1000.00'
             )
         );
 
@@ -35,7 +37,8 @@ class CreateCourseTable extends Migration
             array(
                    'subjCode'   =>   'CS 246',
                    'subjName'   =>   'Computer Programming 1',
-                   'units'   =>   '5',
+                   'units'   =>   '3',
+                   'labFee' => '1000.00'
             )
         );
 
@@ -86,7 +89,8 @@ class CreateCourseTable extends Migration
             array(
                    'subjCode'   =>   'CS 2222',
                    'subjName'   =>   'Computer Programming 2',
-                   'units'   =>   '5',
+                   'units'   =>   '3',
+                   'labFee' => '1000.00'
             )
         );
         DB::table('Course')->insert(
@@ -100,14 +104,16 @@ class CreateCourseTable extends Migration
             array(
                    'subjCode'   =>   'CS 456',
                    'subjName'   =>   'Object Oriented Programming',
-                   'units'   =>   '5',
+                   'units'   =>   '3',
+                   'labFee' => '1000.00'
             )
         );
         DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'CHE 22111',
                    'subjName'   =>   'Chemistry for Engineers',
-                   'units'   =>   '5',
+                   'units'   =>   '3',
+                   'labFee' => '1000.00'
             )
         );
         DB::table('Course')->insert(
@@ -128,7 +134,8 @@ class CreateCourseTable extends Migration
             array(
                    'subjCode'   =>   'CHE 22444',
                    'subjName'   =>   'Engineering Management',
-                   'units'   =>   '5',
+                   'units'   =>   '3',
+                   'labFee' => '1000.00'
             )
         );
         DB::table('Course')->insert(
@@ -164,7 +171,8 @@ class CreateCourseTable extends Migration
             array(
                    'subjCode'   =>   'CHE 22224',
                    'subjName'   =>   'Chemical Process Industries',
-                   'units'   =>   '5',
+                   'units'   =>   '3',
+                   'labFee' => '1000.00'
             )
         );
 	    DB::table('Course')->insert(
@@ -172,13 +180,15 @@ class CreateCourseTable extends Migration
                    'subjCode'   =>   'CHE 22225',
                    'subjName'   =>   'Particle Technology',
                    'units'   =>   '3',
+                   
             )
         );
 	    DB::table('Course')->insert(
             array(
                    'subjCode'   =>   'CHE 22226',
                    'subjName'   =>   'Biochemical Engineering',
-                   'units'   =>   '5',
+                   'units'   =>   '3',
+                   'labFee' => '1000.00'
             )
         );
 

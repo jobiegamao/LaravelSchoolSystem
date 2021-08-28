@@ -5,6 +5,7 @@ use Flash;
 use Illuminate\Http\Request;
 use App\Models\Person; 
 use App\Models\Student;
+use App\Models\Course;
 use App\Models\StudentUpdate;
 use App\Models\Fees; 
 use App\Models\ClassOffering;
@@ -68,20 +69,13 @@ class RegistrarController extends Controller
                 return view('menu_Student.balance.balance', [
                     'fees' => $fees,
                     'student' => $student,
-                    'balance' => 0.0,
-                    'totalPay'=> 0.0,
-                    'unitsFee'=> 0.0,
-                    'totalTuition'=> 0.0,
-                    'currDue' =>0.0,
-                    'adj' =>0.0,
+                    'isGrad' => 0,
                     'acadPeriod' => $acadPeriod,
                     ]
                 );
             }
     
         }
-
-        
 
         $totalPay = 0.00;
         foreach($student->Person->Payments as $pay){
@@ -93,50 +87,76 @@ class RegistrarController extends Controller
             }
         }
 
+
+        ##lab fees
+        $totalLabFee = 0;
+            //get courses of student on the specified year and sem
+        $c = Course::
+            whereHas('ClassOffering', function ($query) use($acadPeriod){
+                $query->where('year', $acadPeriod->acadYear)
+                      ->where('semester', $acadPeriod->acadSem);
+            })
+            ->whereHas('ClassOffering.StudentClass', function ($query) use($student){
+                $query->where('student_id', $student->id);
+            })
+            ->get();
+
+        foreach($c as $c){
+            $totalLabFee += $c->labFee;
+        }
+         
         $totalTuition = 0;
         if($latest){
+            $isGrad = $student->StudentUpdateLatest->isGrad;
             $unitsFee = $student->StudentUpdateLatest->unitsTook *  $fees->unitsFee;
-            
             $adj = $student->StudentUpdateLatest->adjustments;
             $currDue = $student->StudentUpdateLatest->currDue;
 
-            //in case if wala pa na update
+            //in case if wala pa na update sa table
             if($unitsFee > 0 && $currDue == 0){
                 $s = $student->StudentUpdateLatest; 
                 $s->currDue =  $unitsFee + $fees->totalMisc();
                 $s->save();
+                $currDue = $student->StudentUpdateLatest->currDue;
             }
-            $currDue = $student->StudentUpdateLatest->currDue;
+            
             
         }else {
+            $isGrad = $student->StudentUpdate[0]->isGrad;
             $unitsFee = $student->StudentUpdate[0]->unitsTook *  $fees->unitsFee; 
             $adj = $student->StudentUpdate[0]->adjustments;
             $currDue = $student->StudentUpdate[0]->currDue;
-            //in case if wala pa na update
+            
+            //in case if wala pa na update sa table
             if($unitsFee > 0 && $currDue == 0){
                 $s = $student->StudentUpdate[0]; 
                 $s->currDue =  $unitsFee + $fees->totalMisc();
                 $s->save();
+                $currDue = $student->StudentUpdate[0]->currDue;
             }
-            $currDue = $student->StudentUpdate[0]->currDue;
-            
-           
         }
        
 
-        $totalTuition += $unitsFee + $fees->totalMisc();
+        $totalTuition += $unitsFee + $fees->totalMisc() + $totalLabFee;
+        if($isGrad){
+            $totalTuition += $fees->totalGradFee();
+        }
         $balance = $totalTuition - $totalPay - $adj;
-
+        if($currDue == 0){
+            $balance = 0;
+        }
    
         return view('menu_Student.balance.balance', [
             'fees' => $fees,
             'student' => $student,
             'balance' => $balance,
             'totalPay'=> $totalPay,
+            'totalLabFee'=> $totalLabFee,
             'unitsFee'=> $unitsFee,
             'totalTuition'=> $totalTuition,
-            'currDue' =>$currDue,
+            
             'adj' =>$adj,
+            'isGrad' => $isGrad,
             'acadPeriod' => $acadPeriod,
             ]
         );
@@ -145,18 +165,40 @@ class RegistrarController extends Controller
     public function updateDues(){
         $acadPeriod = AcadPeriod::latest()->first();
         $fees = Fees::latest()->first();
-
         $s = StudentUpdate::where('acadPeriod_id', $acadPeriod->id)->get();
-
         foreach($s as $s){
             if($s->unitsTook > 0){
                 $s->currDue = $s->unitsTook * $fees->unitsFee + $fees->totalMisc();
                 $s->save();
             }
         }
-
-    
-
         return back();
+    }
+
+    public function updateEnrollTag(Request $request,$id ){
+         $student = Student::find($id);
+         $ap = AcadPeriod::latest()->first();
+
+         if($request->isEnrolled == 0){
+            $student->update(['isEnrolled' => 0]);
+            Flash::success('Student Updated Successfully.');
+            return back();
+         }
+        
+         if($student->Person->PaymentLatest == null){
+            Flash::error('Balance Account is Not Yet Settled');
+            return back();
+         }
+         $due = $student->StudentUpdateLatest->currDue;
+         if($student->Person->PaymentLatest->acadPeriod_id == $ap->id &&
+            $student->Person->PaymentLatest->amount >= ($due * .10)
+         ){
+             $student->update(['isEnrolled' => $request->isEnrolled]);
+
+         }else{
+             Flash::error('Balance Account is Not Yet Settled');
+             
+         }
+         return back();
     }
 }

@@ -12,6 +12,7 @@
             
             <th>Courses</th>
             <th>Grades</th>
+            <th>Balance</th>
             <th>Evaluation Pass <br><small>Pass for Next Enrollment</small></th>
             {{-- <th>Year Promotion<br><small>Promote College Level</small></th> --}}
             <th>Action</th>
@@ -75,7 +76,12 @@
 
                 </td>
 
-
+                <td>
+                    <a href="{{ route('balance', [$students->person_id]) }}"
+                        class='btn btn-link p-0'>
+                        Balance
+                    </a> 
+                </td>
                 
                 <td>
                     {{-- promote student to next sem, isPass to be true if allowed to enroll next sem --}}
@@ -96,12 +102,7 @@
                     
                 </td>
 
-                {{-- <td>
-                    {!! Form::model($students, ['route' => ['student.update', $students->id], 'method' => 'patch']) !!}
-                        {!! Form::hidden('year', $students->year + 1 ) !!}
-                    {{Form::submit('Promote',['class' => 'btn btn-default'])}}
-                    {!!Form::close()!!} 
-                </td> --}}
+                
                 <td>
 
                     {{-- Edit programme type status && Delete Student ID --}}

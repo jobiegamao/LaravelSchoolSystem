@@ -45,7 +45,7 @@
                             <tr>
                                 <td>
                                     {{-- finance should have a table data like this to tag student as enrolled --}}
-                                    {!! Form::model($students, ['route' => ['student.update', $students->id], 'method' => 'patch']) !!}
+                                    {!! Form::model($students, ['route' => ['update.enrollTag', $students->id], 'method' => 'patch']) !!}
                                   
                                     @switch($students->isEnrolled)
                                         @case(0)
@@ -109,7 +109,7 @@
                                     
                                     <a href="{{ route('balance', [$students->person_id]) }}"
                                         class='btn btn-link p-0'>
-                                        balance
+                                       Balance
                                     </a> 
                                     
                                 </td>
