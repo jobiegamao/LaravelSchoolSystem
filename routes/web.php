@@ -38,7 +38,7 @@ Route::get('student/promotion-list', 'App\Http\Controllers\AdminController@stude
 
 
 Route::get('enrollProgramme/{id}', 'App\Http\Controllers\AdminController@goTo_enrollProgramme')->name('goTo_enrollProgramme');
-Route::post('enrollProgramme/edit/{id}', 'App\Http\Controllers\AdminController@enrollProgrammeEdit')->name('enrollProgramme.edit');
+Route::get('enrollProgramme/edit/{id}', 'App\Http\Controllers\AdminController@enrollProgrammeEdit')->name('enrollProgramme.edit');
 Route::post('enrollProgramme/store', 'App\Http\Controllers\AdminController@enrollProgrammeStore')->name('enrollProgramme.store');
 Route::patch('enrollProgramme/update-status', 'App\Http\Controllers\AdminController@enrollProgrammeUpdate')->name('enrollProgramme.update');
 Route::delete('enrollProgramme/delete/{id}', 'App\Http\Controllers\AdminController@enrollProgrammeDelete')->name('enrollProgramme.delete');
