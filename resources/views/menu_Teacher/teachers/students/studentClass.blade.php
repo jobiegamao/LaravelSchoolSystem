@@ -6,19 +6,20 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-10">
+                <div class="col-sm-12 text-center">
                     <h1>Class Code: {{ $class->classCode }}</h1>
-                    <h1>{{ $class->Course->subjCode }}</h1>
+                    <span>{{ $class->Course->subjCode }}</span>
+                    <span>{{ $class->Course->subjName }}</span>
+                    <hr>
                     <div class="clearfix"> @include('flash::message')</div>
                 </div>
                 <div class="col-sm-2">
                     @if (Auth::user()->role == 'Teacher')
                         {!! Form::open(['method' => 'POST', 'route' => 'teacher.report' , 'id' => 'submitForm']) !!}
                                 {!! Form::hidden('classOffering_id', $class->id) !!}
-                                {{Form::submit('Submit Grade Report',['class' => 'btn btn-primary btn', 
-                                 'onclick' => "return confirm(
-                                     'Are you sure all grades are filled and final? 
-                                     Grade Reports are irreversable')"])}}
+                                {{Form::button('Submit Grade Report',['class' => 'btn btn-primary btn', 
+                                'type' => 'submit', 'onclick' => "return confirm('WARNING: Submission of reports is irreversable. 
+                                Contact Registrar for changes after submission.')" ])}}
                         {!! Form::close() !!}
                     @endif
                     

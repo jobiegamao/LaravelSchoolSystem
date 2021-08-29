@@ -68,11 +68,14 @@ Route::any('student/prereg', 'App\Http\Controllers\RegistrarController@goTo_prer
 Route::any('studentClass/add', 'App\Http\Controllers\RegistrarController@studentClassStore')->name('studentClass.store');
 Route::delete('studentClass/drop', 'App\Http\Controllers\RegistrarController@studentClassDelete')->name('studentClass.delete');
 
-Route::get('finance/index', 'App\Http\Controllers\FinanceController@index')->name('registrar.index');
+Route::get('finance/index', 'App\Http\Controllers\FinanceController@index')->name('finance.index');
 Route::get('finance/add-payment/{id}', 'App\Http\Controllers\FinanceController@goTo_payment')->name('goTo_payment');
 Route::post('finance/add-payment/{id}', 'App\Http\Controllers\FinanceController@paymentStore')->name('payment.store');
 Route::get('finance/{id}/payments-history', 'App\Http\Controllers\FinanceController@paymentShow')->name('payment.show');
+Route::get('finance/payments', 'App\Http\Controllers\FinanceController@paymentsAll')->name('payments.all');
 Route::get('finance/{id}/balance', 'App\Http\Controllers\FinanceController@balance')->name('balance');
 Route::get('finance/update-dues', 'App\Http\Controllers\FinanceController@updateDues')->name('update.dues');
 Route::patch('finance/tag/{id}', 'App\Http\Controllers\FinanceController@updateEnrollTag')->name('update.enrollTag');
 
+Route::get('finance/course-fees', 'App\Http\Controllers\FinanceController@coursefees')->name('finance.coursefees');
+Route::patch('finance/course-fees/update', 'App\Http\Controllers\FinanceController@coursefeesUpdate')->name('finance.coursefeesUpdate');

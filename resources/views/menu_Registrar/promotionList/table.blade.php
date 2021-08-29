@@ -13,7 +13,7 @@
             <th>Courses</th>
             <th>Grades</th>
             <th>Balance</th>
-            <th>Evaluation Pass <br><small>Pass for Next Enrollment</small></th>
+            <th>Evaluation Pass <br><small>Pass for Enrollment</small></th>
             {{-- <th>Year Promotion<br><small>Promote College Level</small></th> --}}
             <th>Action</th>
         </tr>

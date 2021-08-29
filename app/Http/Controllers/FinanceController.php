@@ -31,7 +31,7 @@ class FinanceController extends Controller
         
         Payments::create($request->all());
         Flash::success('Payment saved successfully.');
-        return redirect()->route('registrar.index');
+        return redirect()->route('finance.index');
     }
 
     public function paymentShow($id){
@@ -202,4 +202,28 @@ class FinanceController extends Controller
          }
          return back();
     }
+
+    public function coursefees(){
+        
+        $c = Course::all();
+        return view('menu_Finance.coursefees', [
+            'course' => $c
+        ]);
+    }
+    public function coursefeesUpdate(Request $request){
+        
+        Course::where('subjCode',$request->subjCode)
+        ->update(['labFee' => $request->labFee]);
+        Flash::success('Course Fee Updated Successfully.');
+        return back();
+    }
+
+    public function paymentsAll(){
+        $payments = Payments::all();
+        
+        return view('menu_Finance.payments_all' ,[
+             'payments' => $payments
+        ]);
+    }
+
 }

@@ -11,9 +11,10 @@
       </li>
       
     @if (Auth::user()->role == 'Registrar' || Auth::user()->role == 'Super Admin')
+      
       <li class="nav-item">
-        <a href="javascript:void(0)" 
-          class="nav-link {{ Request::is('teacher*') ? 'active' : '' }}" onclick="$('#teachListForm').submit()">
+        <a href="{{ route('teacher.list')}}"
+          class="nav-link {{ Request::is('teacher*') ? 'active' : '' }}" >
           <i class="fas fa-chalkboard-teacher nav-icon"></i>
           <p>Teachers</p>
         </a>
@@ -22,7 +23,7 @@
       <li class="nav-item">
         <a href="{{ route('goTo_promotionList.index') }}" 
           class="nav-link {{ Request::is('students/promotion-list') ? 'active' : '' }}" >
-          <i class="fas fa-user nav-icon"></i>
+          <i class="fas fa-user-friends nav-icon"></i>
           <p>Students</p>
         </a>
       </li>
@@ -84,7 +85,7 @@
         @if(!(Auth::user()->Person->Student->StudentUpdate->isEmpty()) )
         <li class="nav-item">
           <a href="{{ route('balance', Auth::user()->person_id)}}"
-            class="nav-link {{ Request::is('student/*/balance') ? 'active' : '' }}">
+            class="nav-link {{ Request::is('finance/*/balance') ? 'active' : '' }}">
             <i class="fas fa-calendar-alt nav-icon"></i>
             <p>My Balance</p>
           </a>
@@ -97,27 +98,43 @@
     @if (Auth::user()->role == 'Teacher')
       <li class="nav-item">
         <a href="{{ route('teacher.classes', Auth::user()->Person->Teacher->id)}}"
-          class="nav-link {{ Request::is('/teacher/*/current-classes') ? 'active' : '' }}" >
-          <i class="fas fa-clipboard-list nav-icon"></i>
-          <p>Active Classes</p>
+          class="nav-link {{ Request::is('teacher/*/current-classes') ? 'active' : '' }}" >
+          <i class="fas fa-chalkboard nav-icon"></i>
+          <p>My Active Classes</p>
         </a>
       </li>
       
       <li class="nav-item">
         <a href="{{ route('teacher.allclasses', Auth::user()->Person->Teacher->id)}}"
-          class="nav-link {{ Request::is('/teacher/*/all-classes') ? 'active' : '' }}" >
-          <i class="fas fa-clipboard-list nav-icon"></i>
-          <p>Classes History</p>
+          class="nav-link {{ Request::is('teacher/*/all-classes') ? 'active' : '' }}" >
+          <i class="fas fa-history nav-icon"></i>
+          <p>My Class History</p>
         </a>
       </li>
     @endif
 
     @if (Auth::user()->role == 'Finance')
       <li class="nav-item">
-        <a href="{{ route('registrar.index') }}"
+        <a href="{{ route('finance.index') }}"
           class="nav-link {{ Request::is('finance/index') ? 'active' : '' }}">
           <i class="fas fa-users nav-icon"></i>
           <p>SOAs</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="{{ route('payments.all')}}"
+          class="nav-link {{ Request::is('finance/payments') ? 'active' : '' }}" >
+          <i class="fas fa-clipboard-list nav-icon"></i>
+          <p>Payment Records</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="{{ url('finance/course-fees') }}"
+          class="nav-link {{ Request::is('finance/course-fees') ? 'active' : '' }}">
+          <i class="fas fa-flask nav-icon"></i>
+          <p>Course Fees</p>
         </a>
       </li>
 

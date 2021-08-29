@@ -6,14 +6,7 @@ use Eloquent as Model;
 
 
 
-/**
- * Class Course
- * @package App\Models
- * @version August 1, 2021, 8:33 pm UTC
- *
- * @property string $subjCode
- * @property string $subjName
- */
+
 class Course extends Model
 {
     
@@ -35,7 +28,8 @@ class Course extends Model
     public $fillable = [
         'subjCode',
         'subjName',
-        'units'
+        'units',
+        'labFee'
     ];
 
     
@@ -49,7 +43,8 @@ class Course extends Model
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'subjCode' => 'required|string|max:191',
-        'subjName' => 'required|string|max:191'
+        'subjName' => 'required|string|max:191',
+        'labFee' => 'float'
     ];
 
     public function CourseProgramme()
