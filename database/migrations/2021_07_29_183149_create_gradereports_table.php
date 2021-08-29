@@ -24,6 +24,91 @@ class CreateGradereportsTable extends Migration
 
 
         });
+
+        DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'CHE 22222',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'CHE 22222',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'CHE 22333',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'CHE 22333',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'TRIG 11111',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'TRIG 11111',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'GE 222',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'GE 222',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'CHE 22222',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'TRIG 11111',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'DIFF 22222',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'CHE 22223',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'CHE 22224',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   'CHE 22225',
+            )
+         );
+
     }
 
     /**
