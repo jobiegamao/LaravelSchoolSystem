@@ -27,85 +27,85 @@ class CreateGradereportsTable extends Migration
 
         DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'CHE 22222',
+                   'classOffering_id'   =>   '35',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'CHE 22222',
+                   'classOffering_id'   =>   '36',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'CHE 22333',
+                   'classOffering_id'   =>   '37',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'CHE 22333',
+                   'classOffering_id'   =>   '38',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'TRIG 11111',
+                   'classOffering_id'   =>   '39',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'TRIG 11111',
+                   'classOffering_id'   =>   '40',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'GE 222',
+                   'classOffering_id'   =>   '41',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'GE 222',
+                   'classOffering_id'   =>   '42',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'CHE 22222',
+                   'classOffering_id'   =>   '43',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'TRIG 11111',
+                   'classOffering_id'   =>   '44',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'DIFF 22222',
+                   'classOffering_id'   =>   '45',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'CHE 22223',
+                   'classOffering_id'   =>   '46',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'CHE 22224',
+                   'classOffering_id'   =>   '47',
             )
          );
 
          DB::table('GradeReports')->insert(
             array(
-                   'classOffering_id'   =>   'CHE 22225',
+                   'classOffering_id'   =>   '48',
             )
          );
 
