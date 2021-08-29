@@ -62,17 +62,19 @@
                 
                 <td>
                     {{-- curric  --}}
-                    {!! Form::open(['method' => 'GET', 'route' => 'courseProgramme.show' ]) !!}
-                        {!! Form::hidden('id', $students->person_id ) !!}   
-                        {{Form::submit('Curriculum',['class' => 'btn btn-link'])}}
-                    {!! Form::close() !!}
+                    <a href="{{ route('courseProgramme.show', ['id' => $students->person_id]) }}"
+                        class='btn btn-link p-0'>
+                        Curriculum
+                    </a> 
                 </td>
 
                 <td>
                     {{-- class grade of student per sem  --}}
-                    {!! Form::open(['method' => 'GET', 'route' => ['grades.show', 'id' => $students->id] ]) !!}
-                    {{Form::submit('Grades',['class' => 'btn btn-link'])}}
-                    {!! Form::close() !!}
+                    
+                    <a href="{{ route('grades.show', ['id' => $students->id]) }}"
+                        class='btn btn-link p-0'>
+                        Grades
+                    </a> 
 
                 </td>
 

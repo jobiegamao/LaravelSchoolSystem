@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="content-header" style="padding-top: 8%">
+<section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-md-10 col-md-offset-1">

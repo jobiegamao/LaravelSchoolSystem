@@ -7,6 +7,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12 text-center">
                     <h1>Registrar's List</h1>
+                    <hr>
                 </div>
                 
             </div>
@@ -24,7 +25,6 @@
                         <thead>
                         <tr>
                             <th>Enrollment Status</th>
-                            
                             <th>ID</th>
                             <th>SID</th>
                             <th>Name</th>
@@ -32,7 +32,6 @@
                             <th></th>
                             <th></th>
                             <th></th>
-
                             <th></th>
                             <th></th>
                             <th></th>

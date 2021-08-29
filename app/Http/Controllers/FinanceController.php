@@ -44,7 +44,7 @@ class FinanceController extends Controller
  
     public function balance(Request $request, $id){
         $student = Student::where('person_id', $id)
-                    ->with('StudentUpdateLatest', 'Person.Payments')
+                    ->with('StudentUpdateLatest','Person.Payments')
                     ->first();
         $latest = true;
         

@@ -23,13 +23,12 @@ class AcadPeriodController extends AppBaseController
     {
        
         $acadPeriods = AcadPeriod::all();
-        $current_year = AcadPeriod::latest()->value('acadYear');
-        $current_sem = AcadPeriod::latest()->value('acadSem');
+        $currentPeriod = AcadPeriod::latest()->first();
+       
 
         return view('menu_Registrar/acad_periods/index', [
             'acadPeriods' => $acadPeriods,
-            'current_year' =>$current_year,
-            'current_sem' => $current_sem
+            'currentPeriod' => $currentPeriod
         ]);
     }
 

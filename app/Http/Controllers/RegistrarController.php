@@ -101,10 +101,10 @@ class RegistrarController extends Controller
                 $this->studentUpdateUnits($su);
             }else{
                 StudentUpdate::where('student_id',$id)
-                ->latest()->delete();
+                               ->where('acadPeriod_id',$ap->id)
+                               ->delete();
 
                 // in case if student is mistakenly approved then already added classes
-                
                 $sc = StudentClass::where('student_id',$id)
                      ->whereHas('ClassOffering',  function ($query) use($ap){
                         $query->where('year', $ap->acadYear)->where('semester', $ap->acadSem);
