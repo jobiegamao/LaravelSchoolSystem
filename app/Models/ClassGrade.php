@@ -6,15 +6,11 @@ use Eloquent as Model;
 
 class ClassGrade extends Model
 {
-    
-
 
     public $table = 'ClassGrade';
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
-
-
 
 
 

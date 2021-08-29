@@ -13,10 +13,7 @@ class CreateRegistrarTable extends Migration
      */
     public function up()
     {
-        Schema::create('Registrar', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        
     }
 
     /**

@@ -40,7 +40,7 @@ class CreatePersonTable extends Migration
                    'lname'   =>   'Gomez',
 		  'fname'   =>   'Jay',
 		  'mname'   =>   'M',
-		  'role'   =>   'Super Admin',
+		  'role'   =>   'Registrar',
             )
         );
 
@@ -50,7 +50,7 @@ class CreatePersonTable extends Migration
                    'lname'   =>   'Gray',
 		  'fname'   =>   'Keith',
 		  'mname'   =>   'N',
-		  'role'   =>   'Registrar',
+		  'role'   =>   'Finance',
             )
         );
 
@@ -133,6 +133,9 @@ class CreatePersonTable extends Migration
               'role'   =>   'Student',
                 )
             );
+
+
+            
 
 
     }

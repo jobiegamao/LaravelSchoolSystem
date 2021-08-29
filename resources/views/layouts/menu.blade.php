@@ -10,7 +10,7 @@
         </a>
       </li>
       
-    @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Super Admin')
+    @if (Auth::user()->role == 'Registrar' || Auth::user()->role == 'Super Admin')
       <li class="nav-item">
         <a href="javascript:void(0)" 
           class="nav-link {{ Request::is('teacher*') ? 'active' : '' }}" onclick="$('#teachListForm').submit()">
@@ -96,24 +96,32 @@
 
     @if (Auth::user()->role == 'Teacher')
       <li class="nav-item">
-        <a href="javascript:void(0)"
-          class="nav-link {{ Request::is('/teacher/*/classes') ? 'active' : '' }}" onclick="$('#tClassesForm').submit()">
+        <a href="{{ route('teacher.classes', Auth::user()->Person->Teacher->id)}}"
+          class="nav-link {{ Request::is('/teacher/*/current-classes') ? 'active' : '' }}" >
           <i class="fas fa-clipboard-list nav-icon"></i>
-          <p>Classes</p>
+          <p>Active Classes</p>
         </a>
       </li>
-    @endIf
+      
+      <li class="nav-item">
+        <a href="{{ route('teacher.allclasses', Auth::user()->Person->Teacher->id)}}"
+          class="nav-link {{ Request::is('/teacher/*/all-classes') ? 'active' : '' }}" >
+          <i class="fas fa-clipboard-list nav-icon"></i>
+          <p>Classes History</p>
+        </a>
+      </li>
+    @endif
 
-    @if (Auth::user()->role == 'Registrar')
+    @if (Auth::user()->role == 'Finance')
       <li class="nav-item">
         <a href="{{ route('registrar.index') }}"
-          class="nav-link {{ Request::is('registrar/index') ? 'active' : '' }}">
+          class="nav-link {{ Request::is('finance/index') ? 'active' : '' }}">
           <i class="fas fa-users nav-icon"></i>
           <p>SOAs</p>
         </a>
       </li>
 
-    @endIf
+    @endif
 
     
       <li class="nav-header"><b>ACCOUNT</b></li>
@@ -144,14 +152,14 @@
   </nav>
 
   @if (Auth::user()->role == 'Student')
-    {!! Form::open(['id' => 'gradesForm','method' => 'POST', 'route' => ['grades.show', 'id' => Auth::user()->Person->Student->id] ]) !!}
+    {!! Form::open(['id' => 'gradesForm','method' => 'GET', 'route' => ['grades.show', 'id' => Auth::user()->Person->Student->id] ]) !!}
     {!! Form::close() !!}
 
-    {!! Form::open(['id' => 'curricForm','method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
+    {!! Form::open(['id' => 'curricForm','method' => 'GET', 'route' => 'courseProgramme.show' ]) !!}
     {!! Form::hidden('id', Auth::user()->person_id ) !!}
     {!! Form::close() !!}
 
-    {!! Form::open(['id' => 'preregForm','method' => 'POST', 'route' => 'goTo_prereg' ]) !!}
+    {!! Form::open(['id' => 'preregForm','method' => 'GET', 'route' => 'goTo_prereg' ]) !!}
     {!! Form::hidden('id', Auth::user()->person_id ) !!}
     {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
     {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!}
@@ -159,16 +167,11 @@
     
   @endif
 
-  @if (Auth::user()->role == 'Teacher')
-    {!! Form::open(['id' => 'tClassesForm', 'method' => 'POST', 'route' => ['teacher.classes',  'id' => Auth::user()->Person->Teacher->id] ]) !!}
-    {!! Form::close() !!}
+  
 
 
-  @endif
-
-
-  @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Super Admin')
-    {!! Form::open(['id' => 'teachListForm','method' => 'POST', 'route' => 'teacher.list' ]) !!}
+  @if (Auth::user()->role == 'Registrar' || Auth::user()->role == 'Super Admin')
+    {!! Form::open(['id' => 'teachListForm','method' => 'GET', 'route' => 'teacher.list' ]) !!}
     {!! Form::close() !!}
 
 

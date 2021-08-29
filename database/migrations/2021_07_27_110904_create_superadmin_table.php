@@ -13,10 +13,7 @@ class CreateSuperadminTable extends Migration
      */
     public function up()
     {
-        Schema::create('SuperAdmin', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        
     }
 
     /**

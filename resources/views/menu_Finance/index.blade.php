@@ -91,14 +91,14 @@
                                 </td>
                                 <td>
                                     {{-- curriculum --}}
-                                    {!! Form::open(['method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
+                                    {!! Form::open(['method' => 'GET', 'route' => 'courseProgramme.show' ]) !!}
                                         {!! Form::hidden('id', $students->person_id ) !!}   
                                         {{Form::submit('Curriculum' ,['class' => 'btn btn-link p-0 '])}}
                                     {!! Form::close() !!}
                                 </td>
                                 <td>
                                     {{-- pre reg --}}
-                                    {!! Form::open(['method' => 'POST', 'route' => ['goTo_prereg' , 'id' => $students->person_id ] ]) !!}
+                                    {!! Form::open(['method' => 'GET', 'route' => ['goTo_prereg' , 'id' => $students->person_id ] ]) !!}
                                         {!! Form::hidden('id', $students->person_id ) !!}
                                         {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
                                         {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!}    

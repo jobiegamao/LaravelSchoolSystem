@@ -62,7 +62,7 @@
                 
                 <td>
                     {{-- curric  --}}
-                    {!! Form::open(['method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
+                    {!! Form::open(['method' => 'GET', 'route' => 'courseProgramme.show' ]) !!}
                         {!! Form::hidden('id', $students->person_id ) !!}   
                         {{Form::submit('Curriculum',['class' => 'btn btn-link'])}}
                     {!! Form::close() !!}
@@ -70,7 +70,7 @@
 
                 <td>
                     {{-- class grade of student per sem  --}}
-                    {!! Form::open(['method' => 'POST', 'route' => ['grades.show', 'id' => $students->id] ]) !!}
+                    {!! Form::open(['method' => 'GET', 'route' => ['grades.show', 'id' => $students->id] ]) !!}
                     {{Form::submit('Grades',['class' => 'btn btn-link'])}}
                     {!! Form::close() !!}
 

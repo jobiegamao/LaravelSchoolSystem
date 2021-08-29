@@ -54,7 +54,7 @@
                             <!-- show next button if this is not the latest acadPeriod -->
                             @if(!($acadPeriod->acadYear == $currPeriod->acadYear && $acadPeriod->acadSem== $currPeriod->acadSem))
                                 <div class="p-2"> 
-                                {!! Form::open(['method' => 'POST', 'route' => ['grades.show', 'id' => $student->id] ]) !!}
+                                {!! Form::open(['method' => 'GET', 'route' => ['grades.show', 'id' => $student->id] ]) !!}
                                     {!! Form::hidden('changePeriod', true) !!}
                                     {!! Form::hidden('acadPeriod_id', $nextPeriod->id) !!}
                                     {{Form::submit('Next &rarr;',['class' => 'btn btn-link'])}}

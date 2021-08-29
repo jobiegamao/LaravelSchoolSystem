@@ -42,6 +42,7 @@ return array(
     'App\\Models\\CourseProgrammePrereq' => $baseDir . '/app/Models/CourseProgrammePrereq.php',
     'App\\Models\\EnrollProgramme' => $baseDir . '/app/Models/EnrollProgramme.php',
     'App\\Models\\Fees' => $baseDir . '/app/Models/Fees.php',
+    'App\\Models\\GradeReports' => $baseDir . '/app/Models/GradeReports.php',
     'App\\Models\\Payments' => $baseDir . '/app/Models/Payments.php',
     'App\\Models\\Person' => $baseDir . '/app/Models/Person.php',
     'App\\Models\\Programme' => $baseDir . '/app/Models/Programme.php',

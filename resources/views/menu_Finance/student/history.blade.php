@@ -55,7 +55,7 @@
             
             {{-- table --}}
             <div class="pt-3"> 
-                @include('menu_Registrar/student/history_table')
+                @include('menu_Finance/student/history_table')
             </div>
         </div>
 

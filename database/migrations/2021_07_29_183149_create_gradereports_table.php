@@ -17,21 +17,11 @@ class CreateGradereportsTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignID('studentClass_id')
-                ->nullable()
-                ->contstrained('StudentClass')
+            $table->foreignID('classOffering_id')
+                ->contstrained('ClassOffering')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreignID('teacher_id')
-                ->nullable()
-                ->contstrained('Teacher')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->boolean('isPass')->nullable()->default(1);
-
-            
 
         });
     }

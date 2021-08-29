@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit Acad Period</h1>
+                    <h1>Create Acad Period</h1>
                 </div>
             </div>
         </div>
@@ -17,12 +17,14 @@
 
         <div class="card">
 
-            {!! Form::model($acadPeriod, ['route' => ['acadPeriods.update', $acadPeriod->id], 'method' => 'patch']) !!}
+            {!! Form::open(['route' => 'acadPeriods.store']) !!}
 
             <div class="card-body">
+
                 
-                    @include('menu_Super/acad_periods/fields')
-                
+                    @include('menu_Registrar/acad_periods/fields')
+              
+
             </div>
 
             <div class="card-footer">

@@ -23,7 +23,7 @@
                     {{ $t->full_name() }}
                 </td>
                 <td>
-                    {!! Form::open(['method' => 'POST', 'route' => ['teacher.classes',  $t->id] ]) !!}
+                    {!! Form::open(['method' => 'GET', 'route' => ['teacher.classes',  $t->id] ]) !!}
                         {{Form::submit('Class List',['class' => 'btn btn-link'])}}
                     {!! Form::close() !!}
                 </td>

@@ -61,7 +61,7 @@
 
 
             <div class="card-body p-0">
-                @include('menu_Super/acad_periods/table')
+                @include('menu_Registrar/acad_periods/table')
             </div>
 
         </div>

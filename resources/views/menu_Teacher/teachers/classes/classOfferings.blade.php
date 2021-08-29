@@ -31,7 +31,6 @@
                         <th><small>Offering #</small></th>
                         <th>Year and Semester</th>
                         
-                        
                         <th>Class Code</th>
                         <th>Subject Code</th>
                         <th>Subject Title</th>
@@ -72,24 +71,13 @@
             
                             </td>
                             <td>
-                                
                                 {{ $classes->StudentCount() }}
                             </td>
                             <td>
-                            
                                 {{ 40 - $classes->StudentCount() }}
             
                             </td>
                             <td>
-                                {{-- FOR POST METHOD --}} 
-                                {{-- {!! Form::open(['id' => 'Tclasses','method' => 'POST', 'route' => ['teacher.students', 'id' => $classes->id  ] ]) !!}
-                                {!! Form::hidden('id', $classes->id) !!}
-                                {!! Form::button('<i class="fas fa-graduation-cap"></i>', 
-                                ['type' => 'submit', 'class' => 'btn bg-transparent', ]) !!}
-                                {!! Form::close() !!} --}}
-
-                                {{-- FOR GET METHOD prob here kay ma access ang url ng anyone --}}
-
                                {!! Form::open(['method' => 'GET', 'route' => 'teacher.students' ]) !!}
                                 {!! Form::hidden('id', $classes->id) !!}
                                 {!! Form::button('<i class="fas fa-graduation-cap"></i>', 
