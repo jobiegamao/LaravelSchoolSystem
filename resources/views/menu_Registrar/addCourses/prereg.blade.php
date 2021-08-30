@@ -29,23 +29,32 @@
             <div class="card">
                 <div class="card-body p-10">
                     {{-- Search Student ID --}}
-                   
+                    <div class="form-group row">
+                        <label class="col-sm-12" style="text-align:center;"><h4>SEARCH STUDENT REGISTRATIONS</h4> </label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 form-control"></label>
+                        <label class="col-sm-1 col-form-label" style="text-align:center;">Student ID </label>
+                        <label class="col-sm-2 col-form-label" style="text-align:center;">Academic Year </label>
+                        <label class="col-sm-1 col-form-label" style="text-align:center;">Semester </label>
+                    </div>
                     {!! Form::open(['method' => 'GET','route' => 'goTo_prereg']) !!}
-                        <div class="input-group">
-                            <input type="text" class="col-sm-4 form-control" name="id"
+                        <div class="input-group" style="text-align: center">
+                            <label class="col-sm-4 form-control"></label>
+                            <input type="text" name="id"
                                 placeholder="Search ID" value="{{ $person->id  ?? old('id') }}" required> 
 
-                            <input type="number" class="col-sm-4 form-control"  name="acadYear" value="{{ old('acadYear') ?? $currentYear }}"
+                            <input type="number"  name="acadYear" value="{{ old('acadYear') ?? $currentYear }}"
                                 placeholder="Enter School Year(YYYY)" required>
 
-                            <select class="col-sm-4 form-control""  name="acadSem" 
+
+                            <select class="col-sm-1 form-control"  name="acadSem" 
                                 style="width:100%" data-style="btn-info" placeholder="Semester" required>
     
                                     <option {{ ( old('acadSem') ?? $currentSem) == '1' ? 'selected' : '' }} value="1">1st</option>
                                     <option {{ ( old('acadSem') ?? $currentSem ) == '2' ? 'selected' : '' }} value="2">2nd</option> 
                                     <option {{ ( old('acadSem') ?? $currentSem ) == '0' ? 'selected' : '' }} value="0">Summer</option> 
                             </select>
-                                
                             <span class="input-group-btn">
                                     <button type="submit" class="btn btn-default">
                                         <i class="fas fa-search"></i>

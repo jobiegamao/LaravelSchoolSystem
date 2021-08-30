@@ -45,7 +45,7 @@
   @yield('css')
 </head>
 
-<body class="hold-transition sidebar-mini sidebar-collapse">
+<body class="hold-transition sidebar-mini sidebar-collapse" style="color:black">
 <div class="wrapper">
  
 
