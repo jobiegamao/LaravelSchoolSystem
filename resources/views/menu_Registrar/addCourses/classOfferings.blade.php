@@ -6,7 +6,7 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <h1>Class Offerings</h1>
                 </div>
                 <div class="col-sm-6">
@@ -24,7 +24,7 @@
         
         <div class="card-body p-10">
             <div class="table-responsive">
-                <table class="table" id="classofferings-table">
+                <table class="table" id="classoffering-table">
                     <thead>
                     <tr>
                         <th><small>Offering #</small></th>
@@ -145,7 +145,7 @@
                 </script>
                 <script>
                     $(document).ready( function () {
-                        $('#classofferings-table').DataTable();
+                        $('#classoffering-table').DataTable();
                        
                     } );
                 </script>
