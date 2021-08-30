@@ -23,10 +23,7 @@
         }
         </style>
 
-        @php
-            $y = 0.00;
-            $x = number_format($y, 2)
-        @endphp
+    
 
     <div class="card">
         <div class="card-body">
@@ -40,23 +37,23 @@
                             
                             <tr>
                                 <td style="font-weight:bold">CURRENT DUE:</td>
-                                <td style="text-align:right;">{{ $totalTuition ?? $x}}</td>
+                                <td style="text-align:right;">{{ $currDue ?? "0.00"}}</td>
                             </tr>
                             <tr>
                                 <td style="font-weight:bold" colspan="2">LESS</td>
                             </tr>
                             <tr>
                                 <td style="font-weight:bold;padding-left: 30px">ADJUSTMENTS:</td>
-                                <td style="text-align:right">{{ $adj ?? $x}}</td>
+                                <td style="text-align:right">{{ $adj ?? "0.00"}}</td>
                             </tr>
                             <tr>
                                 <td style="font-weight:bold;padding-left: 30px">PAYMENTS:</td>
-                                <td style="text-align:right">{{ $totalPay ?? $x}} </td>
+                                <td style="text-align:right">{{ $totalPay ?? "0.00"}} </td>
                             </tr>
                             <tr>
                                
                                 <td style="font-weight:bold; font-size: 14px; color: red">BALANCE:</td>
-                                <td style="font-weight:bold; font-size: 14px; text-align:right; color: red">{{ $balance ?? 0.00}}</td>
+                                <td style="font-weight:bold; font-size: 14px; text-align:right; color: red">{{ $balance ??"0.00"}}</td>
                                 
                             </tr>
                         </tbody>
@@ -72,71 +69,71 @@
                                 <tbody>
                                     <tr>
                                         <td><strong>TUITION FEE</strong></td>
-                                        <td style="text-align:right"><strong>{{ $unitsFee ?? $x}}</strong></td>
+                                        <td style="text-align:right"><strong>{{ $unitsFee ?? "0.00"}}</strong></td>
                                     </tr>
                                     <tr>
                                     <td><strong>MISCELLANEOUS FEES</strong></td>
                                         <td style="text-align:right">
                                             @if ($isGrad)
-                                                <strong>{{ $fees->totalMisc() + $fees->totalGradFee() }}</strong>
+                                                <strong>{{ number_format($fees->totalMisc() + $fees->totalGradFee(),2) }}</strong>
                                             @else
-                                                <strong>{{ $fees->totalMisc() }}</strong>
+                                                <strong>{{  number_format($fees->totalMisc(),2)}}</strong>
                                             @endif
                                         </td>
                                     
                                     @if ($isGrad)
                                         <tr>
                                             <td style="padding-left: 30px;">GRADUATION FEE</td>
-                                            <td style="text-align:right"> {{ $fees->gradfee }}</td>
+                                            <td style="text-align:right"> {{ number_format($fees->gradfee,2)}}</td>
                                         </tr>
                                         <tr>
                                             <td style="padding-left: 30px;">RETREAT FEE</td>
-                                            <td style="text-align:right"> {{ $fees->retreatfee }}</td>
+                                            <td style="text-align:right"> {{ number_format($fees->retreatfee,2)}}</td>
                                         </tr>
                                     @endif
                                     <tr>
                                         <td style="padding-left: 30px;">LABORATORY FEE</td>
-                                        <td style="text-align:right"> {{ $totalLabFee ?? $x}}</td> 
+                                        <td style="text-align:right"> {{ $totalLabFee ?? "0.00"}}</td> 
                                     </tr>
                                     <tr>
                                         <td style="padding-left: 30px;">A-DCB STUDENT ACTIVITIES</td>
-                                        <td style="text-align:right"> {{ $fees->misc_dcb }}</td>
+                                        <td style="text-align:right"> {{ number_format($fees->misc_dcb,2) }}</td>
                                     </tr><tr>
                                         <td style="padding-left: 30px;">A-DEVELOPMENT FEE</td>
-                                        <td style="text-align:right"> {{ $fees->misc_devfee }}</td>
+                                        <td style="text-align:right"> {{ number_format($fees->misc_devfee,2) }}</td>
                                     </tr><tr>
                                         <td style="padding-left: 30px;">A-ENERGY FEE</td>
-                                        <td style="text-align:right">{{ $fees->misc_energyfee }}</td>
+                                        <td style="text-align:right">{{number_format($fees->misc_energyfee,2)  }}</td>
                                     </tr><tr>
                                         <td style="padding-left: 30px;">A-FACILITIES IMPROVEMENTS</td>
-                                        <td style="text-align:right">{{ $fees->misc_facimp }}</td>
+                                        <td style="text-align:right">{{ number_format($fees->misc_facimp,2) }}</td>
                                     </tr><tr>
                                     <td style="padding-left: 30px;">A-GUIDANCE &amp; COUNSELLING</td>
-                                    <td style="text-align:right">{{ $fees->misc_guidfee }}</td>
+                                    <td style="text-align:right">{{ number_format($fees->misc_guidfee,2) }}</td>
                                     </tr><tr>
                                     <td style="padding-left: 30px;">A-INFORMATION TECHNOLOGY FEE</td>
-                                    <td style="text-align:right">{{ $fees->misc_ITfee }}</td>
+                                    <td style="text-align:right">{{ number_format($fees->misc_ITfee,2)}}</td>
                                     </tr>
                                     <tr>
                                     <td style="padding-left: 30px;">A-INST RES/STUDENT INFO SYS FEE</td>
-                                    <td style="text-align:right">{{ $fees->misc_inst }}</td>
+                                    <td style="text-align:right">{{ number_format($fees->misc_inst,2)}}</td>
                                     </tr>
                                     <tr>
                                     <td style="padding-left: 30px;">A-LIBRARY</td>
-                                    <td style="text-align:right">{{ $fees->misc_studIns }}</td>
+                                    <td style="text-align:right">{{ number_format($fees->misc_studIns,2) }}</td>
                                     </tr>
                                     <tr>
                                     <td style="padding-left: 30px;">A-MEDICO DENTAL</td>
-                                    <td style="text-align:right">{{ $fees->misc_medfee }}</td>
+                                    <td style="text-align:right">{{ number_format($fees->misc_medfee,2) }}</td>
                                     </tr>
                                     <tr>
                                     <td style="padding-left: 30px;">A-REGISTRATION FEE-OLD</td>
-                                    <td style="text-align:right">{{ $fees->regFee }}</td>
+                                    <td style="text-align:right">{{ number_format($fees->regFee,2) }}</td>
                                     </tr>
                                     <tr>
                                     <td style="font-size: 14px;color:blue;"><strong>TOTAL TUITION FEE</strong></td>
                                     <td style="text-align:right;font-size: 14px;color:blue;"><strong>
-                                        {{  $totalTuition ?? $x}}
+                                        {{  $totalTuition ?? "0.00"}}
                                     </strong></td>
                                     </tr>
                                 </tbody>

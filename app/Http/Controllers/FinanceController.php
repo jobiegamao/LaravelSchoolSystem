@@ -116,7 +116,7 @@ class FinanceController extends Controller
             //in case if wala pa na update sa table
             if($unitsFee > 0 && $currDue == 0){
                 $s = $student->StudentUpdateLatest; 
-                $s->currDue =  $unitsFee + $fees->totalMisc();
+                $s->currDue =  $unitsFee + $fees->totalMisc() + $totalLabFee;
                 $s->save();
                 $currDue = $student->StudentUpdateLatest->currDue;
             }
@@ -131,7 +131,7 @@ class FinanceController extends Controller
             //in case if wala pa na update sa table
             if($unitsFee > 0 && $currDue == 0){
                 $s = $student->StudentUpdate[0]; 
-                $s->currDue =  $unitsFee + $fees->totalMisc();
+                $s->currDue =  $unitsFee + $fees->totalMisc() + $totalLabFee;
                 $s->save();
                 $currDue = $student->StudentUpdate[0]->currDue;
             }
@@ -139,12 +139,15 @@ class FinanceController extends Controller
        
 
         $totalTuition += $unitsFee + $fees->totalMisc() + $totalLabFee;
+        
         if($isGrad){
             $totalTuition += $fees->totalGradFee();
         }
         $balance = $totalTuition - $totalPay - $adj;
-        if($currDue == 0){
+        $currDue = $totalTuition;
+        if($unitsFee == 0 ){
             $balance = 0.00;
+            $currDue = 0.00;
         }
    
         return view('menu_Student.balance.balance', [
@@ -155,6 +158,7 @@ class FinanceController extends Controller
             'totalLabFee'=> number_format($totalLabFee, 2),
             'unitsFee'=> number_format($unitsFee, 2),
             'totalTuition'=> number_format($totalTuition, 2),
+            'currDue'=> number_format($currDue, 2),
             'adj' =>$adj,
             'isGrad' => $isGrad,
             'acadPeriod' => $acadPeriod,
