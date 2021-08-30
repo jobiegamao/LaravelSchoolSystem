@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit Acad Period</h1>
+                    <h1>Edit Academic Period</h1>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
 
             {!! Form::model($acadPeriod, ['route' => ['acadPeriods.update', $acadPeriod->id], 'method' => 'patch']) !!}
 
-            <div class="card-body">
+            <div class="card-body" style="color:black">
                 
                     @include('menu_Registrar/acad_periods/fields')
                 
