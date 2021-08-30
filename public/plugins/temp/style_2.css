@@ -8310,11 +8310,11 @@
    transition: all 0.3s; }
  
  .btn.btn-primary {
-   background: #3445b4;
+   background: #124559;
    border-color: #3445b4; }
    .btn.btn-primary:hover, .btn.btn-primary:focus {
-     background: #3445b4 !important;
-     border-color: #3445b4 !important; }
+     background: #65a0c2 !important;
+     border-color: #65a0c2 !important; } /* edit button here */
  
  .footer p {
    color: rgba(255, 255, 255, 0.5); }
