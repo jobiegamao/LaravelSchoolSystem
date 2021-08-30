@@ -23,7 +23,7 @@ its chosen program ID from Prgram --}}
 
             {!! Form::open(['route' => 'enrollProgramme.store']) !!}
 
-            <div class="card-body">
+            <div class="card-body" style="color:black">
 
                     <div class="form-group row">
                         {!! Form::label('person_id', 'Person ID:',array('class' => 'col-sm-2 col-form-label')) !!}
