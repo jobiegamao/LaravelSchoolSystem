@@ -31,8 +31,9 @@
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"> 
   <!-- Bootstrap core CSS -->
   <link href="{{ asset('plugins/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <!--<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">-->
   
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
   
   <!-- additional styles -->
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
@@ -41,6 +42,9 @@
   <link rel="stylesheet" href="{{ asset('plugins/temp/lightbox.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/temp/owl.css') }}"> 
   <link rel="stylesheet" href="{{ asset('plugins/temp/templatemo-grad-school.css') }}">  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{ asset('plugins/temp/lightbox.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/temp/style_2.css') }}" />
   @yield('css')
 </head>
 
@@ -161,6 +165,12 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 
+<!-- -->
+<script src="{{ asset('dist/js/jquery.min.js') }}"></script>
+<script src="{{ asset('dist/js/popper.js') }}"></script>
+<script src="{{ asset('dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

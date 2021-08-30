@@ -5,9 +5,8 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12 text-center">
-                    <h1>SEU Teachers</h1>
-                    <hr>
+                <div class="col-sm-12">
+                    <h1 style="color:#3c6b9b;font-weight:bold">Teachers List</h1>
                     <div class="clearfix"> @include('flash::message')</div>
                 </div>
                 

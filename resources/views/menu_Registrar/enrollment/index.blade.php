@@ -5,9 +5,8 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12 text-center">
-                    <h1>Enrollment</h1>
-                    <hr>
+                <div class="col-sm-12">
+                    <h1 style="color:#3c6b9b;font-weight:bold">Enrollment List</h1>
                 </div>
                 
             </div>

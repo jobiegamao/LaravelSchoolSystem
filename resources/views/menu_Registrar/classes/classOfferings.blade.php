@@ -6,9 +6,8 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12 text-center">
-                    <h1>Class Offerings</h1>
-                    <hr>
+                <div class="col-sm-6">
+                    <h1 style="color:#3c6b9b;font-weight:bold">Class Offerings</h1>
                 </div>
                 
             </div>
@@ -21,7 +20,7 @@
     <div class="card">
             <div class="card-body p-10">
                 <div class="table-responsive">
-                    <table class="table" id="classofferings-table">
+                    <table id="classofferings-table" class="table table-striped table-bordered table-hover" style="width:100%;">
                         <thead>
                             <tr>
                                 <th><small>Offering #</small></th>
