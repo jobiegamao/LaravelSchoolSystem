@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12 text-center">
-                    <h1> Teacher {{ $classes[0]->Teacher->full_name() }}'s Classes</h1>
+                    <h1 style="color:#3c6b9b;font-weight:bold"> Classes of Teacher: {{ $classes[0]->Teacher->full_name() }}</h1>
                     <hr>
                 </div>
             </div>
@@ -34,8 +34,8 @@
                         <th>Subject Title</th>
                         <th>Schedule</th>
                         <th>Room</th>
-                        <th><small>Reserved<br>Slots</small></th>
-                        <th><small>Available<br>Slots</small></th>
+                        <th><small><b>Reserved</b><br><b>Slots</b></small></th>
+                        <th><small><b>Available</b><br><b>Slots</b></small></th>
             
                         <th>Students</th>
                     </tr>

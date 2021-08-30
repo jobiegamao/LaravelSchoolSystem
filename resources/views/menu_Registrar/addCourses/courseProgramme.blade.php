@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Curriculum</h1>
+                    <h1 style="color:#3c6b9b;font-weight:bold">Curriculum</h1>
                 </div>
                 <div class="col-sm-6 clearfix"> @include('flash::message')</div>
             </div>

@@ -7,9 +7,9 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12 text-center">
-                    <h1>Class Code: {{ $class->classCode }}</h1>
-                    <span>{{ $class->Course->subjCode }}</span>
-                    <span>{{ $class->Course->subjName }}</span>
+                    <h1 style="color:#3c6b9b;font-weight:bold">Class Code: {{ $class->classCode }}</h1>
+                    <span><b>{{ $class->Course->subjCode }}</b></span>
+                    <span><b>{{ $class->Course->subjName }}</b></span>
                     <hr>
                     <div class="clearfix"> @include('flash::message')</div>
                 </div>

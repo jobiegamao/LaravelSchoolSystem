@@ -36,7 +36,7 @@ class Fees extends Migration
         DB::table('Fees')->insert(
             array(
                    'year'   =>   '2019',
-                   'unitsFee'   =>   '1,000.00',
+                   'unitsFee'   =>   '1000.00',
                    'regFee'   =>   '1000.00',
                    'misc_dcb'   =>   '1000.00',
                    'misc_devfee'   =>   '1000.00',
