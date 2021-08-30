@@ -737,6 +737,7 @@ class ComposerStaticInitf19304e2e2f29d0a3a236eaae273c8d0
         'App\\Models\\CourseProgrammePrereq' => __DIR__ . '/../..' . '/app/Models/CourseProgrammePrereq.php',
         'App\\Models\\EnrollProgramme' => __DIR__ . '/../..' . '/app/Models/EnrollProgramme.php',
         'App\\Models\\Fees' => __DIR__ . '/../..' . '/app/Models/Fees.php',
+        'App\\Models\\GradeReports' => __DIR__ . '/../..' . '/app/Models/GradeReports.php',
         'App\\Models\\Payments' => __DIR__ . '/../..' . '/app/Models/Payments.php',
         'App\\Models\\Person' => __DIR__ . '/../..' . '/app/Models/Person.php',
         'App\\Models\\Programme' => __DIR__ . '/../..' . '/app/Models/Programme.php',

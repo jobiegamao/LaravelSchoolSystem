@@ -23,13 +23,12 @@ class AcadPeriodController extends AppBaseController
     {
        
         $acadPeriods = AcadPeriod::all();
-        $current_year = AcadPeriod::latest()->value('acadYear');
-        $current_sem = AcadPeriod::latest()->value('acadSem');
+        $currentPeriod = AcadPeriod::latest()->first();
+       
 
-        return view('menu_Super/acad_periods/index', [
+        return view('menu_Registrar/acad_periods/index', [
             'acadPeriods' => $acadPeriods,
-            'current_year' =>$current_year,
-            'current_sem' => $current_sem
+            'currentPeriod' => $currentPeriod
         ]);
     }
 
@@ -40,7 +39,7 @@ class AcadPeriodController extends AppBaseController
      */
     public function create()
     {
-        return view('menu_Super/acad_periods/create');
+        return view('menu_Registrar/acad_periods/create');
     }
 
     /**
@@ -82,7 +81,7 @@ class AcadPeriodController extends AppBaseController
             return redirect(route('acadPeriods.index'));
         }
 
-        return view('menu_Super/acad_periods/edit')->with('acadPeriod', $acadPeriod);
+        return view('menu_Registrar/acad_periods/edit')->with('acadPeriod', $acadPeriod);
     }
 
     /**

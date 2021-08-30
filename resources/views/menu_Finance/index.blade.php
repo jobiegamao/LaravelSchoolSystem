@@ -6,7 +6,10 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12 text-center">
-                    <h1>Registrar's List</h1>
+                    <h1>Statement of Accounts</h1>
+                    <span>Finance</span>
+                    <hr>
+                    
                 </div>
                 
             </div>
@@ -24,7 +27,6 @@
                         <thead>
                         <tr>
                             <th>Enrollment Status</th>
-                            
                             <th>ID</th>
                             <th>SID</th>
                             <th>Name</th>
@@ -32,7 +34,6 @@
                             <th></th>
                             <th></th>
                             <th></th>
-
                             <th></th>
                             <th></th>
                             <th></th>
@@ -91,14 +92,14 @@
                                 </td>
                                 <td>
                                     {{-- curriculum --}}
-                                    {!! Form::open(['method' => 'POST', 'route' => 'courseProgramme.show' ]) !!}
+                                    {!! Form::open(['method' => 'GET', 'route' => 'courseProgramme.show' ]) !!}
                                         {!! Form::hidden('id', $students->person_id ) !!}   
                                         {{Form::submit('Curriculum' ,['class' => 'btn btn-link p-0 '])}}
                                     {!! Form::close() !!}
                                 </td>
                                 <td>
                                     {{-- pre reg --}}
-                                    {!! Form::open(['method' => 'POST', 'route' => ['goTo_prereg' , 'id' => $students->person_id ] ]) !!}
+                                    {!! Form::open(['method' => 'GET', 'route' => ['goTo_prereg' , 'id' => $students->person_id ] ]) !!}
                                         {!! Form::hidden('id', $students->person_id ) !!}
                                         {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
                                         {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!}    
@@ -152,12 +153,9 @@
 
 
         <div class="">
-            <a href="{{ route('student.unenroll') }}" class="btn btn-danger float-right"
-            onclick ="return confirm('Are you sure you want to unenroll ALL students?')"
-            >Restart Enrollment</a> 
-
-            <a href="{{ route('update.dues') }}" class="btn btn-danger"
-            onclick ="return confirm('All account due balance for the sem will be updated')"
+            
+            <a href="{{ route('update.dues') }}" class="btn btn-primary float-right"
+            onclick ="return confirm('All account due balance for the semester will be updated')"
             >Update Statement of Accounts</a> 
         </div>
 

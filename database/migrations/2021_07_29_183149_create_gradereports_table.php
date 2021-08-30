@@ -17,23 +17,98 @@ class CreateGradereportsTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignID('studentClass_id')
-                ->nullable()
-                ->contstrained('StudentClass')
+            $table->foreignID('classOffering_id')
+                ->contstrained('ClassOffering')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreignID('teacher_id')
-                ->nullable()
-                ->contstrained('Teacher')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->boolean('isPass')->nullable()->default(1);
-
-            
 
         });
+
+        DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '35',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '36',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '37',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '38',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '39',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '40',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '41',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '42',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '43',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '44',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '45',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '46',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '47',
+            )
+         );
+
+         DB::table('GradeReports')->insert(
+            array(
+                   'classOffering_id'   =>   '48',
+            )
+         );
+
     }
 
     /**

@@ -39,7 +39,7 @@ its chosen program ID from Prgram --}}
                     </div>
 
                     {{-- data fields in form request for adding course/programme --}}
-                    @include('menu_Super/enrollment/fields')
+                    @include('menu_Registrar/enrollment/fields')
                 
 
             </div>

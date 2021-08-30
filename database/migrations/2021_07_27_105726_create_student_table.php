@@ -41,6 +41,7 @@ class CreateStudentTable extends Migration
                    'id'   =>   '20001',
                    'person_id'   =>   '10006',
 		            'year'   =>   '1',
+                    
             )
         );
 
@@ -49,6 +50,7 @@ class CreateStudentTable extends Migration
                    'id'   =>   '20002',
                    'person_id'   =>   '10007',
 		           'year'   =>   '1',
+                   
             )
         );
 
@@ -57,6 +59,7 @@ class CreateStudentTable extends Migration
                    'id'   =>   '20003',
                    'person_id'   =>   '10008',
 		           'year'   =>   '1',
+                   
             )
         );
 

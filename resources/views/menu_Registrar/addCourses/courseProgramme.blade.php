@@ -21,12 +21,12 @@
         
         <div class="card">
 
-            @if (Auth::user()->role == 'Super Admin')
+            @if (Auth::user()->role == 'Registrar')
             <div class="card-body p-10">
 
                 
                 {{-- Search Student ID --}}
-                        {!! Form::open(['route' => 'courseProgramme.show']) !!}
+                        {!! Form::open(['method' => 'GET','route' => 'courseProgramme.show']) !!}
                     <div class="row">
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="id"
@@ -40,7 +40,7 @@
                             {!! Form::close() !!}
                         
                             @if (isset($person))
-                                {!! Form::open(['method' => 'POST', 'route' => ['goTo_prereg' , 'id' => $person->id  ] ]) !!}
+                                {!! Form::open(['method' => 'GET', 'route' => 'goTo_prereg'  ]) !!}
                                     {!! Form::hidden('id', $person->id ) !!}   
                                     {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
                                     {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!}
@@ -81,7 +81,7 @@
                         
                 </div>
                 <div class="pt-3"> 
-                    @include('menu_Super/addCourses/courseProgramme_table') 
+                    @include('menu_Registrar/addCourses/courseProgramme_table') 
                 </div>
                 @endif
                 

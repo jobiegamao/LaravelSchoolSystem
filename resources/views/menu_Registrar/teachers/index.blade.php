@@ -21,7 +21,7 @@
         
         <div class="card">
             <div class="card-body p-10">
-                @include('menu_super/teachers/table')
+                @include('menu_Registrar/teachers/table')
             </div>
 
         </div>

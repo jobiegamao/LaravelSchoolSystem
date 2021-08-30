@@ -6,13 +6,12 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>{{ $classes[0]->Teacher->full_name() }}'s Classes</h1>
-                </div>
-                <div class="col-sm-6">
-                    <div class="clearfix"> @include('flash::message')</div>
+                <div class="col-sm-12 text-center">
+                    <h1> Teacher {{ $classes[0]->Teacher->full_name() }}'s Classes</h1>
+                    <hr>
                 </div>
             </div>
+            
         </div>
     </section>
     {{-- /header --}}
@@ -28,9 +27,7 @@
                 <table class="table" id="teacherClasses-table">
                     <thead>
                     <tr>
-                        <th><small>Offering #</small></th>
                         <th>Year and Semester</th>
-                        
                         
                         <th>Class Code</th>
                         <th>Subject Code</th>
@@ -47,9 +44,7 @@
                     {{-- foreach classoffering  --}}
                     @foreach($classes as $classes)
                         <tr>
-                            <td>
-                                {{ $classes->id }}
-                            </td>
+                            
                             <td>
                                  {{ $classes->year }} sem: {{ $classes->semester }}
                             </td>
@@ -72,28 +67,17 @@
             
                             </td>
                             <td>
-                                
                                 {{ $classes->StudentCount() }}
                             </td>
                             <td>
-                            
                                 {{ 40 - $classes->StudentCount() }}
             
                             </td>
-                            <td>
-                                {{-- FOR POST METHOD --}} 
-                                {{-- {!! Form::open(['id' => 'Tclasses','method' => 'POST', 'route' => ['teacher.students', 'id' => $classes->id  ] ]) !!}
-                                {!! Form::hidden('id', $classes->id) !!}
-                                {!! Form::button('<i class="fas fa-graduation-cap"></i>', 
-                                ['type' => 'submit', 'class' => 'btn bg-transparent', ]) !!}
-                                {!! Form::close() !!} --}}
-
-                                {{-- FOR GET METHOD prob here kay ma access ang url ng anyone --}}
-
+                            <td class="text-center">
                                {!! Form::open(['method' => 'GET', 'route' => 'teacher.students' ]) !!}
                                 {!! Form::hidden('id', $classes->id) !!}
-                                {!! Form::button('<i class="fas fa-graduation-cap"></i>', 
-                                ['type' => 'submit', 'class' => 'btn bg-transparent', ]) !!}
+                                {!! Form::button('<i class="fas fa-users"></i>', 
+                                ['type' => 'submit', 'class' => 'btn ', ]) !!}
                                 {!! Form::close() !!}
                             </td>
                             

@@ -9,9 +9,7 @@
                 <div class="col-sm-6">
                     <h1 style="color:#3c6b9b;font-weight:bold">Class Offerings</h1>
                 </div>
-                <div class="col-sm-6">
-                    <div class="clearfix"> @include('flash::message')</div>
-                </div>
+                
             </div>
         </div>
     </section>
@@ -20,31 +18,6 @@
     {{-- body --}}
 
     <div class="card">
-        {{-- <div class="card-body p-10">
-            {!! Form::open(['route' => 'classOfferings.show']) !!}
-            <div class="input-group">
-                <input type="number" class="col-sm-4 form-control"  name="year" value="{{ old('year') }}"
-                                    placeholder="Enter School Year(YYYY)" required>
-                
-                <select class="col-sm-4 form-control""  name="sem" 
-                    style="width:100%" data-style="btn-info" placeholder="Semester" required>
-                    
-                        <option disabled"></option>
-                        <option {{ old('sem') == '1' ? 'selected' : '' }} value="1">1st</option>
-                        <option {{ old('sem') == '2' ? 'selected' : '' }} value="2">2nd</option> 
-                        <option {{ old('sem') == '3' ? 'selected' : '' }} value="3">Summer</option> 
-                </select>
-
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </span>
-            </div>
-
-            {!! Form::close() !!}
-        </div> --}}
-        
             <div class="card-body p-10">
                 <div class="table-responsive">
                     <table id="classofferings-table" class="table table-striped table-bordered table-hover" style="width:100%;">

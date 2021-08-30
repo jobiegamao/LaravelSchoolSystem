@@ -69,6 +69,7 @@ class CreateStudentUpdateTable extends Migration
                    'unitsTook'   =>   '6',
                    'final'   =>   '79.67',
                    'currDue'   =>   '16000.00',
+                   'created_at' => '2020-10-10'
             )
         );
 
@@ -116,6 +117,7 @@ class CreateStudentUpdateTable extends Migration
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '3',
+                   'created_at' => '2020-07-10'
             )
         );
         DB::table('StudentUpdate')->insert(
@@ -125,6 +127,7 @@ class CreateStudentUpdateTable extends Migration
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '3',
+                   'created_at' => '2020-10-10'
             )
         );
 
@@ -134,11 +137,12 @@ class CreateStudentUpdateTable extends Migration
                    'acadPeriod_id'   =>   '10',
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
-                   'isGrad' => '1'
+                   'isGrad' => '1',
+                   'created_at' => '2021-07-10'
                    
             )
         );
-       
+        
 
 
     }

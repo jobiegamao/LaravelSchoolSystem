@@ -54,7 +54,7 @@
                             <!-- show next button if this is not the latest acadPeriod -->
                             @if(!($acadPeriod->acadYear == $currPeriod->acadYear && $acadPeriod->acadSem== $currPeriod->acadSem))
                                 <div class="p-2"> 
-                                {!! Form::open(['method' => 'POST', 'route' => ['grades.show', 'id' => $student->id] ]) !!}
+                                {!! Form::open(['method' => 'GET', 'route' => ['grades.show', 'id' => $student->id] ]) !!}
                                     {!! Form::hidden('changePeriod', true) !!}
                                     {!! Form::hidden('acadPeriod_id', $nextPeriod->id) !!}
                                     {{Form::submit('Next &rarr;',['class' => 'btn btn-link'])}}
@@ -63,7 +63,7 @@
                             @endif
                             @if($prevPeriod != null)
                             <div class="p-2">
-                                {!! Form::open(['method' => 'POST', 'route' => ['grades.show', 'id' => $student->id] ]) !!}
+                                {!! Form::open(['method' => 'GET', 'route' => ['grades.show', 'id' => $student->id] ]) !!}
                                     {!! Form::hidden('changePeriod', true) !!}
                                     {!! Form::hidden('acadPeriod_id', $prevPeriod->id) !!}
                                     {{Form::submit('&larr; Prev',['class' => 'btn btn-link'])}}
@@ -126,32 +126,9 @@
                                         <td>
 
                                             @php
-                                                $n = $class->ClassGrade->finalGrade();
-                                                switch($n){
-                                                    case ($n >= 92):
-                                                        $e = 4.0;
-                                                        break;
-                                                    case ($n >= 87):
-                                                        $e = 3.5;
-                                                        break;
-                                                    case ($n >= 80):
-                                                        $e = 3.0;
-                                                        break;
-                                                    case ($n >= 75):
-                                                        $e = 2.5;
-                                                        break;
-                                                    case ($n >= 68):
-                                                        $e = 2.0;
-                                                        break;
-                                                    case ($n >= 60):
-                                                        $e = 1.0;
-                                                        break;
-                                                    default:
-                                                        $e = 0.0;
-                                                        break;  
-                                                }
-                                                echo($e);
-                                                $e = $e * $class->ClassOffering->Course->units;
+                                                $n = $class->ClassGrade->finalGradeQPI();
+                                                echo($n);
+                                                $e = $n * $class->ClassOffering->Course->units;
                                                 array_push($grades, $e);
                                                 
                                             @endphp
@@ -185,7 +162,9 @@
                                                         echo($sum / $totalUnits);
                                                     }
                                                     
-                                                }
+                                                }else {
+                                                        echo(0);
+                                                    }
                                             @endphp
                                         </td>
                                         <td></td>

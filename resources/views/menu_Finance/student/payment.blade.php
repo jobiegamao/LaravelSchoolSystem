@@ -64,7 +64,7 @@
 
             <div class="card-footer">
                 
-                <a href="{{ route('registrar.index') }}" class="btn btn-default float-right">Cancel</a>
+                <a href="{{ route('finance.index') }}" class="btn btn-default float-right">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary float-right mr-2']) !!}
             </div>
 

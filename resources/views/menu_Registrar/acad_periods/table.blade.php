@@ -23,7 +23,7 @@
                             <i class="far fa-edit"></i>
                         </a>
 
-                        @if ($acadPeriod->acadSem == $current_sem && $acadPeriod->acadYear == $current_year)
+                        @if ($acadPeriod->id == $currentPeriod->id)
                         {!! Form::open(['route' => ['acadPeriods.destroy', $acadPeriod->id], 'method' => 'delete']) !!}
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                         {!! Form::close() !!}
