@@ -12,7 +12,7 @@
         @foreach($acadPeriods as $acadPeriod)
             <tr>
                 <td style="text-align: center; vertical-align: middle;">{{ $acadPeriod->id}}</td>
-                <td style="text-align: center; vertical-align: middle;">{{ $acadPeriod->acadSem }}</td>
+                <td style="text-align: center; vertical-align: middle;">{{ $acadPeriod->acadSemText() }}</td>
                 <td style="text-align: center; vertical-align: middle;">{{ $acadPeriod->acadYear }}</td>
                 <td style="text-align: center; vertical-align: middle;">
                     

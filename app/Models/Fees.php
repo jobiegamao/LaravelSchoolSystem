@@ -46,17 +46,17 @@ class Fees extends Model
      */
     public static $rules = [
         'year' => 'nullable',
-        'unitsFee' => 'nullable|numeric',
-        'regFee' => 'nullable|numeric',
-        'misc_dcb' => 'nullable|numeric',
-        'misc_devfee' => 'nullable|numeric',
-        'misc_energyfee' => 'nullable|numeric',
-        'misc_facimp' => 'nullable|numeric',
-        'misc_guidfee' => 'nullable|numeric',
-        'misc_ITfee' => 'nullable|numeric',
-        'misc_inst' => 'nullable|numeric',
-        'misc_medfee' => 'nullable|numeric',
-        'misc_studIns' => 'nullable|numeric'
+        'unitsFee' => 'nullable|float',
+        'regFee' => 'nullable|float',
+        'misc_dcb' => 'nullable|float',
+        'misc_devfee' => 'nullable|float',
+        'misc_energyfee' => 'nullable|float',
+        'misc_facimp' => 'nullable|float',
+        'misc_guidfee' => 'nullable|float',
+        'misc_ITfee' => 'nullable|float',
+        'misc_inst' => 'nullable|float',
+        'misc_medfee' => 'nullable|float',
+        'misc_studIns' => 'nullable|float'
     ];
 
     public function totalMisc(){
