@@ -4,13 +4,32 @@
 <div class="content p-3">
     {{-- details on student --}}
 
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+
+
     <div class="card">
         <div class="card-body">
             
             <table>
                 <td valign='top' width="400">
-                    <h4>Statement of Account Summary</h4>
-                    <span>S.Y. {{ $acadPeriod->acadYear }} {{ $acadPeriod->acadSemText() }}</span>
+                    <h4><b> Statement of Account Summary </b></h4>
+                    <span><b> S.Y. {{ $acadPeriod->acadYear }} {{ $acadPeriod->acadSemText() }}  </b></span>
                     <table>
                         <tbody>
                             
@@ -48,7 +67,7 @@
                                 <tbody>
                                     <tr>
                                         <td><strong>TUITION FEE</strong></td>
-                                        <td style="text-align:right"><strong>{{ $unitsFee ?? 0.0}}</strong></td>
+                                        <td style="text-align:right"><strong>{{ $unitsFee ?? 0.00}}</strong></td>
                                     </tr>
                                     <tr>
                                     <td><strong>MISCELLANEOUS FEES</strong></td>
@@ -72,7 +91,7 @@
                                     @endif
                                     <tr>
                                         <td style="padding-left: 30px;">LABORATORY FEE</td>
-                                        <td style="text-align:right"> {{ $totalLabFee ?? 0.0 }}</td> 
+                                        <td style="text-align:right"> {{ $totalLabFee ?? 0.00}}</td> 
                                     </tr>
                                     <tr>
                                         <td style="padding-left: 30px;">A-DCB STUDENT ACTIVITIES</td>
@@ -121,16 +140,8 @@
                 
             </table>
            
-            <div class="d-flex flex-row-reverse">
+            <div class="d-flex flex-row">
                 <!-- show next button if this is not the latest acadPeriod -->
-                @if(!($acadPeriod->id == $student->StudentUpdateLatest->acadPeriod_id))
-                    <div class="p-2"> 
-                    {!! Form::open(['method' => 'GET', 'route' => ['balance', 'id' => $student->person_id] ]) !!}
-                        {!! Form::hidden('acadPeriod_id', $acadPeriod->id + 1) !!}
-                        {{Form::submit('Next &rarr;',['class' => 'btn btn-link'])}}
-                    {!! Form::close() !!}
-                    </div>
-                @endif
                 @if( App\Models\AcadPeriod::find( ($acadPeriod->id) -1) != null)
                 <div class="p-2">
                     {!! Form::open(['method' => 'GET', 'route' => ['balance', 'id' => $student->person_id] ]) !!}
@@ -138,6 +149,14 @@
                         {{Form::submit('&larr; Prev',['class' => 'btn btn-link'])}}
                     {!! Form::close() !!}
                 </div>
+                @endif
+                @if(!($acadPeriod->id == $student->StudentUpdateLatest->acadPeriod_id))
+                    <div class="p-2"> 
+                    {!! Form::open(['method' => 'GET', 'route' => ['balance', 'id' => $student->person_id] ]) !!}
+                        {!! Form::hidden('acadPeriod_id', $acadPeriod->id + 1) !!}
+                        {{Form::submit('Next &rarr;',['class' => 'btn btn-link'])}}
+                    {!! Form::close() !!}
+                    </div>
                 @endif
             </div>
         </div>
