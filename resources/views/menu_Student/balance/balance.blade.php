@@ -23,12 +23,16 @@
         }
         </style>
 
+        @php
+            $y = 0.00;
+            $x = number_format($y, 2)
+        @endphp
 
     <div class="card">
         <div class="card-body">
             
             <table>
-                <td valign='top' width="400">
+                <td valign='top' width="600">
                     <h4><b> Statement of Account Summary </b></h4>
                     <span><b> S.Y. {{ $acadPeriod->acadYear }} {{ $acadPeriod->acadSemText() }}  </b></span>
                     <table>
@@ -36,18 +40,18 @@
                             
                             <tr>
                                 <td style="font-weight:bold">CURRENT DUE:</td>
-                                <td style="text-align:right;">{{ $totalTuition ?? 0.00}}</td>
+                                <td style="text-align:right;">{{ $totalTuition ?? $x}}</td>
                             </tr>
                             <tr>
                                 <td style="font-weight:bold" colspan="2">LESS</td>
                             </tr>
                             <tr>
                                 <td style="font-weight:bold;padding-left: 30px">ADJUSTMENTS:</td>
-                                <td style="text-align:right">{{ $adj ?? 0.00}}</td>
+                                <td style="text-align:right">{{ $adj ?? $x}}</td>
                             </tr>
                             <tr>
                                 <td style="font-weight:bold;padding-left: 30px">PAYMENTS:</td>
-                                <td style="text-align:right">{{ $totalPay ?? 0.00}} </td>
+                                <td style="text-align:right">{{ $totalPay ?? $x}} </td>
                             </tr>
                             <tr>
                                
@@ -60,7 +64,7 @@
                     </table>
                 </td>
 
-                <td valign="top" width="900">
+                <td valign="top" width="400">
                     <h4>Breakdown of Fees</h4>
                     
                     
@@ -68,7 +72,7 @@
                                 <tbody>
                                     <tr>
                                         <td><strong>TUITION FEE</strong></td>
-                                        <td style="text-align:right"><strong>{{ $unitsFee ?? 0.00}}</strong></td>
+                                        <td style="text-align:right"><strong>{{ $unitsFee ?? $x}}</strong></td>
                                     </tr>
                                     <tr>
                                     <td><strong>MISCELLANEOUS FEES</strong></td>
@@ -92,7 +96,7 @@
                                     @endif
                                     <tr>
                                         <td style="padding-left: 30px;">LABORATORY FEE</td>
-                                        <td style="text-align:right"> {{ $totalLabFee ?? 0.00}}</td> 
+                                        <td style="text-align:right"> {{ $totalLabFee ?? $x}}</td> 
                                     </tr>
                                     <tr>
                                         <td style="padding-left: 30px;">A-DCB STUDENT ACTIVITIES</td>
@@ -132,7 +136,7 @@
                                     <tr>
                                     <td style="font-size: 14px;color:blue;"><strong>TOTAL TUITION FEE</strong></td>
                                     <td style="text-align:right;font-size: 14px;color:blue;"><strong>
-                                        {{  $totalTuition ?? 0}}
+                                        {{  $totalTuition ?? $x}}
                                     </strong></td>
                                     </tr>
                                 </tbody>

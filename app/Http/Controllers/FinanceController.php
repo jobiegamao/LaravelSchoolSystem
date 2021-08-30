@@ -144,18 +144,17 @@ class FinanceController extends Controller
         }
         $balance = $totalTuition - $totalPay - $adj;
         if($currDue == 0){
-            $balance = 0;
+            $balance = 0.00;
         }
    
         return view('menu_Student.balance.balance', [
             'fees' => $fees,
             'student' => $student,
-            'balance' => $balance,
-            'totalPay'=> $totalPay,
-            'totalLabFee'=> $totalLabFee,
-            'unitsFee'=> $unitsFee,
-            'totalTuition'=> $totalTuition,
-            
+            'balance' => number_format($balance, 2),
+            'totalPay'=> number_format($totalPay, 2),
+            'totalLabFee'=> number_format($totalLabFee, 2),
+            'unitsFee'=> number_format($unitsFee, 2),
+            'totalTuition'=> number_format($totalTuition, 2),
             'adj' =>$adj,
             'isGrad' => $isGrad,
             'acadPeriod' => $acadPeriod,
