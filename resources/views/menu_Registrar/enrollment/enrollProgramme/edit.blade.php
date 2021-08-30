@@ -23,7 +23,7 @@
         {!! Form::model($student, ['route' => ['enrollProgramme.update', 'id' => $student->id], 'method' => 'patch']) !!}
 
 
-        <div class="card-body">
+        <div class="card-body" style="color:black">
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">ID: </label>
