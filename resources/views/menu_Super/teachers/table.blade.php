@@ -1,8 +1,8 @@
 <div class="table-responsive">
-    <table class="table" id="teachers-table">
+    <table id="teachers-table" class="table table-striped table-bordered table-hover" style="width:100%;">
         <thead>
         <tr>
-            <th>PID</th>
+            <th>Person ID</th>
             <th>Teacher ID</th>
             <th>Name</th>
             <th>Classes</th>
@@ -39,6 +39,7 @@
 
 
 @push('scripts')
+    
     <script
     src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js">
     </script>

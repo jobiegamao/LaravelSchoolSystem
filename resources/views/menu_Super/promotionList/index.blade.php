@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Student List</h1>
+                    <h1 style="color:#3c6b9b;font-weight:bold">Students List</h1>
                 </div>
                 
             </div>

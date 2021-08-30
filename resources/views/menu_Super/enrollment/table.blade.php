@@ -7,12 +7,12 @@
             <th>Name</th>
             <th>Programme</th>
             <th></th>
-            <th><small>Units</small></th>
-            <th><small>Curriculum</small></th>
-            <th><small>Courses</small></th>
-            <th><small>Balance</small></th>
-            <th><small>Enrollment Status</small></th>
-            <th><small>Action</small></th>
+            <th><small><b>Units</b></small></th>
+            <th><small><b>Curriculum</b></small></th>
+            <th><small></small></th>
+            <th><small><b>Balance</b></small></th>
+            <th><small><b>Status</b></small></th>
+            <th><small><b>Action</b></small></th>
         </tr>
         </thead>
         <tbody>

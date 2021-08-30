@@ -1,20 +1,20 @@
 <div class="table-responsive">
     <table class="table" id="acadPeriods-table">
         <thead>
-        <tr>
+        <tr style="text-align: center; vertical-align: middle;">
             <th>#</th>
-            <th>Acadsem</th>
-            <th>Acadyear</th>
+            <th>Semester</th>
+            <th>Academic Year</th>
             <th colspan="3">Action</th>
         </tr>
         </thead>
         <tbody>
         @foreach($acadPeriods as $acadPeriod)
             <tr>
-                <td>{{ $acadPeriod->id}}</td>
-                <td>{{ $acadPeriod->acadSem }}</td>
-                <td>{{ $acadPeriod->acadYear }}</td>
-                <td width="120">
+                <td style="text-align: center; vertical-align: middle;">{{ $acadPeriod->id}}</td>
+                <td style="text-align: center; vertical-align: middle;">{{ $acadPeriod->acadSem }}</td>
+                <td style="text-align: center; vertical-align: middle;">{{ $acadPeriod->acadYear }}</td>
+                <td style="text-align: center; vertical-align: middle;">
                     
                     <div class='btn-group'>
                         
