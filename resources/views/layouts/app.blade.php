@@ -84,9 +84,9 @@
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
-                <a href="{{ url('/profile') }}" class="btn btn-default btn-flat">
+                <a href="{{ url('/profile') }}" class="btn btn-secondary btn-flat">
                 <i class="fas fa-btn fa-user m-1"></i>Profile</a>
-                <a href="#" class="btn btn-default btn-flat float-right"
+                <a href="#" class="btn btn-secondary btn-flat float-right"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Sign out
                 </a>
