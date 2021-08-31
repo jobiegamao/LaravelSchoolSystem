@@ -12,7 +12,7 @@
         <div class="image">
           <img src="/dist/dp/{{ Auth::user()->dp }}" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="info">
+        <div class="info" style="font-size:17px">
           <a href="{{ url('/profile') }}" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>

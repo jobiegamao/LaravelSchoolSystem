@@ -14,7 +14,7 @@
                     <input type="file" name="dp" style="color:#3c6b9b">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="row mt-1">
-                        <input type="submit" class="btn btn-sm btn-secondary" style="width:200px;">
+                        <input type="submit" class="btn btn-sm btn-primary" style="width:200px;">
                     </div>
                     
                 </form>

@@ -2,3 +2,26 @@
     font-weight:bold;
     color:#3c6b9b
 }
+
+body {
+    font-family: Poppins;
+    font-size: 14px;
+}
+
+.btn {
+    color:#3c6b9b;
+}
+
+.btn-primary {
+    color: white;
+    background-color: #3c6b9b;
+}
+
+.btn-secondary {
+    background-color: #3c6b9b;
+    color: white;
+}
+
+.btn-danger {
+    color:white;
+}

@@ -30,17 +30,15 @@
                 <div class="card-body p-10">
                     {{-- Search Student ID --}}
                     <div class="form-group row">
-                        <label class="col-sm-12" style="text-align:center;"><h4>SEARCH STUDENT REGISTRATIONS</h4> </label>
+                        <label class="col-sm-12"><h4>SEARCH STUDENT REGISTRATIONS</h4> </label>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-4 form-control"></label>
-                        <label class="col-sm-1 col-form-label" style="text-align:center;">Student ID </label>
-                        <label class="col-sm-2 col-form-label" style="text-align:center;">Academic Year </label>
-                        <label class="col-sm-1 col-form-label" style="text-align:center;">Semester </label>
+                        <label class="col-sm-1 col-form-label">Student ID </label>
+                        <label class="col-sm-2 col-form-label" style="text-align:center;"> Academic Year</label>
+                        <label class="col-sm-2 col-form-label" style="text-align:left;">Semester </label>
                     </div>
                     {!! Form::open(['method' => 'GET','route' => 'goTo_prereg']) !!}
                         <div class="input-group" style="text-align: center">
-                            <label class="col-sm-4 form-control"></label>
                             <input type="text" name="id"
                                 placeholder="Search ID" value="{{ $person->id  ?? old('id') }}" required> 
 
