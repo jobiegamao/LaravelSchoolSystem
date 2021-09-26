@@ -89,6 +89,7 @@ final class Versions
   'ralouphie/getallheaders' => '3.0.3@120b605dfeb996808c31b6477290a714d356e822',
   'ramsey/collection' => '1.2.1@eaca1dc1054ddd10cbd83c1461907bee6fb528fa',
   'ramsey/uuid' => '4.2.1@fe665a03df4f056aa65af552a96e1976df8c8dae',
+  'spatie/laravel-permission' => '5.1.1@58d5eb6c7b0eafa8bdf0a93d1ca5c214a05344cb',
   'staudenmeir/eloquent-has-many-deep' => 'v1.13.1@c0c9b6bd5c39d08e8adddc7eb8625962bd67a3da',
   'swiftmailer/swiftmailer' => 'v6.2.7@15f7faf8508e04471f666633addacf54c0ab5933',
   'symfony/console' => 'v5.3.6@51b71afd6d2dc8f5063199357b9880cea8d8bfe2',
@@ -164,7 +165,7 @@ final class Versions
   'sebastian/type' => '2.3.4@b8cd8a1c753c90bc1a0f5372170e3e489136f914',
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'theseer/tokenizer' => '1.2.1@34a41e998c2183e22995f158c581e7b5e755ab9e',
-  'laravel/laravel' => 'dev-master@2a904db9d3e06df90fd346fad7413ba8152c9dc8',
+  'laravel/laravel' => 'dev-master@175d04fb35743babab41aec1e10a3364a0d48017',
 );
 
     private function __construct()

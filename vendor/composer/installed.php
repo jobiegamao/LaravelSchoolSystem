@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'bc37ce8f0ead102f1ae4d47b9abefda4a92efd09',
+        'reference' => '175d04fb35743babab41aec1e10a3364a0d48017',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -508,7 +508,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'bc37ce8f0ead102f1ae4d47b9abefda4a92efd09',
+            'reference' => '175d04fb35743babab41aec1e10a3364a0d48017',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -1135,6 +1135,15 @@
             'aliases' => array(),
             'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
             'dev_requirement' => true,
+        ),
+        'spatie/laravel-permission' => array(
+            'pretty_version' => '5.1.1',
+            'version' => '5.1.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/laravel-permission',
+            'aliases' => array(),
+            'reference' => '58d5eb6c7b0eafa8bdf0a93d1ca5c214a05344cb',
+            'dev_requirement' => false,
         ),
         'staudenmeir/eloquent-has-many-deep' => array(
             'pretty_version' => 'v1.13.1',
