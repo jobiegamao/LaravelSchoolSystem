@@ -684,8 +684,7 @@ class RegistrarController extends Controller
                      }])
                     ->first();
 
-        //dd($student->StudentUpdate[0]);
-        
+       
 
         // get all specific student's classses for this acad time
         $s = ClassOffering::with(['StudentClass' => function ($query) use($studentID){

@@ -8,9 +8,9 @@
             <th>Programme</th>
             <th></th>
             <th><small><b>Units</b></small></th>
-            <th><small><b>Curriculum</b></small></th>
-            <th><small></small></th>
-            <th><small><b>Balance</b></small></th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th><small><b>Status</b></small></th>
             <th><small><b>Action</b></small></th>
         </tr>

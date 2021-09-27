@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table id="students-table" class="table table-striped table-bordered table-hover" style="width:100%;">
+    <table id="students-table" class="table table-hover" style="width:100%;">
         <thead>
         <tr>
             <th>PID</th>
@@ -9,9 +9,9 @@
             <th>Programme</th>
             <th>Status</th>
             
-            <th>Courses</th>
-            <th>Grades</th>
-            <th>Balance</th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th>Evaluation<br><small>Pass for Next Enrollment</small></th>
             {{-- <th>Year Promotion<br><small>Promote College Level</small></th> --}}
             <th>Action</th>

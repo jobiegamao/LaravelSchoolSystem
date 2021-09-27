@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1 style="color:#3c6b9b;font-weight:bold">Class Code: {{ $class->classCode }}</h1>
+                    <h1>Class Code: {{ $class->classCode }}</h1>
                     <span>{{ $class->Course->subjCode }}</span>
                     <span>{{ $class->Course->subjName }}</span></br>
                     <span>Instructor: {{ $class->Teacher->full_name()}}</span>

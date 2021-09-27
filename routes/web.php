@@ -77,5 +77,8 @@ Route::get('finance/update-dues', 'App\Http\Controllers\FinanceController@update
 Route::patch('finance/tag/{id}', 'App\Http\Controllers\FinanceController@updateEnrollTag')->name('update.enrollTag')->middleware('role:Finance|Registrar');
 Route::get('finance/course-fees', 'App\Http\Controllers\FinanceController@coursefees')->name('finance.coursefees')->middleware('role:Finance');
 Route::patch('finance/course-fees/update', 'App\Http\Controllers\FinanceController@coursefeesUpdate')->name('finance.coursefeesUpdate')->middleware('role:Finance');
-Route::get('finance/{id}/balance', 'App\Http\Controllers\FinanceController@balance')->name('balance')->middleware('role:Finance|Registrar');
+Route::get('finance/course-fees/create', 'App\Http\Controllers\FinanceController@coursefeesCreate')->name('finance.coursefeesCreate')->middleware('role:Finance');
+Route::post('finance/course-fees/store', 'App\Http\Controllers\FinanceController@coursefeesStore')->name('finance.coursefeesStore')->middleware('role:Finance');
+
+Route::get('finance/{id}/balance', 'App\Http\Controllers\FinanceController@balance')->name('balance');
 

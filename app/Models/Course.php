@@ -29,7 +29,7 @@ class Course extends Model
         'subjCode',
         'subjName',
         'units',
-        'labFee'
+        
     ];
 
     
@@ -44,7 +44,7 @@ class Course extends Model
         'updated_at' => 'nullable',
         'subjCode' => 'required|string|max:191',
         'subjName' => 'required|string|max:191',
-        'labFee' => 'float'
+        
     ];
 
     public function CourseProgramme()
@@ -55,6 +55,11 @@ class Course extends Model
     public function ClassOffering()
     {
         return $this->hasMany(ClassOffering::class, 'subjCode', 'subjCode');
+    }
+
+    public function CourseFee()
+    {
+        return $this->hasMany(CourseFee::class, 'subjCode', 'subjCode');
     }
     
 }

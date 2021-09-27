@@ -45,15 +45,12 @@ class AcadPeriodController extends AppBaseController
     /**
      * Store a newly created AcadPeriod in storage.
      *
-     * @param CreateAcadPeriodRequest $request
-     *
-     * @return Response
      */
     public function store(CreateAcadPeriodRequest $request)
     {
         $input = $request->all();
 
-        /** @var AcadPeriod $acadPeriod */
+        
         $acadPeriod = AcadPeriod::create($input);
 
         Flash::success('Acad Period saved successfully.');
@@ -66,13 +63,10 @@ class AcadPeriodController extends AppBaseController
     /**
      * Show the form for editing the specified AcadPeriod.
      *
-     * @param int $id
-     *
-     * @return Response
      */
     public function edit($id)
     {
-        /** @var AcadPeriod $acadPeriod */
+       
         $acadPeriod = AcadPeriod::find($id);
 
         if (empty($acadPeriod)) {

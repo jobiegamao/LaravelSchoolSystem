@@ -38,6 +38,7 @@ return array(
     'App\\Models\\ClassGrade' => $baseDir . '/app/Models/ClassGrade.php',
     'App\\Models\\ClassOffering' => $baseDir . '/app/Models/ClassOffering.php',
     'App\\Models\\Course' => $baseDir . '/app/Models/Course.php',
+    'App\\Models\\CourseFee' => $baseDir . '/app/Models/CourseFee.php',
     'App\\Models\\CourseProgramme' => $baseDir . '/app/Models/CourseProgramme.php',
     'App\\Models\\CourseProgrammePrereq' => $baseDir . '/app/Models/CourseProgrammePrereq.php',
     'App\\Models\\EnrollProgramme' => $baseDir . '/app/Models/EnrollProgramme.php',

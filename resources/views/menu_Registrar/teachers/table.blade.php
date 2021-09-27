@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table id="teachers-table" class="table table-striped table-bordered table-hover" style="width:100%;">
+    <table id="teachers-table" class="table table-hover" style="width:100%;">
         <thead>
         <tr>
             <th>Person ID</th>

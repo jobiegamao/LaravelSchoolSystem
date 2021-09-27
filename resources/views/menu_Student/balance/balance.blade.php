@@ -27,7 +27,33 @@
 
     <div class="card">
         <div class="card-body">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">ID: </label>
+                <div class="col-sm-10 form-control" readonly>{{ $student->person->id }} </div>
+            </div>
             
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Student ID: </label>
+                <div class="col-sm-10 form-control" readonly>{{ $student->id }} </div>
+            </div>
+                    
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Name: </label>
+                <div class="col-sm-10 form-control" readonly>{{ $student->full_name()}} </div>
+            </div>
+            <div class="form-group row">
+                @forelse ($student->EnrolledProgramme as $ep )
+                    <label class="col-sm-2 col-form-label">Programme: </label>
+                    <div class="col-sm-2 form-control mb-3" readonly>{{ $ep->description }} </div>
+                    <div class="col-sm-4 form-control mb-3" readonly>{{ $ep->Programme->name}} </div>
+                    <div class="col-sm-4 form-control mb-3" readonly>{{ $ep->statusText()}} </div>
+                @empty
+                    <h1>no enrolled programme</h1>
+                @endforelse
+                
+            </div>
+        <div>
+
             <table>
                 <td valign='top' width="600">
                     <h4><b> Statement of Account Summary </b></h4>
@@ -77,7 +103,7 @@
                                     <td><strong>MISCELLANEOUS FEES</strong></td>
                                         <td style="text-align:right">
                                             @if ($isGrad)
-                                                <strong>{{ number_format($fees->totalMisc() + $fees->totalGradFee(),2) }}</strong>
+                                                <strong>{{ number_format($fees->totalMisc() + $fees->totalGradFee() + $totalLabFee,2) }}</strong>
                                             @else
                                                 <strong>{{  number_format($fees->totalMisc() + $totalLabFee,2)}}</strong>
                                             @endif

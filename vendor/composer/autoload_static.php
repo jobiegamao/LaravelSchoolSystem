@@ -98,8 +98,8 @@ class ComposerStaticInitf19304e2e2f29d0a3a236eaae273c8d0
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         'a28599dc506da421718fad75955a4b9d' => __DIR__ . '/..' . '/infyomlabs/laravel-generator/src/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
-        '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
+        '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -739,6 +739,7 @@ class ComposerStaticInitf19304e2e2f29d0a3a236eaae273c8d0
         'App\\Models\\ClassGrade' => __DIR__ . '/../..' . '/app/Models/ClassGrade.php',
         'App\\Models\\ClassOffering' => __DIR__ . '/../..' . '/app/Models/ClassOffering.php',
         'App\\Models\\Course' => __DIR__ . '/../..' . '/app/Models/Course.php',
+        'App\\Models\\CourseFee' => __DIR__ . '/../..' . '/app/Models/CourseFee.php',
         'App\\Models\\CourseProgramme' => __DIR__ . '/../..' . '/app/Models/CourseProgramme.php',
         'App\\Models\\CourseProgrammePrereq' => __DIR__ . '/../..' . '/app/Models/CourseProgrammePrereq.php',
         'App\\Models\\EnrollProgramme' => __DIR__ . '/../..' . '/app/Models/EnrollProgramme.php',

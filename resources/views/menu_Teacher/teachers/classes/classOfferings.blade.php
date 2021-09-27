@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1 style="color:#3c6b9b;font-weight:bold"> Classes</h1>
+                    <h1> Classes</h1>
                     <span>Instructor: {{ $classes[0]->Teacher->full_name()}}</span>
                     <hr>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Flash;
+use App\Http\Requests\CreateCoursefeesRequest;
 use Illuminate\Http\Request;
 use App\Models\Person; 
 use App\Models\Student;
@@ -11,6 +12,7 @@ use App\Models\Fees;
 use App\Models\ClassOffering;
 use App\Models\Payments; 
 use App\Models\AcadPeriod;
+use App\Models\CourseFee;
 use Auth;
 
 class FinanceController extends Controller
@@ -45,9 +47,10 @@ class FinanceController extends Controller
  
     public function balance(Request $request, $id){
         //gatekeep other students from viewing other student's record
-        if(Auth::user()->role == "Student" && Auth::user()->person_id !=$request->id){
+        if(Auth::user()->role == "Student" && Auth::user()->person_id !=$id){
             abort(403); 
-        }
+        } 
+        //
         $student = Student::where('person_id', $id)
                     ->with('StudentUpdateLatest','Person.Payments')
                     ->first();
@@ -106,11 +109,21 @@ class FinanceController extends Controller
             ->whereHas('ClassOffering.StudentClass', function ($query) use($student){
                 $query->where('student_id', $student->id);
             })
+            ->whereHas('CourseFee', function ($query) use($acadPeriod){
+                $query->where('acadPeriod_id', $acadPeriod->id);
+            })
+            ->with(['CourseFee' => function ($query) use($acadPeriod){
+                $query->where('acadPeriod_id',$acadPeriod->id);
+             }])
+            
             ->get();
 
+            
         foreach($c as $c){
-            $totalLabFee += $c->labFee;
+            $totalLabFee += $c->CourseFee[0]->labFee;
         }
+
+        ##eof lab fees
          
         $totalTuition = 0;
         if($latest){
@@ -213,18 +226,36 @@ class FinanceController extends Controller
     }
 
     public function coursefees(){
-        
-        $c = Course::all();
-        return view('menu_Finance.coursefees', [
-            'course' => $c
+        // go to courseFees view
+        $ap = AcadPeriod::latest()->first();
+        $cf = CourseFee::where("acadPeriod_id",$ap->id)->get();
+  
+                 
+        return view('menu_Finance.coursefees.index', [
+            'cf' => $cf
         ]);
+    }
+
+    public function coursefeesCreate(Request $request){
+        return view('menu_Finance.coursefees.create');
+    }
+    public function coursefeesStore(CreateCoursefeesRequest $request){
+        $input = $request->all();
+       
+        CourseFee::create($input);
+
+        Flash::success('Programme Enrolled successfully.');
+        return redirect(route('finance.coursefees'));
     }
     public function coursefeesUpdate(Request $request){
         
-        Course::where('subjCode',$request->subjCode)
-        ->update(['labFee' => $request->labFee]);
+        $ap = AcadPeriod::latest()->first();
+        $cf = CourseFee::where('acadPeriod_id',$ap->id)
+                ->where('subjCode',$request->subjCode)
+                ->update(['labFee' => $request->labFee]);
         Flash::success('Course Fee Updated Successfully.');
         return back();
+
     }
 
     public function paymentsAll(){
