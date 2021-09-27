@@ -11,8 +11,7 @@ class CreatePersonTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up(){
         Schema::create('Person', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -36,8 +35,8 @@ class CreatePersonTable extends Migration
 
         DB::table('Person')->insert(
             array(
-                   'id'   =>   '10001',
-                   'lname'   =>   'Gomez',
+          'id'   =>   '10001',
+          'lname'   =>   'Gomez',
 		  'fname'   =>   'Jay',
 		  'mname'   =>   'M',
 		  'role'   =>   'Registrar',

@@ -49,8 +49,8 @@
                     
                 </td>
                 <td>
-                   
-                    <form action="{{ route('studentClass.delete', [
+                   @if (old('acadYear') == $currentYear && old('acadSem') == $currentSem)
+                       <form action="{{ route('studentClass.delete', [
                                 'id' => $student->person_id,
                                 'student_id' => $student->id, 
                                 'classOffering_id' => $prereg->id,
@@ -62,6 +62,8 @@
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm" title="Delete">Drop</button>
                     </form>
+                   @endif
+                    
 
                 </td>
                  

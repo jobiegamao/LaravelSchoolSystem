@@ -37,6 +37,7 @@
                         <label class="col-sm-2 col-form-label"> Year</label>
                         <label class="col-sm-2 col-form-label">Semester </label>
                     </div>
+                    
                     {!! Form::open(['method' => 'GET','route' => 'goTo_prereg']) !!}
                         <div class="input-group" style="text-align: center">
                             <input class="col-sm-2 form-control"  type="text" name="id"
@@ -116,6 +117,8 @@
                                     {!! Form::close() !!}
                                 </div>
                             </div>
+
+                            @role("Student|Registrar")
                             {{-- ADD CLASS --}}
                             <div class="ml-auto p-2">
                                 <div class="d-flex align-items-end flex-column" style="height:50px;">   
@@ -127,8 +130,8 @@
                                 <div class="d-flex align-items-end flex-column" style="height:20px;">
                                     <small>Note: You can only add class for current academic period</small>
                                 </div> 
-
                             </div>
+                            @endrole
                         </div>
 
                         

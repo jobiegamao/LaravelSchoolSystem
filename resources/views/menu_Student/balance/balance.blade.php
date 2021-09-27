@@ -71,13 +71,15 @@
                                         <td><strong>TUITION FEE</strong></td>
                                         <td style="text-align:right"><strong>{{ $unitsFee ?? "0.00"}}</strong></td>
                                     </tr>
+
+
                                     <tr>
                                     <td><strong>MISCELLANEOUS FEES</strong></td>
                                         <td style="text-align:right">
                                             @if ($isGrad)
                                                 <strong>{{ number_format($fees->totalMisc() + $fees->totalGradFee(),2) }}</strong>
                                             @else
-                                                <strong>{{  number_format($fees->totalMisc(),2)}}</strong>
+                                                <strong>{{  number_format($fees->totalMisc() + $totalLabFee,2)}}</strong>
                                             @endif
                                         </td>
                                     
@@ -93,7 +95,7 @@
                                     @endif
                                     <tr>
                                         <td style="padding-left: 30px;">LABORATORY FEE</td>
-                                        <td style="text-align:right"> {{ $totalLabFee ?? "0.00"}}</td> 
+                                        <td style="text-align:right"> {{ number_format($totalLabFee,2) ?? "0.00"}}</td> 
                                     </tr>
                                     <tr>
                                         <td style="padding-left: 30px;">A-DCB STUDENT ACTIVITIES</td>

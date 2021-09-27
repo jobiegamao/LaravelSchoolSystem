@@ -6,10 +6,11 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12 text-center">
+                <div class="col-sm-12">
                     <h1 style="color:#3c6b9b;font-weight:bold">Class Code: {{ $class->classCode }}</h1>
-                    <span><b>{{ $class->Course->subjCode }}</b></span>
-                    <span><b>{{ $class->Course->subjName }}</b></span>
+                    <span>{{ $class->Course->subjCode }}</span>
+                    <span>{{ $class->Course->subjName }}</span></br>
+                    <span>Instructor: {{ $class->Teacher->full_name()}}</span>
                     <hr>
                     <div class="clearfix"> @include('flash::message')</div>
                 </div>

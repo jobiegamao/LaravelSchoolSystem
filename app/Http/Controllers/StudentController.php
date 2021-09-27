@@ -1,25 +1,35 @@
 <?php
 
 namespace App\Http\Controllers;
-use Flash;
-use Illuminate\Http\Request;
-use App\Models\Person; 
-use App\Models\Student; 
-use App\Models\EnrollProgramme; 
-use App\Models\CourseProgramme; 
-use App\Models\CourseProgrammePreReq; 
-use App\Models\ClassOffering; 
-use App\Models\ClassGrade; 
-use App\Models\StudentClass; 
-use App\Models\AcadPeriod; 
-use App\Models\Fees; 
-use App\Models\Payments; 
-use App\Models\StudentUpdate; 
+
+use Flash, Auth, Illuminate\Http\Request;
+use App\Models\{
+    Person,
+    Student,
+    EnrollProgramme,
+    CourseProgramme,
+    CourseProgrammePreReq,
+    ClassOffering,
+    ClassGrade,
+    StudentClass,
+    AcadPeriod,
+    Fees,
+    Payments,
+    StudentUpdate,
+};
+
 
 class StudentController extends Controller
 {
     public function grades(Request $request, $id){
-       
+
+        //gatekeep other students from viewing other student's record
+        if(Auth::user()->role == "Student" && Auth::user()->Person->Student->id !=$id){
+            abort(403); 
+        }
+        //
+
+
             //pressed prev or next button
         if($request->has('changePeriod')){
             
@@ -39,13 +49,7 @@ class StudentController extends Controller
                 })
                 ->get();
 
-            // if(!empty($classes)){
-            //     //calculate qpi
-            //     $this->calculateQPI($classes);
-            // }
-               
-
-            
+          
             return view('menu_Student.grades.grades', [
                 'student' => $student,
                 'classes' => $classes,

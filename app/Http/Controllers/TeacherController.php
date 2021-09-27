@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Flash;
+use Flash, Auth;
 //models
 use App\Models\Teacher;
 use App\Models\ClassOffering; 
@@ -23,9 +23,14 @@ class TeacherController extends Controller
     }
 
     public function classes($id){
+        //gatekeep other teachers from viewing other teachers's record
+        if(Auth::user()->role == "Teacher" && Auth::user()->Person->Teacher->id !=$id){
+            abort(403); 
+        }
+        //
+
+
         $acadPeriod = AcadPeriod::latest()->first();
-        
-        
         $classes = ClassOffering::where('teacher_id', $id)
                     ->with('Teacher')
                     ->where('year', $acadPeriod->acadYear)
@@ -38,9 +43,13 @@ class TeacherController extends Controller
     }
 
     public function allclasses($id){
-        $acadPeriod = AcadPeriod::latest()->first();
+        //gatekeep other teachers from viewing other teachers's record
+        if(Auth::user()->role == "Teacher" && Auth::user()->Person->Teacher->id !=$id){
+            abort(403); 
+        }
+        //
 
-        
+        $acadPeriod = AcadPeriod::latest()->first();
         $classes = ClassOffering::where('teacher_id', $id)
                     ->with('Teacher')
                     ->get();
@@ -52,6 +61,12 @@ class TeacherController extends Controller
     }
 
     public function classStudents(Request $request){
+        //gatekeep other teachers from viewing other teachers's record
+        if(Auth::user()->role == "Teacher" && Auth::user()->Person->Teacher->id !=$request->tid){
+            abort(403); 
+        }
+        //
+        
         $class = ClassOffering::find($request->id);
         $report = GradeReports::where('classOffering_id', $class->id)->first();
         if( $report == null){

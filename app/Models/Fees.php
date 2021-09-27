@@ -63,13 +63,13 @@ class Fees extends Model
         $total = $this->misc_dcb + $this->misc_devfee + $this->misc_energyfee + $this->misc_facimp + $this->misc_guidfee
         + $this->misc_ITfee + $this->misc_inst + $this->misc_medfee + $this->misc_studIns + $this->regFee;
 
-        return round($total,2);
+        return $total;
     }
 
     public function totalGradFee(){
         $total = $this->gradfee + $this->retreatfee;
 
-        return round($total,2);
+        return $total;
     }
     
 }

@@ -11,6 +11,7 @@ use App\Models\Fees;
 use App\Models\ClassOffering;
 use App\Models\Payments; 
 use App\Models\AcadPeriod;
+use Auth;
 
 class FinanceController extends Controller
 {
@@ -43,6 +44,10 @@ class FinanceController extends Controller
     }
  
     public function balance(Request $request, $id){
+        //gatekeep other students from viewing other student's record
+        if(Auth::user()->role == "Student" && Auth::user()->person_id !=$request->id){
+            abort(403); 
+        }
         $student = Student::where('person_id', $id)
                     ->with('StudentUpdateLatest','Person.Payments')
                     ->first();
@@ -71,6 +76,7 @@ class FinanceController extends Controller
                     'fees' => $fees,
                     'student' => $student,
                     'isGrad' => 0,
+                    'totalLabFee'=> 0,
                     'acadPeriod' => $acadPeriod,
                     ]
                 );
@@ -155,7 +161,7 @@ class FinanceController extends Controller
             'student' => $student,
             'balance' => number_format($balance, 2),
             'totalPay'=> number_format($totalPay, 2),
-            'totalLabFee'=> number_format($totalLabFee, 2),
+            'totalLabFee'=> $totalLabFee,
             'unitsFee'=> number_format($unitsFee, 2),
             'totalTuition'=> number_format($totalTuition, 2),
             'currDue'=> number_format($currDue, 2),

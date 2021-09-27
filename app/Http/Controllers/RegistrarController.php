@@ -18,6 +18,7 @@ use App\Models\StudentClass;
 use App\Models\AcadPeriod;
 use App\Models\Fees; 
 use App\Models\StudentUpdate; 
+use Auth;
 
 
 
@@ -334,6 +335,12 @@ class RegistrarController extends Controller
     
     public function courseProgrammeShow(Request $request)
     {
+        //gatekeep other students from viewing other student's record
+        if(Auth::user()->role == "Student" && Auth::user()->person_id !=$request->id){
+            abort(403); 
+        }
+        //
+        
         $person = Person::find($request->id);
         $studentID = Student::where('person_id', $request->id)->value('id');
 
@@ -433,6 +440,10 @@ class RegistrarController extends Controller
 
 
     public function goTo_prereg(Request $request){
+        //gatekeep other students from viewing other student's record
+        if(Auth::user()->role == "Student" && Auth::user()->person_id !=$request->id){
+            abort(403); 
+        }
         
         $acadPeriod = AcadPeriod::
                         where('acadYear',$request->acadYear )
@@ -464,6 +475,8 @@ class RegistrarController extends Controller
             Flash::error('Prereg not found');
             return redirect(route('goTo_prereg'))->withInput();
         }
+
+        
         
         //Get and show Classes Registered for sem and year
         $prereg = ClassOffering::with(['StudentClass' =>

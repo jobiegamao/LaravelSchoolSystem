@@ -6,8 +6,9 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12 text-center">
-                    <h1 style="color:#3c6b9b;font-weight:bold"> Classes of Teacher: {{ $classes[0]->Teacher->full_name() }}</h1>
+                <div class="col-sm-12">
+                    <h1 style="color:#3c6b9b;font-weight:bold"> Classes</h1>
+                    <span>Instructor: {{ $classes[0]->Teacher->full_name()}}</span>
                     <hr>
                 </div>
             </div>
@@ -74,8 +75,10 @@
             
                             </td>
                             <td class="text-center">
+                               
                                {!! Form::open(['method' => 'GET', 'route' => 'teacher.students' ]) !!}
                                 {!! Form::hidden('id', $classes->id) !!}
+                                {!! Form::hidden('tid', $classes->teacher_id) !!}
                                 {!! Form::button('<i class="fas fa-users"></i>', 
                                 ['type' => 'submit', 'class' => 'btn ', ]) !!}
                                 {!! Form::close() !!}
