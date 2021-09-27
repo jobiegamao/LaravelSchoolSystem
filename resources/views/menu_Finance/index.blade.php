@@ -5,7 +5,7 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12 text-center">
+                <div class="col-sm-12">
                     <h1>Statement of Accounts</h1>
                     <span>Finance</span>
                     <hr>

@@ -6,7 +6,7 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12 text-center">
+                <div class="col-sm-12">
                     <h1>Payment History</h1>
                     <hr>
                     
@@ -23,7 +23,7 @@
         <div class="card-body p-10">
             
             <div class="table-responsive">
-                <table class="table" id="allpayHistory-table">
+                <table class="table table-hover" id="allpayHistory-table">
                         <thead>
                             <tr>
                                 <th>Transact no.</th>

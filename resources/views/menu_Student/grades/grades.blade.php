@@ -20,7 +20,12 @@
  
             <div class="card">
                 <div class="card-body"> 
-                    
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">ID: </label>
+                        <div class="col-sm-10 form-control" readonly>{{ $student->Person->id }} </div>
+                    </div>
+
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Student ID: </label>
                         <div class="col-sm-10 form-control" readonly>{{ $student->id }} </div>
@@ -34,8 +39,8 @@
                         @forelse ($student->EnrolledProgramme as $ep )
                             <label class="col-sm-2 col-form-label">Programme: </label>
                             <div class="col-sm-2 form-control mb-3" readonly>{{ $ep->description }} </div>
-                            <div class="col-sm-4 form-control mb-3" readonly>{{ $ep->Programme->name}} </div>
-                            <div class="col-sm-4 form-control mb-3" readonly>{{ $ep->statusText()}} </div>
+                            <div class="col-sm-8 form-control mb-3" readonly>{{ $ep->Programme->name}} </div>
+                            
                         @empty
                             <span>not a student</span>
                         @endforelse

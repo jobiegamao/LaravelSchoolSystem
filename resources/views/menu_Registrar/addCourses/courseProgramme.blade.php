@@ -6,9 +6,11 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 style="color:#3c6b9b;font-weight:bold">Curriculum</h1>
+                <div class="col-sm-12">
+                    <h1>Curriculum</h1>
+                    <hr>
                 </div>
+                
                 <div class="col-sm-6 clearfix"> @include('flash::message')</div>
             </div>
         </div>
@@ -58,11 +60,16 @@
              
              <div class="card">
                 @if(isset($person))
-                <div class="card-body p-10"> 
+                <div class="card-body p-10">
                     
                         <div class="form-group row">
-                            {!! Form::label('person_id', 'Person ID:',array('class' => 'col-sm-2 col-form-label')) !!}
+                            <label class="col-sm-2 col-form-label">ID: </label>
                             <div class="col-sm-10 form-control" readonly>{{ $person->id }} </div>
+                        </div>
+                    
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Student ID: </label>
+                            <div class="col-sm-10 form-control" readonly>{{ $person->Student->id }} </div>
                         </div>
                     
                         <div class="form-group row">

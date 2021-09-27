@@ -8,7 +8,7 @@
                 <div class="col-sm-10">
                     <h1>Extra Course Fees</h1>
                     <span style="font-size: smaller;">
-                    Note: To update a course fee, click on fee then enter.
+                    Note: To update a course fee, click on fee, type, then enter.
                     </span>
                 </div>
                 <div class="col-sm-2">
