@@ -1,4 +1,4 @@
-.col-sm-12 h1{
+h1{
     font-weight:bold;
     color:#3c6b9b
 }
@@ -23,5 +23,6 @@ body {
 }
 
 .btn-danger {
-    color:white;
+    background-color: #3c6b9b;
+    color: white;
 }

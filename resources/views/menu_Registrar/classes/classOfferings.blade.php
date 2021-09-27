@@ -9,8 +9,8 @@
                 <div class="col-sm-12">
                     <h1>Class Offerings</h1>
                 </div>
-                
             </div>
+            <hr>
         </div>
     </section>
     {{-- /header --}}

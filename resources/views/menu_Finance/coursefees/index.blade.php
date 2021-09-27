@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-10">
-                    <h1>Extra Course Fees</h1>
+                    <h1 style="color:#3c6b9b; font-weight:bold;">Extra Course Fees</h1>
                     <span style="font-size: smaller;">
                     Note: To update a course fee, click on fee, type, then enter.
                     </span>
@@ -20,6 +20,7 @@
                 <hr>
                     <div class="clearfix"> @include('flash::message')</div>
             </div>
+            <hr>
 
         </div>
     </section>

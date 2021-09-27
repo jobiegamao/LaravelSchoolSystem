@@ -9,8 +9,8 @@
                     <h1>Teachers List</h1>
                     <div class="clearfix"> @include('flash::message')</div>
                 </div>
-                
             </div>
+            <hr>
         </div>
     </section>
 {{-- /header --}}

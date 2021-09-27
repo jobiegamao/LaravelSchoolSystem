@@ -11,6 +11,7 @@
                 
             </div>
         </div>
+        <hr>
     </section>
 {{-- /header --}}
 

@@ -13,7 +13,7 @@
                     <div class="clearfix"> @include('flash::message')</div>
                 </div>
             </div>
-           
+            <hr>
         </div>
     </section>
     {{-- /header --}}
