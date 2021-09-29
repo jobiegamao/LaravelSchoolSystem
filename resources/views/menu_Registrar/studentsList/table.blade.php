@@ -90,11 +90,11 @@
                     @switch($students->isPass)
                         @case(0)
                             {!! Form::hidden('isPass', 1) !!}
-                            {{Form::submit('Approve',['class' => 'btn btn-default'])}}
+                            {{Form::submit('Approve',['class' => 'btn btn-info'])}}
                             @break
                         @default
                             {!! Form::hidden('isPass', 0) !!}
-                            {{Form::button('Approved <i class="fas fa-times"></i>',['class' => 'btn remove-circle-outline','type' => 'submit', 
+                            {{Form::button('Approved <i class="fas fa-times"></i>',['class' => 'btn btn-delete remove-circle-outline','type' => 'submit', 
                             'onclick' => "return confirm('Are you sure you want to unpromote student?')"])}}
                             
                     @endswitch
@@ -110,13 +110,13 @@
                     {!! Form::open(['route' => ['student.delete', $students->id], 'method' => 'delete']) !!}
                     
                     <a href={{ route('enrollProgramme.edit', $students->id ) }}
-                        class='btn btn-default btn-xs'>
+                        class='btn btn-edit btn-xs'>
                         <i class="far fa-edit"></i>
                     </a>
                     
                     
                     {!! Form::button('<i class="far fa-trash-alt"></i>', 
-                        ['type' => 'submit', 'class' => 'btn btn-danger btn-xs',
+                        ['type' => 'submit', 'class' => 'btn btn-delete btn-xs',
                          'onclick' => "return confirm('Are you sure you want to delete student ID?')"]) !!}
                     {!! Form::close() !!}
                 </td>

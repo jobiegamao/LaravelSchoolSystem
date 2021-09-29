@@ -22,7 +22,7 @@ class AcadPeriodController extends AppBaseController
     public function index(Request $request)
     {
        
-        $acadPeriods = AcadPeriod::all();
+        $acadPeriods = AcadPeriod::orderBy('id', 'DESC')->get();
         $currentPeriod = AcadPeriod::latest()->first();
        
 

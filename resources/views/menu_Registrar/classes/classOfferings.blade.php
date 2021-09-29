@@ -1,23 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- header --}}
+
 <div class="content px-3">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1>Class Offerings</h1>
+    {{-- header --}}
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h1>Class Offerings</h1>
+                    </div>
                 </div>
+                <hr>
             </div>
-            <hr>
-        </div>
-    </section>
+        </section>
     {{-- /header --}}
 
     {{-- body --}}
-
-    <div class="card">
+    <div class="content px-3">
+        <div class="card">
             <div class="card-body p-10">
                 <div class="table-responsive">
                     <table id="classofferings-table" class="table table-striped table-bordered table-hover" style="width:100%;">
@@ -35,8 +36,6 @@
                                 <th>Room</th>
                                 <th><small>Reserved<br>Slots</small></th>
                                 <th><small>Available<br>Slots</small></th>
-                    
-                            
                             </tr>
                         </thead>
                         <tfoot style="display: table-header-group ">
@@ -106,7 +105,7 @@
                 </div>
             
             </div>
-        
+        </div>
     </div>
 
     

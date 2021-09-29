@@ -62,7 +62,7 @@ class RegistrarController extends Controller
     {
        // $students = Student::where('isEnrolled', '1')->orderBy('updated_at','asc')->get();
        $students = Student::orderBy('updated_at','asc')->get();
-        return view('menu_Registrar/promotionList/index')
+        return view('menu_Registrar/studentsList/index')
             ->with('students', $students);
     }
 

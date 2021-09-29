@@ -49,6 +49,8 @@
                     
                 </td>
                 <td>
+        
+                   @role("Student|Registrar")
                    @if (old('acadYear') == $currentYear && old('acadSem') == $currentSem)
                        <form action="{{ route('studentClass.delete', [
                                 'id' => $student->person_id,
@@ -60,9 +62,10 @@
                                 ]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger btn-sm" title="Delete">Drop</button>
+                                <button class="btn btn-delete btn-sm" title="Delete">Drop</button>
                     </form>
                    @endif
+                   @endrole
                     
 
                 </td>

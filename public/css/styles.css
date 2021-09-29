@@ -8,21 +8,82 @@ body {
     font-size: 14px;
 }
 
-.btn {
-    color:#3c6b9b;
+.table{
+    font-family: Poppins;
+    font-size: 14px;
+    
 }
 
+
+/* outside buttons */
 .btn-primary {
     color: white;
     background-color: #3c6b9b;
+    border-color:#3c6b9b;
 }
-
-.btn-secondary {
-    background-color: #3c6b9b;
-    color: white;
-}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
 
 .btn-danger {
     background-color: #3c6b9b;
     color: white;
+    border-color:#3c6b9b;
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+
+/* table buttons */
+
+.btn-edit {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    box-shadow: none;
+}
+.btn-edit:hover {
+    color: #fff;
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn-delete {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    box-shadow: none;
+}
+
+.btn-delete:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-x {
+    color: #6c757d;
+    padding-top: 0px;
+    
+    
+}
+.btn-x:hover{
+    color: #c82333;
+}
+    /* buttons like tag btn, add prog  */
+.btn-info { 
+    background-color: #f8f9fa;
+    border-color: #ddd;
+    color: #6c757d;
+    box-shadow: none;
+  }
+  
+.btn-info:hover {
+    color: #fff;
+    background-color: #3c6b9b;
+    border-color: #3c6b9b;
 }

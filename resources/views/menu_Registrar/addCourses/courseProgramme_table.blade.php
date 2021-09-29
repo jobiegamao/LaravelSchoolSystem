@@ -8,26 +8,20 @@
         <table class="table" id="curriculum-table">
             <thead>
             <tr>
-                <th>CP #</th>
                 <th>Year Level</th>
                 <th>Semester</th>
                 <th>Code</th>
                 <th>Title</th>
-                
                 <th>Units</th>
                 <th>Final Grade</th>
                 <th>Prerequisite</th>
-                <th>Action</th>
             </tr>
             </thead>
             <tbody>
             {{-- CourseProgramme Table --}}
             @foreach($course as $course)
                 <tr>
-                    <td> 
-                        {{-- temp only  --}}
-                        {{ $course->id }}
-                    </td>
+
                     <td>
                         {{ $course->yearLevel }}
                     </td>
@@ -76,10 +70,7 @@
                         
                         
                     </td>
-                    <td>
                     
-
-                    </td>
                     
 
                 </tr>
@@ -108,7 +99,7 @@
                 <th>Units</th>
                 <th>Final Grade</th>
                 <th>Prerequisite</th>
-                <th>Action</th>
+                
             </tr>
             </thead>
             <tbody>
@@ -142,9 +133,7 @@
                            
                         @endphp
                     </td>
-                    <td>
-                        {{--  --}}
-                    </td>
+                    
                     <td>
                         
                         @php
