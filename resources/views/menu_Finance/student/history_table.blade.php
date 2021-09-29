@@ -2,7 +2,7 @@
     <table class="table" id="payHistory-table">
             <thead>
                 <tr>
-                    <th>Control #</th>
+                    <th>Transaction No.</th>
                     <th>Date</th>
                     <th>Semester</th>
                     <th>Remarks</th>

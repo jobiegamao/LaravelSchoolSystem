@@ -6,14 +6,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-/**
- * Class CourseProgrammePrereq
- * @package App\Models
- * @version August 1, 2021, 8:32 pm UTC
- *
- * @property integer $course_programme_id
- * @property integer $prereq_course_programme_id
- */
+
 class CourseProgrammePrereq extends Model
 {
 
@@ -34,22 +27,7 @@ class CourseProgrammePrereq extends Model
         'prereq_course_programme_id'
     ];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'course_programme_id' => 'integer',
-        'prereq_course_programme_id' => 'integer'
-    ];
 
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
     public static $rules = [
         'created_at' => 'nullable',
         'updated_at' => 'nullable',

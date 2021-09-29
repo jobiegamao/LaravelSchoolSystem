@@ -43,10 +43,7 @@ class EnrollProgramme extends Model
         'student_id' => 'required|exists:App\Models\Student,id',
         'progCode' => 'required|exists:App\Models\Programme,progCode',
     ];
-    public static $status_rules = [
-        
-        // 'status' => 'required|inBetween',
-    ];
+    
 
     public function statusText()
     {

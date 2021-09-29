@@ -80,6 +80,11 @@
                                 <label class="col-sm-2 col-form-label">Student ID: </label>
                                 <div class="col-sm-10 form-control" readonly>{{ $student->id }} </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Reg Control No: </label>
+                                <div class="col-sm-10 form-control" readonly>{{ $student->StudentUpdate[0]->id }} </div>
+                            </div>
                         
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Name: </label>
@@ -92,7 +97,7 @@
                                     <div class="col-sm-4 form-control mb-3" readonly>{{ $ep->Programme->name}} </div>
                                     <div class="col-sm-4 form-control mb-3" readonly>{{ $ep->statusText()}} </div>
                                 @empty
-                                    <h1>no enrolled programme</h1>
+                                    <h2>no enrolled programme</h2>
                                 @endforelse
                                 
                             </div>

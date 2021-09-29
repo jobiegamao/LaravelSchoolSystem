@@ -40,7 +40,7 @@ class RegistrarController extends Controller
         $acadPeriod = AcadPeriod::latest()->first();
         $students = Student::where('isPass', '1')
                     ->whereHas('StudentUpdate', function ($query) use($acadPeriod){
-                    $query->where('acadPeriod_id',$acadPeriod->id);
+                        $query->where('acadPeriod_id',$acadPeriod->id);
                     })
                     ->with(['StudentUpdate' => function ($query) use($acadPeriod){
                             $query->where('acadPeriod_id',$acadPeriod->id);

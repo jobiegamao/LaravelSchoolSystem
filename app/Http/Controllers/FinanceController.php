@@ -18,7 +18,7 @@ use Auth;
 class FinanceController extends Controller
 {
     public function index(){
-        $students = Student::all();
+        $students = Student::whereHas('StudentUpdateLatest')->get();
 
         return view('menu_Finance.index', [
             'students' => $students
@@ -212,12 +212,21 @@ class FinanceController extends Controller
             Flash::error('Balance Account is Not Yet Settled');
             return back();
          }
+         
          $due = $student->StudentUpdateLatest->currDue;
-         if($student->Person->PaymentLatest->acadPeriod_id == $ap->id &&
-            $student->Person->PaymentLatest->amount >= ($due * .10)
-         ){
-             $student->update(['isEnrolled' => $request->isEnrolled]);
-
+         $totalPay = 0.0;
+         
+         if($student->Person->PaymentLatest->acadPeriod_id == $ap->id){
+            foreach($student->Person->Payments as $pay){
+                if($pay->acadPeriod_id == $ap->id){
+                    $totalPay += $pay->amount;
+                }
+            }
+            if($totalPay >= ($due * .10)){
+                $student->update(['isEnrolled' => $request->isEnrolled]);
+            }else{
+                Flash::error('Insufficient Payment For Enrollment. Requirement: 10% Downpayment');
+            }
          }else{
              Flash::error('Balance Account is Not Yet Settled');
              

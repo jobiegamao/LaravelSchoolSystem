@@ -27,9 +27,9 @@
                         <table class="table table-hover" id="enrollment-table">
                             <thead>
                             <tr>
-                                <th>Enrollment Status</th>
+                                <th style="text-align: center;">Enrollment Status</th>
+                                <th style="text-align: center;">RGC NO</th>
                                 <th>ID</th>
-                                <th>SID</th>
                                 <th>Name</th>
                                 <th>Programme</th>
                                 <th></th>
@@ -45,7 +45,7 @@
                             @foreach($students  as $students )
                                 
                                 <tr>
-                                    <td>
+                                    <td style="text-align: center;">
                                         {{-- finance should have a table data like this to tag student as enrolled --}}
                                         {!! Form::model($students, ['route' => ['update.enrollTag', $students->id], 'method' => 'patch']) !!}
                                     
@@ -64,11 +64,11 @@
                     
                                     </td>
             
-                                    <td>
-                                        {{ $students->person_id }}
+                                    <td style="text-align: center;">
+                                        {{ $students->StudentUpdateLatest->id }}
                                     </td>
                                     <td>
-                                        {{ $students->id }}
+                                        {{ $students->person_id }}
                                     </td>
                                     <td>
                                         {{ $students->full_name() }}

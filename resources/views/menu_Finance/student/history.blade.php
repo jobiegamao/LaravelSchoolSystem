@@ -6,7 +6,7 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12 text-center">
+                <div class="col-sm-12">
                     <h1>Payment History of {{ $person->full_name() }}</h1>
                     <hr>
                     
@@ -18,7 +18,7 @@
     {{-- /header --}}
 
     {{-- body --}}
-
+<div class="content px-3">
     <div class="card">
         <div class="card-body p-10">
             <div class="form-group row">
@@ -27,7 +27,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Student ID: </label>
+                <label class="col-sm-2 col-form-label">Student No: </label>
                 <div class="col-sm-10 form-control" readonly>{{ $person->Student->id }} </div>
             </div>
         
@@ -62,7 +62,7 @@
         
         
     </div>
-
+</div>
     
              
 </div>

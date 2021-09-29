@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th>PID</th>
-            <th>SID</th>
+            <th>SNO</th>
             <th>Name</th>
             <th>Year</th>
             <th>Programme</th>

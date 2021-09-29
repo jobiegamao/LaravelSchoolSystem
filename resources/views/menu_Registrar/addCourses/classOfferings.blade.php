@@ -8,19 +8,20 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 style="color:#3c6b9b;font-weight:bold">SEU Class Offerings</h1>
-                    {{-- pre reg --}}
-                    {!! Form::open(['method' => 'GET', 'route' => 'goTo_prereg'  ]) !!}
-                        {!! Form::hidden('id', $student->person_id ) !!} 
-                        {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
-                        {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!} 
-                        {{Form::submit('Prereg' ,['class' => 'btn btn-link p-0 '])}}
-                    {!! Form::close() !!}
+                    
                 </div>
                 <div class="col-sm-6">
                     <div class="clearfix"> @include('flash::message')</div>
                 </div>
             </div>
             <hr>
+            {{-- pre reg --}}
+            {!! Form::open(['method' => 'GET', 'route' => 'goTo_prereg'  ]) !!}
+            {!! Form::hidden('id', $student->person_id ) !!} 
+            {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
+            {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!} 
+            {{Form::submit('&larr; Prereg' ,['class' => 'btn btn-link p-0 '])}}
+        {!! Form::close() !!}
         </div>
     </section>
     {{-- /header --}}

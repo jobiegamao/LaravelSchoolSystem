@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content p-3">
-    {{-- details on student --}}
+    
 
     <style>
         table {
@@ -24,7 +24,7 @@
         </style>
 
     
-
+{{-- details on student --}}
     <div class="card">
         <div class="card-body">
             <div class="form-group row">
@@ -33,7 +33,7 @@
             </div>
             
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Student ID: </label>
+                <label class="col-sm-2 col-form-label">Student No: </label>
                 <div class="col-sm-10 form-control" readonly>{{ $student->id }} </div>
             </div>
                     

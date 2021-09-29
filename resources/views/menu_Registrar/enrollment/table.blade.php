@@ -2,8 +2,9 @@
     <table class="table" id="enrollment-table">
         <thead>
         <tr>
-            <th>PID</th>
-            <th>SID</th>
+            <th>RGC</th>
+            <th>ID</th>
+            {{-- <th>SID</th> --}}
             <th>Name</th>
             <th>Units</th>
             <th>Programme</th>
@@ -20,17 +21,20 @@
         @foreach($students  as $students )
             
             <tr>
+                <td style="text-align: center;">
+                    {{ $students->StudentUpdate[0]->id }}
+                </td>
                 <td>
                     {{ $students->person_id }}
                 </td>
-                <td>
+                {{-- <td>
                     {{ $students->id }}
-                </td>
+                </td> --}}
                 <td>
                     {{ $students->full_name() }}
                     
                 </td>
-                <td>
+                <td style="text-align: center;">
                     {{-- units --}}
                     {{ $students->StudentUpdate[0]->units }}
                 </td>
