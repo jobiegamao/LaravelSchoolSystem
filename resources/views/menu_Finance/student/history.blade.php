@@ -48,7 +48,7 @@
             </div>
             <div>
                 <a href="{{ route('goTo_payment', [$person->id]) }}"
-                    class='btn btn-default btn'>
+                    class='btn btn-info btn-xs'>
                      Add Payment
                  </a> 
             </div>

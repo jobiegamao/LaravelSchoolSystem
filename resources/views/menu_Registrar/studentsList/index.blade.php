@@ -5,17 +5,11 @@
     {{-- header --}}
         <section class="content-header">
             <div class="container-fluid">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h1 style="color:#3c6b9b; font-weight:bold;">Enrollment List</h1>
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h1>Students List</h1>
                     </div>
-                    <div>
-                    </div>
-                    <div>
-                        <a href="{{ route('student.unenroll') }}" class="btn btn-danger float-right"
-                        onclick ="return confirm('Are you sure you want to unenroll ALL students?')"
-                        >Tag All as Unenrolled</a>
-                    </div>
+                    
                 </div>
                 <hr>
             </div>
@@ -28,9 +22,13 @@
             <div class="clearfix"> @include('flash::message')</div>
             <div class="card">
                 <div class="card-body p-10">
-                    @include('menu_Registrar/enrollment/table')
+                    @include('menu_Registrar/studentsList/table')
                 </div>
+
             </div>
+            <a href="{{ route('student.unpromote') }}" class="btn btn-danger float-right"
+            onclick ="return confirm('Are you sure you want to unpromote ALL students?')"
+            >Unpromote All </a>
         </div>
     {{-- body --}}
 </div>

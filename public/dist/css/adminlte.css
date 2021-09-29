@@ -2778,6 +2778,7 @@ fieldset:disabled a.btn {
   box-shadow: none;
 }
 
+
 .btn-primary:hover {
   color: #fff;
   background-color: #0069d9;
@@ -3338,7 +3339,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-link:hover {
-  color: #0056b3;
+  color: #3c6b9b;
   text-decoration: none;
 }
 

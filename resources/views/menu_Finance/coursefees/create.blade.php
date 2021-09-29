@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="content px-3">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -12,7 +13,6 @@
     </section>
 
     <div class="content px-3">
-
         @include('adminlte-templates::common.errors')
 
         <div class="card">
@@ -32,4 +32,5 @@
 
         </div>
     </div>
+</div>
 @endsection

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="content px-3">
+    {{-- header --}}
     <section class="content-header">
         <div class="container-fluid">
                 <div class="d-flex justify-content-between">
@@ -13,14 +15,15 @@
                     <div>
                         <a class="btn btn-primary float-left"
                         href="{{ route('acadPeriods.create') }}">
-                        Add New
-                        </a>
+                        Add New</a>
                     </div>
                 </div>
                 <hr>
         </div>
     </section>
+    {{-- /header --}}
 
+    {{-- body --}}
     <div class="content px-3">
         <div class="card">
             <div class="card-body">
@@ -56,6 +59,7 @@
 
         </div>
     </div>
-
+    {{-- /body --}}
+</div>
 @endsection
 
