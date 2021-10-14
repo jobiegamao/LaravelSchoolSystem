@@ -32,7 +32,7 @@ class CreateStudentTable extends Migration
             //pass for next enrollment
             $table->boolean('isPass')->default(0);
 
-            $table->boolean('isGrad')->default(0);
+            
 
         });
 

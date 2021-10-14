@@ -50,7 +50,7 @@ Route::get('student/courses/curriculum', 'App\Http\Controllers\RegistrarControll
 Route::resource('acadPeriods', App\Http\Controllers\AcadPeriodController::class)->middleware('role:Registrar');
 
 Route::get('teacher', 'App\Http\Controllers\TeacherController@index')->name('teacher.list')->middleware('role:Teacher|Registrar');
-Route::post('teacher', 'App\Http\Controllers\TeacherController@gradeReport')->name('teacher.report')->middleware('role:Teacher');
+Route::post('teacher', 'App\Http\Controllers\TeacherController@gradeReport')->name('teacher.report')->middleware('role:Registrar');
 
 Route::get('teacher/{id}/current-classes', 'App\Http\Controllers\TeacherController@classes')->name('teacher.classes')->middleware('role:Teacher|Registrar');
 Route::get('teacher/{id}/all-classes', 'App\Http\Controllers\TeacherController@allclasses')->name('teacher.allclasses')->middleware('role:Teacher|Registrar');

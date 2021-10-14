@@ -16,10 +16,10 @@
                         <div class="clearfix"> @include('flash::message')</div>
                     </div>
                     <div class="col-sm-2">
-                        @if (Auth::user()->role == 'Teacher')
+                        @if (Auth::user()->role == 'Registrar')
                             {!! Form::open(['method' => 'POST', 'route' => 'teacher.report' , 'id' => 'submitForm']) !!}
                                     {!! Form::hidden('classOffering_id', $class->id) !!}
-                                    {{Form::button('Submit Grade Report',['class' => 'btn btn-primary', 
+                                    {{Form::button('Update Grade Report',['class' => 'btn btn-primary', 
                                     'type' => 'submit', 'onclick' => "return confirm('WARNING: Submission of reports is irreversable. 
                                     Contact Registrar for changes after submission.')" ])}}
                             {!! Form::close() !!}

@@ -25,24 +25,9 @@ class Teacher extends Model
         
     ];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer'
-    ];
+    
 
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static $rules = [
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable'
-    ];
+    
 
     public function Person()
     {

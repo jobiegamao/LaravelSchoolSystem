@@ -11,7 +11,7 @@
         </thead>
         <tbody>
             
-        @foreach($t as $t )
+        @foreach($t as $t ) 
             <tr>
                 <td>
                     {{ $t->person_id }}
