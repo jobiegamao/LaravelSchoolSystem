@@ -24,7 +24,7 @@
                     <table id="classofferings-table" class="table table-striped table-bordered table-hover" style="width:100%;">
                         <thead>
                             <tr>
-                                <th><small>Offering #</small></th>
+                                <th>Offering #</th>
                                 <th>Year</th>
                                 <th>Semester</th>
                                 <th>Units</th>
