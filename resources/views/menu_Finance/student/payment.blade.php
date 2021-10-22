@@ -36,7 +36,7 @@
                         <div class="col-sm-10 form-control" readonly>{{ $person->full_name()}} </div>   
                     </div>
 
-                    @php( $acadPeriod = \App\Models\AcadPeriod::all())
+                    @php( $acadPeriod = \App\Models\AcadPeriod::all()->sortByDesc("id"))
                     <div class="form-group row">
                         {!! Form::label('acad_id', 'Academic Period:',array('class' => 'col-sm-2 col-form-label')) !!}
                         <div class="col-sm-10 form-control">

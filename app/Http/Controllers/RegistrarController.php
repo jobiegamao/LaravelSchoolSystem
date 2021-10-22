@@ -3,23 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Flash, Response, Validator, Input, Redirect, Rule;
+use Auth, Flash, Response, Validator, Input, Redirect, Rule;
 use Illuminate\Support\Facades\DB;
 
 // add models that will be used in this controller
-use App\Models\Person; 
-use App\Models\Student; 
-use App\Models\EnrollProgramme; 
-use App\Models\CourseProgramme; 
-use App\Models\CourseProgrammePreReq; 
-use App\Models\ClassOffering; 
-use App\Models\ClassGrade; 
-use App\Models\StudentClass; 
-use App\Models\AcadPeriod;
-use App\Models\Fees; 
-use App\Models\StudentUpdate; 
-use Auth;
-
+use App\Models\{
+    Person,
+    Student,
+    EnrollProgramme,
+    CourseProgramme,
+    CourseProgrammePreReq,
+    ClassOffering,
+    ClassGrade,
+    StudentClass,
+    AcadPeriod,
+    Fees,
+    Payments,
+    StudentUpdate,
+};
 
 
 

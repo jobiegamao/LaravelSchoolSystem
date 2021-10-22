@@ -52,8 +52,12 @@ Route::resource('acadPeriods', App\Http\Controllers\AcadPeriodController::class)
 Route::get('teacher', 'App\Http\Controllers\TeacherController@index')->name('teacher.list')->middleware('role:Teacher|Registrar');
 Route::post('teacher', 'App\Http\Controllers\TeacherController@gradeReport')->name('teacher.report')->middleware('role:Registrar');
 
-Route::get('teacher/{id}/current-classes', 'App\Http\Controllers\TeacherController@classes')->name('teacher.classes')->middleware('role:Teacher|Registrar');
-Route::get('teacher/{id}/all-classes', 'App\Http\Controllers\TeacherController@allclasses')->name('teacher.allclasses')->middleware('role:Teacher|Registrar');
+// Route::get('teacher/{id}/current-classes', 'App\Http\Controllers\TeacherController@classes')->name('teacher.classes')->middleware('role:Teacher|Registrar');
+// Route::get('teacher/{id}/all-classes', 'App\Http\Controllers\TeacherController@allclasses')->name('teacher.allclasses')->middleware('role:Teacher|Registrar');
+Route::get('teacher/{id}/search-class', 'App\Http\Controllers\TeacherController@goTo_classes')->name('teacher.goTo_classes')->middleware('role:Teacher|Registrar');
+Route::get('teacher/classes', 'App\Http\Controllers\TeacherController@loadClasses')->name('teacher.loadClasses')->middleware('role:Teacher|Registrar');
+
+
 Route::get('class/students', 'App\Http\Controllers\TeacherController@classStudents')->name('teacher.students')->middleware('role:Teacher|Registrar');
 Route::patch('class/grade/{id}', 'App\Http\Controllers\TeacherController@classGradeUpdate')->name('classGrade.update')->middleware('role:Teacher');
 Route::any('classes', 'App\Http\Controllers\RegistrarController@classOfferingsShow')->name('classOfferings.show')->middleware('role:Registrar');;

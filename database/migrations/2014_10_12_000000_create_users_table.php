@@ -51,6 +51,10 @@ class CreateUsersTable extends Migration
         // student
         // cksmith@seu.edu.ph
         // pass: 10009
+
+        // student
+        // aaano@seu.edu.ph
+        // pass: 10010
         
         $person = Person::all();
         

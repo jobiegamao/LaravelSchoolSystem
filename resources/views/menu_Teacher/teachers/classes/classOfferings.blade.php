@@ -8,7 +8,8 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <h1> Classes</h1>
-                    <span>Instructor: {{ $classes[0]->Teacher->full_name()}}</span>
+                    <span>Instructor: {{ $teacher->full_name()}}</span>
+                    
                     <hr>
                 </div>
             </div>
@@ -19,6 +20,9 @@
 
     {{-- body --}}
     <div class="content px-3">
+        {!! Form::open(['method' => 'GET', 'route' => ['teacher.goTo_classes',  $teacher->id] ]) !!}
+            {{Form::submit(' &larr; Change Period',['class' => 'btn btn-link'])}}
+        {!! Form::close() !!}
         <div class="card">
             <div class="card-body p-10">
                 <div class="table-responsive">
@@ -35,7 +39,7 @@
                             <th><small><b>Reserved</b><br><b>Slots</b></small></th>
                             <th><small><b>Available</b><br><b>Slots</b></small></th>
                 
-                            <th>Students</th>
+                            <th class="text-center">Students</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -76,7 +80,7 @@
                                 {!! Form::open(['method' => 'GET', 'route' => 'teacher.students' ]) !!}
                                     {!! Form::hidden('id', $classes->id) !!}
                                     {!! Form::hidden('tid', $classes->teacher_id) !!}
-                                    {!! Form::button('<i class="fas fa-users"></i>', 
+                                    {!! Form::button('View Students', 
                                     ['type' => 'submit', 'class' => 'btn btn-link', ]) !!}
                                     {!! Form::close() !!}
                                 </td>

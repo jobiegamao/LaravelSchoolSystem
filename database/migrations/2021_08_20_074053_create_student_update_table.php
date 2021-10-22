@@ -39,9 +39,9 @@ class CreateStudentUpdateTable extends Migration
 
 
             // $table->decimal('oldBal', 10, 2)->nullable()->default(0.00);
-            $table->decimal('balance', 10, 2)->nullable()->default(0.00);
-            $table->decimal('currDue', 10, 2)->nullable()->default(0.00);
-            $table->decimal('adjustments', 10, 2)->nullable()->default(0.00);
+            $table->decimal('balance', 10, 2)->default(0.00);
+            $table->decimal('currDue', 10, 2)->default(0.00);
+            $table->decimal('adjustments', 10, 2)->default(0.00);
 
             //is graduating? || is this the last sem of student
             $table->boolean('isGrad')->default(0);

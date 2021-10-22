@@ -22,44 +22,30 @@ class TeacherController extends Controller
         ]);
     }
 
-    public function classes($id){
+    public function goTo_classes($id){
+        $t = Teacher::find($id);
+        return view('menu_Teacher.teachers.classes.searchclasses',[
+            'teacher'=>$t 
+        ]);
+    }
+    public function loadClasses(Request $request){
         //gatekeep other teachers from viewing other teachers's record
-        if(Auth::user()->role == "Teacher" && Auth::user()->Person->Teacher->id !=$id){
+        if(Auth::user()->role == "Teacher" && Auth::user()->Person->Teacher->id !=$request->teacher_id){
             abort(403); 
         }
         //
-
-
-        $acadPeriod = AcadPeriod::latest()->first();
-        $classes = ClassOffering::where('teacher_id', $id)
+        $acadPeriod = AcadPeriod::find($request->acadPeriod_id);
+        $classes = ClassOffering::where('teacher_id', $request->teacher_id)
                     ->with('Teacher')
                     ->where('year', $acadPeriod->acadYear)
                     ->where('semester', $acadPeriod->acadSem)
                     ->get();
-   
-        return view('menu_Teacher.teachers.classes.classOfferings', [
-            'classes' => $classes
-        ]);
-    }
-
-    public function allclasses($id){
-        //gatekeep other teachers from viewing other teachers's record
-        if(Auth::user()->role == "Teacher" && Auth::user()->Person->Teacher->id !=$id){
-            abort(403); 
-        }
-        //
-
-        $acadPeriod = AcadPeriod::latest()->first();
-        $classes = ClassOffering::where('teacher_id', $id)
-                    ->with('Teacher')
-                    ->get();
-   
+        $t = Teacher::find($request->teacher_id);
         return view('menu_Teacher.teachers.classes.classOfferings', [
             'classes' => $classes,
-            'allclasses' => 1
+            'teacher'=>$t 
         ]);
     }
-
     public function classStudents(Request $request){
         //gatekeep other teachers from viewing other teachers's record
         if(Auth::user()->role == "Teacher" && Auth::user()->Person->Teacher->id !=$request->tid){
@@ -86,6 +72,46 @@ class TeacherController extends Controller
             'reported' => $reported
         ]);
     }
+
+    // public function classes($id){
+    //     //gatekeep other teachers from viewing other teachers's record
+    //     if(Auth::user()->role == "Teacher" && Auth::user()->Person->Teacher->id !=$id){
+    //         abort(403); 
+    //     }
+    //     //
+
+
+    //     $acadPeriod = AcadPeriod::latest()->first();
+    //     $classes = ClassOffering::where('teacher_id', $id)
+    //                 ->with('Teacher')
+    //                 ->where('year', $acadPeriod->acadYear)
+    //                 ->where('semester', $acadPeriod->acadSem)
+    //                 ->get();
+   
+    //     return view('menu_Teacher.teachers.classes.classOfferings', [
+    //         'classes' => $classes
+    //     ]);
+    // }
+
+    // public function allclasses($id){
+    //     //gatekeep other teachers from viewing other teachers's record
+    //     if(Auth::user()->role == "Teacher" && Auth::user()->Person->Teacher->id !=$id){
+    //         abort(403); 
+    //     }
+    //     //
+
+    //     $acadPeriod = AcadPeriod::latest()->first();
+    //     $classes = ClassOffering::where('teacher_id', $id)
+    //                 ->with('Teacher')
+    //                 ->get();
+   
+    //     return view('menu_Teacher.teachers.classes.classOfferings', [
+    //         'classes' => $classes,
+    //         'allclasses' => 1
+    //     ]);
+    // }
+
+   
 
     public function classGradeUpdate(Request $request, $id){
 

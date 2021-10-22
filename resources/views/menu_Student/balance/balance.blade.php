@@ -69,6 +69,10 @@
                                 <td style="font-weight:bold" colspan="2">LESS</td>
                             </tr>
                             <tr>
+                                <td style="font-weight:bold;padding-left: 30px">OVERBALANCE:</td>
+                                <td style="text-align:right">{{ $overbalance ?? "0.00"}} </td>
+                            </tr>
+                            <tr>
                                 <td style="font-weight:bold;padding-left: 30px">ADJUSTMENTS:</td>
                                 <td style="text-align:right">{{ $adj ?? "0.00"}}</td>
                             </tr>
@@ -176,6 +180,7 @@
                 <div class="p-2">
                     {!! Form::open(['method' => 'GET', 'route' => ['balance', 'id' => $student->person_id] ]) !!}
                         {!! Form::hidden('acadPeriod_id', $acadPeriod->id - 1) !!}
+                        {!! Form::hidden('prev', true) !!}
                         {{Form::submit('&larr; Prev',['class' => 'btn btn-link'])}}
                     {!! Form::close() !!}
                 </div>
@@ -184,6 +189,7 @@
                     <div class="p-2"> 
                     {!! Form::open(['method' => 'GET', 'route' => ['balance', 'id' => $student->person_id] ]) !!}
                         {!! Form::hidden('acadPeriod_id', $acadPeriod->id + 1) !!}
+                        {!! Form::hidden('next', true) !!}
                         {{Form::submit('Next &rarr;',['class' => 'btn btn-link'])}}
                     {!! Form::close() !!}
                     </div>
