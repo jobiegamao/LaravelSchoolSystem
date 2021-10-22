@@ -125,7 +125,7 @@
                                             {{ $class->ClassGrade->prefinalsGrade }}
                                         </td>
                                         <td>
-                                            {{ $class->ClassGrade->finalGrade() }}
+                                            {{ $class->ClassGrade->finalsGrade }}
                                             
                                         </td>
                                         <td>

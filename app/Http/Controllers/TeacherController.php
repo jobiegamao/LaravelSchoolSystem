@@ -109,7 +109,8 @@ class TeacherController extends Controller
         foreach($sc as $a){
             if($a->ClassGrade->prelimGrade == null ||
                $a->ClassGrade->midtermGrade == null ||
-               $a->ClassGrade->prefinalsGrade == null ){
+               $a->ClassGrade->prefinalsGrade == null ||
+               $a->ClassGrade->finalsGrade == null ){
                     Flash::error('NOT ALL GRADES ARE FILLED.');
                     return redirect()->back();
             }
@@ -118,7 +119,7 @@ class TeacherController extends Controller
 
         //CHANGE ISPASS in ClassGrade
         foreach($sc as $b){
-            if($b->ClassGrade->finalGrade() >= 75){
+            if($b->ClassGrade->finalsGrade >= 75){
                 $b->ClassGrade->isPass = 1;
                 $b->ClassGrade->save();
             }else{

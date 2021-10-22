@@ -78,7 +78,10 @@
                             </td>
                 
                             <td>
-                                {{ $s->ClassGrade->finalGrade() }}
+                                {!! Form::model($s, ['route' => ['classGrade.update', $s->classGrade_id], 'method' => 'patch', 'id' => 'g4Form']) !!}
+                                {!! Form::number('finalsGrade',$s->ClassGrade->finalsGrade, ['class' => 'border-0 w-1', 'size' => 10, ]) !!}
+                                <a href="{{ route('classGrade.update', [$s->classGrade_id]) }}"></a>
+                                {!!Form::close()!!}
                             </td>
                         @endforeach
                         </tbody>
@@ -109,6 +112,7 @@
                             $("#g1Form :input").prop("disabled", true);
                             $("#g2Form :input").prop("disabled", true);
                             $("#g3Form :input").prop("disabled", true);
+                            $("#g4Form :input").prop("disabled", true);
                         }
                     } );
                 </script>

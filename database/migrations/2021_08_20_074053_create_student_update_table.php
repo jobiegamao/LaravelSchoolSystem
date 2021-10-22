@@ -55,7 +55,6 @@ class CreateStudentUpdateTable extends Migration
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '6',
-                   'final'   =>   '88.36',
                    'currDue'   =>   '16000.00',
             )
         );
@@ -67,7 +66,6 @@ class CreateStudentUpdateTable extends Migration
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '6',
-                   'final'   =>   '79.67',
                    'currDue'   =>   '16000.00',
                    'created_at' => '2020-10-10'
             )
@@ -81,6 +79,7 @@ class CreateStudentUpdateTable extends Migration
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '3',
+                   'currDue'   =>   '13000.00',
             )
         );
         DB::table('StudentUpdate')->insert(
@@ -90,6 +89,7 @@ class CreateStudentUpdateTable extends Migration
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '3',
+                   'currDue'   =>   '13000.00',
             )
         );
         DB::table('StudentUpdate')->insert(
@@ -99,6 +99,7 @@ class CreateStudentUpdateTable extends Migration
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '3',
+                   'currDue'   =>   '13000.00',
             )
         );
         DB::table('StudentUpdate')->insert(
@@ -108,6 +109,8 @@ class CreateStudentUpdateTable extends Migration
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '3',
+                   'currDue'   =>   '13000.00',
+
             )
         );
         DB::table('StudentUpdate')->insert(
@@ -117,7 +120,8 @@ class CreateStudentUpdateTable extends Migration
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '3',
-                   'created_at' => '2020-07-10'
+                   'created_at' => '2020-07-10',
+                   'currDue'   =>   '14000.00',
             )
         );
         DB::table('StudentUpdate')->insert(
@@ -127,7 +131,8 @@ class CreateStudentUpdateTable extends Migration
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
                    'unitsTook'   =>   '3',
-                   'created_at' => '2020-10-10'
+                   'created_at' => '2020-10-10',
+                   'currDue'   =>   '13000.00',
             )
         );
 

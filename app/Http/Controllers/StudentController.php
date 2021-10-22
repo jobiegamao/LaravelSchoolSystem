@@ -108,12 +108,5 @@ class StudentController extends Controller
         
     }
 
-    public function balance(Request $request, $id){
-       //
-    }
-
-    public function calculateQPI($classes){
-        //
-    }
 
 }

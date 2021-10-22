@@ -19,6 +19,7 @@ class ClassGrade extends Model
         'prelimGrade',
         'midtermGrade',
         'prefinalsGrade',
+        'finalsGrade',
         'isPass'
     ];
 
@@ -31,45 +32,40 @@ class ClassGrade extends Model
         'id' => 'integer',
         'prelimGrade' => 'float',
         'midtermGrade' => 'float',
-        'prefinalsGrade' => 'float'
+        'prefinalsGrade' => 'float',
+        'finalsGrade' => 'float'
     ];
 
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static $rules = [
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'prelimGrade' => 'nullable|numeric',
-        'midtermGrade' => 'nullable|numeric',
-        'prefinalsGrade' => 'nullable|numeric'
-    ];
+   
 
    
 
     public function finalGradeText()
     {
-        $grade = round( (($this->prelimGrade + $this->midtermGrade + $this->prefinalsGrade)/3) , 2);
-        if($grade < 75){
-             return "<strong style='color:red'>{$grade}</strong>";
-        }else{
-            return "<p style='color:green'>{$grade}</p>";
+        if($this->finalsGrade != null){
+            $grade = $this->finalsGrade;
+            if($grade < 75){
+                 return "<strong style='color:red'>{$grade}</strong>";
+            }else{
+                return "<p style='color:green'>{$grade}</p>";
+            }
         }
+        
        
     }
 
-    public function finalGrade()
-    {
-        $grade = round( (($this->prelimGrade + $this->midtermGrade + $this->prefinalsGrade)/3) , 2);
-        return $grade;
+    // finals is not the avaerage of the 3
+
+    // public function finalGrade()
+    // {
+    //     $grade = round( (($this->prelimGrade + $this->midtermGrade + $this->prefinalsGrade)/3) , 2);
+    //     return $grade;
        
-    }
+    // }
 
     public function finalGradeQPI()
     {
-        $n = $this->finalGrade();
+        $n = $this->finalsGrade;
         
         if($n == 0){
             return 0;
