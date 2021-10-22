@@ -34,8 +34,16 @@ class CreateCourseprogramTable extends Migration
             $table->boolean('isProfessional')->nullable()->default(1);
             $table->tinyInteger('semester')->nullable()->default(1);
             $table->tinyInteger('yearLevel')->nullable();
-            $table->smallInteger('yearImplemented');
+
+            // Curriculum for batch who started at acadPeriod
+            //year and sem this curric is for
+            $table->foreignID('acadPeriod')
+                    ->contstrained('AcadPeriod')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
         });
+
+        ## BSCS curric for batch 2020 (ap=10)
         DB::table('CourseProgramme')->insert(
             array(
                    'progCode'   =>   'BSCS',
@@ -43,7 +51,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -54,7 +62,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -65,7 +73,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -76,7 +84,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -87,7 +95,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -98,7 +106,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -109,7 +117,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -120,10 +128,11 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
+        ## BSPSYCH curric for batch 2020 (ap=10)
         DB::table('CourseProgramme')->insert(
             array(
                    'progCode'   =>   'BSPSYCH',
@@ -131,7 +140,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -142,7 +151,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -153,7 +162,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -164,7 +173,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -175,7 +184,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -186,10 +195,11 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
+        ## ABPHILO curric for batch 2020 (ap=10)
         DB::table('CourseProgramme')->insert(
             array(
                    'progCode'   =>   'ABPHILO',
@@ -197,7 +207,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -208,7 +218,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -219,7 +229,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -230,7 +240,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
 
@@ -241,9 +251,11 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '10',
             )
         );
+
+    ## BSCHE Curric for batch 2018 (ap = 1)
 	DB::table('CourseProgramme')->insert(
             array(
                    'progCode'   =>   'BSCHE',
@@ -251,7 +263,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
             )
         );
 
@@ -262,7 +274,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
             )
         );
 
@@ -273,7 +285,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
             )
         );
 
@@ -284,7 +296,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '1',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
             )
         );
 	DB::table('CourseProgramme')->insert(
@@ -294,7 +306,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '2',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
             )
         );
 
@@ -305,7 +317,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '2',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
             )
         );
 
@@ -316,7 +328,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '0',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '2',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
             )
         );
 
@@ -327,7 +339,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '2',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
             )
         );
 
@@ -338,7 +350,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '2',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
             )
         );
 
@@ -349,7 +361,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '3',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
             )
         );
 
@@ -360,7 +372,7 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '2',
                    'yearLevel'   =>   '3',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
             )
         );
 
@@ -371,7 +383,271 @@ class CreateCourseprogramTable extends Migration
                    'isProfessional'   =>   '1',
                    'semester'   =>   '1',
                    'yearLevel'   =>   '4',
-                   'yearImplemented'   =>   '2018',
+                   'acadPeriod'   =>   '1',
+            )
+        );
+
+        ## BSCHE Curric for batch 2020 (ap = 7)
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22222',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '1',
+                'acadPeriod'   =>   '7',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'GE 222',
+                'isProfessional'   =>   '0',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '1',
+                'acadPeriod'   =>   '7',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'TRIG 11111',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '2',
+                'yearLevel'   =>   '1',
+                'acadPeriod'   =>   '7',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22333',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '2',
+                'yearLevel'   =>   '1',
+                'acadPeriod'   =>   '7',
+            )
+        );
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22111',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '2',
+                'acadPeriod'   =>   '7',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'DIFF 22222',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '2',
+                'acadPeriod'   =>   '7',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'APP 11111',
+                'isProfessional'   =>   '0',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '2',
+                'acadPeriod'   =>   '7',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22444',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '2',
+                'acadPeriod'   =>   '7',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22223',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '2',
+                'yearLevel'   =>   '2',
+                'acadPeriod'   =>   '7',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22224',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '3',
+                'acadPeriod'   =>   '7',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22225',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '2',
+                'yearLevel'   =>   '3',
+                'acadPeriod'   =>   '7',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22226',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '4',
+                'acadPeriod'   =>   '7',
+            )
+        );
+
+        ## BSCHE Curric for batch 2021 (ap = 10)
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22222',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '1',
+                'acadPeriod'   =>   '10',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'GE 222',
+                'isProfessional'   =>   '0',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '1',
+                'acadPeriod'   =>   '10',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'TRIG 11111',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '2',
+                'yearLevel'   =>   '1',
+                'acadPeriod'   =>   '10',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22333',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '2',
+                'yearLevel'   =>   '1',
+                'acadPeriod'   =>   '10',
+            )
+        );
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22111',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '2',
+                'acadPeriod'   =>   '10',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'DIFF 22222',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '2',
+                'acadPeriod'   =>   '10',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'APP 11111',
+                'isProfessional'   =>   '0',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '2',
+                'acadPeriod'   =>   '10',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22444',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '2',
+                'acadPeriod'   =>   '10',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22223',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '2',
+                'yearLevel'   =>   '2',
+                'acadPeriod'   =>   '10',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22224',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '3',
+                'acadPeriod'   =>   '10',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22225',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '2',
+                'yearLevel'   =>   '3',
+                'acadPeriod'   =>   '10',
+            )
+        );
+
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22226',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '4',
+                'acadPeriod'   =>   '10',
             )
         );
        

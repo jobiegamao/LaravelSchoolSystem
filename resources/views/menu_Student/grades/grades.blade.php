@@ -66,7 +66,8 @@
                                 {!! Form::close() !!}
                                 </div>
                             @endif
-                            @if($prevPeriod != null)
+                            @if($prevPeriod != null 
+                                &&  $student->StudentUpdateFirst->acadPeriod_id != $acadPeriod->id)
                             <div class="p-2">
                                 {!! Form::open(['method' => 'GET', 'route' => ['grades.show', 'id' => $student->id] ]) !!}
                                     {!! Form::hidden('changePeriod', true) !!}

@@ -19,6 +19,12 @@
 
     {{-- body --}}
 <div class="content px-3">
+    
+        @role('Finance')
+        {!! Form::open(['method' => 'GET', 'route' => ['finance.index'] ]) !!}
+            {{Form::submit(' &larr; Back',['class' => 'btn btn-link p-0'])}}
+        {!! Form::close() !!}
+        @endrole
     <div class="card">
         <div class="card-body p-10">
             <div class="form-group row">

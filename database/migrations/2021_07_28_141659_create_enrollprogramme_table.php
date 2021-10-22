@@ -28,10 +28,16 @@ class CreateEnrollprogrammeTable extends Migration
                 ->onDelete('cascade');
 
             $table->string('progCode');
-
             $table->foreign('progCode')
                 ->references('progCode')
                 ->on('Programme');
+
+            //year and sem this program started
+            $table->foreignID('acadPeriod_start')
+                    ->contstrained('AcadPeriod')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+            
         });
 
         DB::table('EnrollProgramme')->insert(
@@ -39,48 +45,53 @@ class CreateEnrollprogrammeTable extends Migration
 		            'student_id' =>   '20001',
                    'progCode'   =>   'BSCS',
                    'description'   =>   'Major',
+                   'acadPeriod_start'   =>   '10',
             )
         );
 
         DB::table('EnrollProgramme')->insert(
             array(
-		  'student_id' =>   '20001',
+		            'student_id' =>   '20001',
                    'progCode'   =>   'ABPHILO',
                    'description'   =>   'Certificate',
-                   
+                   'acadPeriod_start'   =>   '10',
 
             )
         );
 
 	DB::table('EnrollProgramme')->insert(
             array(
-		  'student_id' =>   '20002',
+		           'student_id' =>   '20002',
                    'progCode'   =>   'BSPSYCH',
                    'description'   =>   'Major',
+                   'acadPeriod_start'   =>   '10',
             )
         );
 
         DB::table('EnrollProgramme')->insert(
             array(
-		  'student_id' =>   '20002',
+		            'student_id' =>   '20002',
                    'progCode'   =>   'BSCS',
                    'description'   =>   'Minor',
+                   'acadPeriod_start'   =>   '10',
             )
         );
 	
 	DB::table('EnrollProgramme')->insert(
             array(
-		  'student_id' =>   '20003',
+		            'student_id' =>   '20003',
                    'progCode'   =>   'ABPHILO',
                    'description'   =>   'Major',
+                   'acadPeriod_start'   =>   '10',
             )
         );
 
         DB::table('EnrollProgramme')->insert(
             array(
-		  'student_id' =>   '20004',
+		            'student_id' =>   '20004',
                    'progCode'   =>   'BSCHE',
                    'description'   =>   'Major',
+                   'acadPeriod_start'   =>   '7',
             )
         );
 
@@ -89,6 +100,7 @@ class CreateEnrollprogrammeTable extends Migration
 		           'student_id' =>   '20005',
                    'progCode'   =>   'BSCHE',
                    'description'   =>   'Major',
+                   'acadPeriod_start'   =>   '1',
             )
         );
         

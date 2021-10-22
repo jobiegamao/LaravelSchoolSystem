@@ -26,7 +26,8 @@ class EnrollProgramme extends Model
         'student_id',
         'progCode',
         'description',
-        'status'
+        'status',
+        'acadPeriod_start'
     ];
 
     
@@ -42,6 +43,7 @@ class EnrollProgramme extends Model
         'description' => 'required',
         'student_id' => 'required|exists:App\Models\Student,id',
         'progCode' => 'required|exists:App\Models\Programme,progCode',
+        'acadPeriod_start' => 'required'
     ];
     
 
@@ -84,6 +86,10 @@ class EnrollProgramme extends Model
         return $this->hasMany(CourseProgramme::class, 'progCode', 'progCode');
     }
 
+    public function AcadPeriod()
+    {
+        return $this->belongsTo(AcadPeriod::class, 'acadPeriod_start');
+    }
 
     
 }

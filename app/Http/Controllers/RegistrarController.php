@@ -93,6 +93,19 @@ class RegistrarController extends Controller
 
         
         if($request->has('isPass')){
+            //checker if old student has past balance
+            if($student->isNew == '0'){
+               $su= StudentUpdate::where('student_id',$id)
+                          ->latest()
+                          ->first();
+                if($su->balance >0){
+                    Flash::error('Past Account Balance Is Not Settled.');
+                    return back();
+                }          
+            }
+            
+
+
             Student::whereId($id)->update(['isPass' => $request->isPass], $id);
             if($request->isPass == 1){
                 $su = StudentUpdate::create([
@@ -369,16 +382,14 @@ class RegistrarController extends Controller
 
         $i=0; // major and minor counter
         foreach ($enrolledProg as $enrolledProg){
-            $year = CourseProgramme::where('progCode', $enrolledProg->progCode,)->max('yearImplemented');
-            
             
             switch($enrolledProg->description){
                 case 'Major':
-                    $a = $enrolledProg->CourseProgramme->where('yearImplemented', $year);
+                    $a = $enrolledProg->CourseProgramme->where('acadPeriod', $enrolledProg->acadPeriod_start);
                     break;
                 
                 case 'Minor': 
-                    $a = $enrolledProg->CourseProgramme->where('isProfessional', '1')->where('yearImplemented', $year);
+                    $a = $enrolledProg->CourseProgramme->where('isProfessional', '1')->where('acadPeriod', $enrolledProg->acadPeriod_start);
                     break;
 
                 default:
@@ -414,12 +425,12 @@ class RegistrarController extends Controller
         $j=0; // cert counter
         
         foreach ($enrolledProg as $enrolledProg){
-            $year = CourseProgramme::where('progCode', $enrolledProg->progCode,)->max('yearImplemented');
+            
             
             
             if ($enrolledProg->description == 'Certificate' ){
         
-                $b = $enrolledProg->CourseProgramme->where('isProfessional', '1')->where('yearImplemented', $year);
+                $b = $enrolledProg->CourseProgramme->where('isProfessional', '1')->where('acadPeriod', $enrolledProg->acadPeriod_start);
                 if($j > 0){
                     $certOptions = $certOptions->merge($b);
                 }else{

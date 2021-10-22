@@ -6,15 +6,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-/**
- * Class CourseProgramme
- * @package App\Models
- * @version August 1, 2021, 8:32 pm UTC
- *
- * @property integer $course_id
- * @property integer $programme_id
- * @property boolean $isProfessional
- */
+
 class CourseProgramme extends Model
 {
    
@@ -34,7 +26,8 @@ class CourseProgramme extends Model
         'subjCode',
         'progCode',
         'programme_id',
-        'isProfessional'
+        'isProfessional',
+        'acadPeriod'
     ];
 
    
@@ -71,4 +64,8 @@ class CourseProgramme extends Model
         return $this->belongsTo(EnrollProgramme::class, 'progCode', 'progCode');
     }
    
+    public function AcadPeriod()
+    {
+        return $this->belongsTo(AcadPeriod::class, 'acadPeriod');
+    }
 }

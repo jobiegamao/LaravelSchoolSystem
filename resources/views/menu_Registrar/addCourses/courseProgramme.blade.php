@@ -20,6 +20,16 @@
 
     {{-- body --}}
     <div class="content px-3">
+        @role('Registrar')
+        {!! Form::open(['method' => 'GET', 'route' => ['goTo_enrollment.index'] ]) !!}
+            {{Form::submit(' &larr; Enrollees',['class' => 'btn btn-link p-0'])}}
+        {!! Form::close() !!}
+        @endrole
+        @role('Finance')
+        {!! Form::open(['method' => 'GET', 'route' => ['finance.index'] ]) !!}
+            {{Form::submit(' &larr; Back',['class' => 'btn btn-link p-0'])}}
+        {!! Form::close() !!}
+        @endrole
         <div class="card">
             @role('Registrar')
                 <div class="card-body p-10">
@@ -73,7 +83,9 @@
                             
                                 {!! Form::label('programme', 'Programme:',array('class' => 'col-sm-2 col-form-label')) !!}
                                 {!! Form::text('programme', $courses->description , ['class' => "col-sm-2 form-control mb-3", 'readonly']) !!}
-                                {!! Form::text('programme', $courses->Programme->name , ['class' => "col-sm-8 form-control mb-3", 'readonly']) !!}
+                                {!! Form::text('programme', $courses->Programme->name , ['class' => "col-sm-5 form-control mb-3", 'readonly']) !!}
+                                <div class="col-sm-3 form-control" readonly>Curriculum Year: {{ $courses->AcadPeriod->acadYear }} </div>
+
                                 
                             @endforeach
                         </div>    
