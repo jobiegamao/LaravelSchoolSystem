@@ -75,6 +75,10 @@ class Student extends Model
         return $this->hasOne(StudentUpdate::class, 'student_id')->latestOfMany('id');
     }
 
+    public function StudentUpdateFirst()
+    {
+        return $this->hasOne(StudentUpdate::class, 'student_id')->oldest();
+    }
  
     
     /**

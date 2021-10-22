@@ -4,7 +4,7 @@
 <div class="content p-3">
     
 
-    <style>
+        <style>
         table {
           font-family: arial, sans-serif;
           color: black;
@@ -22,6 +22,17 @@
           background-color: #dddddd;
         }
         </style>
+        
+        @role('Registrar')
+        {!! Form::open(['method' => 'GET', 'route' => ['goTo_enrollment.index'] ]) !!}
+            {{Form::submit(' &larr; Enrollees',['class' => 'btn btn-link p-0'])}}
+        {!! Form::close() !!}
+        @endrole
+        @role('Finance')
+        {!! Form::open(['method' => 'GET', 'route' => ['finance.index'] ]) !!}
+            {{Form::submit(' &larr; Back',['class' => 'btn btn-link p-0'])}}
+        {!! Form::close() !!}
+        @endrole
 
     
 {{-- details on student --}}
@@ -176,7 +187,8 @@
            
             <div class="d-flex flex-row">
                 <!-- show next button if this is not the latest acadPeriod -->
-                @if( App\Models\AcadPeriod::find( ($acadPeriod->id) -1) != null)
+                @if( App\Models\AcadPeriod::find( ($acadPeriod->id) -1) != null 
+                    && $student->StudentUpdateFirst->acadPeriod_id != $acadPeriod->id)
                 <div class="p-2">
                     {!! Form::open(['method' => 'GET', 'route' => ['balance', 'id' => $student->person_id] ]) !!}
                         {!! Form::hidden('acadPeriod_id', $acadPeriod->id - 1) !!}

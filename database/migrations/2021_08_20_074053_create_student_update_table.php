@@ -32,13 +32,14 @@ class CreateStudentUpdateTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            // $table->decimal('qpi', 3, 2)->nullable()->default(0.00);
             $table->decimal('final', 4, 2)->nullable()->default(00.00);
+
+            //total given units
             $table->tinyInteger('units')->nullable()->default(0);
+            //units student only took
             $table->tinyInteger('unitsTook')->nullable()->default(0);
 
 
-            // $table->decimal('oldBal', 10, 2)->nullable()->default(0.00);
             $table->decimal('balance', 10, 2)->default(0.00);
             $table->decimal('currDue', 10, 2)->default(0.00);
             $table->decimal('adjustments', 10, 2)->default(0.00);

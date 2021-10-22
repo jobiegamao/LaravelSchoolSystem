@@ -9,8 +9,8 @@
                 <div class="col-sm-12">
                     <h1> Classes</h1>
                     <span>Instructor: {{ $teacher->full_name()}}</span>
-                    
                     <hr>
+                  
                 </div>
             </div>
             
@@ -21,7 +21,7 @@
     {{-- body --}}
     <div class="content px-3">
         {!! Form::open(['method' => 'GET', 'route' => ['teacher.goTo_classes',  $teacher->id] ]) !!}
-            {{Form::submit(' &larr; Change Period',['class' => 'btn btn-link'])}}
+            {{Form::submit(' &larr; Change Period',['class' => 'btn btn-link p-0'])}}
         {!! Form::close() !!}
         <div class="card">
             <div class="card-body p-10">

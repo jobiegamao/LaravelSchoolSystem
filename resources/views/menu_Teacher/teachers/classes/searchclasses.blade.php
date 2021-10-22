@@ -15,14 +15,18 @@
                     </div>
                 </div>
                 <hr>
+                
             </div>
         </section>
     {{-- /header --}}
 
     {{-- body --}}
         <div class="content px-3">
-            
-            
+            @role("Registrar")
+            {!! Form::open(['method' => 'GET', 'route' => ['teacher.list'] ]) !!}
+            {{Form::submit(' &larr; Professors',['class' => 'btn btn-link p-0'])}}
+            {!! Form::close() !!}
+            @endrole
             <div class="card">
                 <div class="card-body p-10">
                     {!! Form::open(['method' => 'GET','route' => 'teacher.loadClasses']) !!}

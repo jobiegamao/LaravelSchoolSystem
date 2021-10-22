@@ -1,6 +1,8 @@
 <!-- ipa nice ang ui design, basic way lang to-->
-
-
+@php
+    $acadPeriod = App\Models\AcadPeriod::latest()->first();
+@endphp
+{!! Form::hidden('acadPeriod_start', $acadPeriod->id) !!}
 <!-- programme ID Field -->
 @php( $programme = \App\Models\Programme::all())
 <div class="form-group row">
