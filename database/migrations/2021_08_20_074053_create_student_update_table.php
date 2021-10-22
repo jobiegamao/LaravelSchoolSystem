@@ -143,7 +143,7 @@ class CreateStudentUpdateTable extends Migration
                    'acadPeriod_id'   =>   '10',
                    'fees_id'   =>   '1',
                    'units'   =>   '15',
-                   'isGrad' => '1',
+                //    'isGrad' => '1',
                    'created_at' => '2021-07-10'
                    
             )

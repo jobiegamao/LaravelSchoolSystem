@@ -283,15 +283,12 @@ class RegistrarController extends Controller
             EnrollProgramme::where('id',$id)
             ->update(['status' => $status] );
         }
-        //dd($request->all());
-        if($request->has('isGrad')){
-            $s = Student::find($request->id);
-            $isGrad = isset($request->isGrad) ? 1 : 0;
-            $s->StudentUpdateLatest->isGrad = $isGrad;
-            $s->StudentUpdateLatest->save();
-            
-        }
-        
+
+        $isGrad = isset($request->isGrad) ? 1 : 0;
+        $s = Student::find($request->id);
+        $s->StudentUpdateLatest->isGrad = $isGrad;
+        $s->StudentUpdateLatest->save();
+       
         Flash::success('Programme Updated Successfully.');
         return redirect()->route('goTo_promotionList.index');
     }

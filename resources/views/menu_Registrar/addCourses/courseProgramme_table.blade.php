@@ -64,6 +64,7 @@
                                 $reqID = $req->prereq_course_programme_id;
                                 $ID = \App\Models\CourseProgramme::where('id',$reqID)->value('subjCode');
                                 echo($ID);
+                                echo(" ");
                             }
                             
                         @endphp
@@ -140,7 +141,8 @@
                             foreach($course->CourseProgrammePrereq as $req){
                                 $reqID = $req->prereq_course_programme_id;
                                 $ID = \App\Models\CourseProgramme::where('id',$reqID)->value('subjCode');
-                                echo($ID);
+                                echo($ID); 
+                                echo(" ");
                             }
                             
                         @endphp

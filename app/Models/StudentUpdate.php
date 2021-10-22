@@ -22,7 +22,10 @@ class StudentUpdate extends Model
         'fees_id',
         'units',
         'unitsTook',
-        'isGrad'
+        'isGrad',
+        'balance',
+        'adjustments',
+        'currDue'
     ];
 
 

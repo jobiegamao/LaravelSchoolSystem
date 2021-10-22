@@ -135,8 +135,8 @@ class FinanceController extends Controller
         $currDue_sem = $student->StudentUpdate[0]->currDue;
         
         //if wala pa na update sa database
-        if($unitsFee > 0 && $currDue_sem == 0){
-            $s = $student->StudentUpdate[0]; 
+        $s = $student->StudentUpdate[0];
+        if($unitsFee > 0 && $currDue_sem == 0){ 
             $bill =  $unitsFee + $fees->totalMisc() + $totalLabFee;
             if($isGrad){
                 $bill += $fees->totalGradFee();
@@ -167,6 +167,10 @@ class FinanceController extends Controller
             $balance_sem = 0.00;
             $currDue_sem = 0.00;
         }
+
+        //save balance in table
+        $s->balance = $balance_sem;
+        $s->save();
    
         return view('menu_Student.balance.balance', [
             'fees' => $fees,
