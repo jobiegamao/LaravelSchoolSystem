@@ -83,8 +83,8 @@
                             
                                 {!! Form::label('programme', 'Programme:',array('class' => 'col-sm-2 col-form-label')) !!}
                                 {!! Form::text('programme', $courses->description , ['class' => "col-sm-2 form-control mb-3", 'readonly']) !!}
-                                {!! Form::text('programme', $courses->Programme->name , ['class' => "col-sm-5 form-control mb-3", 'readonly']) !!}
-                                <div class="col-sm-3 form-control" readonly>Curriculum Year: {{ $courses->AcadPeriod->acadYear }} </div>
+                                {!! Form::text('programme', $courses->Programme->name , ['class' => "col-sm-4 form-control mb-3", 'readonly']) !!}
+                                <div class="col-sm-4 form-control" readonly>Curriculum Batch: {{ $courses->AcadPeriod->acadYear }}, {{ $courses->AcadPeriod->acadSemText() }}</div>
 
                                 
                             @endforeach

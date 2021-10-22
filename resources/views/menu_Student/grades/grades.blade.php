@@ -2,7 +2,7 @@
 
 @section('content')
 {{-- header --}}
-<div class="content px-3">
+
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -17,7 +17,12 @@
 {{-- /header --}}
 
 {{-- body --}}
- 
+ <div class="content px-3">
+    @role('Registrar')
+    {!! Form::open(['method' => 'GET', 'route' => ['goTo_enrollment.index'] ]) !!}
+        {{Form::submit(' &larr; Enrollees',['class' => 'btn btn-link p-0'])}}
+    {!! Form::close() !!}
+    @endrole
             <div class="card">
                 <div class="card-body"> 
 

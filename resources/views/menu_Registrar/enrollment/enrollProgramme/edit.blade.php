@@ -57,7 +57,14 @@
             </div>
 
                 
-            
+            @if ($student->StudentUpdateLatest != null)
+                <div class="form-group row">
+                    {!! Form::label('isGrad', 'Graduating Status:',array('class' => 'col-sm-2 col-form-label')) !!}
+                    <div class="col-sm-10 pt-2">
+                        {{ Form::checkbox('isGrad', null,  $student->StudentUpdateLatest->isGrad) }}
+                    </div>
+                </div>  
+            @endif
 
         </div>
 

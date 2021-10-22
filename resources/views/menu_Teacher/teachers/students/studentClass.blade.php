@@ -16,14 +16,14 @@
                         <div class="clearfix"> @include('flash::message')</div>
                     </div>
                     <div class="col-sm-2">
-                        @if (Auth::user()->role == 'Registrar')
+                        @role("Registrar")
                             {!! Form::open(['method' => 'POST', 'route' => 'teacher.report' , 'id' => 'submitForm']) !!}
                                     {!! Form::hidden('classOffering_id', $class->id) !!}
                                     {{Form::button('Update Grade Report',['class' => 'btn btn-primary', 
                                     'type' => 'submit', 'onclick' => "return confirm('WARNING: Submission of reports is irreversable. 
                                     Contact Registrar for changes after submission.')" ])}}
                             {!! Form::close() !!}
-                        @endif
+                        @endrole
                         
                     </div>
                 </div>
@@ -33,22 +33,18 @@
 
     {{-- body --}}
     <div class="content px-3">
-        @php
+            @php
                 $acadPeriod_id = \App\Models\AcadPeriod::where('acadYear',$class->year )
                                                         ->where('acadSem', $class->semester)
                                                         ->value('id');
             @endphp
             {!! Form::open(['method' => 'GET','route' => 'teacher.loadClasses']) !!}
-            
-                    {!! Form::hidden('acadPeriod_id', $acadPeriod_id) !!}
-                    {!! Form::hidden('teacher_id', $class->teacher_id) !!}
-                    {{Form::submit(' &larr; Back',['class' => 'btn btn-link'])}}
+                {!! Form::hidden('acadPeriod_id', $acadPeriod_id) !!}
+                {!! Form::hidden('teacher_id', $class->teacher_id) !!}
+                {{Form::submit(' &larr; Back',['class' => 'btn btn-link'])}}
             {!! Form::close() !!}
         <div class="card">
-            
             <div class="card-body p-10">
-                
-                
                 <div class="table-responsive">
                     <table class="table" id="classStudents-table">
                         <thead>
@@ -67,35 +63,35 @@
                         {{-- foreach studentClass  --}}
                     
                         @foreach ($s as $s)
-                        
+                            <tr>
                             <td>{{ $s->Student->id }}</td>
                             <td>{{ $s->Student->full_name() }}</td>
-                            
                             <td> 
-                                {!! Form::model($s, ['route' => ['classGrade.update', $s->classGrade_id], 'method' => 'patch', 'id' => 'g1Form']) !!}
-                                {!! Form::number('prelimGrade',$s->ClassGrade->prelimGrade, ['class' => 'border-0 w-1', 'size' => 10]) !!}
+                                {!! Form::model($s, ['route' => ['classGrade.update', $s->classGrade_id], 'method' => 'patch']) !!}
+                                {!! Form::number('prelimGrade',$s->ClassGrade->prelimGrade, ['class' => 'border-0 w-1', 'size' => 10, 'id' => 'g1Form' ]) !!}
                                 <a href="{{ route('classGrade.update', [$s->classGrade_id]) }}"></a>
                                 {!!Form::close()!!}
                             </td>
                             <td>
-                                {!! Form::model($s, ['route' => ['classGrade.update', $s->classGrade_id], 'method' => 'patch', 'id' => 'g2Form']) !!}
-                                {!! Form::number('midtermGrade',$s->ClassGrade->midtermGrade, ['class' => 'border-0 w-1', 'size' => 10]) !!}
+                                {!! Form::model($s, ['route' => ['classGrade.update', $s->classGrade_id], 'method' => 'patch']) !!}
+                                {!! Form::number('midtermGrade',$s->ClassGrade->midtermGrade, ['class' => 'border-0 w-1', 'size' => 10, 'id' => 'g2Form']) !!}
                                 <a href="{{ route('classGrade.update', [$s->classGrade_id]) }}"></a>
                                 {!!Form::close()!!}
                             </td>
                             <td>
-                                {!! Form::model($s, ['route' => ['classGrade.update', $s->classGrade_id], 'method' => 'patch', 'id' => 'g3Form']) !!}
-                                {!! Form::number('prefinalsGrade',$s->ClassGrade->prefinalsGrade, ['class' => 'border-0 w-1', 'size' => 10, ]) !!}
+                                {!! Form::model($s, ['route' => ['classGrade.update', $s->classGrade_id], 'method' => 'patch']) !!}
+                                {!! Form::number('prefinalsGrade',$s->ClassGrade->prefinalsGrade, ['class' => 'border-0 w-1', 'size' => 10, 'id' => 'g3Form']) !!}
                                 <a href="{{ route('classGrade.update', [$s->classGrade_id]) }}"></a>
                                 {!!Form::close()!!}
                             </td>
                 
                             <td>
-                                {!! Form::model($s, ['route' => ['classGrade.update', $s->classGrade_id], 'method' => 'patch', 'id' => 'g4Form']) !!}
-                                {!! Form::number('finalsGrade',$s->ClassGrade->finalsGrade, ['class' => 'border-0 w-1', 'size' => 10, ]) !!}
+                                {!! Form::model($s, ['route' => ['classGrade.update', $s->classGrade_id], 'method' => 'patch']) !!}
+                                {!! Form::number('finalsGrade',$s->ClassGrade->finalsGrade, ['class' => 'border-0 w-1', 'size' => 10, 'id' => 'g4Form' ]) !!}
                                 <a href="{{ route('classGrade.update', [$s->classGrade_id]) }}"></a>
                                 {!!Form::close()!!}
                             </td>
+                        </tr>
                         @endforeach
                         </tbody>
                     </table>
@@ -122,10 +118,11 @@
                         var reported = {{ $reported }};
                         if(reported){
                             $("#submitForm :input").prop("disabled", true);
-                            $("#g1Form :input").prop("disabled", true);
-                            $("#g2Form :input").prop("disabled", true);
-                            $("#g3Form :input").prop("disabled", true);
-                            $("#g4Form :input").prop("disabled", true);
+                            
+                            $('[id=g1Form]').prop("disabled", true);
+                            $('[id=g2Form]').prop("disabled", true);
+                            $('[id=g3Form]').prop("disabled", true);
+                            $('[id=g4Form]').prop("disabled", true);
                         }
                     } );
                 </script>

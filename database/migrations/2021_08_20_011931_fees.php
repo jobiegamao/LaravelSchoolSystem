@@ -238,19 +238,19 @@ class Fees extends Migration
         DB::table('Fees')->insert(
             array(
                    'acadPeriod_id'   =>   '11',
-                   'unitsFee'   =>   '1000.00',
-                   'regFee'   =>   '1000.00',
-                   'misc_dcb'   =>   '1000.00',
-                   'misc_devfee'   =>   '1000.00',
-                   'misc_energyfee'   =>   '1000.00',
-                   'misc_facimp'   =>   '1000.00',
-                   'misc_guidfee'   =>   '1000.00',
-                   'misc_ITfee'   =>   '1000.00',
-                   'misc_inst'   =>   '1000.00',
-                   'misc_medfee'   =>   '1000.00',
-                   'misc_studIns'   =>   '1000.00',
-                   'gradfee'    =>   '1000.00',
-                   'retreatfee'   =>   '1000.00',
+                   'unitsFee'   =>   '3000.00',
+                   'regFee'   =>   '3000.00',
+                   'misc_dcb'   =>   '3000.00',
+                   'misc_devfee'   =>   '3000.00',
+                   'misc_energyfee'   =>   '3000.00',
+                   'misc_facimp'   =>   '3000.00',
+                   'misc_guidfee'   =>   '3000.00',
+                   'misc_ITfee'   =>   '3000.00',
+                   'misc_inst'   =>   '3000.00',
+                   'misc_medfee'   =>   '3000.00',
+                   'misc_studIns'   =>   '3000.00',
+                   'gradfee'    =>   '3000.00',
+                   'retreatfee'   => '3000.00',
             )
         );
 

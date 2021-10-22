@@ -278,10 +278,18 @@ class RegistrarController extends Controller
      * 
      */
     public function enrollProgrammeUpdate(Request $request){
-        $status_arr = request()->except(['_token','_method','id']);
+        $status_arr = request()->except(['_token','_method','id','isGrad']);
         foreach($status_arr as $id => $status){
             EnrollProgramme::where('id',$id)
             ->update(['status' => $status] );
+        }
+        //dd($request->all());
+        if($request->has('isGrad')){
+            $s = Student::find($request->id);
+            $isGrad = isset($request->isGrad) ? 1 : 0;
+            $s->StudentUpdateLatest->isGrad = $isGrad;
+            $s->StudentUpdateLatest->save();
+            
         }
         
         Flash::success('Programme Updated Successfully.');

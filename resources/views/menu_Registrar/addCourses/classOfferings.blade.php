@@ -35,8 +35,9 @@
                     <table class="table" id="classoffering-table">
                         <thead>
                         <tr>
-                            {{-- <th><small>Offering #</small></th>
-                            <th>Semester</th> --}}
+                            {{-- <th><small>Offering #</small></th> --}}
+                            <th>Year</th>
+                            <th>Semester</th>
                             <th>Units</th>
                             
                             <th>Class Code</th>
@@ -55,12 +56,12 @@
                         {{-- foreach classoffering  --}}
                         @foreach($classes as $classes)
                             <tr>
-                                {{-- <td>
-                                    {{ $classes->id }}
+                                <td>
+                                    {{ $classes->year }}
                                 </td>
                                 <td>
                                     {{ $classes->semester }}
-                                </td> --}}
+                                </td>
                                 <td>
                                     {{ $classes->Course->units }}
                                 </td>

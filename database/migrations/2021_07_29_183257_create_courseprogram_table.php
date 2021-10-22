@@ -650,6 +650,48 @@ class CreateCourseprogramTable extends Migration
                 'acadPeriod'   =>   '10',
             )
         );
+
+        ## sample curric for each course at 2021 2nd sem
+        DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSCS',
+                   'subjCode'   =>   'ET 111',
+                   'isProfessional'   =>   '0',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'acadPeriod'   =>   '11',
+            )
+        );
+        DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'BSPSYCH',
+                   'subjCode'   =>   'PSY 333',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'acadPeriod'   =>   '11',
+            )
+        );
+        DB::table('CourseProgramme')->insert(
+            array(
+                'progCode'   =>   'BSCHE',
+                'subjCode'   =>   'CHE 22444',
+                'isProfessional'   =>   '1',
+                'semester'   =>   '1',
+                'yearLevel'   =>   '2',
+                'acadPeriod'   =>   '11',
+            )
+        );
+        DB::table('CourseProgramme')->insert(
+            array(
+                   'progCode'   =>   'ABPHILO',
+                   'subjCode'   =>   'ET 111',
+                   'isProfessional'   =>   '1',
+                   'semester'   =>   '2',
+                   'yearLevel'   =>   '1',
+                   'acadPeriod'   =>   '11',
+            )
+        );
        
     }
 
