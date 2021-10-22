@@ -78,10 +78,14 @@
                 </td>
 
                 <td>
-                    <a href="{{ route('balance', [$students->person_id]) }}"
+                    {!! Form::open(['method' => 'GET', 'route' => ['balance', 'id' => $students->person_id] ]) !!}
+                        {!! Form::hidden('acadPeriod_id', \App\Models\AcadPeriod::latest()->value('id')) !!}
+                        {{Form::submit('Balance',['class' => 'btn btn-link p-0'])}}
+                    {!! Form::close() !!}
+                    {{-- <a href="{{ route('balance', [$students->person_id]) }}"
                         class='btn btn-link p-0'>
                         Balance
-                    </a> 
+                    </a>  --}}
                 </td>
                 
                 <td>

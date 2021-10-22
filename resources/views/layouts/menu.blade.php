@@ -83,9 +83,10 @@
         @endif
 
         @if(!(Auth::user()->Person->Student->StudentUpdate->isEmpty()) )
+        
         <li class="nav-item">
-          <a href="{{ route('balance', Auth::user()->person_id)}}"
-            class="nav-link {{ Request::is('finance/*/balance') ? 'active' : '' }}">
+          <a href="javascript:void(0)"
+            class="nav-link {{ Request::is('finance/*/balance') ? 'active' : '' }}" onclick="$('#balanceForm').submit()">
             <i class="fas fa-calendar-alt nav-icon"></i>
             <p>My Balance</p>
           </a>
@@ -97,18 +98,10 @@
 
     @if (Auth::user()->role == 'Teacher')
       <li class="nav-item">
-        <a href="{{ route('teacher.classes', Auth::user()->Person->Teacher->id)}}"
-          class="nav-link {{ Request::is('teacher/*/current-classes') ? 'active' : '' }}" >
+        <a href="javascript:void(0)"
+          class="nav-link {{ Request::is('teacher/*/search-class') ? 'active' : '' }}" onclick="$('#teacherForm').submit()">
           <i class="fas fa-chalkboard nav-icon"></i>
-          <p>My Active Classes</p>
-        </a>
-      </li>
-      
-      <li class="nav-item">
-        <a href="{{ route('teacher.allclasses', Auth::user()->Person->Teacher->id)}}"
-          class="nav-link {{ Request::is('teacher/*/all-classes') ? 'active' : '' }}" >
-          <i class="fas fa-history nav-icon"></i>
-          <p>My Class History</p>
+          <p>My Classes</p>
         </a>
       </li>
     @endif
@@ -181,11 +174,17 @@
     {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
     {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!}
     {!! Form::close() !!}
+
+    {!! Form::open(['id' => 'balanceForm','method' => 'GET', 'route' => ['balance', 'id' => Auth::user()->person_id ] ]) !!}
+    {!! Form::hidden('acadPeriod_id', \App\Models\AcadPeriod::latest()->value('id')) !!}
+    {!! Form::close() !!}
     
   @endif
 
-  
-
+  @if (Auth::user()->role == 'Teacher')
+    {!! Form::open(['id' => 'teacherForm','method' => 'GET', 'route' => ['teacher.goTo_classes', 'id' => Auth::user()->Person->Teacher->id ] ]) !!}
+    {!! Form::close() !!}
+  @endIf
 
   @if (Auth::user()->role == 'Registrar' || Auth::user()->role == 'Super Admin')
     {!! Form::open(['id' => 'teachListForm','method' => 'GET', 'route' => 'teacher.list' ]) !!}

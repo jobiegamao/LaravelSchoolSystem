@@ -20,6 +20,7 @@ class CreateClassgradeTable extends Migration
             $table->float('prelimGrade')->nullable();
             $table->float('midtermGrade')->nullable();
             $table->float('prefinalsGrade')->nullable();
+            $table->float('finalsGrade')->nullable();
 
             $table->boolean('isPass')->default(0);
         });
@@ -29,7 +30,8 @@ class CreateClassgradeTable extends Migration
                    'prelimGrade'   =>   '86',
                    'midtermGrade'   =>   '90',
                    'prefinalsGrade'   =>   '88',
-		  'isPass'   =>  '1',
+                   'finalsGrade' => '100',
+		             'isPass'   =>  '1',
             )
          );
 
@@ -38,7 +40,8 @@ class CreateClassgradeTable extends Migration
                    'prelimGrade'   =>   '89',
                    'midtermGrade'   =>   '92',
                    'prefinalsGrade'   =>   '85',
-		  'isPass'   =>  '1',
+                   'finalsGrade' => '100',
+		             'isPass'   =>  '1',
             )
          );
 
@@ -47,7 +50,8 @@ class CreateClassgradeTable extends Migration
                    'prelimGrade'   =>   '70',
                    'midtermGrade'   =>   '70',
                    'prefinalsGrade'   =>   '71',
-		  'isPass'   => '0',
+                   'finalsGrade' => '70',
+		             'isPass'   => '0',
             )
          );
 
@@ -56,7 +60,8 @@ class CreateClassgradeTable extends Migration
                    'prelimGrade'   =>   '88',
                    'midtermGrade'   =>   '89',
                    'prefinalsGrade'   =>   '90',
-		  'isPass'   =>  '1',
+                   'finalsGrade' => '100',
+		            'isPass'   =>  '1',
             )
          );
 
@@ -65,6 +70,7 @@ class CreateClassgradeTable extends Migration
                    'prelimGrade'   =>   '83',
                    'midtermGrade'   =>   '84',
                    'prefinalsGrade'   =>   '89',
+                   'finalsGrade' => '100',
 		  'isPass'   =>  '1',
             )
          );
@@ -74,6 +80,7 @@ class CreateClassgradeTable extends Migration
                    'prelimGrade'   =>   '84',
                    'midtermGrade'   =>   '85',
                    'prefinalsGrade'   =>   '92',
+                   'finalsGrade' => '100',
 		  'isPass'   =>  '1',
             )
          );
@@ -83,6 +90,7 @@ class CreateClassgradeTable extends Migration
                    'prelimGrade'   =>   '85',
                    'midtermGrade'   =>   '87',
                    'prefinalsGrade'   =>   '93',
+                   'finalsGrade' => '100',
 		  'isPass'   =>  '1',
             )
          );
@@ -92,6 +100,7 @@ class CreateClassgradeTable extends Migration
                    'prelimGrade'   =>   '86',
                    'midtermGrade'   =>   '85',
                    'prefinalsGrade'   =>   '93',
+                   'finalsGrade' => '100',
 		  'isPass'   =>  '1',
             )
          );
@@ -101,6 +110,7 @@ class CreateClassgradeTable extends Migration
                    'prelimGrade'   =>   '87',
                    'midtermGrade'   =>   '89',
                    'prefinalsGrade'   =>   '91',
+                   'finalsGrade' => '100',
 		  'isPass'   =>  '1',
             )
          );
@@ -110,6 +120,7 @@ class CreateClassgradeTable extends Migration
                    'prelimGrade'   =>   '88',
                    'midtermGrade'   =>   '90',
                    'prefinalsGrade'   =>   '89',
+                   'finalsGrade' => '100',
 		  'isPass'   =>  '1',
             )
          );

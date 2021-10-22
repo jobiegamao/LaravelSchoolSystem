@@ -45,58 +45,199 @@ class FinanceController extends Controller
         ]);
     }
  
+    // public function balance(Request $request, $id){
+    //     //gatekeep other students from viewing other student's record
+    //     if(Auth::user()->role == "Student" && Auth::user()->person_id !=$id){
+    //         abort(403); 
+    //     } 
+    //     //
+    //     $student = Student::where('person_id', $id)
+    //                 ->with('StudentUpdateLatest','Person.Payments')
+    //                 ->first();
+    //     $latest = true;
+        
+    //     $fees = Fees::latest()->first();
+
+    //     if( $student->StudentUpdateLatest == null ){
+    //         Flash::error('No Recorded Balance');       
+    //         return redirect()->back();
+    //     }
+    //     $acadPeriod = AcadPeriod::find($student->StudentUpdateLatest->acadPeriod_id);
+        
+    //     if($request->has('acadPeriod_id')){
+    //         $latest = false;
+    //         $student = Student::where('person_id', $id)
+    //                 ->with(['StudentUpdate' => function ($query) use($request){
+    //                     $query->where('acadPeriod_id',$request->acadPeriod_id);
+    //                     }, 'Person.Payments'])
+    //                 ->first();
+    //                 //dd($student->Person->Payments);
+    //         $acadPeriod = AcadPeriod::find($request->acadPeriod_id);
+
+    //         if(empty($student->StudentUpdate[0])){
+    //             return view('menu_Student.balance.balance', [
+    //                 'fees' => $fees,
+    //                 'student' => $student,
+    //                 'isGrad' => 0,
+    //                 'totalLabFee'=> 0,
+    //                 'acadPeriod' => $acadPeriod,
+    //                 ]
+    //             );
+    //         }
+    
+    //     }
+
+    //     $totalPay = 0.00;
+    //     foreach($student->Person->Payments as $pay){
+    //         if($latest && $pay->acadPeriod == $student->StudentUpdateLatest->acadPeriod){
+    //             $totalPay+= $pay->amount;
+    //         }
+    //         if(!$latest && $pay->acadPeriod == $student->StudentUpdate[0]->acadPeriod){
+    //             $totalPay+= $pay->amount;
+    //         }
+    //     }
+
+
+    //     ##lab fees
+    //     $totalLabFee = 0;
+    //         //get courses of student on the specified year and sem
+    //     $c = Course::
+    //         whereHas('ClassOffering', function ($query) use($acadPeriod){
+    //             $query->where('year', $acadPeriod->acadYear)
+    //                   ->where('semester', $acadPeriod->acadSem);
+    //         })
+    //         ->whereHas('ClassOffering.StudentClass', function ($query) use($student){
+    //             $query->where('student_id', $student->id);
+    //         })
+    //         ->whereHas('CourseFee', function ($query) use($acadPeriod){
+    //             $query->where('acadPeriod_id', $acadPeriod->id);
+    //         })
+    //         ->with(['CourseFee' => function ($query) use($acadPeriod){
+    //             $query->where('acadPeriod_id',$acadPeriod->id);
+    //          }])
+            
+    //         ->get();
+
+            
+    //     foreach($c as $c){
+    //         $totalLabFee += $c->CourseFee[0]->labFee;
+    //     }
+
+    //     ##eof lab fees
+         
+    //     $totalTuition = 0;
+    //     if($latest){
+    //         $isGrad = $student->StudentUpdateLatest->isGrad;
+    //         $unitsFee = $student->StudentUpdateLatest->unitsTook *  $fees->unitsFee;
+    //         $adj = $student->StudentUpdateLatest->adjustments;
+    //         $currDue = $student->StudentUpdateLatest->currDue;
+
+    //         //in case if wala pa na update sa table
+    //         if($unitsFee > 0 && $currDue == 0){
+    //             $s = $student->StudentUpdateLatest; 
+    //             $s->currDue =  $unitsFee + $fees->totalMisc() + $totalLabFee;
+    //             $s->save();
+    //             $currDue = $student->StudentUpdateLatest->currDue;
+    //         }
+            
+            
+    //     }else {
+    //         $isGrad = $student->StudentUpdate[0]->isGrad;
+    //         $unitsFee = $student->StudentUpdate[0]->unitsTook *  $fees->unitsFee; 
+    //         $adj = $student->StudentUpdate[0]->adjustments;
+    //         $currDue = $student->StudentUpdate[0]->currDue;
+            
+    //         //in case if wala pa na update sa table
+    //         if($unitsFee > 0 && $currDue == 0){
+    //             $s = $student->StudentUpdate[0]; 
+    //             $s->currDue =  $unitsFee + $fees->totalMisc() + $totalLabFee;
+    //             $s->save();
+    //             $currDue = $student->StudentUpdate[0]->currDue;
+    //         }
+    //     }
+       
+
+    //     $totalTuition += $unitsFee + $fees->totalMisc() + $totalLabFee;
+        
+    //     if($isGrad){
+    //         $totalTuition += $fees->totalGradFee();
+    //     }
+    //     $balance = $totalTuition - $totalPay - $adj;
+    //     $currDue = $totalTuition;
+    //     if($unitsFee == 0 ){
+    //         $balance = 0.00;
+    //         $currDue = 0.00;
+    //     }
+   
+    //     return view('menu_Student.balance.balance', [
+    //         'fees' => $fees,
+    //         'student' => $student,
+    //         'balance' => number_format($balance, 2),
+    //         'totalPay'=> number_format($totalPay, 2),
+    //         'totalLabFee'=> $totalLabFee,
+    //         'unitsFee'=> number_format($unitsFee, 2),
+    //         'totalTuition'=> number_format($totalTuition, 2),
+    //         'currDue'=> number_format($currDue, 2),
+    //         'adj' =>$adj,
+    //         'isGrad' => $isGrad,
+    //         'acadPeriod' => $acadPeriod,
+    //         ]
+    //     );
+    // }
+
     public function balance(Request $request, $id){
         //gatekeep other students from viewing other student's record
         if(Auth::user()->role == "Student" && Auth::user()->person_id !=$id){
             abort(403); 
         } 
         //
+        //check if student has passed enrollments (old student)
         $student = Student::where('person_id', $id)
                     ->with('StudentUpdateLatest','Person.Payments')
                     ->first();
-        $latest = true;
-        
         $fees = Fees::latest()->first();
 
         if( $student->StudentUpdateLatest == null ){
             Flash::error('No Recorded Balance');       
             return redirect()->back();
         }
-        $acadPeriod = AcadPeriod::find($student->StudentUpdateLatest->acadPeriod_id);
         
-        if($request->has('acadPeriod_id')){
-            $latest = false;
-            $student = Student::where('person_id', $id)
-                    ->with(['StudentUpdate' => function ($query) use($request){
-                        $query->where('acadPeriod_id',$request->acadPeriod_id);
-                        }, 'Person.Payments'])
-                    ->first();
-                    //dd($student->Person->Payments);
-            $acadPeriod = AcadPeriod::find($request->acadPeriod_id);
-
-            if(empty($student->StudentUpdate[0])){
-                return view('menu_Student.balance.balance', [
-                    'fees' => $fees,
-                    'student' => $student,
-                    'isGrad' => 0,
-                    'totalLabFee'=> 0,
-                    'acadPeriod' => $acadPeriod,
-                    ]
-                );
+        $acadPeriod = AcadPeriod::find($request->acadPeriod_id);  
+         
+        $student = Student::where('person_id', $id)
+                ->with(['StudentUpdate' => function ($query) use($request){
+                    $query->where('acadPeriod_id',$request->acadPeriod_id);
+                    }, 'Person.Payments'])
+                ->first();
+              
+        if(empty($student->StudentUpdate[0])){
+            if($request->has('next')){
+                return redirect()->route('balance', [
+                    'id' => $id,
+                    'acadPeriod_id' => $request->acadPeriod_id+1,
+                ]);
             }
-    
+            return redirect()->route('balance', [
+                'id' => $id,
+                'acadPeriod_id' => $request->acadPeriod_id-1,
+            ]);
         }
 
+        //All of student's Updates 
+        $studrecord = Student::where('person_id', $id)->with('StudentUpdate')->first();
+        //dd($studrecord->StudentUpdate[0]);
+        
         $totalPay = 0.00;
+        $totalPay_sem = 0.00;
         foreach($student->Person->Payments as $pay){
-            if($latest && $pay->acadPeriod == $student->StudentUpdateLatest->acadPeriod){
+            if($pay->acadPeriod_id == $student->StudentUpdate[0]->acadPeriod_id){
+                $totalPay_sem+= $pay->amount;
+            }
+            if($pay->acadPeriod_id < $acadPeriod->id){
                 $totalPay+= $pay->amount;
             }
-            if(!$latest && $pay->acadPeriod == $student->StudentUpdate[0]->acadPeriod){
-                $totalPay+= $pay->amount;
-            }
+            
         }
-
 
         ##lab fees
         $totalLabFee = 0;
@@ -115,70 +256,67 @@ class FinanceController extends Controller
             ->with(['CourseFee' => function ($query) use($acadPeriod){
                 $query->where('acadPeriod_id',$acadPeriod->id);
              }])
-            
             ->get();
 
-            
         foreach($c as $c){
             $totalLabFee += $c->CourseFee[0]->labFee;
         }
 
         ##eof lab fees
          
-        $totalTuition = 0;
-        if($latest){
-            $isGrad = $student->StudentUpdateLatest->isGrad;
-            $unitsFee = $student->StudentUpdateLatest->unitsTook *  $fees->unitsFee;
-            $adj = $student->StudentUpdateLatest->adjustments;
-            $currDue = $student->StudentUpdateLatest->currDue;
+        $totalTuition_sem = 0.0;
 
-            //in case if wala pa na update sa table
-            if($unitsFee > 0 && $currDue == 0){
-                $s = $student->StudentUpdateLatest; 
-                $s->currDue =  $unitsFee + $fees->totalMisc() + $totalLabFee;
-                $s->save();
-                $currDue = $student->StudentUpdateLatest->currDue;
-            }
-            
-            
-        }else {
-            $isGrad = $student->StudentUpdate[0]->isGrad;
-            $unitsFee = $student->StudentUpdate[0]->unitsTook *  $fees->unitsFee; 
-            $adj = $student->StudentUpdate[0]->adjustments;
-            $currDue = $student->StudentUpdate[0]->currDue;
-            
-            //in case if wala pa na update sa table
-            if($unitsFee > 0 && $currDue == 0){
-                $s = $student->StudentUpdate[0]; 
-                $s->currDue =  $unitsFee + $fees->totalMisc() + $totalLabFee;
-                $s->save();
-                $currDue = $student->StudentUpdate[0]->currDue;
-            }
-        }
-       
-
-        $totalTuition += $unitsFee + $fees->totalMisc() + $totalLabFee;
+        $fees = Fees::where('acadPeriod_id',$acadPeriod->id)->first();
+        $isGrad = $student->StudentUpdate[0]->isGrad;
+        $unitsFee = $student->StudentUpdate[0]->unitsTook *  $fees->unitsFee; 
+        $adj_sem = $student->StudentUpdate[0]->adjustments;
+        $currDue_sem = $student->StudentUpdate[0]->currDue;
         
-        if($isGrad){
-            $totalTuition += $fees->totalGradFee();
+        //if wala pa na update sa database
+        if($unitsFee > 0 && $currDue_sem == 0){
+            $s = $student->StudentUpdate[0]; 
+            $bill =  $unitsFee + $fees->totalMisc() + $totalLabFee;
+            if($isGrad){
+                $bill += $fees->totalGradFee();
+            }
+            $s->currDue = $bill;
+            $s->save();
+            $currDue_sem = $student->StudentUpdate[0]->currDue;
         }
-        $balance = $totalTuition - $totalPay - $adj;
-        $currDue = $totalTuition;
+        $totalTuition_sem = $currDue_sem;
+
+        ##over balance
+        $totalAdj = 0.0;
+        $totalCurrDue = 0.0;
+        $overbalance_sem = 0.0;
+        foreach($studrecord->StudentUpdate as $sem){
+            if($sem->acadPeriod_id < $acadPeriod->id){
+                $totalAdj += $sem->adj;
+                $totalCurrDue += $sem->currDue;
+            }
+        }
+        $overbalance_sem = $totalPay - $totalCurrDue - $totalAdj;
+        
+        ##over balance
+        
+        $balance_sem = $totalTuition_sem - $totalPay_sem - $adj_sem - $overbalance_sem;
+       
         if($unitsFee == 0 ){
-            $balance = 0.00;
-            $currDue = 0.00;
+            $balance_sem = 0.00;
+            $currDue_sem = 0.00;
         }
    
         return view('menu_Student.balance.balance', [
             'fees' => $fees,
             'student' => $student,
-            'balance' => number_format($balance, 2),
-            'totalPay'=> number_format($totalPay, 2),
+            'balance' => number_format($balance_sem, 2),
+            'totalPay'=> number_format($totalPay_sem, 2),
             'totalLabFee'=> $totalLabFee,
             'unitsFee'=> number_format($unitsFee, 2),
-            'totalTuition'=> number_format($totalTuition, 2),
-            'currDue'=> number_format($currDue, 2),
-            'adj' =>$adj,
+            'totalTuition'=> number_format($totalTuition_sem, 2),
+            'currDue'=> number_format($currDue_sem, 2),
+            'adj' =>$adj_sem,
+            'overbalance'=> number_format($overbalance_sem, 2),
             'isGrad' => $isGrad,
             'acadPeriod' => $acadPeriod,
             ]
@@ -187,7 +325,7 @@ class FinanceController extends Controller
 
     public function updateDues(){
         $acadPeriod = AcadPeriod::latest()->first();
-        $fees = Fees::latest()->first();
+        $fees = Fees::where('acadPeriod_id',$acadPeriod->id)->first();
         $s = StudentUpdate::where('acadPeriod_id', $acadPeriod->id)->get();
         foreach($s as $s){
             if($s->unitsTook > 0){

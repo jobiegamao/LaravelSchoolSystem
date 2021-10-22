@@ -108,7 +108,7 @@ class Payments extends Migration
                     array(
                         'person_id'   =>   '10010',
                         'acadPeriod_id'   =>   '8',
-                        'amount'   =>   '13000.00',
+                        'amount'   =>   '14000.00',
                         'description'   =>   '2nd sem 2020 tuition',
                         'created_at' => '2020-10-10'
                     )

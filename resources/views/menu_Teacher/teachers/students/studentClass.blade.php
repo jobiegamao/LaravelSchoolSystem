@@ -33,8 +33,21 @@
 
     {{-- body --}}
     <div class="content px-3">
+        @php
+                $acadPeriod_id = \App\Models\AcadPeriod::where('acadYear',$class->year )
+                                                        ->where('acadSem', $class->semester)
+                                                        ->value('id');
+            @endphp
+            {!! Form::open(['method' => 'GET','route' => 'teacher.loadClasses']) !!}
+            
+                    {!! Form::hidden('acadPeriod_id', $acadPeriod_id) !!}
+                    {!! Form::hidden('teacher_id', $class->teacher_id) !!}
+                    {{Form::submit(' &larr; Back',['class' => 'btn btn-link'])}}
+            {!! Form::close() !!}
         <div class="card">
+            
             <div class="card-body p-10">
+                
                 
                 <div class="table-responsive">
                     <table class="table" id="classStudents-table">
@@ -78,7 +91,10 @@
                             </td>
                 
                             <td>
-                                {{ $s->ClassGrade->finalGrade() }}
+                                {!! Form::model($s, ['route' => ['classGrade.update', $s->classGrade_id], 'method' => 'patch', 'id' => 'g4Form']) !!}
+                                {!! Form::number('finalsGrade',$s->ClassGrade->finalsGrade, ['class' => 'border-0 w-1', 'size' => 10, ]) !!}
+                                <a href="{{ route('classGrade.update', [$s->classGrade_id]) }}"></a>
+                                {!!Form::close()!!}
                             </td>
                         @endforeach
                         </tbody>
@@ -109,6 +125,7 @@
                             $("#g1Form :input").prop("disabled", true);
                             $("#g2Form :input").prop("disabled", true);
                             $("#g3Form :input").prop("disabled", true);
+                            $("#g4Form :input").prop("disabled", true);
                         }
                     } );
                 </script>
