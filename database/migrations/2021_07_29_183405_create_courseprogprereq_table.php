@@ -73,6 +73,21 @@ class CreateCourseprogprereqTable extends Migration
             )
         );
 
+        DB::table('CourseProgrammePreReq')->insert(
+            array(
+                   'course_programme_id'   =>   '31',
+                   'prereq_course_programme_id'   =>   '23',
+            )
+        );
+
+        DB::table('CourseProgrammePreReq')->insert(
+            array(
+                   'course_programme_id'   =>   '31',
+                   'prereq_course_programme_id'   =>   '29',
+            )
+        );
+
+
     }
 
     /**
