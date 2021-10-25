@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table" id="enrollment-table">
+    <table class="table table-hover" id="enrollment-table">
         <thead>
         <tr>
             <th>RGC</th>

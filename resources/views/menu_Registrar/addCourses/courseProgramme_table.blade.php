@@ -5,7 +5,7 @@
 @if ($course->isNotEmpty())
 <div class="card-body">
     <div class="table-responsive">
-        <table class="table" id="curriculum-table">
+        <table class="table table-hover" id="curriculum-table">
             <thead>
             <tr>
                 <th>Year Level</th>

@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table" id="prereg-table">
+    <table class="table table-hover" id="prereg-table">
             <thead>
                 <tr>
                     <th>CO-ID</th>

@@ -21,55 +21,53 @@
         <div class="card">
             <div class="card-body p-10">
                 <div class="table-responsive">
-                    <table id="classofferings-table" class="table table-striped table-bordered table-hover" style="width:100%;">
+                    <table id="classofferings-table" class="table table-striped table-bordered table-hover " style="width:100%;">
                         <thead>
                             <tr>
-                                <th>Offering #</th>
+                                
                                 <th>Year</th>
                                 <th>Semester</th>
-                                <th>Units</th>
+                                
                                 <th>Class Code</th>
                                 <th>Subject Code</th>
                                 <th>Subject Title</th>
                                 <th>Schedule</th>
                                 <th>Instructor</th>
                                 <th>Room</th>
-                                <th><small>Reserved<br>Slots</small></th>
-                                <th><small>Available<br>Slots</small></th>
+                                <th>Units</th>
+                                <th>Reserved<br>Slots</th>
+                                <th>Available<br>Slots</th>
                             </tr>
                         </thead>
-                        <tfoot style="display: table-header-group ">
+                        <tfoot style="display: table-header-group; ">
                             <tr>
-                                <th><small>Offering #</small></th>
+                                
                                 <th>Year</th>
                                 <th>Semester</th>
-                                <th>Units</th>
+                                
                                 <th>Class Code</th>
                                 <th>Subject Code</th>
                                 <th>Subject Title</th>
                                 <th>Schedule</th>
                                 <th>Instructor</th>
                                 <th>Room</th>
-                                <th><small>Reserved<br>Slots</small></th>
-                                <th><small>Available<br>Slots</small></th>
+                                <th>Units</th>
+                                <th>Number</th>
+                                <th>Number</th>
                             </tr>
                         </tfoot>
                         <tbody>
                         {{-- foreach classoffering  --}}
                         @foreach($classes as $classes)
                             <tr>
-                                <td>
-                                    {{ $classes->id }}
-                                </td>
+                                
                                 <td>
                                     {{ $classes->year }}
                                 </td>
                                 <td>
                                     {{ $classes->semester }}
                                 </td>
-                                <td>
-                                    {{ $classes->Course->units }}
-                                </td>
+                                
                                 <td>
                                     {{ $classes->classCode }}
                                 </td>
@@ -89,6 +87,9 @@
                                 <td>
                                     {{ $classes->room }}
                 
+                                </td>
+                                <td>
+                                    {{ $classes->Course->units }}
                                 </td>
                                 <td>
                                     
