@@ -89,6 +89,8 @@
                 <td>
                     {{-- pre reg --}}
                     {!! Form::open(['method' => 'GET', 'route' => 'goTo_prereg'  ]) !!}
+                    
+                        {{ session()->forget('_old_input'); }}
                         {!! Form::hidden('id', $students->person_id ) !!} 
                         {!! Form::hidden('acadYear', \App\Models\AcadPeriod::latest()->value('acadYear') ) !!}
                         {!! Form::hidden('acadSem', \App\Models\AcadPeriod::latest()->value('acadSem') ) !!} 

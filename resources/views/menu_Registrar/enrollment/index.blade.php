@@ -26,6 +26,7 @@
     {{-- body --}}
         <div class="content px-3">
             <div class="clearfix"> @include('flash::message')</div>
+            
             <div class="card">
                 <div class="card-body p-10">
                     @include('menu_Registrar/enrollment/table')
