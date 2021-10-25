@@ -57,7 +57,7 @@ class FinanceController extends Controller
         $student = Student::where('person_id', $id)
                     ->with('StudentUpdateLatest','Person.Payments')
                     ->first();
-        $fees = Fees::latest()->first();
+        
 
         if( $student->StudentUpdateLatest == null ){
             Flash::error('No Recorded Balance');       
@@ -134,17 +134,17 @@ class FinanceController extends Controller
         $adj_sem = $student->StudentUpdate[0]->adjustments;
         $currDue_sem = $student->StudentUpdate[0]->currDue;
         
-        //if wala pa na update sa database
+        //update sa database
         $s = $student->StudentUpdate[0];
-        if($unitsFee > 0 && $currDue_sem == 0){ 
-            $bill =  $unitsFee + $fees->totalMisc() + $totalLabFee;
-            if($isGrad){
-                $bill += $fees->totalGradFee();
-            }
-            $s->currDue = $bill;
-            $s->save();
-            $currDue_sem = $student->StudentUpdate[0]->currDue;
+        
+        $bill =  $unitsFee + $fees->totalMisc() + $totalLabFee;
+        if($isGrad){
+            $bill += $fees->totalGradFee();
         }
+        $s->currDue = $bill;
+        $s->save();
+        $currDue_sem = $student->StudentUpdate[0]->currDue;
+        
         $totalTuition_sem = $currDue_sem;
 
         ##over balance

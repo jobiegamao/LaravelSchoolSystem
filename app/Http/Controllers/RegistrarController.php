@@ -91,10 +91,12 @@ class RegistrarController extends Controller
         $ap = AcadPeriod::latest()->first();
         //dd($request->all());
 
-        
+        if($request->has('year')){
+            $student->update(['year' => $request->year]);
+        }
         if($request->has('isPass')){
             //checker if old student has past balance
-            if($student->isNew == '0'){
+            if($student->isNew == '0' && $student->isPass == '0' ){
                $su= StudentUpdate::where('student_id',$id)
                           ->latest()
                           ->first();

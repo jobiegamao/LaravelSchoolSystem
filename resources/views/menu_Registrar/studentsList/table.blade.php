@@ -94,9 +94,14 @@
                             {{Form::submit('Approve',['class' => 'btn btn-info'])}}
                             @break
                         @default
-                            {!! Form::hidden('isPass', 0) !!}
-                            {{Form::button('Approved <i class="fas fa-times"></i>',['class' => 'btn btn-delete remove-circle-outline','type' => 'submit', 
-                            'onclick' => "return confirm('Are you sure you want to unpromote student?')"])}}
+                            @if ($students->isEnrolled == 1)
+                                Enrolled
+                            @else
+                                {!! Form::hidden('isPass', 0) !!}
+                                {{Form::button('Approved <i class="fas fa-times"></i>',['class' => 'btn btn-delete remove-circle-outline','type' => 'submit', 
+                                'onclick' => "return confirm('Are you sure you want to unpromote student?')"])}}
+                            @endif
+                               
                             
                     @endswitch
                     {!!Form::close()!!} 

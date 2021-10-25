@@ -26,9 +26,9 @@
                 </div>
 
             </div>
-            <a href="{{ route('student.unpromote') }}" class="btn btn-danger float-right"
+            {{-- <a href="{{ route('student.unpromote') }}" class="btn btn-danger float-right"
             onclick ="return confirm('Are you sure you want to unpromote ALL students?')"
-            >Unpromote All </a>
+            >Unpromote All </a> --}}
         </div>
     {{-- body --}}
 </div>

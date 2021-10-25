@@ -6,6 +6,7 @@ use App\Http\Requests\CreateAcadPeriodRequest;
 use App\Http\Requests\UpdateAcadPeriodRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\AcadPeriod;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -52,8 +53,12 @@ class AcadPeriodController extends AppBaseController
 
         
         $acadPeriod = AcadPeriod::create($input);
+        Student::where('isPass','1')
+        ->update(['isPass' => '0' ]);
+        Student::where('isEnrolled','1')
+        ->update(['isEnrolled' => '0']);
 
-        Flash::success('Acad Period saved successfully.');
+        Flash::success('New Academic Period.');
 
         return redirect(route('acadPeriods.index'));
     }
