@@ -41,7 +41,7 @@ class TeacherController extends Controller
         //
         $acadPeriod = AcadPeriod::find($request->acadPeriod_id);
         $classes = ClassOffering::where('teacher_id', $request->teacher_id)
-                    ->with('Teacher')
+                    ->with('Teacher', 'GradeReports')
                     ->where('year', $acadPeriod->acadYear)
                     ->where('semester', $acadPeriod->acadSem)
                     ->get();

@@ -76,6 +76,9 @@ class ClassOffering extends Model
     {
         return $this->belongsTo(Teacher::class, 'teacher_id');
     }
-
+    public function GradeReports()
+    {
+        return $this->hasOne(GradeReports::class, 'classOffering_id');
+    }
 
 }

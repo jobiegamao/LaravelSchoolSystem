@@ -38,8 +38,9 @@
                             <th>Room</th>
                             <th><small><b>Reserved</b><br><b>Slots</b></small></th>
                             <th><small><b>Available</b><br><b>Slots</b></small></th>
-                
+                            <th><small><b>Grades</b><br><b>Submitted</b></small></th>
                             <th class="text-center">Students</th>
+                            
                         </tr>
                         </thead>
                         <tbody>
@@ -76,6 +77,13 @@
                 
                                 </td>
                                 <td class="text-center">
+                                    @if ($classes->GradeReports)
+                                        <i class="far fa-check-square"></i>
+                                    @else
+                                        
+                                    @endif
+                                </td>
+                                <td class="text-center">
                                 
                                 {!! Form::open(['method' => 'GET', 'route' => 'teacher.students' ]) !!}
                                     {!! Form::hidden('id', $classes->id) !!}
@@ -84,6 +92,8 @@
                                     ['type' => 'submit', 'class' => 'btn btn-link', ]) !!}
                                     {!! Form::close() !!}
                                 </td>
+
+                                
                                 
                 
                             </tr>
