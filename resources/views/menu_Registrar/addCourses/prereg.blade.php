@@ -23,16 +23,23 @@
     {{-- body --}}
 
     <div class="content px-3">
+        
         @role('Registrar')
         {!! Form::open(['method' => 'GET', 'route' => ['goTo_enrollment.index'] ]) !!}
-            {{ session()->forget('_old_input'); }}
-            {{Form::submit(' &larr; Enrollees',['class' => 'btn btn-link p-0'])}}
+        {{-- 'onclick' => '{{ session()->forget('_old_input') }}' --}}
+            {{Form::submit(' &larr; Enrollees',['class' => 'btn btn-link p-0', 'name' => 'goTo_enrollmentsubmit' ])}}
+            @if (isset($request->preregsubmit))
+                {{ session()->forget('_old_input'); }}
+            @endif
         {!! Form::close() !!}
         @endrole
         @role('Finance')
         {!! Form::open(['method' => 'GET', 'route' => ['finance.index'] ]) !!}
-            {{ session()->forget('_old_input'); }}
-            {{Form::submit(' &larr; Back',['class' => 'btn btn-link p-0'])}}
+            {{-- {{ session()->forget('_old_input'); }} --}}
+            {{Form::submit(' &larr; Back',['class' => 'btn btn-link p-0', 'name' =>'financesubmit' ])}}
+            @if (isset($request->financesubmit))
+                {{ session()->forget('_old_input'); }}
+            @endif
         {!! Form::close() !!}
         @endrole
             @php
@@ -72,7 +79,8 @@
                                         <button type="submit" class="btn btn-info">
                                             <i class="fas fa-search"></i>
                                         </button>
-                                </span>   
+                                </span>
+                                 
                             </div>
                     {!! Form::close() !!}
                     </div>

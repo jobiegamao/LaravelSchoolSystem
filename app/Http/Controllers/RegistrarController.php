@@ -469,7 +469,7 @@ class RegistrarController extends Controller
                         ->where('acadSem', $request->acadSem)
                         ->first();
 
-
+        
         session()->flashInput($request->input());
        
         if(empty($acadPeriod)){
