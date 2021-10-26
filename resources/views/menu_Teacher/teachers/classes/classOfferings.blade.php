@@ -49,7 +49,7 @@
                             <tr>
                                 
                                 <td>
-                                    {{ $classes->year }} sem: {{ $classes->semester }}
+                                    {{ $classes->year }} Sem: {{ $classes->semester }}
                                 </td>
             
                                 <td>

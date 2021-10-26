@@ -12,7 +12,7 @@
             <th></th>
             <th></th>
             <th></th>
-            <th>Evaluation<br><small>Pass for Next Enrollment</small></th>
+            <th style="text-align: center;">Evaluation<br><small>Pass for Next Enrollment</small></th>
             {{-- <th>Year Promotion<br><small>Promote College Level</small></th> --}}
             <th>Action</th>
         </tr>
@@ -85,7 +85,7 @@
                     
                 </td>
                 
-                <td>
+                <td style="text-align: center;">
                     {{-- promote student to next sem, isPass to be true if allowed to enroll next sem --}}
                     {!! Form::model($students, ['route' => ['student.update', $students->id], 'method' => 'patch']) !!}
                     @switch($students->isPass)
@@ -110,7 +110,7 @@
                 </td>
 
                 
-                <td>
+                <td style="text-align: center;">
 
                     {{-- Edit programme type status && Delete Student ID --}}
                     {{-- {!! Form::open(['route' => ['student.delete', $students->id], 'method' => 'delete']) !!} --}}
