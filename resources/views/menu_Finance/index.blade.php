@@ -153,12 +153,12 @@
             </div>
 
 
-            <div class="">
+            {{-- <div class="">
                 
                 <a href="{{ route('update.dues') }}" class="btn btn-primary float-right"
                 onclick ="return confirm('All account due balance for the semester will be updated')"
                 >Update Statement of Accounts</a> 
-            </div>
+            </div> --}}
 
         </div>
     {{-- /body --}}
