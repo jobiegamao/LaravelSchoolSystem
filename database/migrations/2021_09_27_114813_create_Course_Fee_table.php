@@ -21,7 +21,8 @@ class CreateCourseFeeTable extends Migration
             $table->foreign('subjCode')
                 ->references('subjCode')
                 ->on('Course')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             
             $table->decimal('labFee', 10, 2)->nullable()->default(0.00);
             

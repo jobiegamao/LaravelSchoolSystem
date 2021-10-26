@@ -89,7 +89,7 @@ class RegistrarController extends Controller
         
         $student = Student::find($id);
         $ap = AcadPeriod::latest()->first();
-        //dd($request->all());
+        $fees = Fees::where('acadPeriod_id', $ap->id)->first();
 
         if($request->has('year')){
             $student->update(['year' => $request->year]);
@@ -113,7 +113,7 @@ class RegistrarController extends Controller
                 $su = StudentUpdate::create([
                             'student_id' => $id,
                             'acadPeriod_id' => AcadPeriod::latest()->value('id'),
-                            'fees_id' => Fees::latest()->value('id')
+                            'fees_id' => $fees->id
                         ]);  
                 $this->studentUpdateUnits($su);
             }else{
@@ -198,15 +198,48 @@ class RegistrarController extends Controller
         return;
     }
     /**
-     * Tag all as not enrolled 
-     * isEnrolled
+     * Drop All Prereg of Unenrolled Students
      * 
      */
     public function studentUnenrollAll()
     {
-        $student = Student::where('isEnrolled','1')->update(['isEnrolled' => '0']);
- 
-        Flash::success('Students are all tagged as unenrolled for the new semester');
+        $ap = AcadPeriod::latest()->first();
+        $fees = Fees::where('acadPeriod_id', $ap->id)->first();
+
+
+        $sc = StudentClass::
+             whereHas('ClassOffering',  function ($query) use($ap){
+                $query->where('year', $ap->acadYear)->where('semester', $ap->acadSem);
+                })
+             ->with('ClassGrade', 'Student')
+             ->get();
+
+        if(!empty($sc)){
+            
+            foreach($sc as $sc){
+                if($sc->Student->isEnrolled == 0){
+                    
+                    
+                    if($sc->Student->StudentUpdate->where('acadPeriod_id', $ap->id) != null){
+                        $su = $sc->Student->StudentUpdate->where('acadPeriod_id', $ap->id)->first();
+                        $su->delete($su->id);
+                        //new studentUpdate
+                        $su = StudentUpdate::create([
+                            'student_id' => $sc->Student->id,
+                            'acadPeriod_id' => $ap->id,
+                            'fees_id' => $fees->id
+                        ]);  
+                        $this->studentUpdateUnits($su);
+                    }
+                    $sc->ClassGrade->delete();
+                    $sc->delete($sc->id);
+                     
+                }
+            }  
+        }  
+            
+        
+        Flash::success('Classes are dropped');
 
         return back();
     }

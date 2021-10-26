@@ -11,11 +11,11 @@
                     </div>
                     <div>
                     </div>
-                    {{-- <div>
+                    <div>
                         <a href="{{ route('student.unenroll') }}" class="btn btn-danger float-right"
-                        onclick ="return confirm('Are you sure you want to unenroll ALL students?')"
-                        >Tag All as Unenrolled</a>
-                    </div> --}}
+                        onclick ="return confirm('Are you sure you want to do that?')"
+                        >Drop All Prereg of Unenrolled Students</a>
+                    </div>
                 </div>
                 <hr>
             </div>
