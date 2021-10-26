@@ -40,14 +40,7 @@ class CreateEnrollprogrammeTable extends Migration
             
         });
 
-        DB::table('EnrollProgramme')->insert(
-            array(
-		            'student_id' =>   '20001',
-                   'progCode'   =>   'BSCS',
-                   'description'   =>   'Major',
-                   'acadPeriod_start'   =>   '10',
-            )
-        );
+        
 
         DB::table('EnrollProgramme')->insert(
             array(

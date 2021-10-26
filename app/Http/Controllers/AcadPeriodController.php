@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateAcadPeriodRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\AcadPeriod;
 use App\Models\Student;
+use App\Models\StudentUpdate;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -58,6 +59,10 @@ class AcadPeriodController extends AppBaseController
         Student::where('isEnrolled','1')
         ->update(['isEnrolled' => '0']);
 
+        $s= Student::whereHas('StudentUpdate')->get();
+        foreach($s as $s){
+            $s->update(['isNew' => '1']);
+        }
         Flash::success('New Academic Period.');
 
         return redirect(route('acadPeriods.index'));

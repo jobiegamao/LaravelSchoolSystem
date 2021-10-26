@@ -113,7 +113,7 @@
                 <td>
 
                     {{-- Edit programme type status && Delete Student ID --}}
-                    {!! Form::open(['route' => ['student.delete', $students->id], 'method' => 'delete']) !!}
+                    {{-- {!! Form::open(['route' => ['student.delete', $students->id], 'method' => 'delete']) !!} --}}
                     
                     <a href={{ route('enrollProgramme.edit', $students->id ) }}
                         class='btn btn-edit btn-xs'>
@@ -121,10 +121,10 @@
                     </a>
                     
                     
-                    {!! Form::button('<i class="far fa-trash-alt"></i>', 
+                    {{-- {!! Form::button('<i class="far fa-trash-alt"></i>', 
                         ['type' => 'submit', 'class' => 'btn btn-delete btn-xs',
                          'onclick' => "return confirm('Are you sure you want to delete student ID?')"]) !!}
-                    {!! Form::close() !!}
+                    {!! Form::close() !!} --}}
                 </td>
                
             </tr>

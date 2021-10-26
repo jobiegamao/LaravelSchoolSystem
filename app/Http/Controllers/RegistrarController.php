@@ -194,7 +194,7 @@ class RegistrarController extends Controller
 
         $s->units = $unitsCounter;
         $s->save();
-        
+        //dd($s);
         return;
     }
     /**
@@ -280,14 +280,20 @@ class RegistrarController extends Controller
      * 
      */
     public function enrollProgrammeUpdate(Request $request){
+        $acadPeriod = AcadPeriod::latest()->first();
+        $su = StudentUpdate::where('student_id', $request->id)
+                            ->where('acadPeriod_id', $acadPeriod->id)
+                            ->first();
+        
         $status_arr = request()->except(['_token','_method','id','isGrad']);
         foreach($status_arr as $id => $status){
             EnrollProgramme::where('id',$id)
-            ->update(['status' => $status] );
+            ->update(['status' => $status] );   
         }
-
-        $isGrad = isset($request->isGrad) ? 1 : 0;
+        $this->studentUpdateUnits($su);
+       
         $s = Student::find($request->id);
+        $isGrad = isset($request->isGrad) ? 1 : 0;
         $s->StudentUpdateLatest->isGrad = $isGrad;
         $s->StudentUpdateLatest->save();
        
@@ -372,7 +378,7 @@ class RegistrarController extends Controller
         }
 
         $course = $this->currCourse($studentID);
-        $certOptions = $this->currCertOptions($studentID);
+        $certOptions = $this->currCertOptions($studentID,$course);
     
         return view('menu_Registrar/addCourses/courseProgramme', [
             'person' => $person,
@@ -423,7 +429,7 @@ class RegistrarController extends Controller
         return $course;
     }
 
-    public function currCertOptions($studentID){
+    public function currCertOptions($studentID, $course){
         //Get Curriculum                                                                                 
         $enrolledProg = Student::find($studentID)->EnrolledProgramme
                                                  ->where('status', '0');
@@ -450,10 +456,20 @@ class RegistrarController extends Controller
 
         if(!empty($certOptions)){                             //will not include in curriculum but will be displayed
             $certOptions = $certOptions->unique('subjCode'); // list of subjects as options to a cert programme
+            
+            //remove duplicated from course options
+            foreach($certOptions as $key => $co){
+                foreach($course as $c){
+                    if($co->subjCode == $c->subjCode){
+                        unset($certOptions[$key]);
+                    }
+                }
+            }
+            
         }else{
             $certOptions = collect();
         }
-
+     
         return $certOptions;
     }
 
@@ -533,7 +549,7 @@ class RegistrarController extends Controller
         
         //curriculum of student (CourseProgramme)
         $course = $this->currCourse($studentID);
-        $certOptions = $this->currCertOptions($studentID);
+        $certOptions = $this->currCertOptions($studentID,$course);
 
         $classes = ClassOffering::
             where('year',$acadYear )

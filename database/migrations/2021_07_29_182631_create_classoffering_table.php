@@ -161,7 +161,7 @@ class CreateClassofferingTable extends Migration
               array(
                      'subjCode'   =>   'GE 222',
                      'classCode'   =>   '4-311',
-                     'schedule'   =>   'MW 9:40-11:10 AM',
+                     'schedule'   =>   'MW 9:20-10:50 AM',
                   'teacher_id'  =>   '30002',
                      'room'   =>   'F130',
                      'semester'   =>   '1',
